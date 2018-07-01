@@ -1,0 +1,15 @@
+<Project>
+
+  <PropertyGroup>
+    <Authors>Alessio Gogna</Authors>
+    <Description>The Expression Tree Toolkit is a collection of helper functions, extension methods, and ready-to-use classes to simplifies common developer tasks manipulating expression trees.</Description>
+    <Copyright>Copyright (c) 2018 Alessio Gogna</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/alecsg77/ExpressionTreeToolkit/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/alecsg77/ExpressionTreeToolkit</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alecsg77/ExpressionTreeToolkit</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>expression expression-trees linq-expression</PackageTags>
+    <Product>ExpressionTreeToolkit</Product>
+  </PropertyGroup>
+
+</Project>

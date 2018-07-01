@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionTreeToolkit.Core", "src\ExpressionTreeToolkit.Core\ExpressionTreeToolkit.Core.csproj", "{425CF5CA-C402-4863-B808-BF6FC39F3260}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionTreeToolkit.UnitTests", "test\ExpressionTreeToolkit.UnitTests\ExpressionTreeToolkit.UnitTests.csproj", "{60E75D07-7E65-4781-900E-3F64545F5F8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E878ADD7-C825-4E9E-9153-E58CDD6FC750}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4DDB3794-E4E6-45FC-B1BF-F23AF6FEA7C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Debug|x64.Build.0 = Debug|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Debug|x86.Build.0 = Debug|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Release|x64.ActiveCfg = Release|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Release|x64.Build.0 = Release|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Release|x86.ActiveCfg = Release|Any CPU
+		{425CF5CA-C402-4863-B808-BF6FC39F3260}.Release|x86.Build.0 = Release|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Debug|x64.Build.0 = Debug|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Debug|x86.Build.0 = Debug|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Release|x64.ActiveCfg = Release|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Release|x64.Build.0 = Release|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Release|x86.ActiveCfg = Release|Any CPU
+		{60E75D07-7E65-4781-900E-3F64545F5F8E}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{425CF5CA-C402-4863-B808-BF6FC39F3260} = {E878ADD7-C825-4E9E-9153-E58CDD6FC750}
+		{60E75D07-7E65-4781-900E-3F64545F5F8E} = {4DDB3794-E4E6-45FC-B1BF-F23AF6FEA7C7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4F7A1D0-AF28-4A0B-B855-F26B44B1A92E}
+	EndGlobalSection
+EndGlobal
