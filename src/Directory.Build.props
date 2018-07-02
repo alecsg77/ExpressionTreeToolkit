@@ -1,6 +1,10 @@
 <Project>
 
   <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45;netcoreapp2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <Authors>Alessio Gogna</Authors>
     <Description>The Expression Tree Toolkit is a collection of helper functions, extension methods, and ready-to-use classes to simplifies common developer tasks manipulating expression trees.</Description>
     <Copyright>Copyright (c) 2018 Alessio Gogna</Copyright>
