@@ -5,4 +5,9 @@
     <RootNamespace>ExpressionTreeToolkit</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="ExpressionEqualityComparer.*.cs">
+      <DependentUpon>ExpressionEqualityComparer.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
