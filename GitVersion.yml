@@ -1,3 +1,4 @@
+next-version: 0.1
 branches:
     dev(elop)?(ment)?$:
       tag: alpha
