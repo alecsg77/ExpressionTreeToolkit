@@ -126,7 +126,7 @@ namespace ExpressionTreeToolkit.UnitTests
                 }
             }
 
-            public static MyExpressionEqualityComparer Default { get; } = new MyExpressionEqualityComparer();
+            public new static readonly MyExpressionEqualityComparer Default = new MyExpressionEqualityComparer();
         }
 
         [Fact]

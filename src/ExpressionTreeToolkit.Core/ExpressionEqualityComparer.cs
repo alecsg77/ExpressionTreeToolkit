@@ -10,7 +10,7 @@ namespace ExpressionTreeToolkit
     public partial class ExpressionEqualityComparer : EqualityComparer<Expression>
     {
         private readonly IEqualityComparer<Expression> _equalityComparer;
-        public static ExpressionEqualityComparer Default = new ExpressionEqualityComparer();
+        public new static readonly ExpressionEqualityComparer Default = new ExpressionEqualityComparer();
 
         public ExpressionEqualityComparer()
             : this(null)
