@@ -45,7 +45,7 @@
       ],
       "src": "docfx"
     }],
-    "dest": "gh-pages",
+    "dest": "docs",
     "globalMetadata": {
       "_appTitle": "Expression Tree Toolkit Documentation",
       "_enableSearch": true
