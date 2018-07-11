@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace ExpressionTreeToolkit
@@ -15,7 +16,11 @@ namespace ExpressionTreeToolkit
             return null;
         }
 
-        public bool Equals(DefaultExpression x, DefaultExpression y)
+        /// <summary>Determines whether the specified DefaultExpressions are equal.</summary>
+        /// <param name="x">The first DefaultExpression to compare.</param>
+        /// <param name="y">The second DefaultExpression to compare.</param>
+        /// <returns>true if the specified DefaultExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<DefaultExpression>.Equals(DefaultExpression x, DefaultExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -25,9 +30,13 @@ namespace ExpressionTreeToolkit
 
         }
 
-        public int GetHashCode(DefaultExpression obj)
+        /// <summary>Returns a hash code for the specified DefaultExpression.</summary>
+        /// <param name="obj">The <see cref="DefaultExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified DefaultExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<DefaultExpression>.GetHashCode(DefaultExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             return GetHashCodeExpression(
                 obj,

@@ -11,6 +11,7 @@ namespace ExpressionTreeToolkit
     partial class ExpressionEqualityComparer
     {
         private bool EqualsList<T>(IEnumerable<T> x, IEnumerable<T> y, Func<T, T, bool> equalityComparer)
+            where T:class
         {
             if (ReferenceEquals(x, y))
             {

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
@@ -23,7 +24,11 @@ namespace ExpressionTreeToolkit
                 node.Arguments);
         }
 
-        public bool Equals(MethodCallExpression x, MethodCallExpression y)
+        /// <summary>Determines whether the specified MethodCallExpressions are equal.</summary>
+        /// <param name="x">The first MethodCallExpression to compare.</param>
+        /// <param name="y">The second MethodCallExpression to compare.</param>
+        /// <returns>true if the specified MethodCallExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<MethodCallExpression>.Equals(MethodCallExpression x, MethodCallExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -32,9 +37,13 @@ namespace ExpressionTreeToolkit
                    && EqualsMethodCall(x, y);
         }
 
-        public int GetHashCode(MethodCallExpression obj)
+        /// <summary>Returns a hash code for the specified MethodCallExpression.</summary>
+        /// <param name="obj">The <see cref="MethodCallExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified MethodCallExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<MethodCallExpression>.GetHashCode(MethodCallExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             return GetHashCodeExpression(
                 obj,

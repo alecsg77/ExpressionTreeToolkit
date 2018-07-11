@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
@@ -21,7 +22,11 @@ namespace ExpressionTreeToolkit
                 node.Expression);
         }
 
-        public bool Equals(TypeBinaryExpression x, TypeBinaryExpression y)
+        /// <summary>Determines whether the specified TypeBinaryExpressions are equal.</summary>
+        /// <param name="x">The first TypeBinaryExpression to compare.</param>
+        /// <param name="y">The second TypeBinaryExpression to compare.</param>
+        /// <returns>true if the specified TypeBinaryExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<TypeBinaryExpression>.Equals(TypeBinaryExpression x, TypeBinaryExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -30,9 +35,13 @@ namespace ExpressionTreeToolkit
                    && EqualsTypeBinary(x, y);
         }
 
-        public int GetHashCode(TypeBinaryExpression obj)
+        /// <summary>Returns a hash code for the specified TypeBinaryExpression.</summary>
+        /// <param name="obj">The <see cref="TypeBinaryExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified TypeBinaryExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<TypeBinaryExpression>.GetHashCode(TypeBinaryExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             return GetHashCodeExpression(
                 obj,

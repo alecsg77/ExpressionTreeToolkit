@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -38,7 +39,11 @@ namespace ExpressionTreeToolkit
                 switchCase.TestValues);
         }
 
-        public bool Equals(SwitchExpression x, SwitchExpression y)
+        /// <summary>Determines whether the specified SwitchExpressions are equal.</summary>
+        /// <param name="x">The first SwitchExpression to compare.</param>
+        /// <param name="y">The second SwitchExpression to compare.</param>
+        /// <returns>true if the specified SwitchExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<SwitchExpression>.Equals(SwitchExpression x, SwitchExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -47,9 +52,13 @@ namespace ExpressionTreeToolkit
                    && EqualsSwitch(x, y);
         }
 
-        public int GetHashCode(SwitchExpression obj)
+        /// <summary>Returns a hash code for the specified SwitchExpression.</summary>
+        /// <param name="obj">The <see cref="SwitchExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified SwitchExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<SwitchExpression>.GetHashCode(SwitchExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             return GetHashCodeExpression(
                 obj,

@@ -1,27 +1,45 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace ExpressionTreeToolkit
 {
+    /// <summary>
+    /// Expression Equality Comparer
+    /// </summary>
     public partial class ExpressionEqualityComparer : EqualityComparer<Expression>
     {
         private readonly IEqualityComparer<Expression> _equalityComparer;
+        /// <summary>
+        /// Returns a default Expression equality comparer.
+        /// </summary>
         public new static readonly ExpressionEqualityComparer Default = new ExpressionEqualityComparer();
 
+        /// <summary>
+        /// Initializes a new instance of the ExpressionEqualityComparer class.
+        /// </summary>
         public ExpressionEqualityComparer()
-            : this(null)
+            : this(EqualityComparer<Expression>.Default)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ExpressionEqualityComparer class and uses the specified equality comparer for the unknown Expression node.
+        /// </summary>
+        /// <param name="equalityComparer">The EqualityComparer for comparing unknown Expression node in the Expression tree, or null to use the default EqualityComparer implementation.</param>
         public ExpressionEqualityComparer(IEqualityComparer<Expression> equalityComparer)
         {
             _equalityComparer = equalityComparer ?? EqualityComparer<Expression>.Default;
         }
 
+        /// <summary>Determines whether two Expressions are equal.</summary>
+        /// <param name="x">The first Expression to compare.</param>
+        /// <param name="y">The second Expression to compare.</param>
+        /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
         public sealed override bool Equals(Expression x, Expression y)
         {
             if (ReferenceEquals(x, y))
@@ -170,12 +188,13 @@ namespace ExpressionTreeToolkit
             return x.NodeType == y.NodeType;
         }
 
+        /// <summary>Serves as a hash function for the specified Expression for hashing algorithms and data structures, such as a hash table.</summary>
+        /// <param name="obj">The Expression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified Expression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         public sealed override int GetHashCode(Expression obj)
         {
-            if (obj == null)
-            {
-                return 0;
-            }
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             IEnumerable<int> hashElements;
             switch (obj.NodeType)
@@ -323,7 +342,6 @@ namespace ExpressionTreeToolkit
 
             return GetHashCodeExpression(obj, hashElements);
         }
-
 
         private int GetHashCodeExpression(Expression exp, IEnumerable<int> hashElements)
         {

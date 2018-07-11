@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -43,7 +44,11 @@ namespace ExpressionTreeToolkit
                 catchBlock.Variable);
         }
 
-        public bool Equals(TryExpression x, TryExpression y)
+        /// <summary>Determines whether the specified TryExpressions are equal.</summary>
+        /// <param name="x">The first TryExpression to compare.</param>
+        /// <param name="y">The second TryExpression to compare.</param>
+        /// <returns>true if the specified TryExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<TryExpression>.Equals(TryExpression x, TryExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -52,9 +57,13 @@ namespace ExpressionTreeToolkit
                    && EqualsTry(x, y);
         }
 
-        public int GetHashCode(TryExpression obj)
+        /// <summary>Returns a hash code for the specified TryExpression.</summary>
+        /// <param name="obj">The <see cref="TryExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified TryExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<TryExpression>.GetHashCode(TryExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             return GetHashCodeExpression(
                 obj,
