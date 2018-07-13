@@ -8,7 +8,7 @@ using Xunit;
 
 namespace ExpressionTreeToolkit.UnitTests
 {
-    public class ExpressionEqualityComparer_EqualsBehavours
+    public class ExpressionEqualityComparerEqualsBehavours
     {
         private readonly IEqualityComparer<Expression> _target = ExpressionEqualityComparer.Default;
 
@@ -22,7 +22,6 @@ namespace ExpressionTreeToolkit.UnitTests
         {
             Assert.False(_target.Equals(x, y));
         }
-
 
         [Fact]
         public void ShouldBeEqual_Null_And_Null()
@@ -47,7 +46,6 @@ namespace ExpressionTreeToolkit.UnitTests
         {
             AssertAreNotEqual(Expression.Constant(null), Expression.Constant(5));
         }
-
 
         [Fact]
         public void ShouldBeEqual_Constant_And_Itself()
@@ -91,7 +89,6 @@ namespace ExpressionTreeToolkit.UnitTests
             Expression<Func<int?>> y = () => null;
             AssertAreNotEqual(x, y);
         }
-
 
         [Fact]
         public void ShouldBeNotEqual_FuncReturningNullObject_And_FuncObjectReturningNullObject()
