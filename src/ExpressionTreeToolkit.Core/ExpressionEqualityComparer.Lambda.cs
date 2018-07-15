@@ -11,18 +11,17 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsLambda(LambdaExpression x, LambdaExpression y)
         {
-            if (!EqualsList(x.Parameters, y.Parameters, EqualsParameter))
-            {
-                return false;
-            }
-
-            var comparer = new ExpressionEqualityComparer(x.Parameters, y.Parameters);
-            return comparer.Equals(x.Body, y.Body);
+            return x.Type == y.Type
+                && EqualsList(x.Parameters, y.Parameters, EqualsParameter)
+                && new ExpressionEqualityComparer(x.Parameters, y.Parameters).EqualsExpression(x.Body, y.Body);
         }
 
-        private IEnumerable<int> GetHashElementsLambda(LambdaExpression node)
+        private int GetHashCodeLambda(LambdaExpression node)
         {
-            return GetHashElements(node.Parameters, node.Body);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeList(node.Parameters, GetHashCodeParameter),
+                GetHashCodeExpression(node.Body));
         }
 
         /// <summary>Determines whether the specified LambdaExpressions are equal.</summary>
@@ -34,7 +33,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y) && EqualsLambda(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsLambda(x, y);
         }
 
         /// <summary>Returns a hash code for the specified LambdaExpression.</summary>
@@ -44,7 +46,8 @@ namespace ExpressionTreeToolkit
         int IEqualityComparer<LambdaExpression>.GetHashCode(LambdaExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            return GetHashCodeExpression(obj, GetHashElementsLambda(obj));
+
+            return GetHashCodeLambda(obj);
         }
     }
 }

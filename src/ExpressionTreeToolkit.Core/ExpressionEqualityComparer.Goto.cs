@@ -11,17 +11,19 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsGoto(GotoExpression x, GotoExpression y)
         {
-            return x.Kind == y.Kind
+            return x.Type == y.Type
+                   && x.Kind == y.Kind
                    && EqualsLabelTarget(x.Target, y.Target)
-                   && Equals(x.Value, y.Value);
+                   && EqualsExpression(x.Value, y.Value);
         }
 
-        private IEnumerable<int> GetHashElementsGoto(GotoExpression node)
+        private int GetHashCodeGoto(GotoExpression node)
         {
-            return GetHashElements(
-                node.Kind,
-                GetHashElementsLabelTarget(node.Target),
-                node.Value);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                node.Kind.GetHashCode(),
+                GetHashCodeLabelTarget(node.Target),
+                GetHashCodeExpression(node.Value));
         }
 
 
@@ -34,8 +36,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsGoto(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsGoto(x, y);
         }
 
         /// <summary>Returns a hash code for the specified GotoExpression.</summary>
@@ -46,7 +50,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(obj, GetHashElementsGoto(obj));
+            return GetHashCodeGoto(obj);
         }
     }
 }

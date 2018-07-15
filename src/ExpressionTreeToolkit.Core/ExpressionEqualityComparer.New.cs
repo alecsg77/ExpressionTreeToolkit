@@ -11,17 +11,19 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsNew(NewExpression x, NewExpression y)
         {
-            return Equals(x.Constructor, y.Constructor)
+            return x.Type == y.Type
+                   && Equals(x.Constructor, y.Constructor)
                    && EqualsList(x.Members, y.Members)
                    && EqualsExpressionList(x.Arguments, y.Arguments);
         }
 
-        private IEnumerable<int> GetHashElementsNew(NewExpression node)
+        private int GetHashCodeNew(NewExpression node)
         {
-            return GetHashElements(
-                node.Constructor,
-                node.Members,
-                node.Arguments);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.Constructor),
+                GetHashCodeList(node.Members),
+                GetHashCodeExpressionList(node.Arguments));
         }
 
         /// <summary>Determines whether the specified NewExpressions are equal.</summary>
@@ -33,8 +35,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsNew(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsNew(x, y);
         }
 
         /// <summary>Returns a hash code for the specified NewExpression.</summary>
@@ -45,9 +49,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsNew(obj));
+            return GetHashCodeNew(obj);
         }
     }
 }

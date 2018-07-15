@@ -11,15 +11,17 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsTypeBinary(TypeBinaryExpression x, TypeBinaryExpression y)
         {
-            return x.TypeOperand == y.TypeOperand
-                   && Equals(x.Expression, y.Expression);
+            return x.Type == y.Type
+                   && x.TypeOperand == y.TypeOperand
+                   && EqualsExpression(x.Expression, y.Expression);
         }
 
-        private IEnumerable<int> GetHashElementsTypeBinary(TypeBinaryExpression node)
+        private int GetHashCodeTypeBinary(TypeBinaryExpression node)
         {
-            return GetHashElements(
-                node.TypeOperand,
-                node.Expression);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.TypeOperand),
+                GetHashCodeExpression(node.Expression));
         }
 
         /// <summary>Determines whether the specified TypeBinaryExpressions are equal.</summary>
@@ -31,8 +33,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsTypeBinary(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsTypeBinary(x, y);
         }
 
         /// <summary>Returns a hash code for the specified TypeBinaryExpression.</summary>
@@ -43,9 +47,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsTypeBinary(obj));
+            return GetHashCodeTypeBinary(obj);
         }
     }
 }

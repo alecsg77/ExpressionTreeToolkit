@@ -11,15 +11,17 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsUnary(UnaryExpression x, UnaryExpression y)
         {
-            return Equals(x.Method, y.Method)
-                   && Equals(x.Operand, y.Operand);
+            return x.Type == y.Type
+                   && Equals(x.Method, y.Method)
+                   && EqualsExpression(x.Operand, y.Operand);
         }
 
-        private IEnumerable<int> GetHashElementsUnary(UnaryExpression unary)
+        private int GetHashCodeUnary(UnaryExpression node)
         {
-            return GetHashElements(
-                unary.Method,
-                unary.Operand);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.Method),
+                GetHashCodeExpression(node.Operand));
         }
 
         /// <summary>Determines whether the specified UnaryExpressions are equal.</summary>
@@ -31,8 +33,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsUnary(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsUnary(x, y);
         }
 
         /// <summary>Returns a hash code for the specified UnaryExpression.</summary>
@@ -43,9 +47,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsUnary(obj));
+            return GetHashCodeUnary(obj);
         }
     }
 }

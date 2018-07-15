@@ -11,17 +11,19 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsDynamic(DynamicExpression x, DynamicExpression y)
         {
-            return x.DelegateType == y.DelegateType
+            return x.Type == y.Type
+                   && x.DelegateType == y.DelegateType
                    && EqualsExpressionList(x.Arguments, y.Arguments)
                    && Equals(x.Binder, y.Binder);
         }
 
-        private IEnumerable<int> GetHashElementsDynamic(DynamicExpression node)
+        private int GetHashCodeDynamic(DynamicExpression node)
         {
-            return GetHashElements(
-                node.DelegateType,
-                node.Arguments,
-                node.Binder);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.DelegateType),
+                GetHashCodeExpressionList(node.Arguments),
+                GetHashCodeSafe(node.Binder));
         }
 
         /// <summary>Determines whether the specified DynamicExpressions are equal.</summary>
@@ -33,8 +35,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsDynamic(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsDynamic(x, y);
         }
 
         /// <summary>Returns a hash code for the specified DynamicExpression.</summary>
@@ -45,9 +49,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsDynamic(obj));
+            return GetHashCodeDynamic(obj);
         }
     }
 }

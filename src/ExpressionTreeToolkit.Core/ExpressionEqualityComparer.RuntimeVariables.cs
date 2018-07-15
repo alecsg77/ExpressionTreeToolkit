@@ -11,12 +11,15 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsRuntimeVariables(RuntimeVariablesExpression x, RuntimeVariablesExpression y)
         {
-            return EqualsExpressionList(x.Variables, y.Variables);
+            return x.Type == y.Type
+                   && EqualsExpressionList(x.Variables, y.Variables);
         }
 
-        private IEnumerable<int> GetHashElementsRuntimeVariables(RuntimeVariablesExpression node)
+        private int GetHashCodeRuntimeVariables(RuntimeVariablesExpression node)
         {
-            return GetHashElements(node.Variables);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeList(node.Variables));
         }
 
         /// <summary>Determines whether the specified RuntimeVariablesExpressions are equal.</summary>
@@ -28,8 +31,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsRuntimeVariables(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsRuntimeVariables(x, y);
         }
 
         /// <summary>Returns a hash code for the specified RuntimeVariablesExpression.</summary>
@@ -40,9 +45,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsRuntimeVariables(obj));
+            return GetHashCodeRuntimeVariables(obj);
         }
     }
 }

@@ -12,36 +12,38 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsTry(TryExpression x, TryExpression y)
         {
-            return Equals(x.Body, y.Body)
-                   && Equals(x.Fault, y.Fault)
-                   && Equals(x.Finally, y.Finally)
+            return x.Type == y.Type
+                   && EqualsExpression(x.Body, y.Body)
+                   && EqualsExpression(x.Fault, y.Fault)
+                   && EqualsExpression(x.Finally, y.Finally)
                    && EqualsList(x.Handlers, y.Handlers, EqualsCatchBlock);
         }
 
         private bool EqualsCatchBlock(CatchBlock x, CatchBlock y)
         {
             return x.Test == y.Test
-                   && Equals(x.Body, y.Body)
-                   && Equals(x.Filter, y.Filter)
-                   && Equals(x.Variable, y.Variable);
+                   && EqualsExpression(x.Body, y.Body)
+                   && EqualsExpression(x.Filter, y.Filter)
+                   && EqualsParameter(x.Variable, y.Variable);
         }
 
-        private IEnumerable<int> GetHashElementsTry(TryExpression node)
+        private int GetHashCodeTry(TryExpression node)
         {
-            return GetHashElements(
-                node.Body,
-                node.Fault,
-                node.Finally,
-                node.Handlers.SelectMany(GetHashElementsCatchBlock));
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeExpression(node.Body),
+                GetHashCodeExpression(node.Fault),
+                GetHashCodeExpression(node.Finally),
+                GetHashCodeList(node.Handlers, GetHashCodeCatchBlock));
         }
 
-        private IEnumerable<int> GetHashElementsCatchBlock(CatchBlock catchBlock)
+        private int GetHashCodeCatchBlock(CatchBlock catchBlock)
         {
-            return GetHashElements(
-                catchBlock.Test,
-                catchBlock.Body,
-                catchBlock.Filter,
-                catchBlock.Variable);
+            return GetHashCode(
+                GetHashCodeSafe(catchBlock.Test),
+                GetHashCodeExpression(catchBlock.Body),
+                GetHashCodeExpression(catchBlock.Filter),
+                GetHashCodeParameter(catchBlock.Variable));
         }
 
         /// <summary>Determines whether the specified TryExpressions are equal.</summary>
@@ -53,8 +55,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsTry(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsTry(x, y);
         }
 
         /// <summary>Returns a hash code for the specified TryExpression.</summary>
@@ -65,9 +69,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsTry(obj));
+            return GetHashCodeTry(obj);
         }
     }
 }

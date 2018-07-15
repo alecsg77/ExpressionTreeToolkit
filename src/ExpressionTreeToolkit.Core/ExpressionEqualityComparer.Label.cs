@@ -11,15 +11,17 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsLabel(LabelExpression x, LabelExpression y)
         {
-            return EqualsLabelTarget(x.Target, y.Target)
-                   && Equals(x.DefaultValue, y.DefaultValue);
+            return x.Type == y.Type
+                   && EqualsLabelTarget(x.Target, y.Target)
+                   && EqualsExpression(x.DefaultValue, y.DefaultValue);
         }
 
-        private IEnumerable<int> GetHashElementsLabel(LabelExpression node)
+        private int GetHashCodeLabel(LabelExpression node)
         {
-            return GetHashElements(
-                GetHashElementsLabelTarget(node.Target),
-                node.DefaultValue);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeLabelTarget(node.Target),
+                GetHashCodeExpression(node.DefaultValue));
         }
 
         /// <summary>Determines whether the specified LabelExpressions are equal.</summary>
@@ -31,8 +33,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsLabel(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsLabel(x, y);
         }
 
         /// <summary>Returns a hash code for the specified LabelExpression.</summary>
@@ -43,9 +47,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsLabel(obj));
+            return GetHashCodeLabel(obj);
         }
     }
 }

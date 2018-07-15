@@ -10,12 +10,12 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsExtension(Expression x, Expression y)
         {
-            return Equals(x.ReduceExtensions(), y.ReduceExtensions());
+            return EqualsExpression(x.ReduceExtensions(), y.ReduceExtensions());
         }
 
-        private IEnumerable<int> GetHashElementsExtension(Expression obj)
+        private int GetHashCodeExtension(Expression obj)
         {
-            return GetHashElements(obj.ReduceExtensions());
+            return GetHashCode(obj.ReduceExtensions());
         }
     }
 }

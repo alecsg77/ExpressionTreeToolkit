@@ -11,12 +11,15 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsNewArray(NewArrayExpression x, NewArrayExpression y)
         {
-            return EqualsExpressionList(x.Expressions, y.Expressions);
+            return x.Type == y.Type
+                   && EqualsExpressionList(x.Expressions, y.Expressions);
         }
 
-        private IEnumerable<int> GetHashElementsNewArray(NewArrayExpression node)
+        private int GetHashCodeNewArray(NewArrayExpression node)
         {
-            return GetHashElements(node.Expressions);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeList(node.Expressions));
         }
 
         /// <summary>Determines whether the specified NewArrayExpressions are equal.</summary>
@@ -28,8 +31,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsNewArray(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsNewArray(x, y);
         }
 
         /// <summary>Returns a hash code for the specified NewArrayExpression.</summary>
@@ -40,9 +45,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsNewArray(obj));
+            return GetHashCodeNewArray(obj);
         }
     }
 }

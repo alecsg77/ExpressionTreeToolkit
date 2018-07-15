@@ -12,31 +12,33 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsSwitch(SwitchExpression x, SwitchExpression y)
         {
-            return Equals(x.SwitchValue, y.SwitchValue)
-                   && x.Comparison == y.Comparison
+            return x.Type == y.Type
+                   && EqualsExpression(x.SwitchValue, y.SwitchValue)
+                   && Equals(x.Comparison, y.Comparison)
                    && EqualsList(x.Cases, y.Cases, EqualsSwitchCase)
-                   && Equals(x.DefaultBody, y.DefaultBody);
+                   && EqualsExpression(x.DefaultBody, y.DefaultBody);
         }
 
         private bool EqualsSwitchCase(SwitchCase x, SwitchCase y)
         {
-            return Equals(x.Body, y.Body)
+            return EqualsExpression(x.Body, y.Body)
                    && EqualsExpressionList(x.TestValues, y.TestValues);
         }
 
-        private IEnumerable<int> GetHashElementsSwitch(SwitchExpression node)
+        private int GetHashCodeSwitch(SwitchExpression node)
         {
-            return GetHashElements(
-                node.SwitchValue,
-                node.Comparison,
-                node.Cases.SelectMany(GetHashElementsSwitchCase));
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeExpression(node.SwitchValue),
+                GetHashCodeSafe(node.Comparison),
+                GetHashCodeList(node.Cases, GetHashCodeSwitchCase));
         }
 
-        private IEnumerable<int> GetHashElementsSwitchCase(SwitchCase switchCase)
+        private int GetHashCodeSwitchCase(SwitchCase switchCase)
         {
-            return GetHashElements(
-                switchCase.Body,
-                switchCase.TestValues);
+            return GetHashCode(
+                GetHashCode(switchCase.Body),
+                GetHashCodeExpressionList(switchCase.TestValues));
         }
 
         /// <summary>Determines whether the specified SwitchExpressions are equal.</summary>
@@ -48,8 +50,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsSwitch(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsSwitch(x, y);
         }
 
         /// <summary>Returns a hash code for the specified SwitchExpression.</summary>
@@ -60,9 +64,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsSwitch(obj));
+            return GetHashCodeSwitch(obj);
         }
     }
 }

@@ -11,17 +11,19 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsBlock(BlockExpression x, BlockExpression y)
         {
-            return EqualsExpressionList(x.Expressions, y.Expressions)
+            return x.Type == y.Type
+                   && EqualsExpressionList(x.Expressions, y.Expressions)
                    && EqualsExpressionList(x.Variables, y.Variables)
-                   && Equals(x.Result, y.Result);
+                   && EqualsExpression(x.Result, y.Result);
         }
 
-        private IEnumerable<int> GetHashElementsBlock(BlockExpression node)
+        private int GetHashCodeBlock(BlockExpression node)
         {
-            return GetHashElements(
-                node.Expressions,
-                node.Variables,
-                node.Result);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeExpressionList(node.Expressions),
+                GetHashCodeExpressionList(node.Variables),
+                GetHashCodeExpression(node.Result));
         }
 
         /// <summary>Determines whether the specified BlockExpression are equal.</summary>
@@ -33,8 +35,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsBlock(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsBlock(x, y);
         }
 
         /// <summary>Returns a hash code for the specified BlockExpression.</summary>
@@ -45,9 +49,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsBlock(obj));
+            return GetHashCodeBlock(obj);
         }
     }
 }

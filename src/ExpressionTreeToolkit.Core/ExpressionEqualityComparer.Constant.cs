@@ -11,12 +11,15 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsConstant(ConstantExpression x, ConstantExpression y)
         {
-            return Equals(x.Value, y.Value);
+            return x.Type == y.Type
+                   && Equals(x.Value, y.Value);
         }
 
-        private IEnumerable<int> GetHashElementsConstant(ConstantExpression node)
+        private int GetHashCodeConstant(ConstantExpression node)
         {
-            return GetHashElements(node.Value);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.Value));
         }
 
 
@@ -29,8 +32,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsConstant(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsConstant(x, y);
         }
 
         /// <summary>Returns a hash code for the specified ConstantExpression.</summary>
@@ -41,9 +46,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsConstant(obj));
+            return GetHashCodeConstant(obj);
         }
     }
 }

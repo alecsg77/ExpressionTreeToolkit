@@ -11,12 +11,13 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsDebugInfo(DebugInfoExpression x, DebugInfoExpression y)
         {
-            return Equals(x.IsClear, y.IsClear)
+            return x.Type == y.Type
+                   && x.IsClear == y.IsClear
                    && EqualsSymbolDocumentInfo(x.Document, y.Document)
-                   && Equals(x.StartLine, y.StartLine)
-                   && Equals(x.StartColumn, y.StartColumn)
-                   && Equals(x.EndLine, y.EndLine)
-                   && Equals(x.EndColumn, y.EndColumn);
+                   && x.StartLine == y.StartLine
+                   && x.StartColumn == y.StartColumn
+                   && x.EndLine == y.EndLine
+                   && x.EndColumn == y.EndColumn;
         }
 
         private bool EqualsSymbolDocumentInfo(SymbolDocumentInfo x, SymbolDocumentInfo y)
@@ -37,18 +38,30 @@ namespace ExpressionTreeToolkit
                    && x.FileName == y.FileName;
         }
 
-        private IEnumerable<int> GetHashElementsDebugInfo(DebugInfoExpression node)
+        private int GetHashCodeDebugInfo(DebugInfoExpression node)
         {
-            return GetHashElements(
-                node.IsClear,
-                node.Document?.DocumentType,
-                node.Document?.Language,
-                node.Document?.LanguageVendor,
-                node.Document?.FileName,
-                node.StartLine,
-                node.StartColumn,
-                node.EndLine,
-                node.EndColumn);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                node.IsClear.GetHashCode(),
+                GetHashSymbolDocumentInfo(node.Document),
+                node.StartLine.GetHashCode(),
+                node.StartColumn.GetHashCode(),
+                node.EndLine.GetHashCode(),
+                node.EndColumn.GetHashCode());
+        }
+
+        private int GetHashSymbolDocumentInfo(SymbolDocumentInfo symbolDocumentInfo)
+        {
+            if (symbolDocumentInfo == null)
+            {
+                return 0;
+            }
+
+            return GetHashCode(
+                symbolDocumentInfo.DocumentType.GetHashCode(),
+                symbolDocumentInfo.Language.GetHashCode(),
+                symbolDocumentInfo.LanguageVendor.GetHashCode(),
+                GetHashCodeSafe(symbolDocumentInfo.FileName));
         }
 
 
@@ -61,8 +74,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsDebugInfo(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsDebugInfo(x, y);
         }
 
         /// <summary>Returns a hash code for the specified DebugInfoExpression.</summary>
@@ -73,9 +88,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsDebugInfo(obj));
+            return GetHashCodeDebugInfo(obj);
         }
     }
 }

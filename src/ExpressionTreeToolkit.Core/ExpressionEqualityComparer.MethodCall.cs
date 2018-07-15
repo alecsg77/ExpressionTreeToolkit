@@ -11,17 +11,19 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y)
         {
-            return Equals(x.Method, y.Method)
-                   && Equals(x.Object, y.Object)
+            return x.Type == y.Type
+                   && Equals(x.Method, y.Method)
+                   && EqualsExpression(x.Object, y.Object)
                    && EqualsExpressionList(x.Arguments, y.Arguments);
         }
 
-        private IEnumerable<int> GetHashElementsMethodCall(MethodCallExpression node)
+        private int GetHashCodeMethodCall(MethodCallExpression node)
         {
-            return GetHashElements(
-                node.Method,
-                node.Object,
-                node.Arguments);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.Method),
+                GetHashCodeExpression(node.Object),
+                GetHashCodeExpressionList(node.Arguments));
         }
 
         /// <summary>Determines whether the specified MethodCallExpressions are equal.</summary>
@@ -33,8 +35,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsMethodCall(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsMethodCall(x, y);
         }
 
         /// <summary>Returns a hash code for the specified MethodCallExpression.</summary>
@@ -45,9 +49,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsMethodCall(obj));
+            return GetHashCodeMethodCall(obj);
         }
     }
 }

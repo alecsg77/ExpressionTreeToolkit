@@ -8,12 +8,12 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsDefault(DefaultExpression x, DefaultExpression y)
         {
-            return true;
+            return x.Type == y.Type;
         }
 
-        private IEnumerable<int> GetHashElementsDefault(DefaultExpression defaultExpression)
+        private int GetHashCodeDefault(DefaultExpression node)
         {
-            return null;
+            return GetHashCodeSafe(node.Type);
         }
 
         /// <summary>Determines whether the specified DefaultExpressions are equal.</summary>
@@ -25,8 +25,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsDefault(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsDefault(x, y);
 
         }
 
@@ -38,9 +40,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsDefault(obj));
+            return GetHashCodeDefault(obj);
         }
     }
 }

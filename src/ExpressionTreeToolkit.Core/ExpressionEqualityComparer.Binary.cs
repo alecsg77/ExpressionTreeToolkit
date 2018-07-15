@@ -11,19 +11,21 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsBinary(BinaryExpression x, BinaryExpression y)
         {
-            return Equals(x.Method, y.Method)
-                   && Equals(x.Left, y.Left)
-                   && Equals(x.Right, y.Right)
-                   && Equals(x.Conversion, y.Conversion);
+            return x.Type == y.Type
+                && Equals(x.Method, y.Method)
+                && EqualsExpression(x.Left, y.Left)
+                && EqualsExpression(x.Right, y.Right)
+                && EqualsExpression(x.Conversion, y.Conversion);
         }
 
-        private IEnumerable<int> GetHashElementsBinary(BinaryExpression node)
+        private int GetHashCodeBinary(BinaryExpression node)
         {
-            return GetHashElements(
-                node.Method,
-                node.Left,
-                node.Right,
-                node.Conversion);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.Method),
+                GetHashCodeExpression(node.Left),
+                GetHashCodeExpression(node.Right),
+                GetHashCodeExpression(node.Conversion));
         }
 
         /// <summary>Determines whether the specified BinaryExpressions are equal.</summary>
@@ -35,8 +37,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsBinary(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsBinary(x, y);
         }
 
         /// <summary>Returns a hash code for the specified BinaryExpression.</summary>
@@ -47,9 +51,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsBinary(obj));
+            return GetHashCodeBinary(obj);
         }
     }
 }

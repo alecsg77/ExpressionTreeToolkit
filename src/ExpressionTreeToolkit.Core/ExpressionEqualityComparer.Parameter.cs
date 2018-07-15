@@ -23,13 +23,16 @@ namespace ExpressionTreeToolkit
 
         private bool EqualsParameter(ParameterExpression x, ParameterExpression y)
         {
-            return Equals(_xParameters?.IndexOf(x), _yParameters?.IndexOf(y))
-                   && Equals(x.IsByRef, y.IsByRef);
+            return x.Type == y.Type
+                   && (_xParameters?.IndexOf(x) ?? 0) == (_yParameters?.IndexOf(y) ?? 0)
+                   && x.IsByRef == y.IsByRef;
         }
 
-        private IEnumerable<int> GetHashElementsParameter(ParameterExpression node)
+        private int GetHashCodeParameter(ParameterExpression node)
         {
-            return GetHashElements(node.IsByRef);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                node.IsByRef.GetHashCode());
         }
 
         /// <summary>Determines whether the specified ParameterExpressions are equal.</summary>
@@ -41,8 +44,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsParameter(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsParameter(x, y);
         }
 
         /// <summary>Returns a hash code for the specified ParameterExpression.</summary>
@@ -53,9 +58,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsParameter(obj));
+            return GetHashCodeParameter(obj);
         }
     }
 }

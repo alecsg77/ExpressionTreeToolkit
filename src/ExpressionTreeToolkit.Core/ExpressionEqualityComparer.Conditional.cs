@@ -11,17 +11,19 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsConditional(ConditionalExpression x, ConditionalExpression y)
         {
-            return Equals(x.Test, y.Test)
-                   && Equals(x.IfTrue, y.IfTrue)
-                   && Equals(x.IfFalse, y.IfFalse);
+            return x.Type == y.Type
+                   && EqualsExpression(x.Test, y.Test)
+                   && EqualsExpression(x.IfTrue, y.IfTrue)
+                   && EqualsExpression(x.IfFalse, y.IfFalse);
         }
 
-        private IEnumerable<int> GetHashElementsConditional(ConditionalExpression node)
+        private int GetHashCodeConditional(ConditionalExpression node)
         {
-            return GetHashElements(
-                node.Test,
-                node.IfTrue,
-                node.IfFalse);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeExpression(node.Test),
+                GetHashCodeExpression(node.IfTrue),
+                GetHashCodeExpression(node.IfFalse));
         }
 
         /// <summary>Determines whether the specified ConditionalExpressions are equal.</summary>
@@ -33,8 +35,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsConditional(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsConditional(x, y);
         }
 
         /// <summary>Returns a hash code for the specified ConditionalExpression.</summary>
@@ -45,9 +49,8 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsConditional(obj));
+
+            return GetHashCodeConditional(obj);
         }
     }
 }

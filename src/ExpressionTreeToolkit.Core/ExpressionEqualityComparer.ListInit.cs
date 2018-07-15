@@ -12,14 +12,17 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsListInit(ListInitExpression x, ListInitExpression y)
         {
-            return Equals(x.NewExpression, y.NewExpression)
+            return x.Type == y.Type
+                   && EqualsExpression(x.NewExpression, y.NewExpression)
                    && EqualsList(x.Initializers, x.Initializers, EqualsElementInit);
         }
 
-        private IEnumerable<int> GetHashElementsListInit(ListInitExpression node)
+        private int GetHashCodeListInit(ListInitExpression node)
         {
-            return GetHashElements(node.NewExpression,
-                node.Initializers.Select(x => GetHashElements(x.AddMethod, x.Arguments)));
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeExpression(node.NewExpression),
+                GetHashCodeList(node.Initializers, GetHashCodeElementInit));
         }
 
         /// <summary>Determines whether the specified ListInitExpressions are equal.</summary>
@@ -31,7 +34,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y) && EqualsListInit(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsListInit(x, y);
         }
 
         /// <summary>Returns a hash code for the specified ListInitExpression.</summary>
@@ -41,7 +47,8 @@ namespace ExpressionTreeToolkit
         int IEqualityComparer<ListInitExpression>.GetHashCode(ListInitExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            return GetHashCodeExpression(obj, GetHashElementsListInit(obj));
+
+            return GetHashCodeListInit(obj);
         }
     }
 }

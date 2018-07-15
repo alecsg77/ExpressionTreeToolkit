@@ -11,15 +11,17 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsInvocation(InvocationExpression x, InvocationExpression y)
         {
-            return Equals(x.Expression, y.Expression)
+            return x.Type == y.Type
+                   && EqualsExpression(x.Expression, y.Expression)
                    && EqualsExpressionList(x.Arguments, y.Arguments);
         }
 
-        private IEnumerable<int> GetHashElementsInvocation(InvocationExpression node)
+        private int GetHashCodeInvocation(InvocationExpression node)
         {
-            return GetHashElements(
-                node.Expression,
-                node.Arguments);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeExpression(node.Expression),
+                GetHashCodeExpressionList(node.Arguments));
         }
 
         /// <summary>Determines whether the specified InvocationExpressions are equal.</summary>
@@ -31,7 +33,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y) && EqualsInvocation(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsInvocation(x, y);
         }
 
         /// <summary>Returns a hash code for the specified InvocationExpression.</summary>
@@ -42,9 +47,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsInvocation(obj));
+            return GetHashCodeInvocation(obj);
         }
     }
 }

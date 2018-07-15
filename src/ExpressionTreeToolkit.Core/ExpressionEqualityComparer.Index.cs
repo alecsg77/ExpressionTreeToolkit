@@ -11,17 +11,19 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsIndex(IndexExpression x, IndexExpression y)
         {
-            return Equals(x.Object, y.Object)
+            return x.Type == y.Type
+                   && EqualsExpression(x.Object, y.Object)
                    && Equals(x.Indexer, y.Indexer)
                    && EqualsExpressionList(x.Arguments, y.Arguments);
         }
 
-        private IEnumerable<int> GetHashElementsIndex(IndexExpression node)
+        private int GetHashCodeIndex(IndexExpression node)
         {
-            return GetHashElements(
-                node.Object,
-                node.Indexer,
-                node.Arguments);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeExpression(node.Object),
+                GetHashCodeSafe(node.Indexer),
+                GetHashCodeExpressionList(node.Arguments));
         }
 
         /// <summary>Determines whether the specified IndexExpressions are equal.</summary>
@@ -33,7 +35,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y) && EqualsIndex(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsIndex(x, y);
         }
 
         /// <summary>Returns a hash code for the specified IndexExpression.</summary>
@@ -44,9 +49,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsIndex(obj));
+            return GetHashCodeIndex(obj);
         }
     }
 }

@@ -11,15 +11,17 @@ namespace ExpressionTreeToolkit
     {
         private bool EqualsMember(MemberExpression x, MemberExpression y)
         {
-            return Equals(x.Member, y.Member)
-                   && Equals(x.Expression, y.Expression);
+            return x.Type == y.Type
+                   && Equals(x.Member, y.Member)
+                   && EqualsExpression(x.Expression, y.Expression);
         }
 
-        private IEnumerable<int> GetHashElementsMember(MemberExpression node)
+        private int GetHashCodeMember(MemberExpression node)
         {
-            return GetHashElements(
-                node.Member,
-                node.Expression);
+            return GetHashCode(
+                GetHashCodeSafe(node.Type),
+                GetHashCodeSafe(node.Member),
+                GetHashCodeExpression(node.Expression));
         }
 
         /// <summary>Determines whether the specified MemberExpressions are equal.</summary>
@@ -31,8 +33,10 @@ namespace ExpressionTreeToolkit
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsMember(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsMember(x, y);
         }
 
         /// <summary>Returns a hash code for the specified MemberExpression.</summary>
@@ -43,9 +47,7 @@ namespace ExpressionTreeToolkit
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsMember(obj));
+            return GetHashCodeMember(obj);
         }
     }
 }
