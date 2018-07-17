@@ -4,26 +4,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ConditionalExpression>
     {
-        private bool EqualsConditional(ConditionalExpression x, ConditionalExpression y)
+        /// <summary>Determines whether the children of the two ConditionalExpression are equal.</summary>
+        /// <param name="x">The first ConditionalExpression to compare.</param>
+        /// <param name="y">The second ConditionalExpression to compare.</param>
+        /// <returns>true if the specified ConditionalExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsConditional([NotNull] ConditionalExpression x, [NotNull] ConditionalExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpression(x.Test, y.Test)
-                   && EqualsExpression(x.IfTrue, y.IfTrue)
-                   && EqualsExpression(x.IfFalse, y.IfFalse);
+                   && Equals(x.Test, y.Test)
+                   && Equals(x.IfTrue, y.IfTrue)
+                   && Equals(x.IfFalse, y.IfFalse);
         }
 
-        private int GetHashCodeConditional(ConditionalExpression node)
+        /// <summary>Gets the hash code for the specified ConditionalExpression.</summary>
+        /// <param name="node">The ConditionalExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified ConditionalExpression.</returns>
+        protected virtual int GetHashCodeConditional([NotNull] ConditionalExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeExpression(node.Test),
-                GetHashCodeExpression(node.IfTrue),
-                GetHashCodeExpression(node.IfFalse));
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.Test),
+                GetHashCode(node.IfTrue),
+                GetHashCode(node.IfFalse));
         }
 
         /// <summary>Determines whether the specified ConditionalExpressions are equal.</summary>
@@ -48,7 +56,6 @@ namespace ExpressionTreeToolkit
         int IEqualityComparer<ConditionalExpression>.GetHashCode(ConditionalExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-
 
             return GetHashCodeConditional(obj);
         }

@@ -4,24 +4,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<LoopExpression>
     {
-        private bool EqualsLoop(LoopExpression x, LoopExpression y)
+        /// <summary>Determines whether the children of the two LoopExpression are equal.</summary>
+        /// <param name="x">The first LoopExpression to compare.</param>
+        /// <param name="y">The second LoopExpression to compare.</param>
+        /// <returns>true if the specified LoopExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsLoop([NotNull] LoopExpression x, [NotNull] LoopExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpression(x.Body, y.Body)
+                   && Equals(x.Body, y.Body)
                    && EqualsLabelTarget(x.ContinueLabel, y.ContinueLabel)
                    && EqualsLabelTarget(x.BreakLabel, y.BreakLabel);
         }
 
-        private int GetHashCodeLoop(LoopExpression node)
+        /// <summary>Gets the hash code for the specified LoopExpression.</summary>
+        /// <param name="node">The LoopExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified LoopExpression.</returns>
+        protected virtual int GetHashCodeLoop([NotNull] LoopExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeExpression(node.Body),
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.Body),
                 GetHashCodeLabelTarget(node.ContinueLabel),
                 GetHashCodeLabelTarget(node.BreakLabel));
         }

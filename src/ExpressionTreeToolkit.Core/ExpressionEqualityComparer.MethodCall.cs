@@ -4,26 +4,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<MethodCallExpression>
     {
-        private bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y)
+        /// <summary>Determines whether the children of the two MethodCallExpression are equal.</summary>
+        /// <param name="x">The first MethodCallExpression to compare.</param>
+        /// <param name="y">The second MethodCallExpression to compare.</param>
+        /// <returns>true if the specified MethodCallExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsMethodCall([NotNull] MethodCallExpression x, [NotNull] MethodCallExpression y)
         {
             return x.Type == y.Type
                    && Equals(x.Method, y.Method)
-                   && EqualsExpression(x.Object, y.Object)
-                   && EqualsExpressionList(x.Arguments, y.Arguments);
+                   && Equals(x.Object, y.Object)
+                   && Equals(x.Arguments, y.Arguments);
         }
 
-        private int GetHashCodeMethodCall(MethodCallExpression node)
+        /// <summary>Gets the hash code for the specified MethodCallExpression.</summary>
+        /// <param name="node">The MethodCallExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified MethodCallExpression.</returns>
+        protected virtual int GetHashCodeMethodCall([NotNull] MethodCallExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeSafe(node.Method),
-                GetHashCodeExpression(node.Object),
-                GetHashCodeExpressionList(node.Arguments));
+                GetDefaultHashCode(node.Type),
+                GetDefaultHashCode(node.Method),
+                GetHashCode(node.Object),
+                GetHashCode(node.Arguments));
         }
 
         /// <summary>Determines whether the specified MethodCallExpressions are equal.</summary>

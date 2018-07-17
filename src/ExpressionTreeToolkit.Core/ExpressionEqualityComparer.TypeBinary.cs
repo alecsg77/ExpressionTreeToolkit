@@ -4,24 +4,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<TypeBinaryExpression>
     {
-        private bool EqualsTypeBinary(TypeBinaryExpression x, TypeBinaryExpression y)
+        /// <summary>Determines whether the children of the two TypeBinaryExpression are equal.</summary>
+        /// <param name="x">The first TypeBinaryExpression to compare.</param>
+        /// <param name="y">The second TypeBinaryExpression to compare.</param>
+        /// <returns>true if the specified TypeBinaryExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsTypeBinary([NotNull] TypeBinaryExpression x, [NotNull] TypeBinaryExpression y)
         {
             return x.Type == y.Type
                    && x.TypeOperand == y.TypeOperand
-                   && EqualsExpression(x.Expression, y.Expression);
+                   && Equals(x.Expression, y.Expression);
         }
 
-        private int GetHashCodeTypeBinary(TypeBinaryExpression node)
+        /// <summary>Gets the hash code for the specified TypeBinaryExpression.</summary>
+        /// <param name="node">The TypeBinaryExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified TypeBinaryExpression.</returns>
+        protected virtual int GetHashCodeTypeBinary([NotNull] TypeBinaryExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeSafe(node.TypeOperand),
-                GetHashCodeExpression(node.Expression));
+                GetDefaultHashCode(node.Type),
+                GetDefaultHashCode(node.TypeOperand),
+                GetHashCode(node.Expression));
         }
 
         /// <summary>Determines whether the specified TypeBinaryExpressions are equal.</summary>

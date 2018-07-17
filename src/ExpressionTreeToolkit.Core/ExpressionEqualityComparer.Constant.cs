@@ -4,24 +4,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ConstantExpression>
     {
-        private bool EqualsConstant(ConstantExpression x, ConstantExpression y)
+        /// <summary>Determines whether the children of the two ConstantExpression are equal.</summary>
+        /// <param name="x">The first ConstantExpression to compare.</param>
+        /// <param name="y">The second ConstantExpression to compare.</param>
+        /// <returns>true if the specified ConstantExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsConstant([NotNull] ConstantExpression x, [NotNull] ConstantExpression y)
         {
             return x.Type == y.Type
                    && Equals(x.Value, y.Value);
         }
 
-        private int GetHashCodeConstant(ConstantExpression node)
+        /// <summary>Gets the hash code for the specified ConstantExpression.</summary>
+        /// <param name="node">The ConstantExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified ConstantExpression.</returns>
+        protected virtual int GetHashCodeConstant([NotNull] ConstantExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeSafe(node.Value));
+                GetDefaultHashCode(node.Type),
+                GetDefaultHashCode(node.Value));
         }
-
 
         /// <summary>Determines whether the specified ConstantExpressions are equal.</summary>
         /// <param name="x">The first ConstantExpression to compare.</param>

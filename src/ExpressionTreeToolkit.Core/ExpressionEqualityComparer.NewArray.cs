@@ -4,22 +4,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<NewArrayExpression>
     {
-        private bool EqualsNewArray(NewArrayExpression x, NewArrayExpression y)
+        /// <summary>Determines whether the children of the two NewArrayExpression are equal.</summary>
+        /// <param name="x">The first NewArrayExpression to compare.</param>
+        /// <param name="y">The second NewArrayExpression to compare.</param>
+        /// <returns>true if the specified NewArrayExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsNewArray([NotNull] NewArrayExpression x, [NotNull] NewArrayExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpressionList(x.Expressions, y.Expressions);
+                   && Equals(x.Expressions, y.Expressions);
         }
 
-        private int GetHashCodeNewArray(NewArrayExpression node)
+        /// <summary>Gets the hash code for the specified NewArrayExpression.</summary>
+        /// <param name="node">The NewArrayExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified NewArrayExpression.</returns>
+        protected virtual int GetHashCodeNewArray([NotNull] NewArrayExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeList(node.Expressions));
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.Expressions));
         }
 
         /// <summary>Determines whether the specified NewArrayExpressions are equal.</summary>

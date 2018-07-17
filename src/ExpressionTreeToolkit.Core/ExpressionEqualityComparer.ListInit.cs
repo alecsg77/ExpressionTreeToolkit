@@ -3,26 +3,33 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ListInitExpression>
     {
-        private bool EqualsListInit(ListInitExpression x, ListInitExpression y)
+        /// <summary>Determines whether the children of the two ListInitExpression are equal.</summary>
+        /// <param name="x">The first ListInitExpression to compare.</param>
+        /// <param name="y">The second ListInitExpression to compare.</param>
+        /// <returns>true if the specified ListInitExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsListInit([NotNull] ListInitExpression x, [NotNull] ListInitExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpression(x.NewExpression, y.NewExpression)
-                   && EqualsList(x.Initializers, x.Initializers, EqualsElementInit);
+                   && Equals(x.NewExpression, y.NewExpression)
+                   && Equals(x.Initializers, x.Initializers, EqualsElementInit);
         }
 
-        private int GetHashCodeListInit(ListInitExpression node)
+        /// <summary>Gets the hash code for the specified ListInitExpression.</summary>
+        /// <param name="node">The ListInitExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified ListInitExpression.</returns>
+        protected virtual int GetHashCodeListInit([NotNull] ListInitExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeExpression(node.NewExpression),
-                GetHashCodeList(node.Initializers, GetHashCodeElementInit));
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.NewExpression),
+                GetHashCode(node.Initializers, GetHashCodeElementInit));
         }
 
         /// <summary>Determines whether the specified ListInitExpressions are equal.</summary>

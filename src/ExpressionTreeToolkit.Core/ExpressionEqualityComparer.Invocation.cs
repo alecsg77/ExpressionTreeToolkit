@@ -4,24 +4,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<InvocationExpression>
     {
-        private bool EqualsInvocation(InvocationExpression x, InvocationExpression y)
+        /// <summary>Determines whether the children of the two InvocationExpression are equal.</summary>
+        /// <param name="x">The first InvocationExpression to compare.</param>
+        /// <param name="y">The second InvocationExpression to compare.</param>
+        /// <returns>true if the specified InvocationExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsInvocation([NotNull] InvocationExpression x, [NotNull] InvocationExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpression(x.Expression, y.Expression)
-                   && EqualsExpressionList(x.Arguments, y.Arguments);
+                   && Equals(x.Expression, y.Expression)
+                   && Equals(x.Arguments, y.Arguments);
         }
 
-        private int GetHashCodeInvocation(InvocationExpression node)
+        /// <summary>Gets the hash code for the specified InvocationExpression.</summary>
+        /// <param name="node">The InvocationExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified InvocationExpression.</returns>
+        protected virtual int GetHashCodeInvocation([NotNull] InvocationExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeExpression(node.Expression),
-                GetHashCodeExpressionList(node.Arguments));
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.Expression),
+                GetHashCode(node.Arguments));
         }
 
         /// <summary>Determines whether the specified InvocationExpressions are equal.</summary>

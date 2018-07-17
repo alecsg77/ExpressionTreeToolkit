@@ -3,26 +3,33 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<MemberInitExpression>
     {
-        private bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y)
+        /// <summary>Determines whether the children of the two MemberInitExpression are equal.</summary>
+        /// <param name="x">The first MemberInitExpression to compare.</param>
+        /// <param name="y">The second MemberInitExpression to compare.</param>
+        /// <returns>true if the specified MemberInitExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsMemberInit([NotNull] MemberInitExpression x, [NotNull] MemberInitExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpression(x.NewExpression, y.NewExpression)
-                   && EqualsList(x.Bindings, y.Bindings, EqualsBinding);
+                   && Equals(x.NewExpression, y.NewExpression)
+                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding);
         }
 
-        private int GetHashCodeMemberInit(MemberInitExpression node)
+        /// <summary>Gets the hash code for the specified MemberInitExpression.</summary>
+        /// <param name="node">The MemberInitExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified MemberInitExpression.</returns>
+        protected virtual int GetHashCodeMemberInit([NotNull] MemberInitExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeExpression(node.NewExpression),
-                GetHashCodeList(node.Bindings, GetHashCodeBinding));
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.NewExpression),
+                GetHashCode(node.Bindings, GetHashCodeMemberBinding));
         }
 
         /// <summary>Determines whether the specified MemberInitExpressions are equal.</summary>

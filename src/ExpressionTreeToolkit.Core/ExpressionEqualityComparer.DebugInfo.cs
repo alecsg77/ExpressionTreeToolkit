@@ -4,12 +4,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<DebugInfoExpression>
     {
-        private bool EqualsDebugInfo(DebugInfoExpression x, DebugInfoExpression y)
+        /// <summary>Determines whether the children of the two DebugInfoExpression are equal.</summary>
+        /// <param name="x">The first DebugInfoExpression to compare.</param>
+        /// <param name="y">The second DebugInfoExpression to compare.</param>
+        /// <returns>true if the specified DebugInfoExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsDebugInfo([NotNull] DebugInfoExpression x, [NotNull] DebugInfoExpression y)
         {
             return x.Type == y.Type
                    && x.IsClear == y.IsClear
@@ -38,10 +43,13 @@ namespace ExpressionTreeToolkit
                    && x.FileName == y.FileName;
         }
 
-        private int GetHashCodeDebugInfo(DebugInfoExpression node)
+        /// <summary>Gets the hash code for the specified DebugInfoExpression.</summary>
+        /// <param name="node">The DebugInfoExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified DebugInfoExpression.</returns>
+        protected virtual int GetHashCodeDebugInfo([NotNull] DebugInfoExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
+                GetDefaultHashCode(node.Type),
                 node.IsClear.GetHashCode(),
                 GetHashSymbolDocumentInfo(node.Document),
                 node.StartLine.GetHashCode(),
@@ -61,9 +69,8 @@ namespace ExpressionTreeToolkit
                 symbolDocumentInfo.DocumentType.GetHashCode(),
                 symbolDocumentInfo.Language.GetHashCode(),
                 symbolDocumentInfo.LanguageVendor.GetHashCode(),
-                GetHashCodeSafe(symbolDocumentInfo.FileName));
+                GetDefaultHashCode(symbolDocumentInfo.FileName));
         }
-
 
         /// <summary>Determines whether the specified DebugInfoExpressions are equal.</summary>
         /// <param name="x">The first DebugInfoExpression to compare.</param>

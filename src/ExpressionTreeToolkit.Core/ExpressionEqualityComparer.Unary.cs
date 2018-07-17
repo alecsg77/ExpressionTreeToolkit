@@ -4,24 +4,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<UnaryExpression>
     {
-        private bool EqualsUnary(UnaryExpression x, UnaryExpression y)
+        /// <summary>Determines whether the children of the two UnaryExpression are equal.</summary>
+        /// <param name="x">The first UnaryExpression to compare.</param>
+        /// <param name="y">The second UnaryExpression to compare.</param>
+        /// <returns>true if the specified UnaryExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsUnary([NotNull] UnaryExpression x, [NotNull] UnaryExpression y)
         {
             return x.Type == y.Type
                    && Equals(x.Method, y.Method)
-                   && EqualsExpression(x.Operand, y.Operand);
+                   && Equals(x.Operand, y.Operand);
         }
 
-        private int GetHashCodeUnary(UnaryExpression node)
+        /// <summary>Gets the hash code for the specified UnaryExpression.</summary>
+        /// <param name="node">The UnaryExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified UnaryExpression.</returns>
+        protected virtual int GetHashCodeUnary([NotNull] UnaryExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeSafe(node.Method),
-                GetHashCodeExpression(node.Operand));
+                GetDefaultHashCode(node.Type),
+                GetDefaultHashCode(node.Method),
+                GetHashCode(node.Operand));
         }
 
         /// <summary>Determines whether the specified UnaryExpressions are equal.</summary>

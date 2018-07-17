@@ -4,28 +4,35 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<GotoExpression>
     {
-        private bool EqualsGoto(GotoExpression x, GotoExpression y)
+        /// <summary>Determines whether the children of the two GotoExpression are equal.</summary>
+        /// <param name="x">The first GotoExpression to compare.</param>
+        /// <param name="y">The second GotoExpression to compare.</param>
+        /// <returns>true if the specified GotoExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsGoto([NotNull] GotoExpression x, [NotNull] GotoExpression y)
         {
             return x.Type == y.Type
                    && x.Kind == y.Kind
                    && EqualsLabelTarget(x.Target, y.Target)
-                   && EqualsExpression(x.Value, y.Value);
+                   && Equals(x.Value, y.Value);
         }
 
-        private int GetHashCodeGoto(GotoExpression node)
+        /// <summary>Gets the hash code for the specified GotoExpression.</summary>
+        /// <param name="node">The GotoExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified GotoExpression.</returns>
+        protected virtual int GetHashCodeGoto([NotNull] GotoExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
+                GetDefaultHashCode(node.Type),
                 node.Kind.GetHashCode(),
                 GetHashCodeLabelTarget(node.Target),
-                GetHashCodeExpression(node.Value));
+                GetHashCode(node.Value));
         }
-
 
         /// <summary>Determines whether the specified GotoExpressions are equal.</summary>
         /// <param name="x">The first GotoExpression to compare.</param>

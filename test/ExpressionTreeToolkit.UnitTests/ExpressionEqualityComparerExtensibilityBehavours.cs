@@ -97,7 +97,7 @@ namespace ExpressionTreeToolkit.UnitTests
         {
             AssertAreEqual(new EqualityComparableExpression(3), new EqualityComparableExpression(3));
         }
-        
+
         [Fact]
         public void ShouldBeNotEqual_ExpressionEqualityComparer_SimpleExpressionNode()
         {
@@ -144,7 +144,6 @@ namespace ExpressionTreeToolkit.UnitTests
             }
         }
 
-
         [Fact]
         public void ShouldBeEqual_ExpressionEqualityComparer_Composition_SimpleExpressionNode()
         {
@@ -154,9 +153,43 @@ namespace ExpressionTreeToolkit.UnitTests
             AssertAreEqual(expressionX, expressionY, target);
         }
 
-        //[Fact]
-        //public void ShouldBeEqual_ExpressionEqualityComparer_Inheritance()
-        //{
-        //}
+        private sealed class ExtendedExpressionEqualityComparer : ExpressionEqualityComparer
+        {
+            public override bool Equals(Expression x, Expression y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+
+                if (x is null || y is null) return false;
+
+                if (x is SimpleExpression myExpressionX && y is SimpleExpression myExpressionY)
+                    return myExpressionX.Id == myExpressionY.Id;
+
+                return base.Equals(x, y);
+            }
+
+            public override int GetHashCode(Expression expression)
+            {
+                if (expression is SimpleExpression simpleExpression)
+                {
+                    unchecked
+                    {
+                        var hashCode = simpleExpression.Id;
+                        hashCode = (hashCode * 397) ^ (int)simpleExpression.NodeType;
+                        return (hashCode * 397) ^ simpleExpression.Type.GetHashCode();
+                    }
+                }
+
+                return base.GetHashCode(expression);
+            }
+        }
+
+        [Fact]
+        public void ShouldBeEqual_ExpressionEqualityComparer_Inheritance()
+        {
+            var target = new ExtendedExpressionEqualityComparer();
+            var expressionX = Expression.Property(new SimpleExpression(5), "Id");
+            var expressionY = Expression.Property(new SimpleExpression(5), "Id");
+            AssertAreEqual(expressionX, expressionY, target);
+        }
     }
 }

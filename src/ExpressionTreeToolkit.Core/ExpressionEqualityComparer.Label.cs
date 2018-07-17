@@ -4,24 +4,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<LabelExpression>
     {
-        private bool EqualsLabel(LabelExpression x, LabelExpression y)
+        /// <summary>Determines whether the children of the two LabelExpression are equal.</summary>
+        /// <param name="x">The first LabelExpression to compare.</param>
+        /// <param name="y">The second LabelExpression to compare.</param>
+        /// <returns>true if the specified LabelExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsLabel([NotNull] LabelExpression x, [NotNull] LabelExpression y)
         {
             return x.Type == y.Type
                    && EqualsLabelTarget(x.Target, y.Target)
-                   && EqualsExpression(x.DefaultValue, y.DefaultValue);
+                   && Equals(x.DefaultValue, y.DefaultValue);
         }
 
-        private int GetHashCodeLabel(LabelExpression node)
+        /// <summary>Gets the hash code for the specified LabelExpression.</summary>
+        /// <param name="node">The LabelExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified LabelExpression.</returns>
+        protected virtual int GetHashCodeLabel([NotNull] LabelExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
+                GetDefaultHashCode(node.Type),
                 GetHashCodeLabelTarget(node.Target),
-                GetHashCodeExpression(node.DefaultValue));
+                GetHashCode(node.DefaultValue));
         }
 
         /// <summary>Determines whether the specified LabelExpressions are equal.</summary>

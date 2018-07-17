@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
@@ -21,17 +22,24 @@ namespace ExpressionTreeToolkit
             _yParameters = yParameters;
         }
 
-        private bool EqualsParameter(ParameterExpression x, ParameterExpression y)
+        /// <summary>Determines whether the children of the two ParameterExpression are equal.</summary>
+        /// <param name="x">The first ParameterExpression to compare.</param>
+        /// <param name="y">The second ParameterExpression to compare.</param>
+        /// <returns>true if the specified ParameterExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsParameter([NotNull] ParameterExpression x, [NotNull] ParameterExpression y)
         {
             return x.Type == y.Type
                    && (_xParameters?.IndexOf(x) ?? 0) == (_yParameters?.IndexOf(y) ?? 0)
                    && x.IsByRef == y.IsByRef;
         }
 
-        private int GetHashCodeParameter(ParameterExpression node)
+        /// <summary>Gets the hash code for the specified ParameterExpression.</summary>
+        /// <param name="node">The ParameterExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified ParameterExpression.</returns>
+        protected virtual int GetHashCodeParameter([NotNull] ParameterExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
+                GetDefaultHashCode(node.Type),
                 node.IsByRef.GetHashCode());
         }
 

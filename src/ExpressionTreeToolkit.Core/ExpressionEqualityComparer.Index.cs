@@ -4,26 +4,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<IndexExpression>
     {
-        private bool EqualsIndex(IndexExpression x, IndexExpression y)
+        /// <summary>Determines whether the children of the two IndexExpression are equal.</summary>
+        /// <param name="x">The first IndexExpression to compare.</param>
+        /// <param name="y">The second IndexExpression to compare.</param>
+        /// <returns>true if the specified IndexExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsIndex([NotNull] IndexExpression x, [NotNull] IndexExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpression(x.Object, y.Object)
+                   && Equals(x.Object, y.Object)
                    && Equals(x.Indexer, y.Indexer)
-                   && EqualsExpressionList(x.Arguments, y.Arguments);
+                   && Equals(x.Arguments, y.Arguments);
         }
 
-        private int GetHashCodeIndex(IndexExpression node)
+        /// <summary>Gets the hash code for the specified IndexExpression.</summary>
+        /// <param name="node">The IndexExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified IndexExpression.</returns>
+        protected virtual int GetHashCodeIndex([NotNull] IndexExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeExpression(node.Object),
-                GetHashCodeSafe(node.Indexer),
-                GetHashCodeExpressionList(node.Arguments));
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.Object),
+                GetDefaultHashCode(node.Indexer),
+                GetHashCode(node.Arguments));
         }
 
         /// <summary>Determines whether the specified IndexExpressions are equal.</summary>

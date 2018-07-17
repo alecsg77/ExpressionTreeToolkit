@@ -4,26 +4,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<NewExpression>
     {
-        private bool EqualsNew(NewExpression x, NewExpression y)
+        /// <summary>Determines whether the children of the two NewExpression are equal.</summary>
+        /// <param name="x">The first NewExpression to compare.</param>
+        /// <param name="y">The second NewExpression to compare.</param>
+        /// <returns>true if the specified NewExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsNew([NotNull] NewExpression x, [NotNull] NewExpression y)
         {
             return x.Type == y.Type
                    && Equals(x.Constructor, y.Constructor)
-                   && EqualsList(x.Members, y.Members)
-                   && EqualsExpressionList(x.Arguments, y.Arguments);
+                   && Equals(x.Members, y.Members)
+                   && Equals(x.Arguments, y.Arguments);
         }
 
-        private int GetHashCodeNew(NewExpression node)
+        /// <summary>Gets the hash code for the specified NewExpression.</summary>
+        /// <param name="node">The NewExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified NewExpression.</returns>
+        protected virtual int GetHashCodeNew([NotNull] NewExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeSafe(node.Constructor),
-                GetHashCodeList(node.Members),
-                GetHashCodeExpressionList(node.Arguments));
+                GetDefaultHashCode(node.Type),
+                GetDefaultHashCode(node.Constructor),
+                GetHashCode(node.Members),
+                GetHashCode(node.Arguments));
         }
 
         /// <summary>Determines whether the specified NewExpressions are equal.</summary>

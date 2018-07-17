@@ -4,22 +4,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<RuntimeVariablesExpression>
     {
-        private bool EqualsRuntimeVariables(RuntimeVariablesExpression x, RuntimeVariablesExpression y)
+        /// <summary>Determines whether the children of the two RuntimeVariablesExpression are equal.</summary>
+        /// <param name="x">The first RuntimeVariablesExpression to compare.</param>
+        /// <param name="y">The second RuntimeVariablesExpression to compare.</param>
+        /// <returns>true if the specified RuntimeVariablesExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsRuntimeVariables([NotNull] RuntimeVariablesExpression x, [NotNull] RuntimeVariablesExpression y)
         {
             return x.Type == y.Type
-                   && EqualsExpressionList(x.Variables, y.Variables);
+                   && Equals(x.Variables, y.Variables, EqualsParameter);
         }
 
-        private int GetHashCodeRuntimeVariables(RuntimeVariablesExpression node)
+        /// <summary>Gets the hash code for the specified RuntimeVariablesExpression.</summary>
+        /// <param name="node">The RuntimeVariablesExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified RuntimeVariablesExpression.</returns>
+        protected virtual int GetHashCodeRuntimeVariables([NotNull] RuntimeVariablesExpression node)
         {
             return GetHashCode(
-                GetHashCodeSafe(node.Type),
-                GetHashCodeList(node.Variables));
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.Variables, GetHashCodeParameter));
         }
 
         /// <summary>Determines whether the specified RuntimeVariablesExpressions are equal.</summary>

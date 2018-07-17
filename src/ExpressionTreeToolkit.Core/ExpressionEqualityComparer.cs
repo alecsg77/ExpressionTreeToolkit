@@ -3,22 +3,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     /// <summary>
     /// Expression Equality Comparer
     /// </summary>
-    public partial class ExpressionEqualityComparer : EqualityComparer<Expression>
+    public partial class ExpressionEqualityComparer : IEqualityComparer<Expression>, System.Collections.IEqualityComparer
     {
         private readonly IEqualityComparer<Expression> _equalityComparer;
 
         /// <summary>
         /// Returns a default Expression equality comparer.
         /// </summary>
-        public new static readonly ExpressionEqualityComparer Default = new ExpressionEqualityComparer();
+        public static readonly ExpressionEqualityComparer Default = new ExpressionEqualityComparer();
 
         /// <summary>
         /// Initializes a new instance of the ExpressionEqualityComparer class.
@@ -32,7 +32,7 @@ namespace ExpressionTreeToolkit
         /// Initializes a new instance of the ExpressionEqualityComparer class and uses the specified equality comparer for the unknown Expression node.
         /// </summary>
         /// <param name="equalityComparer">The EqualityComparer for comparing unknown Expression node in the Expression tree, or null to use the default EqualityComparer implementation.</param>
-        public ExpressionEqualityComparer(IEqualityComparer<Expression> equalityComparer)
+        public ExpressionEqualityComparer([CanBeNull] IEqualityComparer<Expression> equalityComparer)
         {
             _equalityComparer = equalityComparer ?? EqualityComparer<Expression>.Default;
         }
@@ -41,19 +41,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first Expression to compare.</param>
         /// <param name="y">The second Expression to compare.</param>
         /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
-        public sealed override bool Equals(Expression x, Expression y)
-        {
-            if (ReferenceEquals(x, y))
-                return true;
-
-            if (x == null || y == null)
-                return false;
-
-            return EqualsExpression(x, y);
-
-        }
-
-        private bool EqualsExpression(Expression x, Expression y)
+        public virtual bool Equals([CanBeNull] Expression x, [CanBeNull] Expression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -183,17 +171,9 @@ namespace ExpressionTreeToolkit
         }
 
         /// <summary>Serves as a hash function for the specified Expression for hashing algorithms and data structures, such as a hash table.</summary>
-        /// <param name="obj">The Expression for which to get a hash code.</param>
+        /// <param name="expression">The Expression for which to get a hash code.</param>
         /// <returns>A hash code for the specified Expression.</returns>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        public sealed override int GetHashCode(Expression obj)
-        {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-
-            return GetHashCodeExpression(obj);
-        }
-
-        private int GetHashCodeExpression(Expression expression)
+        public virtual int GetHashCode([CanBeNull] Expression expression)
         {
             if (expression == null)
                 return 0;
@@ -314,6 +294,66 @@ namespace ExpressionTreeToolkit
                 default:
                     return _equalityComparer.GetHashCode(expression);
             }
+        }
+
+        /// <summary>Determines whether two Expressions are equal.</summary>
+        /// <param name="x">The first Expression to compare.</param>
+        /// <param name="y">The second Expression to compare.</param>
+        /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<Expression>.Equals(Expression x, Expression y)
+        {
+            if (ReferenceEquals(x, y))
+                return true;
+
+            if (x == null || y == null)
+                return false;
+
+            return Equals(x, y);
+        }
+
+        /// <summary>Determines whether two Expressions are equal.</summary>
+        /// <param name="x">The first Expression to compare.</param>
+        /// <param name="y">The second Expression to compare.</param>
+        /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
+        /// <exception cref="ArgumentException"><paramref name="x">x</paramref> or <paramref name="y">y</paramref> is of a type that cannot be cast to Expression.</exception>
+        bool System.Collections.IEqualityComparer.Equals(object x, object y)
+        {
+            if (x == y)
+                return true;
+
+            if (x == null || y == null)
+                return false;
+
+            if (x is Expression expressionX && y is Expression expressionY)
+                return Equals(expressionX, expressionY);
+
+            throw new ArgumentException("x or y is of a type that cannot be cast to Expression.");
+        }
+
+        /// <summary>Serves as a hash function for the specified Expression for hashing algorithms and data structures, such as a hash table.</summary>
+        /// <param name="obj">The Expression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified Expression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<Expression>.GetHashCode(Expression obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+
+            return GetHashCode(obj);
+        }
+
+        /// <summary>Serves as a hash function for the specified Expression for hashing algorithms and data structures, such as a hash table.</summary>
+        /// <param name="obj">The Expression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified Expression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        /// <exception cref="System.ArgumentException"><paramref name="obj">obj</paramref> is of a type that cannot be cast to Expression</exception>
+        int System.Collections.IEqualityComparer.GetHashCode([NotNull] object obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+
+            if (obj is Expression expression)
+                return GetHashCode(expression);
+
+            throw new ArgumentException("obj is of a type that cannot be cast to Expression", nameof(obj));
         }
     }
 }
