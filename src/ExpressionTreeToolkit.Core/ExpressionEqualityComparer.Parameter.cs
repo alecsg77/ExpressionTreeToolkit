@@ -1,9 +1,11 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
@@ -20,33 +22,51 @@ namespace ExpressionTreeToolkit
             _yParameters = yParameters;
         }
 
-        private bool EqualsParameter(ParameterExpression x, ParameterExpression y)
+        /// <summary>Determines whether the children of the two ParameterExpression are equal.</summary>
+        /// <param name="x">The first ParameterExpression to compare.</param>
+        /// <param name="y">The second ParameterExpression to compare.</param>
+        /// <returns>true if the specified ParameterExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsParameter([NotNull] ParameterExpression x, [NotNull] ParameterExpression y)
         {
-            return Equals(_xParameters?.IndexOf(x), _yParameters?.IndexOf(y))
-                   && Equals(x.IsByRef, y.IsByRef);
+            return x.Type == y.Type
+                   && (_xParameters?.IndexOf(x) ?? 0) == (_yParameters?.IndexOf(y) ?? 0)
+                   && x.IsByRef == y.IsByRef;
         }
 
-        private IEnumerable<int> GetHashElementsParameter(ParameterExpression node)
+        /// <summary>Gets the hash code for the specified ParameterExpression.</summary>
+        /// <param name="node">The ParameterExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified ParameterExpression.</returns>
+        protected virtual int GetHashCodeParameter([NotNull] ParameterExpression node)
         {
-            return GetHashElements(node.IsByRef);
+            return GetHashCode(
+                GetDefaultHashCode(node.Type),
+                node.IsByRef.GetHashCode());
         }
 
-        public bool Equals(ParameterExpression x, ParameterExpression y)
+        /// <summary>Determines whether the specified ParameterExpressions are equal.</summary>
+        /// <param name="x">The first ParameterExpression to compare.</param>
+        /// <param name="y">The second ParameterExpression to compare.</param>
+        /// <returns>true if the specified ParameterExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<ParameterExpression>.Equals(ParameterExpression x, ParameterExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsParameter(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsParameter(x, y);
         }
 
-        public int GetHashCode(ParameterExpression obj)
+        /// <summary>Returns a hash code for the specified ParameterExpression.</summary>
+        /// <param name="obj">The <see cref="ParameterExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified ParameterExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<ParameterExpression>.GetHashCode(ParameterExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsParameter(obj));
+            return GetHashCodeParameter(obj);
         }
     }
 }

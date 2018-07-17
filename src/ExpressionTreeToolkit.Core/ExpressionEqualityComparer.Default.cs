@@ -1,37 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     public partial class ExpressionEqualityComparer : IEqualityComparer<DefaultExpression>
     {
-        private bool EqualsDefault(DefaultExpression x, DefaultExpression y)
+        /// <summary>Determines whether the children of the two DefaultExpression are equal.</summary>
+        /// <param name="x">The first DefaultExpression to compare.</param>
+        /// <param name="y">The second DefaultExpression to compare.</param>
+        /// <returns>true if the specified DefaultExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsDefault([NotNull] DefaultExpression x, [NotNull] DefaultExpression y)
         {
-            return true;
+            return x.Type == y.Type;
         }
 
-        private IEnumerable<int> GetHashElementsDefault(DefaultExpression defaultExpression)
+        /// <summary>Gets the hash code for the specified DefaultExpression.</summary>
+        /// <param name="node">The DefaultExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified DefaultExpression.</returns>
+        protected virtual int GetHashCodeDefault([NotNull] DefaultExpression node)
         {
-            return null;
+            return GetDefaultHashCode(node.Type);
         }
 
-        public bool Equals(DefaultExpression x, DefaultExpression y)
+        /// <summary>Determines whether the specified DefaultExpressions are equal.</summary>
+        /// <param name="x">The first DefaultExpression to compare.</param>
+        /// <param name="y">The second DefaultExpression to compare.</param>
+        /// <returns>true if the specified DefaultExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<DefaultExpression>.Equals(DefaultExpression x, DefaultExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsDefault(x, y);
+            if (x == null || y == null)
+                return false;
 
+            return EqualsDefault(x, y);
         }
 
-        public int GetHashCode(DefaultExpression obj)
+        /// <summary>Returns a hash code for the specified DefaultExpression.</summary>
+        /// <param name="obj">The <see cref="DefaultExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified DefaultExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<DefaultExpression>.GetHashCode(DefaultExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsDefault(obj));
+            return GetHashCodeDefault(obj);
         }
     }
 }

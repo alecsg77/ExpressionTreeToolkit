@@ -1,35 +1,55 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
-    public partial class ExpressionEqualityComparer : EqualityComparer<Expression>
+    /// <summary>
+    /// Expression Equality Comparer
+    /// </summary>
+    public partial class ExpressionEqualityComparer : IEqualityComparer<Expression>, System.Collections.IEqualityComparer
     {
         private readonly IEqualityComparer<Expression> _equalityComparer;
-        public static ExpressionEqualityComparer Default = new ExpressionEqualityComparer();
 
+        /// <summary>
+        /// Returns a default Expression equality comparer.
+        /// </summary>
+        public static readonly ExpressionEqualityComparer Default = new ExpressionEqualityComparer();
+
+        /// <summary>
+        /// Initializes a new instance of the ExpressionEqualityComparer class.
+        /// </summary>
         public ExpressionEqualityComparer()
-            : this(null)
+            : this(EqualityComparer<Expression>.Default)
         {
         }
 
-        public ExpressionEqualityComparer(IEqualityComparer<Expression> equalityComparer)
+        /// <summary>
+        /// Initializes a new instance of the ExpressionEqualityComparer class and uses the specified equality comparer for the unknown Expression node.
+        /// </summary>
+        /// <param name="equalityComparer">The EqualityComparer for comparing unknown Expression node in the Expression tree, or null to use the default EqualityComparer implementation.</param>
+        public ExpressionEqualityComparer([CanBeNull] IEqualityComparer<Expression> equalityComparer)
         {
             _equalityComparer = equalityComparer ?? EqualityComparer<Expression>.Default;
         }
 
-        public sealed override bool Equals(Expression x, Expression y)
+        /// <summary>Determines whether two Expressions are equal.</summary>
+        /// <param name="x">The first Expression to compare.</param>
+        /// <param name="y">The second Expression to compare.</param>
+        /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
+        public virtual bool Equals([CanBeNull] Expression x, [CanBeNull] Expression y)
         {
             if (ReferenceEquals(x, y))
-            {
                 return true;
-            }
 
-            if (!EqualsExpression(x, y))
+            if (x == null || y == null)
+                return false;
+
+            if (!Equals(x.NodeType, y.NodeType))
                 return false;
 
             switch (x.NodeType)
@@ -54,7 +74,7 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.Increment:
                 case ExpressionType.Throw:
                 case ExpressionType.Unbox:
-                    return EqualsUnary((UnaryExpression) x, (UnaryExpression) y);
+                    return EqualsUnary((UnaryExpression)x, (UnaryExpression)y);
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
                 case ExpressionType.Subtract:
@@ -94,55 +114,55 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.AddAssignChecked:
                 case ExpressionType.MultiplyAssignChecked:
                 case ExpressionType.SubtractAssignChecked:
-                    return EqualsBinary((BinaryExpression) x, (BinaryExpression) y);
+                    return EqualsBinary((BinaryExpression)x, (BinaryExpression)y);
                 case ExpressionType.TypeIs:
                 case ExpressionType.TypeEqual:
-                    return EqualsTypeBinary((TypeBinaryExpression) x, (TypeBinaryExpression) y);
+                    return EqualsTypeBinary((TypeBinaryExpression)x, (TypeBinaryExpression)y);
                 case ExpressionType.Conditional:
-                    return EqualsConditional((ConditionalExpression) x, (ConditionalExpression) y);
+                    return EqualsConditional((ConditionalExpression)x, (ConditionalExpression)y);
                 case ExpressionType.Constant:
-                    return EqualsConstant((ConstantExpression) x, (ConstantExpression) y);
+                    return EqualsConstant((ConstantExpression)x, (ConstantExpression)y);
                 case ExpressionType.Parameter:
-                    return EqualsParameter((ParameterExpression) x, (ParameterExpression) y);
+                    return EqualsParameter((ParameterExpression)x, (ParameterExpression)y);
                 case ExpressionType.MemberAccess:
-                    return EqualsMember((MemberExpression) x, (MemberExpression) y);
+                    return EqualsMember((MemberExpression)x, (MemberExpression)y);
                 case ExpressionType.Call:
-                    return EqualsMethodCall((MethodCallExpression) x, (MethodCallExpression) y);
+                    return EqualsMethodCall((MethodCallExpression)x, (MethodCallExpression)y);
                 case ExpressionType.Lambda:
-                    return EqualsLambda((LambdaExpression) x, (LambdaExpression) y);
+                    return EqualsLambda((LambdaExpression)x, (LambdaExpression)y);
                 case ExpressionType.New:
-                    return EqualsNew((NewExpression) x, (NewExpression) y);
+                    return EqualsNew((NewExpression)x, (NewExpression)y);
                 case ExpressionType.NewArrayInit:
                 case ExpressionType.NewArrayBounds:
-                    return EqualsNewArray((NewArrayExpression) x, (NewArrayExpression) y);
+                    return EqualsNewArray((NewArrayExpression)x, (NewArrayExpression)y);
                 case ExpressionType.Invoke:
-                    return EqualsInvocation((InvocationExpression) x, (InvocationExpression) y);
+                    return EqualsInvocation((InvocationExpression)x, (InvocationExpression)y);
                 case ExpressionType.MemberInit:
-                    return EqualsMemberInit((MemberInitExpression) x, (MemberInitExpression) y);
+                    return EqualsMemberInit((MemberInitExpression)x, (MemberInitExpression)y);
                 case ExpressionType.ListInit:
-                    return EqualsListInit((ListInitExpression) x, (ListInitExpression) y);
+                    return EqualsListInit((ListInitExpression)x, (ListInitExpression)y);
                 case ExpressionType.Block:
-                    return EqualsBlock((BlockExpression) x, (BlockExpression) y);
+                    return EqualsBlock((BlockExpression)x, (BlockExpression)y);
                 case ExpressionType.DebugInfo:
-                    return EqualsDebugInfo((DebugInfoExpression) x, (DebugInfoExpression) y);
+                    return EqualsDebugInfo((DebugInfoExpression)x, (DebugInfoExpression)y);
                 case ExpressionType.Dynamic:
-                    return EqualsDynamic((DynamicExpression) x, (DynamicExpression) y);
+                    return EqualsDynamic((DynamicExpression)x, (DynamicExpression)y);
                 case ExpressionType.Goto:
-                    return EqualsGoto((GotoExpression) x, (GotoExpression) y);
+                    return EqualsGoto((GotoExpression)x, (GotoExpression)y);
                 case ExpressionType.Index:
-                    return EqualsIndex((IndexExpression) x, (IndexExpression) y);
+                    return EqualsIndex((IndexExpression)x, (IndexExpression)y);
                 case ExpressionType.Label:
-                    return EqualsLabel((LabelExpression) x, (LabelExpression) y);
+                    return EqualsLabel((LabelExpression)x, (LabelExpression)y);
                 case ExpressionType.RuntimeVariables:
-                    return EqualsRuntimeVariables((RuntimeVariablesExpression) x, (RuntimeVariablesExpression) y);
+                    return EqualsRuntimeVariables((RuntimeVariablesExpression)x, (RuntimeVariablesExpression)y);
                 case ExpressionType.Loop:
-                    return EqualsLoop((LoopExpression) x, (LoopExpression) y);
+                    return EqualsLoop((LoopExpression)x, (LoopExpression)y);
                 case ExpressionType.Switch:
-                    return EqualsSwitch((SwitchExpression) x, (SwitchExpression) y);
+                    return EqualsSwitch((SwitchExpression)x, (SwitchExpression)y);
                 case ExpressionType.Try:
-                    return EqualsTry((TryExpression) x, (TryExpression) y);
+                    return EqualsTry((TryExpression)x, (TryExpression)y);
                 case ExpressionType.Default:
-                    return EqualsDefault((DefaultExpression) x, (DefaultExpression) y);
+                    return EqualsDefault((DefaultExpression)x, (DefaultExpression)y);
                 case ExpressionType.Extension:
                     return EqualsExtension(x, y);
                 default:
@@ -150,35 +170,15 @@ namespace ExpressionTreeToolkit
             }
         }
 
-        private bool EqualsExpression(Expression x, Expression y)
+        /// <summary>Serves as a hash function for the specified Expression for hashing algorithms and data structures, such as a hash table.</summary>
+        /// <param name="expression">The Expression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified Expression.</returns>
+        public virtual int GetHashCode([CanBeNull] Expression expression)
         {
-            if (x == null || y == null)
-            {
-                return false;
-            }
-
-            return EqualsType(x, y) && EqualsNodeType(x, y);
-        }
-
-        private bool EqualsType(Expression x, Expression y)
-        {
-            return x.Type == y.Type;
-        }
-
-        private bool EqualsNodeType(Expression x, Expression y)
-        {
-            return x.NodeType == y.NodeType;
-        }
-
-        public sealed override int GetHashCode(Expression obj)
-        {
-            if (obj == null)
-            {
+            if (expression == null)
                 return 0;
-            }
 
-            IEnumerable<int> hashElements;
-            switch (obj.NodeType)
+            switch (expression.NodeType)
             {
                 case ExpressionType.Negate:
                 case ExpressionType.NegateChecked:
@@ -200,8 +200,7 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.Increment:
                 case ExpressionType.Throw:
                 case ExpressionType.Unbox:
-                    hashElements = GetHashElementsUnary((UnaryExpression) obj);
-                    break;
+                    return GetHashCodeUnary((UnaryExpression)expression);
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
                 case ExpressionType.Subtract:
@@ -241,93 +240,120 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.AddAssignChecked:
                 case ExpressionType.MultiplyAssignChecked:
                 case ExpressionType.SubtractAssignChecked:
-                    hashElements = GetHashElementsBinary((BinaryExpression) obj);
-                    break;
+                    return GetHashCodeBinary((BinaryExpression)expression);
                 case ExpressionType.TypeIs:
                 case ExpressionType.TypeEqual:
-                    hashElements = GetHashElementsTypeBinary((TypeBinaryExpression) obj);
-                    break;
+                    return GetHashCodeTypeBinary((TypeBinaryExpression)expression);
                 case ExpressionType.Conditional:
-                    hashElements = GetHashElementsConditional((ConditionalExpression) obj);
-                    break;
+                    return GetHashCodeConditional((ConditionalExpression)expression);
                 case ExpressionType.Constant:
-                    hashElements = GetHashElementsConstant((ConstantExpression) obj);
-                    break;
+                    return GetHashCodeConstant((ConstantExpression)expression);
                 case ExpressionType.Parameter:
-                    hashElements = GetHashElementsParameter((ParameterExpression) obj);
-                    break;
+                    return GetHashCodeParameter((ParameterExpression)expression);
                 case ExpressionType.MemberAccess:
-                    hashElements = GetHashElementsMember((MemberExpression) obj);
-                    break;
+                    return GetHashCodeMember((MemberExpression)expression);
                 case ExpressionType.Call:
-                    hashElements = GetHashElementsMethodCall((MethodCallExpression) obj);
-                    break;
+                    return GetHashCodeMethodCall((MethodCallExpression)expression);
                 case ExpressionType.Lambda:
-                    hashElements = GetHashElementsLambda((LambdaExpression) obj);
-                    break;
+                    return GetHashCodeLambda((LambdaExpression)expression);
                 case ExpressionType.New:
-                    hashElements = GetHashElementsNew((NewExpression) obj);
-                    break;
+                    return GetHashCodeNew((NewExpression)expression);
                 case ExpressionType.NewArrayInit:
                 case ExpressionType.NewArrayBounds:
-                    hashElements = GetHashElementsNewArray((NewArrayExpression) obj);
-                    break;
+                    return GetHashCodeNewArray((NewArrayExpression)expression);
                 case ExpressionType.Invoke:
-                    hashElements = GetHashElementsInvocation((InvocationExpression) obj);
-                    break;
+                    return GetHashCodeInvocation((InvocationExpression)expression);
                 case ExpressionType.MemberInit:
-                    hashElements = GetHashElementsMemberInit((MemberInitExpression) obj);
-                    break;
+                    return GetHashCodeMemberInit((MemberInitExpression)expression);
                 case ExpressionType.ListInit:
-                    hashElements = GetHashElementsListInit((ListInitExpression) obj);
-                    break;
+                    return GetHashCodeListInit((ListInitExpression)expression);
                 case ExpressionType.Block:
-                    hashElements = GetHashElementsBlock((BlockExpression) obj);
-                    break;
+                    return GetHashCodeBlock((BlockExpression)expression);
                 case ExpressionType.DebugInfo:
-                    hashElements = GetHashElementsDebugInfo((DebugInfoExpression) obj);
-                    break;
+                    return GetHashCodeDebugInfo((DebugInfoExpression)expression);
                 case ExpressionType.Dynamic:
-                    hashElements = GetHashElementsDynamic((DynamicExpression) obj);
-                    break;
+                    return GetHashCodeDynamic((DynamicExpression)expression);
                 case ExpressionType.Goto:
-                    hashElements = GetHashElementsGoto((GotoExpression) obj);
-                    break;
+                    return GetHashCodeGoto((GotoExpression)expression);
                 case ExpressionType.Index:
-                    hashElements = GetHashElementsIndex((IndexExpression) obj);
-                    break;
+                    return GetHashCodeIndex((IndexExpression)expression);
                 case ExpressionType.Label:
-                    hashElements = GetHashElementsLabel((LabelExpression) obj);
-                    break;
+                    return GetHashCodeLabel((LabelExpression)expression);
                 case ExpressionType.RuntimeVariables:
-                    hashElements = GetHashElementsRuntimeVariables((RuntimeVariablesExpression) obj);
-                    break;
+                    return GetHashCodeRuntimeVariables((RuntimeVariablesExpression)expression);
                 case ExpressionType.Loop:
-                    hashElements = GetHashElementsLoop((LoopExpression) obj);
-                    break;
+                    return GetHashCodeLoop((LoopExpression)expression);
                 case ExpressionType.Switch:
-                    hashElements = GetHashElementsSwitch((SwitchExpression) obj);
-                    break;
+                    return GetHashCodeSwitch((SwitchExpression)expression);
                 case ExpressionType.Try:
-                    hashElements = GetHashElementsTry((TryExpression) obj);
-                    break;
+                    return GetHashCodeTry((TryExpression)expression);
                 case ExpressionType.Default:
-                    hashElements = GetHashElementsDefault((DefaultExpression) obj);
-                    break;
+                    return GetHashCodeDefault((DefaultExpression)expression);
                 case ExpressionType.Extension:
-                    hashElements = GetHashElementsExtension(obj);
-                    break;
+                    return GetHashCodeExtension(expression);
                 default:
-                    return _equalityComparer.GetHashCode(obj);
+                    return _equalityComparer.GetHashCode(expression);
             }
-
-            return GetHashCodeExpression(obj, hashElements);
         }
 
-
-        private int GetHashCodeExpression(Expression exp, IEnumerable<int> hashElements)
+        /// <summary>Determines whether two Expressions are equal.</summary>
+        /// <param name="x">The first Expression to compare.</param>
+        /// <param name="y">The second Expression to compare.</param>
+        /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<Expression>.Equals(Expression x, Expression y)
         {
-            return GetHashElements(exp.NodeType, exp.Type, hashElements).Aggregate(GetHashCode);
+            if (ReferenceEquals(x, y))
+                return true;
+
+            if (x == null || y == null)
+                return false;
+
+            return Equals(x, y);
+        }
+
+        /// <summary>Determines whether two Expressions are equal.</summary>
+        /// <param name="x">The first Expression to compare.</param>
+        /// <param name="y">The second Expression to compare.</param>
+        /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
+        /// <exception cref="ArgumentException"><paramref name="x">x</paramref> or <paramref name="y">y</paramref> is of a type that cannot be cast to Expression.</exception>
+        bool System.Collections.IEqualityComparer.Equals(object x, object y)
+        {
+            if (x == y)
+                return true;
+
+            if (x == null || y == null)
+                return false;
+
+            if (x is Expression expressionX && y is Expression expressionY)
+                return Equals(expressionX, expressionY);
+
+            throw new ArgumentException("x or y is of a type that cannot be cast to Expression.");
+        }
+
+        /// <summary>Serves as a hash function for the specified Expression for hashing algorithms and data structures, such as a hash table.</summary>
+        /// <param name="obj">The Expression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified Expression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<Expression>.GetHashCode(Expression obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+
+            return GetHashCode(obj);
+        }
+
+        /// <summary>Serves as a hash function for the specified Expression for hashing algorithms and data structures, such as a hash table.</summary>
+        /// <param name="obj">The Expression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified Expression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        /// <exception cref="System.ArgumentException"><paramref name="obj">obj</paramref> is of a type that cannot be cast to Expression</exception>
+        int System.Collections.IEqualityComparer.GetHashCode([NotNull] object obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+
+            if (obj is Expression expression)
+                return GetHashCode(expression);
+
+            throw new ArgumentException("obj is of a type that cannot be cast to Expression", nameof(obj));
         }
     }
 }

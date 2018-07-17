@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.Build.NoTargets/1.0.39">
+ <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="docfx.console" Version="2.36.2" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PreviewOutputFolder>$(MSBuildProjectDirectory)/../docs</PreviewOutputFolder>
+    <LogFile>$(BaseIntermediateOutputPath)/docfx.log.txt</LogFile>
+    <LogLevel>Info</LogLevel>
+  </PropertyGroup>
+</Project>

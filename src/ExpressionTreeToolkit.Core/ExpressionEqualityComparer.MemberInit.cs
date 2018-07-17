@@ -1,43 +1,61 @@
 ﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
+using JetBrains.Annotations;
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<MemberInitExpression>
     {
-        private bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y)
+        /// <summary>Determines whether the children of the two MemberInitExpression are equal.</summary>
+        /// <param name="x">The first MemberInitExpression to compare.</param>
+        /// <param name="y">The second MemberInitExpression to compare.</param>
+        /// <returns>true if the specified MemberInitExpression are equal; otherwise, false.</returns>
+        protected virtual bool EqualsMemberInit([NotNull] MemberInitExpression x, [NotNull] MemberInitExpression y)
         {
-            return Equals(x.NewExpression, y.NewExpression)
-                   && EqualsList(x.Bindings, y.Bindings, EqualsBinding);
+            return x.Type == y.Type
+                   && Equals(x.NewExpression, y.NewExpression)
+                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding);
         }
 
-        private IEnumerable<int> GetHashElementsMemberInit(MemberInitExpression node)
+        /// <summary>Gets the hash code for the specified MemberInitExpression.</summary>
+        /// <param name="node">The MemberInitExpression for which to get a hash code.</param>
+        /// <returns>A hash code for the specified MemberInitExpression.</returns>
+        protected virtual int GetHashCodeMemberInit([NotNull] MemberInitExpression node)
         {
-            return GetHashElements(
-                node.NewExpression,
-                node.Bindings.Select(x => GetHashElements(x.BindingType, x.Member)));
+            return GetHashCode(
+                GetDefaultHashCode(node.Type),
+                GetHashCode(node.NewExpression),
+                GetHashCode(node.Bindings, GetHashCodeMemberBinding));
         }
 
-        public bool Equals(MemberInitExpression x, MemberInitExpression y)
+        /// <summary>Determines whether the specified MemberInitExpressions are equal.</summary>
+        /// <param name="x">The first MemberInitExpression to compare.</param>
+        /// <param name="y">The second MemberInitExpression to compare.</param>
+        /// <returns>true if the specified MemberInitExpressions are equal; otherwise, false.</returns>
+        bool IEqualityComparer<MemberInitExpression>.Equals(MemberInitExpression x, MemberInitExpression y)
         {
             if (ReferenceEquals(x, y))
                 return true;
 
-            return EqualsExpression(x, y)
-                   && EqualsMemberInit(x, y);
+            if (x == null || y == null)
+                return false;
+
+            return EqualsMemberInit(x, y);
         }
 
-        public int GetHashCode(MemberInitExpression obj)
+        /// <summary>Returns a hash code for the specified MemberInitExpression.</summary>
+        /// <param name="obj">The <see cref="MemberInitExpression"></see> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified MemberInitExpression.</returns>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
+        int IEqualityComparer<MemberInitExpression>.GetHashCode(MemberInitExpression obj)
         {
-            if (obj == null) return 0;
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            return GetHashCodeExpression(
-                obj,
-                GetHashElementsMemberInit(obj));
+            return GetHashCodeMemberInit(obj);
         }
     }
 }
