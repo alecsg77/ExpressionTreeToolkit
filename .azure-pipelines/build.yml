@@ -1,0 +1,56 @@
+name: $(GITVERSION_FullSemVer)
+
+pool:
+  name: Azure Pipelines
+variables:
+  BuildConfiguration: 'Release'
+
+steps:
+- task: gittools.gitversion.gitversion-task.GitVersion@5
+  displayName: GitVersion
+  inputs:
+    runtime: full
+    updateAssemblyInfo: true
+    gitVersionPath: 'C:\ProgramData\chocolatey\bin\GitVersion.exe'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '**/*.sln'
+    feedsToUse: config
+    nugetConfigPath: nuget.config
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**/*.sln'
+    arguments: '--configuration $(BuildConfiguration) --no-restore'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    projects: 'test/**/*.UnitTests/*.csproj'
+    arguments: '--configuration $(BuildConfiguration) --no-build'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack release'
+  inputs:
+    command: pack
+    packagesToPack: 'src/**/*.csproj'
+    nobuild: true
+    versioningScheme: byEnvVar
+    versionEnvVar: GitVersion.NuGetVersion
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    Contents: |
+     **/bin/$(BuildConfiguration)/**
+     docs/**
+     *.nupkg
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
