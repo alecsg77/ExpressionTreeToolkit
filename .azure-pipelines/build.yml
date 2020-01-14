@@ -1,7 +1,7 @@
 name: $(GITVERSION_FullSemVer)
 
 pool:
-  name: Azure Pipelines
+  vmImage: vs2017-win2016
 variables:
   BuildConfiguration: 'Release'
 
