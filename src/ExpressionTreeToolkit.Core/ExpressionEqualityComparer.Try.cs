@@ -32,7 +32,7 @@ namespace ExpressionTreeToolkit
             return x.Test == y.Test
                    && Equals(x.Body, y.Body)
                    && Equals(x.Filter, y.Filter)
-                   && EqualsParameter(x.Variable, y.Variable);
+                   && Equals(x.Variable, y.Variable);
         }
 
         /// <summary>Gets the hash code for the specified TryExpression.</summary>
@@ -57,7 +57,7 @@ namespace ExpressionTreeToolkit
                 GetDefaultHashCode(catchBlock.Test),
                 GetHashCode(catchBlock.Body),
                 GetHashCode(catchBlock.Filter),
-                GetHashCodeParameter(catchBlock.Variable));
+                GetHashCode(catchBlock.Variable));
         }
 
         /// <summary>Determines whether the specified TryExpressions are equal.</summary>
