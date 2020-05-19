@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0012" Condition="'$(MSBuildRuntimeType)' != 'Core'">
+    <PackageReference Include="GitVersionTask" Version="5.3.3" Condition="'$(MSBuildRuntimeType)' != 'Core'">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
