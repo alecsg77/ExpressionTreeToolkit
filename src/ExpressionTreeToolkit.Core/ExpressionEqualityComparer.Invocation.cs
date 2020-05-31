@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first InvocationExpression to compare.</param>
         /// <param name="y">The second InvocationExpression to compare.</param>
         /// <returns>true if the specified InvocationExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsInvocation([NotNull] InvocationExpression x, [NotNull] InvocationExpression y)
+        protected virtual bool EqualsInvocation([DisallowNull] InvocationExpression x, [DisallowNull] InvocationExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Expression, y.Expression)
                    && Equals(x.Arguments, y.Arguments);
@@ -24,8 +32,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified InvocationExpression.</summary>
         /// <param name="node">The InvocationExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified InvocationExpression.</returns>
-        protected virtual int GetHashCodeInvocation([NotNull] InvocationExpression node)
+        protected virtual int GetHashCodeInvocation([DisallowNull] InvocationExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetHashCode(node.Expression),
@@ -36,7 +45,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first InvocationExpression to compare.</param>
         /// <param name="y">The second InvocationExpression to compare.</param>
         /// <returns>true if the specified InvocationExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<InvocationExpression>.Equals(InvocationExpression x, InvocationExpression y)
+        bool IEqualityComparer<InvocationExpression>.Equals([AllowNull] InvocationExpression? x, [AllowNull] InvocationExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -51,7 +60,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="InvocationExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified InvocationExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<InvocationExpression>.GetHashCode(InvocationExpression obj)
+        int IEqualityComparer<InvocationExpression>.GetHashCode([DisallowNull] InvocationExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ConditionalExpression to compare.</param>
         /// <param name="y">The second ConditionalExpression to compare.</param>
         /// <returns>true if the specified ConditionalExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsConditional([NotNull] ConditionalExpression x, [NotNull] ConditionalExpression y)
+        protected virtual bool EqualsConditional([DisallowNull] ConditionalExpression x, [DisallowNull] ConditionalExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Test, y.Test)
                    && Equals(x.IfTrue, y.IfTrue)
@@ -25,8 +33,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified ConditionalExpression.</summary>
         /// <param name="node">The ConditionalExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified ConditionalExpression.</returns>
-        protected virtual int GetHashCodeConditional([NotNull] ConditionalExpression node)
+        protected virtual int GetHashCodeConditional([DisallowNull] ConditionalExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetHashCode(node.Test),
@@ -38,7 +47,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ConditionalExpression to compare.</param>
         /// <param name="y">The second ConditionalExpression to compare.</param>
         /// <returns>true if the specified ConditionalExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<ConditionalExpression>.Equals(ConditionalExpression x, ConditionalExpression y)
+        bool IEqualityComparer<ConditionalExpression>.Equals([AllowNull] ConditionalExpression? x, [AllowNull] ConditionalExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -53,7 +62,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="ConditionalExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified ConditionalExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<ConditionalExpression>.GetHashCode(ConditionalExpression obj)
+        int IEqualityComparer<ConditionalExpression>.GetHashCode([DisallowNull] ConditionalExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

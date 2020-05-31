@@ -6,7 +6,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -16,7 +22,7 @@ namespace ExpressionTreeToolkit
         /// <param name="first">A collection of Expression to compare.</param>
         /// <param name="second">A collection of Expression to compare to the first sequence.</param>
         /// <returns>true if the two nodes sequences are of equal length and their corresponding elements are equal; otherwise, false.</returns>
-        protected bool Equals([CanBeNull] [ItemCanBeNull] ReadOnlyCollection<Expression> first, [CanBeNull] [ItemCanBeNull] ReadOnlyCollection<Expression> second)
+        protected bool Equals([AllowNull, AllowItemNull] ReadOnlyCollection<Expression?>? first, [AllowNull, AllowItemNull] ReadOnlyCollection<Expression?>? second)
         {
             if (ReferenceEquals(first, second))
             {
@@ -58,7 +64,8 @@ namespace ExpressionTreeToolkit
         /// <param name="second">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to the first sequence.</param>
         /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
         /// <returns>true if the two source sequences are of equal length and their corresponding elements are equal according to the default equality comparer for their type; otherwise, false.</returns>
-        protected bool Equals<T>([CanBeNull] [ItemCanBeNull] ReadOnlyCollection<T> first, [CanBeNull] [ItemCanBeNull] ReadOnlyCollection<T> second)
+        protected bool Equals<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? first, [AllowNull, AllowItemNull] ReadOnlyCollection<T?>? second)
+            where T : class
         {
             if (ReferenceEquals(first, second))
             {
@@ -79,7 +86,7 @@ namespace ExpressionTreeToolkit
         /// <param name="equalityComparer">An <see cref="T:System.Func{T,T,bool}"></see> to use to compare elements.</param>
         /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
         /// <returns>true if the two source sequences are of equal length and their corresponding elements compare equal according to <paramref name="equalityComparer">equality comparer</paramref>; otherwise, false.</returns>
-        protected bool Equals<T>([CanBeNull] [ItemCanBeNull] ReadOnlyCollection<T> first, [CanBeNull] [ItemCanBeNull] ReadOnlyCollection<T> second, [CanBeNull] Func<T, T, bool> equalityComparer)
+        protected bool Equals<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? first, [AllowNull, AllowItemNull] ReadOnlyCollection<T?>? second, Func<T, T, bool>? equalityComparer)
             where T : class
         {
             if (equalityComparer == null) throw new ArgumentNullException(nameof(equalityComparer));
@@ -136,7 +143,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ElementInit to compare.</param>
         /// <param name="y">The second ElementInit to compare.</param>
         /// <returns>true if the specified ElementInit are equal; otherwise, false.</returns>
-        protected virtual bool EqualsElementInit([CanBeNull] ElementInit x, [CanBeNull] ElementInit y)
+        protected virtual bool EqualsElementInit([AllowNull] ElementInit? x, [AllowNull] ElementInit? y)
         {
             if (ReferenceEquals(x, y))
             {
@@ -156,7 +163,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first MemberBinding to compare.</param>
         /// <param name="y">The second MemberBinding to compare.</param>
         /// <returns>true if the specified MemberBinding are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberBinding([CanBeNull] MemberBinding x, [CanBeNull] MemberBinding y)
+        protected virtual bool EqualsMemberBinding([AllowNull] MemberBinding? x, [AllowNull] MemberBinding? y)
         {
             if (ReferenceEquals(x, y))
             {
@@ -190,8 +197,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first MemberAssignment to compare.</param>
         /// <param name="y">The second MemberAssignment to compare.</param>
         /// <returns>true if the specified MemberAssignment are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberAssignment([NotNull] MemberAssignment x, [NotNull] MemberAssignment y)
+        protected virtual bool EqualsMemberAssignment([DisallowNull] MemberAssignment x, [DisallowNull] MemberAssignment y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return Equals(x.Member, y.Member)
                    && Equals(x.Expression, y.Expression);
         }
@@ -200,8 +209,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first MemberMemberBinding to compare.</param>
         /// <param name="y">The second MemberMemberBinding to compare.</param>
         /// <returns>true if the specified MemberMemberBinding are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberMemberBinding([NotNull] MemberMemberBinding x, [NotNull] MemberMemberBinding y)
+        protected virtual bool EqualsMemberMemberBinding([DisallowNull] MemberMemberBinding x, [DisallowNull] MemberMemberBinding y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return Equals(x.Member, y.Member)
                    && Equals(x.Bindings, y.Bindings, EqualsMemberBinding);
         }
@@ -210,8 +221,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first MemberListBinding to compare.</param>
         /// <param name="y">The second MemberListBinding to compare.</param>
         /// <returns>true if the specified MemberListBinding are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberListBinding([NotNull] MemberListBinding x, [NotNull] MemberListBinding y)
+        protected virtual bool EqualsMemberListBinding([DisallowNull] MemberListBinding x, [DisallowNull] MemberListBinding y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return Equals(x.Member, y.Member)
                    && Equals(x.Initializers, y.Initializers, EqualsElementInit);
         }
@@ -220,7 +233,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first LabelTarget to compare.</param>
         /// <param name="y">The second LabelTarget to compare.</param>
         /// <returns>true if the specified LabelTarget are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLabelTarget([CanBeNull] LabelTarget x, [CanBeNull] LabelTarget y)
+        protected virtual bool EqualsLabelTarget([AllowNull] LabelTarget? x, [AllowNull] LabelTarget? y)
         {
             if (ReferenceEquals(x, y))
             {
@@ -236,9 +249,10 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Name, y.Name);
         }
 
-        private static int GetDefaultHashCode<T>([CanBeNull] T obj)
+        private static int GetDefaultHashCode<T>([AllowNull] T? obj)
+            where T : class
         {
-            return EqualityComparer<T>.Default.GetHashCode(obj);
+            return obj != null ? EqualityComparer<T>.Default.GetHashCode(obj) : 0;
         }
 
         private static int GetHashCode(int h1, int h2)
@@ -267,7 +281,7 @@ namespace ExpressionTreeToolkit
         /// <summary>Computes the hash of a sequence of <see cref="T:Expression"></see> nodes.</summary>
         /// <param name="nodes">A sequence of <see cref="T:Expression"></see> nodes to calculate the hash of.</param>
         /// <returns>The hash of the sequence of nodes.</returns>
-        protected int GetHashCode([CanBeNull] [ItemCanBeNull] ReadOnlyCollection<Expression> nodes)
+        protected int GetHashCode([AllowNull, AllowItemNull] ReadOnlyCollection<Expression?>? nodes)
         {
             if (nodes == null)
                 return 0;
@@ -282,7 +296,8 @@ namespace ExpressionTreeToolkit
         /// <param name="values">A sequence of values to calculate the hash of.</param>
         /// <typeparam name="T">The type of the elements of values.</typeparam>
         /// <returns>The hash of the sequence of values.</returns>
-        protected int GetHashCode<T>([CanBeNull] [ItemCanBeNull] ReadOnlyCollection<T> values)
+        protected int GetHashCode<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? values)
+            where T : class
         {
             if (values == null)
                 return 0;
@@ -298,8 +313,8 @@ namespace ExpressionTreeToolkit
         /// <param name="getHashCode">An <see cref="T:System.Func{T,int}"></see> to use to computes the hash of elements.</param>
         /// <typeparam name="T">The type of the elements of values.</typeparam>
         /// <returns>The hash of the sequence of values.</returns>
-        protected int GetHashCode<T>([ItemCanBeNull] [CanBeNull] ReadOnlyCollection<T> values, [CanBeNull] Func<T, int> getHashCode)
-            where T: class
+        protected int GetHashCode<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? values, Func<T, int>? getHashCode)
+            where T : class
         {
             if (values == null)
                 return 0;
@@ -318,7 +333,7 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified ElementInit.</summary>
         /// <param name="elementInit">The ElementInit for which to get a hash code.</param>
         /// <returns>A hash code for the specified ElementInit.</returns>
-        protected virtual int GetHashCodeElementInit([CanBeNull] ElementInit elementInit)
+        protected virtual int GetHashCodeElementInit([AllowNull] ElementInit? elementInit)
         {
             if (elementInit == null)
             {
@@ -333,7 +348,7 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified MemberBinding.</summary>
         /// <param name="memberBinding">The MemberBinding for which to get a hash code.</param>
         /// <returns>A hash code for the specified MemberBinding.</returns>
-        protected virtual int GetHashCodeMemberBinding([CanBeNull] MemberBinding memberBinding)
+        protected virtual int GetHashCodeMemberBinding([AllowNull] MemberBinding? memberBinding)
         {
             if (memberBinding == null)
             {
@@ -356,8 +371,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified MemberAssignment.</summary>
         /// <param name="memberAssignment">The MemberAssignment for which to get a hash code.</param>
         /// <returns>A hash code for the specified MemberAssignment.</returns>
-        protected virtual int GetHashCodeMemberAssignment([NotNull] MemberAssignment memberAssignment)
+        protected virtual int GetHashCodeMemberAssignment([DisallowNull] MemberAssignment memberAssignment)
         {
+            if (memberAssignment == null) throw new ArgumentNullException(nameof(memberAssignment));
             return GetHashCode(
                 GetDefaultHashCode(memberAssignment.Member),
                 GetHashCode(memberAssignment.Expression));
@@ -366,8 +382,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified MemberMemberBinding.</summary>
         /// <param name="memberMemberBinding">The MemberMemberBinding for which to get a hash code.</param>
         /// <returns>A hash code for the specified MemberMemberBinding.</returns>
-        protected virtual int GetHashCodeMemberMemberBinding([NotNull] MemberMemberBinding memberMemberBinding)
+        protected virtual int GetHashCodeMemberMemberBinding([DisallowNull] MemberMemberBinding memberMemberBinding)
         {
+            if (memberMemberBinding == null) throw new ArgumentNullException(nameof(memberMemberBinding));
             return GetHashCode(
                 GetDefaultHashCode(memberMemberBinding.Member),
                 GetHashCode(memberMemberBinding.Bindings, GetHashCodeMemberBinding));
@@ -376,8 +393,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified MemberListBinding.</summary>
         /// <param name="memberListBinding">The MemberListBinding for which to get a hash code.</param>
         /// <returns>A hash code for the specified MemberListBinding.</returns>
-        protected virtual int GetHashCodeMemberListBinding([NotNull] MemberListBinding memberListBinding)
+        protected virtual int GetHashCodeMemberListBinding([DisallowNull] MemberListBinding memberListBinding)
         {
+            if (memberListBinding == null) throw new ArgumentNullException(nameof(memberListBinding));
             return GetHashCode(
                 GetDefaultHashCode(memberListBinding.Member),
                 GetHashCode(memberListBinding.Initializers, GetHashCodeElementInit));
@@ -386,7 +404,7 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified LabelTarget.</summary>
         /// <param name="labelTarget">The LabelTarget for which to get a hash code.</param>
         /// <returns>A hash code for the specified LabelTarget.</returns>
-        protected virtual int GetHashCodeLabelTarget([CanBeNull] LabelTarget labelTarget)
+        protected virtual int GetHashCodeLabelTarget([AllowNull] LabelTarget? labelTarget)
         {
             if (labelTarget == null)
             {

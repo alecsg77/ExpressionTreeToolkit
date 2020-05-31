@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ConstantExpression to compare.</param>
         /// <param name="y">The second ConstantExpression to compare.</param>
         /// <returns>true if the specified ConstantExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsConstant([NotNull] ConstantExpression x, [NotNull] ConstantExpression y)
+        protected virtual bool EqualsConstant([DisallowNull] ConstantExpression x, [DisallowNull] ConstantExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Value, y.Value);
         }
@@ -23,8 +31,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified ConstantExpression.</summary>
         /// <param name="node">The ConstantExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified ConstantExpression.</returns>
-        protected virtual int GetHashCodeConstant([NotNull] ConstantExpression node)
+        protected virtual int GetHashCodeConstant([DisallowNull] ConstantExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetDefaultHashCode(node.Value));
@@ -34,7 +43,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ConstantExpression to compare.</param>
         /// <param name="y">The second ConstantExpression to compare.</param>
         /// <returns>true if the specified ConstantExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<ConstantExpression>.Equals(ConstantExpression x, ConstantExpression y)
+        bool IEqualityComparer<ConstantExpression>.Equals([AllowNull] ConstantExpression? x, [AllowNull] ConstantExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -49,7 +58,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="ConstantExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified ConstantExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<ConstantExpression>.GetHashCode(ConstantExpression obj)
+        int IEqualityComparer<ConstantExpression>.GetHashCode([DisallowNull] ConstantExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

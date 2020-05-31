@@ -5,18 +5,25 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ParameterExpression>
     {
-        private readonly ReadOnlyCollection<ParameterExpression> _xParameters;
-        private readonly ReadOnlyCollection<ParameterExpression> _yParameters;
+        private readonly ReadOnlyCollection<ParameterExpression>? _xParameters;
+        private readonly ReadOnlyCollection<ParameterExpression>? _yParameters;
 
         private ExpressionEqualityComparer(
             ReadOnlyCollection<ParameterExpression> xParameters,
             ReadOnlyCollection<ParameterExpression> yParameters)
+            : this()
         {
             _xParameters = xParameters;
             _yParameters = yParameters;
@@ -26,8 +33,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ParameterExpression to compare.</param>
         /// <param name="y">The second ParameterExpression to compare.</param>
         /// <returns>true if the specified ParameterExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsParameter([NotNull] ParameterExpression x, [NotNull] ParameterExpression y)
+        protected virtual bool EqualsParameter([DisallowNull] ParameterExpression x, [DisallowNull] ParameterExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && (_xParameters?.IndexOf(x) ?? 0) == (_yParameters?.IndexOf(y) ?? 0)
                    && x.IsByRef == y.IsByRef;
@@ -36,8 +45,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified ParameterExpression.</summary>
         /// <param name="node">The ParameterExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified ParameterExpression.</returns>
-        protected virtual int GetHashCodeParameter([NotNull] ParameterExpression node)
+        protected virtual int GetHashCodeParameter([DisallowNull] ParameterExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 node.IsByRef.GetHashCode());
@@ -47,7 +57,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ParameterExpression to compare.</param>
         /// <param name="y">The second ParameterExpression to compare.</param>
         /// <returns>true if the specified ParameterExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<ParameterExpression>.Equals(ParameterExpression x, ParameterExpression y)
+        bool IEqualityComparer<ParameterExpression>.Equals([AllowNull] ParameterExpression? x, [AllowNull] ParameterExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -62,7 +72,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="ParameterExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified ParameterExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<ParameterExpression>.GetHashCode(ParameterExpression obj)
+        int IEqualityComparer<ParameterExpression>.GetHashCode([DisallowNull] ParameterExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

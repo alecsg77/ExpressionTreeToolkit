@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first LabelExpression to compare.</param>
         /// <param name="y">The second LabelExpression to compare.</param>
         /// <returns>true if the specified LabelExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLabel([NotNull] LabelExpression x, [NotNull] LabelExpression y)
+        protected virtual bool EqualsLabel([DisallowNull] LabelExpression x, [DisallowNull] LabelExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && EqualsLabelTarget(x.Target, y.Target)
                    && Equals(x.DefaultValue, y.DefaultValue);
@@ -24,8 +32,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified LabelExpression.</summary>
         /// <param name="node">The LabelExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified LabelExpression.</returns>
-        protected virtual int GetHashCodeLabel([NotNull] LabelExpression node)
+        protected virtual int GetHashCodeLabel([DisallowNull] LabelExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetHashCodeLabelTarget(node.Target),
@@ -36,7 +45,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first LabelExpression to compare.</param>
         /// <param name="y">The second LabelExpression to compare.</param>
         /// <returns>true if the specified LabelExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<LabelExpression>.Equals(LabelExpression x, LabelExpression y)
+        bool IEqualityComparer<LabelExpression>.Equals([AllowNull] LabelExpression? x, [AllowNull] LabelExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -51,7 +60,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="LabelExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified LabelExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<LabelExpression>.GetHashCode(LabelExpression obj)
+        int IEqualityComparer<LabelExpression>.GetHashCode([DisallowNull] LabelExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

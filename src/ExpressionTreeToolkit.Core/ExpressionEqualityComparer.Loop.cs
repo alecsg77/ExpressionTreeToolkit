@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first LoopExpression to compare.</param>
         /// <param name="y">The second LoopExpression to compare.</param>
         /// <returns>true if the specified LoopExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLoop([NotNull] LoopExpression x, [NotNull] LoopExpression y)
+        protected virtual bool EqualsLoop([DisallowNull] LoopExpression x, [DisallowNull] LoopExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Body, y.Body)
                    && EqualsLabelTarget(x.ContinueLabel, y.ContinueLabel)
@@ -25,8 +33,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified LoopExpression.</summary>
         /// <param name="node">The LoopExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified LoopExpression.</returns>
-        protected virtual int GetHashCodeLoop([NotNull] LoopExpression node)
+        protected virtual int GetHashCodeLoop([DisallowNull] LoopExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetHashCode(node.Body),
@@ -38,7 +47,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first LoopExpression to compare.</param>
         /// <param name="y">The second LoopExpression to compare.</param>
         /// <returns>true if the specified LoopExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<LoopExpression>.Equals(LoopExpression x, LoopExpression y)
+        bool IEqualityComparer<LoopExpression>.Equals([AllowNull] LoopExpression? x, [AllowNull] LoopExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -53,7 +62,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="LoopExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified LoopExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<LoopExpression>.GetHashCode(LoopExpression obj)
+        int IEqualityComparer<LoopExpression>.GetHashCode([DisallowNull] LoopExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

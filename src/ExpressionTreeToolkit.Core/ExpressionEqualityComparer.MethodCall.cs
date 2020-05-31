@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first MethodCallExpression to compare.</param>
         /// <param name="y">The second MethodCallExpression to compare.</param>
         /// <returns>true if the specified MethodCallExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMethodCall([NotNull] MethodCallExpression x, [NotNull] MethodCallExpression y)
+        protected virtual bool EqualsMethodCall([DisallowNull] MethodCallExpression x, [DisallowNull] MethodCallExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Method, y.Method)
                    && Equals(x.Object, y.Object)
@@ -25,8 +33,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified MethodCallExpression.</summary>
         /// <param name="node">The MethodCallExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified MethodCallExpression.</returns>
-        protected virtual int GetHashCodeMethodCall([NotNull] MethodCallExpression node)
+        protected virtual int GetHashCodeMethodCall([DisallowNull] MethodCallExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetDefaultHashCode(node.Method),
@@ -38,7 +47,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first MethodCallExpression to compare.</param>
         /// <param name="y">The second MethodCallExpression to compare.</param>
         /// <returns>true if the specified MethodCallExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<MethodCallExpression>.Equals(MethodCallExpression x, MethodCallExpression y)
+        bool IEqualityComparer<MethodCallExpression>.Equals([AllowNull] MethodCallExpression? x, [AllowNull] MethodCallExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -53,7 +62,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="MethodCallExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified MethodCallExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<MethodCallExpression>.GetHashCode(MethodCallExpression obj)
+        int IEqualityComparer<MethodCallExpression>.GetHashCode([DisallowNull] MethodCallExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

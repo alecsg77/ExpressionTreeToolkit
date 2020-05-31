@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first SwitchExpression to compare.</param>
         /// <param name="y">The second SwitchExpression to compare.</param>
         /// <returns>true if the specified SwitchExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsSwitch([NotNull] SwitchExpression x, [NotNull] SwitchExpression y)
+        protected virtual bool EqualsSwitch([DisallowNull] SwitchExpression x, [DisallowNull] SwitchExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.SwitchValue, y.SwitchValue)
                    && Equals(x.Comparison, y.Comparison)
@@ -27,8 +35,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first SwitchCase to compare.</param>
         /// <param name="y">The second SwitchCase to compare.</param>
         /// <returns>true if the specified SwitchCase are equal; otherwise, false.</returns>
-        protected virtual bool EqualsSwitchCase([NotNull] SwitchCase x, [NotNull] SwitchCase y)
+        protected virtual bool EqualsSwitchCase([DisallowNull] SwitchCase x, [DisallowNull] SwitchCase y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return Equals(x.Body, y.Body)
                    && Equals(x.TestValues, y.TestValues);
         }
@@ -36,8 +46,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified SwitchExpression.</summary>
         /// <param name="node">The SwitchExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified SwitchExpression.</returns>
-        protected virtual int GetHashCodeSwitch([NotNull] SwitchExpression node)
+        protected virtual int GetHashCodeSwitch([DisallowNull] SwitchExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetHashCode(node.SwitchValue),
@@ -48,8 +59,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified SwitchCase.</summary>
         /// <param name="switchCase">The SwitchCase for which to get a hash code.</param>
         /// <returns>A hash code for the specified SwitchCase.</returns>
-        protected virtual int GetHashCodeSwitchCase([NotNull] SwitchCase switchCase)
+        protected virtual int GetHashCodeSwitchCase([DisallowNull] SwitchCase switchCase)
         {
+            if (switchCase == null) throw new ArgumentNullException(nameof(switchCase));
             return GetHashCode(
                 GetHashCode(switchCase.Body),
                 GetHashCode(switchCase.TestValues));
@@ -59,7 +71,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first SwitchExpression to compare.</param>
         /// <param name="y">The second SwitchExpression to compare.</param>
         /// <returns>true if the specified SwitchExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<SwitchExpression>.Equals(SwitchExpression x, SwitchExpression y)
+        bool IEqualityComparer<SwitchExpression>.Equals([AllowNull] SwitchExpression? x, [AllowNull] SwitchExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -74,7 +86,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="SwitchExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified SwitchExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<SwitchExpression>.GetHashCode(SwitchExpression obj)
+        int IEqualityComparer<SwitchExpression>.GetHashCode([DisallowNull] SwitchExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

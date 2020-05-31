@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first DebugInfoExpression to compare.</param>
         /// <param name="y">The second DebugInfoExpression to compare.</param>
         /// <returns>true if the specified DebugInfoExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsDebugInfo([NotNull] DebugInfoExpression x, [NotNull] DebugInfoExpression y)
+        protected virtual bool EqualsDebugInfo([DisallowNull] DebugInfoExpression x, [DisallowNull] DebugInfoExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && x.IsClear == y.IsClear
                    && EqualsSymbolDocumentInfo(x.Document, y.Document)
@@ -46,8 +54,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified DebugInfoExpression.</summary>
         /// <param name="node">The DebugInfoExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified DebugInfoExpression.</returns>
-        protected virtual int GetHashCodeDebugInfo([NotNull] DebugInfoExpression node)
+        protected virtual int GetHashCodeDebugInfo([DisallowNull] DebugInfoExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 node.IsClear.GetHashCode(),
@@ -76,7 +85,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first DebugInfoExpression to compare.</param>
         /// <param name="y">The second DebugInfoExpression to compare.</param>
         /// <returns>true if the specified DebugInfoExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<DebugInfoExpression>.Equals(DebugInfoExpression x, DebugInfoExpression y)
+        bool IEqualityComparer<DebugInfoExpression>.Equals([AllowNull] DebugInfoExpression? x, [AllowNull] DebugInfoExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -91,7 +100,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="DebugInfoExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified DebugInfoExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<DebugInfoExpression>.GetHashCode(DebugInfoExpression obj)
+        int IEqualityComparer<DebugInfoExpression>.GetHashCode([DisallowNull] DebugInfoExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
