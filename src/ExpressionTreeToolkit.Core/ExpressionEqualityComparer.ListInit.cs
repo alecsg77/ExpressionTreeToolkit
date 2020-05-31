@@ -18,7 +18,7 @@ namespace ExpressionTreeToolkit
         {
             return x.Type == y.Type
                    && Equals(x.NewExpression, y.NewExpression)
-                   && Equals(x.Initializers, x.Initializers, EqualsElementInit);
+                   && Equals(x.Initializers, y.Initializers, EqualsElementInit);
         }
 
         /// <summary>Gets the hash code for the specified ListInitExpression.</summary>
