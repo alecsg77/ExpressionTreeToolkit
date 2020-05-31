@@ -19,15 +19,15 @@ references:
   commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.#ctor
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.ExpressionEqualityComparer()
   nameWithType: ExpressionEqualityComparer.ExpressionEqualityComparer()
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.#ctor(System.Collections.Generic.IEqualityComparer{System.Linq.Expressions.Expression})
-  name: ExpressionEqualityComparer(IEqualityComparer<Expression>)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer__ctor_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_Expression__
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.#ctor(System.Collections.Generic.IEqualityComparer{System.Linq.Expressions.Expression})
-  name.vb: ExpressionEqualityComparer(IEqualityComparer(Of Expression))
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.ExpressionEqualityComparer(System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>)
-  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.ExpressionEqualityComparer(System.Collections.Generic.IEqualityComparer(Of System.Linq.Expressions.Expression))
-  nameWithType: ExpressionEqualityComparer.ExpressionEqualityComparer(IEqualityComparer<Expression>)
-  nameWithType.vb: ExpressionEqualityComparer.ExpressionEqualityComparer(IEqualityComparer(Of Expression))
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.#ctor(System.Nullable{System.Collections.Generic.IEqualityComparer{System.Linq.Expressions.Expression}})
+  name: ExpressionEqualityComparer(Nullable<IEqualityComparer<Expression>>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer__ctor_System_Nullable_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_Expression___
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.#ctor(System.Nullable{System.Collections.Generic.IEqualityComparer{System.Linq.Expressions.Expression}})
+  name.vb: ExpressionEqualityComparer(Nullable(Of IEqualityComparer(Of Expression)))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.ExpressionEqualityComparer(System.Nullable<System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.ExpressionEqualityComparer(System.Nullable(Of System.Collections.Generic.IEqualityComparer(Of System.Linq.Expressions.Expression)))
+  nameWithType: ExpressionEqualityComparer.ExpressionEqualityComparer(Nullable<IEqualityComparer<Expression>>)
+  nameWithType.vb: ExpressionEqualityComparer.ExpressionEqualityComparer(Nullable(Of IEqualityComparer(Of Expression)))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.#ctor*
   name: ExpressionEqualityComparer
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer__ctor_
@@ -41,21 +41,24 @@ references:
   commentId: F:ExpressionTreeToolkit.ExpressionEqualityComparer.Default
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Default
   nameWithType: ExpressionEqualityComparer.Default
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression},System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression})
-  name: Equals(ReadOnlyCollection<Expression>, ReadOnlyCollection<Expression>)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals_System_Collections_ObjectModel_ReadOnlyCollection_System_Linq_Expressions_Expression__System_Collections_ObjectModel_ReadOnlyCollection_System_Linq_Expressions_Expression__
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression},System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression})
-  name.vb: Equals(ReadOnlyCollection(Of Expression), ReadOnlyCollection(Of Expression))
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>, System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>)
-  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Collections.ObjectModel.ReadOnlyCollection(Of System.Linq.Expressions.Expression), System.Collections.ObjectModel.ReadOnlyCollection(Of System.Linq.Expressions.Expression))
-  nameWithType: ExpressionEqualityComparer.Equals(ReadOnlyCollection<Expression>, ReadOnlyCollection<Expression>)
-  nameWithType.vb: ExpressionEqualityComparer.Equals(ReadOnlyCollection(Of Expression), ReadOnlyCollection(Of Expression))
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)
-  name: Equals(Expression, Expression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Linq.Expressions.Expression, System.Linq.Expressions.Expression)
-  nameWithType: ExpressionEqualityComparer.Equals(Expression, Expression)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{System.Linq.Expressions.Expression}}},System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{System.Linq.Expressions.Expression}}})
+  name: Equals(Nullable<ReadOnlyCollection<Nullable<Expression>>>, Nullable<ReadOnlyCollection<Nullable<Expression>>>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals_System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable_System_Linq_Expressions_Expression____System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable_System_Linq_Expressions_Expression____
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{System.Linq.Expressions.Expression}}},System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{System.Linq.Expressions.Expression}}})
+  name.vb: Equals(Nullable(Of ReadOnlyCollection(Of Nullable(Of Expression))), Nullable(Of ReadOnlyCollection(Of Nullable(Of Expression))))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<System.Linq.Expressions.Expression>>>, System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<System.Linq.Expressions.Expression>>>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of System.Linq.Expressions.Expression))), System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of System.Linq.Expressions.Expression))))
+  nameWithType: ExpressionEqualityComparer.Equals(Nullable<ReadOnlyCollection<Nullable<Expression>>>, Nullable<ReadOnlyCollection<Nullable<Expression>>>)
+  nameWithType.vb: ExpressionEqualityComparer.Equals(Nullable(Of ReadOnlyCollection(Of Nullable(Of Expression))), Nullable(Of ReadOnlyCollection(Of Nullable(Of Expression))))
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable{System.Linq.Expressions.Expression},System.Nullable{System.Linq.Expressions.Expression})
+  name: Equals(Nullable<Expression>, Nullable<Expression>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals_System_Nullable_System_Linq_Expressions_Expression__System_Nullable_System_Linq_Expressions_Expression__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable{System.Linq.Expressions.Expression},System.Nullable{System.Linq.Expressions.Expression})
+  name.vb: Equals(Nullable(Of Expression), Nullable(Of Expression))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable<System.Linq.Expressions.Expression>, System.Nullable<System.Linq.Expressions.Expression>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(System.Nullable(Of System.Linq.Expressions.Expression), System.Nullable(Of System.Linq.Expressions.Expression))
+  nameWithType: ExpressionEqualityComparer.Equals(Nullable<Expression>, Nullable<Expression>)
+  nameWithType.vb: ExpressionEqualityComparer.Equals(Nullable(Of Expression), Nullable(Of Expression))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals*
   name: Equals
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals_
@@ -63,24 +66,24 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals
   nameWithType: ExpressionEqualityComparer.Equals
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Collections.ObjectModel.ReadOnlyCollection{``0})
-  name: Equals<T>(ReadOnlyCollection<T>, ReadOnlyCollection<T>)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals__1_System_Collections_ObjectModel_ReadOnlyCollection___0__System_Collections_ObjectModel_ReadOnlyCollection___0__
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Collections.ObjectModel.ReadOnlyCollection{``0})
-  name.vb: Equals(Of T)(ReadOnlyCollection(Of T), ReadOnlyCollection(Of T))
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals<T>(System.Collections.ObjectModel.ReadOnlyCollection<T>, System.Collections.ObjectModel.ReadOnlyCollection<T>)
-  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(Of T)(System.Collections.ObjectModel.ReadOnlyCollection(Of T), System.Collections.ObjectModel.ReadOnlyCollection(Of T))
-  nameWithType: ExpressionEqualityComparer.Equals<T>(ReadOnlyCollection<T>, ReadOnlyCollection<T>)
-  nameWithType.vb: ExpressionEqualityComparer.Equals(Of T)(ReadOnlyCollection(Of T), ReadOnlyCollection(Of T))
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Func{``0,``0,System.Boolean})
-  name: Equals<T>(ReadOnlyCollection<T>, ReadOnlyCollection<T>, Func<T, T, Boolean>)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals__1_System_Collections_ObjectModel_ReadOnlyCollection___0__System_Collections_ObjectModel_ReadOnlyCollection___0__System_Func___0___0_System_Boolean__
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Func{``0,``0,System.Boolean})
-  name.vb: Equals(Of T)(ReadOnlyCollection(Of T), ReadOnlyCollection(Of T), Func(Of T, T, Boolean))
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals<T>(System.Collections.ObjectModel.ReadOnlyCollection<T>, System.Collections.ObjectModel.ReadOnlyCollection<T>, System.Func<T, T, System.Boolean>)
-  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(Of T)(System.Collections.ObjectModel.ReadOnlyCollection(Of T), System.Collections.ObjectModel.ReadOnlyCollection(Of T), System.Func(Of T, T, System.Boolean))
-  nameWithType: ExpressionEqualityComparer.Equals<T>(ReadOnlyCollection<T>, ReadOnlyCollection<T>, Func<T, T, Boolean>)
-  nameWithType.vb: ExpressionEqualityComparer.Equals(Of T)(ReadOnlyCollection(Of T), ReadOnlyCollection(Of T), Func(Of T, T, Boolean))
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}})
+  name: Equals<T>(Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<ReadOnlyCollection<Nullable<T>>>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals__1_System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable___0____System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable___0____
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}})
+  name.vb: Equals(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of ReadOnlyCollection(Of Nullable(Of T))))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals<T>(System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<T>>>, System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<T>>>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(Of T)(System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of T))), System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of T))))
+  nameWithType: ExpressionEqualityComparer.Equals<T>(Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<ReadOnlyCollection<Nullable<T>>>)
+  nameWithType.vb: ExpressionEqualityComparer.Equals(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of ReadOnlyCollection(Of Nullable(Of T))))
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Func{``0,``0,System.Boolean}})
+  name: Equals<T>(Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<Func<T, T, Boolean>>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_Equals__1_System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable___0____System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable___0____System_Nullable_System_Func___0___0_System_Boolean___
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.Equals``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Func{``0,``0,System.Boolean}})
+  name.vb: Equals(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of Func(Of T, T, Boolean)))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals<T>(System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<T>>>, System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<T>>>, System.Nullable<System.Func<T, T, System.Boolean>>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.Equals(Of T)(System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of T))), System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of T))), System.Nullable(Of System.Func(Of T, T, System.Boolean)))
+  nameWithType: ExpressionEqualityComparer.Equals<T>(Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<Func<T, T, Boolean>>)
+  nameWithType.vb: ExpressionEqualityComparer.Equals(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of Func(Of T, T, Boolean)))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsBinary(System.Linq.Expressions.BinaryExpression,System.Linq.Expressions.BinaryExpression)
   name: EqualsBinary(BinaryExpression, BinaryExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsBinary_System_Linq_Expressions_BinaryExpression_System_Linq_Expressions_BinaryExpression_
@@ -185,12 +188,15 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsDynamic
   nameWithType: ExpressionEqualityComparer.EqualsDynamic
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit(System.Linq.Expressions.ElementInit,System.Linq.Expressions.ElementInit)
-  name: EqualsElementInit(ElementInit, ElementInit)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsElementInit_System_Linq_Expressions_ElementInit_System_Linq_Expressions_ElementInit_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit(System.Linq.Expressions.ElementInit,System.Linq.Expressions.ElementInit)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit(System.Linq.Expressions.ElementInit, System.Linq.Expressions.ElementInit)
-  nameWithType: ExpressionEqualityComparer.EqualsElementInit(ElementInit, ElementInit)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit(System.Nullable{System.Linq.Expressions.ElementInit},System.Nullable{System.Linq.Expressions.ElementInit})
+  name: EqualsElementInit(Nullable<ElementInit>, Nullable<ElementInit>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsElementInit_System_Nullable_System_Linq_Expressions_ElementInit__System_Nullable_System_Linq_Expressions_ElementInit__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit(System.Nullable{System.Linq.Expressions.ElementInit},System.Nullable{System.Linq.Expressions.ElementInit})
+  name.vb: EqualsElementInit(Nullable(Of ElementInit), Nullable(Of ElementInit))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit(System.Nullable<System.Linq.Expressions.ElementInit>, System.Nullable<System.Linq.Expressions.ElementInit>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit(System.Nullable(Of System.Linq.Expressions.ElementInit), System.Nullable(Of System.Linq.Expressions.ElementInit))
+  nameWithType: ExpressionEqualityComparer.EqualsElementInit(Nullable<ElementInit>, Nullable<ElementInit>)
+  nameWithType.vb: ExpressionEqualityComparer.EqualsElementInit(Nullable(Of ElementInit), Nullable(Of ElementInit))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsElementInit*
   name: EqualsElementInit
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsElementInit_
@@ -263,12 +269,15 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabel
   nameWithType: ExpressionEqualityComparer.EqualsLabel
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.LabelTarget)
-  name: EqualsLabelTarget(LabelTarget, LabelTarget)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsLabelTarget_System_Linq_Expressions_LabelTarget_System_Linq_Expressions_LabelTarget_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget(System.Linq.Expressions.LabelTarget,System.Linq.Expressions.LabelTarget)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget(System.Linq.Expressions.LabelTarget, System.Linq.Expressions.LabelTarget)
-  nameWithType: ExpressionEqualityComparer.EqualsLabelTarget(LabelTarget, LabelTarget)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget(System.Nullable{System.Linq.Expressions.LabelTarget},System.Nullable{System.Linq.Expressions.LabelTarget})
+  name: EqualsLabelTarget(Nullable<LabelTarget>, Nullable<LabelTarget>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsLabelTarget_System_Nullable_System_Linq_Expressions_LabelTarget__System_Nullable_System_Linq_Expressions_LabelTarget__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget(System.Nullable{System.Linq.Expressions.LabelTarget},System.Nullable{System.Linq.Expressions.LabelTarget})
+  name.vb: EqualsLabelTarget(Nullable(Of LabelTarget), Nullable(Of LabelTarget))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget(System.Nullable<System.Linq.Expressions.LabelTarget>, System.Nullable<System.Linq.Expressions.LabelTarget>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget(System.Nullable(Of System.Linq.Expressions.LabelTarget), System.Nullable(Of System.Linq.Expressions.LabelTarget))
+  nameWithType: ExpressionEqualityComparer.EqualsLabelTarget(Nullable<LabelTarget>, Nullable<LabelTarget>)
+  nameWithType.vb: ExpressionEqualityComparer.EqualsLabelTarget(Nullable(Of LabelTarget), Nullable(Of LabelTarget))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsLabelTarget*
   name: EqualsLabelTarget
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsLabelTarget_
@@ -341,12 +350,15 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberAssignment
   nameWithType: ExpressionEqualityComparer.EqualsMemberAssignment
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding(System.Linq.Expressions.MemberBinding,System.Linq.Expressions.MemberBinding)
-  name: EqualsMemberBinding(MemberBinding, MemberBinding)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsMemberBinding_System_Linq_Expressions_MemberBinding_System_Linq_Expressions_MemberBinding_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding(System.Linq.Expressions.MemberBinding,System.Linq.Expressions.MemberBinding)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding(System.Linq.Expressions.MemberBinding, System.Linq.Expressions.MemberBinding)
-  nameWithType: ExpressionEqualityComparer.EqualsMemberBinding(MemberBinding, MemberBinding)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding(System.Nullable{System.Linq.Expressions.MemberBinding},System.Nullable{System.Linq.Expressions.MemberBinding})
+  name: EqualsMemberBinding(Nullable<MemberBinding>, Nullable<MemberBinding>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsMemberBinding_System_Nullable_System_Linq_Expressions_MemberBinding__System_Nullable_System_Linq_Expressions_MemberBinding__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding(System.Nullable{System.Linq.Expressions.MemberBinding},System.Nullable{System.Linq.Expressions.MemberBinding})
+  name.vb: EqualsMemberBinding(Nullable(Of MemberBinding), Nullable(Of MemberBinding))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding(System.Nullable<System.Linq.Expressions.MemberBinding>, System.Nullable<System.Linq.Expressions.MemberBinding>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding(System.Nullable(Of System.Linq.Expressions.MemberBinding), System.Nullable(Of System.Linq.Expressions.MemberBinding))
+  nameWithType: ExpressionEqualityComparer.EqualsMemberBinding(Nullable<MemberBinding>, Nullable<MemberBinding>)
+  nameWithType.vb: ExpressionEqualityComparer.EqualsMemberBinding(Nullable(Of MemberBinding), Nullable(Of MemberBinding))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsMemberBinding*
   name: EqualsMemberBinding
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_EqualsMemberBinding_
@@ -523,21 +535,24 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.EqualsUnary
   nameWithType: ExpressionEqualityComparer.EqualsUnary
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression})
-  name: GetHashCode(ReadOnlyCollection<Expression>)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode_System_Collections_ObjectModel_ReadOnlyCollection_System_Linq_Expressions_Expression__
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression})
-  name.vb: GetHashCode(ReadOnlyCollection(Of Expression))
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.Expression>)
-  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Collections.ObjectModel.ReadOnlyCollection(Of System.Linq.Expressions.Expression))
-  nameWithType: ExpressionEqualityComparer.GetHashCode(ReadOnlyCollection<Expression>)
-  nameWithType.vb: ExpressionEqualityComparer.GetHashCode(ReadOnlyCollection(Of Expression))
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Linq.Expressions.Expression)
-  name: GetHashCode(Expression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode_System_Linq_Expressions_Expression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Linq.Expressions.Expression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Linq.Expressions.Expression)
-  nameWithType: ExpressionEqualityComparer.GetHashCode(Expression)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{System.Linq.Expressions.Expression}}})
+  name: GetHashCode(Nullable<ReadOnlyCollection<Nullable<Expression>>>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode_System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable_System_Linq_Expressions_Expression____
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{System.Linq.Expressions.Expression}}})
+  name.vb: GetHashCode(Nullable(Of ReadOnlyCollection(Of Nullable(Of Expression))))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<System.Linq.Expressions.Expression>>>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of System.Linq.Expressions.Expression))))
+  nameWithType: ExpressionEqualityComparer.GetHashCode(Nullable<ReadOnlyCollection<Nullable<Expression>>>)
+  nameWithType.vb: ExpressionEqualityComparer.GetHashCode(Nullable(Of ReadOnlyCollection(Of Nullable(Of Expression))))
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable{System.Linq.Expressions.Expression})
+  name: GetHashCode(Nullable<Expression>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode_System_Nullable_System_Linq_Expressions_Expression__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable{System.Linq.Expressions.Expression})
+  name.vb: GetHashCode(Nullable(Of Expression))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable<System.Linq.Expressions.Expression>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(System.Nullable(Of System.Linq.Expressions.Expression))
+  nameWithType: ExpressionEqualityComparer.GetHashCode(Nullable<Expression>)
+  nameWithType.vb: ExpressionEqualityComparer.GetHashCode(Nullable(Of Expression))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode*
   name: GetHashCode
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode_
@@ -545,24 +560,24 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode
   nameWithType: ExpressionEqualityComparer.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Collections.ObjectModel.ReadOnlyCollection{``0})
-  name: GetHashCode<T>(ReadOnlyCollection<T>)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode__1_System_Collections_ObjectModel_ReadOnlyCollection___0__
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Collections.ObjectModel.ReadOnlyCollection{``0})
-  name.vb: GetHashCode(Of T)(ReadOnlyCollection(Of T))
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode<T>(System.Collections.ObjectModel.ReadOnlyCollection<T>)
-  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(Of T)(System.Collections.ObjectModel.ReadOnlyCollection(Of T))
-  nameWithType: ExpressionEqualityComparer.GetHashCode<T>(ReadOnlyCollection<T>)
-  nameWithType.vb: ExpressionEqualityComparer.GetHashCode(Of T)(ReadOnlyCollection(Of T))
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Func{``0,System.Int32})
-  name: GetHashCode<T>(ReadOnlyCollection<T>, Func<T, Int32>)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode__1_System_Collections_ObjectModel_ReadOnlyCollection___0__System_Func___0_System_Int32__
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Func{``0,System.Int32})
-  name.vb: GetHashCode(Of T)(ReadOnlyCollection(Of T), Func(Of T, Int32))
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode<T>(System.Collections.ObjectModel.ReadOnlyCollection<T>, System.Func<T, System.Int32>)
-  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(Of T)(System.Collections.ObjectModel.ReadOnlyCollection(Of T), System.Func(Of T, System.Int32))
-  nameWithType: ExpressionEqualityComparer.GetHashCode<T>(ReadOnlyCollection<T>, Func<T, Int32>)
-  nameWithType.vb: ExpressionEqualityComparer.GetHashCode(Of T)(ReadOnlyCollection(Of T), Func(Of T, Int32))
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}})
+  name: GetHashCode<T>(Nullable<ReadOnlyCollection<Nullable<T>>>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode__1_System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable___0____
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}})
+  name.vb: GetHashCode(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode<T>(System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<T>>>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(Of T)(System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of T))))
+  nameWithType: ExpressionEqualityComparer.GetHashCode<T>(Nullable<ReadOnlyCollection<Nullable<T>>>)
+  nameWithType.vb: ExpressionEqualityComparer.GetHashCode(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))))
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Func{``0,System.Int32}})
+  name: GetHashCode<T>(Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<Func<T, Int32>>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCode__1_System_Nullable_System_Collections_ObjectModel_ReadOnlyCollection_System_Nullable___0____System_Nullable_System_Func___0_System_Int32___
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode``1(System.Nullable{System.Collections.ObjectModel.ReadOnlyCollection{System.Nullable{``0}}},System.Nullable{System.Func{``0,System.Int32}})
+  name.vb: GetHashCode(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of Func(Of T, Int32)))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode<T>(System.Nullable<System.Collections.ObjectModel.ReadOnlyCollection<System.Nullable<T>>>, System.Nullable<System.Func<T, System.Int32>>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCode(Of T)(System.Nullable(Of System.Collections.ObjectModel.ReadOnlyCollection(Of System.Nullable(Of T))), System.Nullable(Of System.Func(Of T, System.Int32)))
+  nameWithType: ExpressionEqualityComparer.GetHashCode<T>(Nullable<ReadOnlyCollection<Nullable<T>>>, Nullable<Func<T, Int32>>)
+  nameWithType.vb: ExpressionEqualityComparer.GetHashCode(Of T)(Nullable(Of ReadOnlyCollection(Of Nullable(Of T))), Nullable(Of Func(Of T, Int32)))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeBinary(System.Linq.Expressions.BinaryExpression)
   name: GetHashCodeBinary(BinaryExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeBinary_System_Linq_Expressions_BinaryExpression_
@@ -667,12 +682,15 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeDynamic
   nameWithType: ExpressionEqualityComparer.GetHashCodeDynamic
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit(System.Linq.Expressions.ElementInit)
-  name: GetHashCodeElementInit(ElementInit)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeElementInit_System_Linq_Expressions_ElementInit_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit(System.Linq.Expressions.ElementInit)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit(System.Linq.Expressions.ElementInit)
-  nameWithType: ExpressionEqualityComparer.GetHashCodeElementInit(ElementInit)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit(System.Nullable{System.Linq.Expressions.ElementInit})
+  name: GetHashCodeElementInit(Nullable<ElementInit>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeElementInit_System_Nullable_System_Linq_Expressions_ElementInit__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit(System.Nullable{System.Linq.Expressions.ElementInit})
+  name.vb: GetHashCodeElementInit(Nullable(Of ElementInit))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit(System.Nullable<System.Linq.Expressions.ElementInit>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit(System.Nullable(Of System.Linq.Expressions.ElementInit))
+  nameWithType: ExpressionEqualityComparer.GetHashCodeElementInit(Nullable<ElementInit>)
+  nameWithType.vb: ExpressionEqualityComparer.GetHashCodeElementInit(Nullable(Of ElementInit))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeElementInit*
   name: GetHashCodeElementInit
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeElementInit_
@@ -745,12 +763,15 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabel
   nameWithType: ExpressionEqualityComparer.GetHashCodeLabel
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget(System.Linq.Expressions.LabelTarget)
-  name: GetHashCodeLabelTarget(LabelTarget)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeLabelTarget_System_Linq_Expressions_LabelTarget_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget(System.Linq.Expressions.LabelTarget)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget(System.Linq.Expressions.LabelTarget)
-  nameWithType: ExpressionEqualityComparer.GetHashCodeLabelTarget(LabelTarget)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget(System.Nullable{System.Linq.Expressions.LabelTarget})
+  name: GetHashCodeLabelTarget(Nullable<LabelTarget>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeLabelTarget_System_Nullable_System_Linq_Expressions_LabelTarget__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget(System.Nullable{System.Linq.Expressions.LabelTarget})
+  name.vb: GetHashCodeLabelTarget(Nullable(Of LabelTarget))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget(System.Nullable<System.Linq.Expressions.LabelTarget>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget(System.Nullable(Of System.Linq.Expressions.LabelTarget))
+  nameWithType: ExpressionEqualityComparer.GetHashCodeLabelTarget(Nullable<LabelTarget>)
+  nameWithType.vb: ExpressionEqualityComparer.GetHashCodeLabelTarget(Nullable(Of LabelTarget))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeLabelTarget*
   name: GetHashCodeLabelTarget
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeLabelTarget_
@@ -823,12 +844,15 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberAssignment
   nameWithType: ExpressionEqualityComparer.GetHashCodeMemberAssignment
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding(System.Linq.Expressions.MemberBinding)
-  name: GetHashCodeMemberBinding(MemberBinding)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeMemberBinding_System_Linq_Expressions_MemberBinding_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding(System.Linq.Expressions.MemberBinding)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding(System.Linq.Expressions.MemberBinding)
-  nameWithType: ExpressionEqualityComparer.GetHashCodeMemberBinding(MemberBinding)
+- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding(System.Nullable{System.Linq.Expressions.MemberBinding})
+  name: GetHashCodeMemberBinding(Nullable<MemberBinding>)
+  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeMemberBinding_System_Nullable_System_Linq_Expressions_MemberBinding__
+  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding(System.Nullable{System.Linq.Expressions.MemberBinding})
+  name.vb: GetHashCodeMemberBinding(Nullable(Of MemberBinding))
+  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding(System.Nullable<System.Linq.Expressions.MemberBinding>)
+  fullName.vb: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding(System.Nullable(Of System.Linq.Expressions.MemberBinding))
+  nameWithType: ExpressionEqualityComparer.GetHashCodeMemberBinding(Nullable<MemberBinding>)
+  nameWithType.vb: ExpressionEqualityComparer.GetHashCodeMemberBinding(Nullable(Of MemberBinding))
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeMemberBinding*
   name: GetHashCodeMemberBinding
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_GetHashCodeMemberBinding_
@@ -1005,23 +1029,6 @@ references:
   isSpec: "True"
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.GetHashCodeUnary
   nameWithType: ExpressionEqualityComparer.GetHashCodeUnary
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BinaryExpression}#Equals(System.Linq.Expressions.BinaryExpression,System.Linq.Expressions.BinaryExpression)
-  name: IEqualityComparer<BinaryExpression>.Equals(BinaryExpression, BinaryExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_BinaryExpression__Equals_System_Linq_Expressions_BinaryExpression_System_Linq_Expressions_BinaryExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BinaryExpression}#Equals(System.Linq.Expressions.BinaryExpression,System.Linq.Expressions.BinaryExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.Equals(BinaryExpression, BinaryExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.Equals(System.Linq.Expressions.BinaryExpression, System.Linq.Expressions.BinaryExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<BinaryExpression>.Equals(BinaryExpression, BinaryExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.Equals(BinaryExpression, BinaryExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BinaryExpression}#Equals*
-  name: IEqualityComparer<BinaryExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_BinaryExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BinaryExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<BinaryExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BinaryExpression}#GetHashCode(System.Linq.Expressions.BinaryExpression)
   name: IEqualityComparer<BinaryExpression>.GetHashCode(BinaryExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_BinaryExpression__GetHashCode_System_Linq_Expressions_BinaryExpression_
@@ -1039,23 +1046,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<BinaryExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BinaryExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BlockExpression}#Equals(System.Linq.Expressions.BlockExpression,System.Linq.Expressions.BlockExpression)
-  name: IEqualityComparer<BlockExpression>.Equals(BlockExpression, BlockExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_BlockExpression__Equals_System_Linq_Expressions_BlockExpression_System_Linq_Expressions_BlockExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BlockExpression}#Equals(System.Linq.Expressions.BlockExpression,System.Linq.Expressions.BlockExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.Equals(BlockExpression, BlockExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.Equals(System.Linq.Expressions.BlockExpression, System.Linq.Expressions.BlockExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<BlockExpression>.Equals(BlockExpression, BlockExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.Equals(BlockExpression, BlockExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BlockExpression}#Equals*
-  name: IEqualityComparer<BlockExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_BlockExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BlockExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<BlockExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#BlockExpression}#GetHashCode(System.Linq.Expressions.BlockExpression)
   name: IEqualityComparer<BlockExpression>.GetHashCode(BlockExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_BlockExpression__GetHashCode_System_Linq_Expressions_BlockExpression_
@@ -1073,23 +1063,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<BlockExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.BlockExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConditionalExpression}#Equals(System.Linq.Expressions.ConditionalExpression,System.Linq.Expressions.ConditionalExpression)
-  name: IEqualityComparer<ConditionalExpression>.Equals(ConditionalExpression, ConditionalExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ConditionalExpression__Equals_System_Linq_Expressions_ConditionalExpression_System_Linq_Expressions_ConditionalExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConditionalExpression}#Equals(System.Linq.Expressions.ConditionalExpression,System.Linq.Expressions.ConditionalExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.Equals(ConditionalExpression, ConditionalExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.Equals(System.Linq.Expressions.ConditionalExpression, System.Linq.Expressions.ConditionalExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ConditionalExpression>.Equals(ConditionalExpression, ConditionalExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.Equals(ConditionalExpression, ConditionalExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConditionalExpression}#Equals*
-  name: IEqualityComparer<ConditionalExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ConditionalExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConditionalExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ConditionalExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConditionalExpression}#GetHashCode(System.Linq.Expressions.ConditionalExpression)
   name: IEqualityComparer<ConditionalExpression>.GetHashCode(ConditionalExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ConditionalExpression__GetHashCode_System_Linq_Expressions_ConditionalExpression_
@@ -1107,23 +1080,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<ConditionalExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConditionalExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConstantExpression}#Equals(System.Linq.Expressions.ConstantExpression,System.Linq.Expressions.ConstantExpression)
-  name: IEqualityComparer<ConstantExpression>.Equals(ConstantExpression, ConstantExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ConstantExpression__Equals_System_Linq_Expressions_ConstantExpression_System_Linq_Expressions_ConstantExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConstantExpression}#Equals(System.Linq.Expressions.ConstantExpression,System.Linq.Expressions.ConstantExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.Equals(ConstantExpression, ConstantExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.Equals(System.Linq.Expressions.ConstantExpression, System.Linq.Expressions.ConstantExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ConstantExpression>.Equals(ConstantExpression, ConstantExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.Equals(ConstantExpression, ConstantExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConstantExpression}#Equals*
-  name: IEqualityComparer<ConstantExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ConstantExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConstantExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ConstantExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ConstantExpression}#GetHashCode(System.Linq.Expressions.ConstantExpression)
   name: IEqualityComparer<ConstantExpression>.GetHashCode(ConstantExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ConstantExpression__GetHashCode_System_Linq_Expressions_ConstantExpression_
@@ -1141,23 +1097,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<ConstantExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ConstantExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DebugInfoExpression}#Equals(System.Linq.Expressions.DebugInfoExpression,System.Linq.Expressions.DebugInfoExpression)
-  name: IEqualityComparer<DebugInfoExpression>.Equals(DebugInfoExpression, DebugInfoExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DebugInfoExpression__Equals_System_Linq_Expressions_DebugInfoExpression_System_Linq_Expressions_DebugInfoExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DebugInfoExpression}#Equals(System.Linq.Expressions.DebugInfoExpression,System.Linq.Expressions.DebugInfoExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.Equals(DebugInfoExpression, DebugInfoExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.Equals(System.Linq.Expressions.DebugInfoExpression, System.Linq.Expressions.DebugInfoExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<DebugInfoExpression>.Equals(DebugInfoExpression, DebugInfoExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.Equals(DebugInfoExpression, DebugInfoExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DebugInfoExpression}#Equals*
-  name: IEqualityComparer<DebugInfoExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DebugInfoExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DebugInfoExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<DebugInfoExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DebugInfoExpression}#GetHashCode(System.Linq.Expressions.DebugInfoExpression)
   name: IEqualityComparer<DebugInfoExpression>.GetHashCode(DebugInfoExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DebugInfoExpression__GetHashCode_System_Linq_Expressions_DebugInfoExpression_
@@ -1175,23 +1114,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<DebugInfoExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DebugInfoExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DefaultExpression}#Equals(System.Linq.Expressions.DefaultExpression,System.Linq.Expressions.DefaultExpression)
-  name: IEqualityComparer<DefaultExpression>.Equals(DefaultExpression, DefaultExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DefaultExpression__Equals_System_Linq_Expressions_DefaultExpression_System_Linq_Expressions_DefaultExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DefaultExpression}#Equals(System.Linq.Expressions.DefaultExpression,System.Linq.Expressions.DefaultExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.Equals(DefaultExpression, DefaultExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.Equals(System.Linq.Expressions.DefaultExpression, System.Linq.Expressions.DefaultExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<DefaultExpression>.Equals(DefaultExpression, DefaultExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.Equals(DefaultExpression, DefaultExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DefaultExpression}#Equals*
-  name: IEqualityComparer<DefaultExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DefaultExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DefaultExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<DefaultExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DefaultExpression}#GetHashCode(System.Linq.Expressions.DefaultExpression)
   name: IEqualityComparer<DefaultExpression>.GetHashCode(DefaultExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DefaultExpression__GetHashCode_System_Linq_Expressions_DefaultExpression_
@@ -1209,23 +1131,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<DefaultExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DefaultExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DynamicExpression}#Equals(System.Linq.Expressions.DynamicExpression,System.Linq.Expressions.DynamicExpression)
-  name: IEqualityComparer<DynamicExpression>.Equals(DynamicExpression, DynamicExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DynamicExpression__Equals_System_Linq_Expressions_DynamicExpression_System_Linq_Expressions_DynamicExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DynamicExpression}#Equals(System.Linq.Expressions.DynamicExpression,System.Linq.Expressions.DynamicExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.Equals(DynamicExpression, DynamicExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.Equals(System.Linq.Expressions.DynamicExpression, System.Linq.Expressions.DynamicExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<DynamicExpression>.Equals(DynamicExpression, DynamicExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.Equals(DynamicExpression, DynamicExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DynamicExpression}#Equals*
-  name: IEqualityComparer<DynamicExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DynamicExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DynamicExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<DynamicExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#DynamicExpression}#GetHashCode(System.Linq.Expressions.DynamicExpression)
   name: IEqualityComparer<DynamicExpression>.GetHashCode(DynamicExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_DynamicExpression__GetHashCode_System_Linq_Expressions_DynamicExpression_
@@ -1243,23 +1148,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<DynamicExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.DynamicExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#Expression}#Equals(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)
-  name: IEqualityComparer<Expression>.Equals(Expression, Expression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_Expression__Equals_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#Expression}#Equals(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.Equals(Expression, Expression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.Equals(System.Linq.Expressions.Expression, System.Linq.Expressions.Expression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<Expression>.Equals(Expression, Expression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.Equals(Expression, Expression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#Expression}#Equals*
-  name: IEqualityComparer<Expression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_Expression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#Expression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<Expression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#Expression}#GetHashCode(System.Linq.Expressions.Expression)
   name: IEqualityComparer<Expression>.GetHashCode(Expression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_Expression__GetHashCode_System_Linq_Expressions_Expression_
@@ -1277,23 +1165,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<Expression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.Expression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#GotoExpression}#Equals(System.Linq.Expressions.GotoExpression,System.Linq.Expressions.GotoExpression)
-  name: IEqualityComparer<GotoExpression>.Equals(GotoExpression, GotoExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_GotoExpression__Equals_System_Linq_Expressions_GotoExpression_System_Linq_Expressions_GotoExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#GotoExpression}#Equals(System.Linq.Expressions.GotoExpression,System.Linq.Expressions.GotoExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.Equals(GotoExpression, GotoExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.Equals(System.Linq.Expressions.GotoExpression, System.Linq.Expressions.GotoExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<GotoExpression>.Equals(GotoExpression, GotoExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.Equals(GotoExpression, GotoExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#GotoExpression}#Equals*
-  name: IEqualityComparer<GotoExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_GotoExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#GotoExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<GotoExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#GotoExpression}#GetHashCode(System.Linq.Expressions.GotoExpression)
   name: IEqualityComparer<GotoExpression>.GetHashCode(GotoExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_GotoExpression__GetHashCode_System_Linq_Expressions_GotoExpression_
@@ -1311,23 +1182,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<GotoExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.GotoExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#IndexExpression}#Equals(System.Linq.Expressions.IndexExpression,System.Linq.Expressions.IndexExpression)
-  name: IEqualityComparer<IndexExpression>.Equals(IndexExpression, IndexExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_IndexExpression__Equals_System_Linq_Expressions_IndexExpression_System_Linq_Expressions_IndexExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#IndexExpression}#Equals(System.Linq.Expressions.IndexExpression,System.Linq.Expressions.IndexExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.Equals(IndexExpression, IndexExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.Equals(System.Linq.Expressions.IndexExpression, System.Linq.Expressions.IndexExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<IndexExpression>.Equals(IndexExpression, IndexExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.Equals(IndexExpression, IndexExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#IndexExpression}#Equals*
-  name: IEqualityComparer<IndexExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_IndexExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#IndexExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<IndexExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#IndexExpression}#GetHashCode(System.Linq.Expressions.IndexExpression)
   name: IEqualityComparer<IndexExpression>.GetHashCode(IndexExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_IndexExpression__GetHashCode_System_Linq_Expressions_IndexExpression_
@@ -1345,23 +1199,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<IndexExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.IndexExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#InvocationExpression}#Equals(System.Linq.Expressions.InvocationExpression,System.Linq.Expressions.InvocationExpression)
-  name: IEqualityComparer<InvocationExpression>.Equals(InvocationExpression, InvocationExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_InvocationExpression__Equals_System_Linq_Expressions_InvocationExpression_System_Linq_Expressions_InvocationExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#InvocationExpression}#Equals(System.Linq.Expressions.InvocationExpression,System.Linq.Expressions.InvocationExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.Equals(InvocationExpression, InvocationExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.Equals(System.Linq.Expressions.InvocationExpression, System.Linq.Expressions.InvocationExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<InvocationExpression>.Equals(InvocationExpression, InvocationExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.Equals(InvocationExpression, InvocationExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#InvocationExpression}#Equals*
-  name: IEqualityComparer<InvocationExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_InvocationExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#InvocationExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<InvocationExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#InvocationExpression}#GetHashCode(System.Linq.Expressions.InvocationExpression)
   name: IEqualityComparer<InvocationExpression>.GetHashCode(InvocationExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_InvocationExpression__GetHashCode_System_Linq_Expressions_InvocationExpression_
@@ -1379,23 +1216,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<InvocationExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.InvocationExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LabelExpression}#Equals(System.Linq.Expressions.LabelExpression,System.Linq.Expressions.LabelExpression)
-  name: IEqualityComparer<LabelExpression>.Equals(LabelExpression, LabelExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LabelExpression__Equals_System_Linq_Expressions_LabelExpression_System_Linq_Expressions_LabelExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LabelExpression}#Equals(System.Linq.Expressions.LabelExpression,System.Linq.Expressions.LabelExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.Equals(LabelExpression, LabelExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.Equals(System.Linq.Expressions.LabelExpression, System.Linq.Expressions.LabelExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<LabelExpression>.Equals(LabelExpression, LabelExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.Equals(LabelExpression, LabelExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LabelExpression}#Equals*
-  name: IEqualityComparer<LabelExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LabelExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LabelExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<LabelExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LabelExpression}#GetHashCode(System.Linq.Expressions.LabelExpression)
   name: IEqualityComparer<LabelExpression>.GetHashCode(LabelExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LabelExpression__GetHashCode_System_Linq_Expressions_LabelExpression_
@@ -1413,23 +1233,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<LabelExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LabelExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LambdaExpression}#Equals(System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.LambdaExpression)
-  name: IEqualityComparer<LambdaExpression>.Equals(LambdaExpression, LambdaExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LambdaExpression__Equals_System_Linq_Expressions_LambdaExpression_System_Linq_Expressions_LambdaExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LambdaExpression}#Equals(System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.LambdaExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.Equals(LambdaExpression, LambdaExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.Equals(System.Linq.Expressions.LambdaExpression, System.Linq.Expressions.LambdaExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<LambdaExpression>.Equals(LambdaExpression, LambdaExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.Equals(LambdaExpression, LambdaExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LambdaExpression}#Equals*
-  name: IEqualityComparer<LambdaExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LambdaExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LambdaExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<LambdaExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LambdaExpression}#GetHashCode(System.Linq.Expressions.LambdaExpression)
   name: IEqualityComparer<LambdaExpression>.GetHashCode(LambdaExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LambdaExpression__GetHashCode_System_Linq_Expressions_LambdaExpression_
@@ -1447,23 +1250,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<LambdaExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LambdaExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ListInitExpression}#Equals(System.Linq.Expressions.ListInitExpression,System.Linq.Expressions.ListInitExpression)
-  name: IEqualityComparer<ListInitExpression>.Equals(ListInitExpression, ListInitExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ListInitExpression__Equals_System_Linq_Expressions_ListInitExpression_System_Linq_Expressions_ListInitExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ListInitExpression}#Equals(System.Linq.Expressions.ListInitExpression,System.Linq.Expressions.ListInitExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.Equals(ListInitExpression, ListInitExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.Equals(System.Linq.Expressions.ListInitExpression, System.Linq.Expressions.ListInitExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ListInitExpression>.Equals(ListInitExpression, ListInitExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.Equals(ListInitExpression, ListInitExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ListInitExpression}#Equals*
-  name: IEqualityComparer<ListInitExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ListInitExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ListInitExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ListInitExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ListInitExpression}#GetHashCode(System.Linq.Expressions.ListInitExpression)
   name: IEqualityComparer<ListInitExpression>.GetHashCode(ListInitExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ListInitExpression__GetHashCode_System_Linq_Expressions_ListInitExpression_
@@ -1481,23 +1267,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<ListInitExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ListInitExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LoopExpression}#Equals(System.Linq.Expressions.LoopExpression,System.Linq.Expressions.LoopExpression)
-  name: IEqualityComparer<LoopExpression>.Equals(LoopExpression, LoopExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LoopExpression__Equals_System_Linq_Expressions_LoopExpression_System_Linq_Expressions_LoopExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LoopExpression}#Equals(System.Linq.Expressions.LoopExpression,System.Linq.Expressions.LoopExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.Equals(LoopExpression, LoopExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.Equals(System.Linq.Expressions.LoopExpression, System.Linq.Expressions.LoopExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<LoopExpression>.Equals(LoopExpression, LoopExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.Equals(LoopExpression, LoopExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LoopExpression}#Equals*
-  name: IEqualityComparer<LoopExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LoopExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LoopExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<LoopExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#LoopExpression}#GetHashCode(System.Linq.Expressions.LoopExpression)
   name: IEqualityComparer<LoopExpression>.GetHashCode(LoopExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_LoopExpression__GetHashCode_System_Linq_Expressions_LoopExpression_
@@ -1515,23 +1284,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<LoopExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.LoopExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberExpression}#Equals(System.Linq.Expressions.MemberExpression,System.Linq.Expressions.MemberExpression)
-  name: IEqualityComparer<MemberExpression>.Equals(MemberExpression, MemberExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MemberExpression__Equals_System_Linq_Expressions_MemberExpression_System_Linq_Expressions_MemberExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberExpression}#Equals(System.Linq.Expressions.MemberExpression,System.Linq.Expressions.MemberExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.Equals(MemberExpression, MemberExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.Equals(System.Linq.Expressions.MemberExpression, System.Linq.Expressions.MemberExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<MemberExpression>.Equals(MemberExpression, MemberExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.Equals(MemberExpression, MemberExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberExpression}#Equals*
-  name: IEqualityComparer<MemberExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MemberExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<MemberExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberExpression}#GetHashCode(System.Linq.Expressions.MemberExpression)
   name: IEqualityComparer<MemberExpression>.GetHashCode(MemberExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MemberExpression__GetHashCode_System_Linq_Expressions_MemberExpression_
@@ -1549,23 +1301,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<MemberExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberInitExpression}#Equals(System.Linq.Expressions.MemberInitExpression,System.Linq.Expressions.MemberInitExpression)
-  name: IEqualityComparer<MemberInitExpression>.Equals(MemberInitExpression, MemberInitExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MemberInitExpression__Equals_System_Linq_Expressions_MemberInitExpression_System_Linq_Expressions_MemberInitExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberInitExpression}#Equals(System.Linq.Expressions.MemberInitExpression,System.Linq.Expressions.MemberInitExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.Equals(MemberInitExpression, MemberInitExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.Equals(System.Linq.Expressions.MemberInitExpression, System.Linq.Expressions.MemberInitExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<MemberInitExpression>.Equals(MemberInitExpression, MemberInitExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.Equals(MemberInitExpression, MemberInitExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberInitExpression}#Equals*
-  name: IEqualityComparer<MemberInitExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MemberInitExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberInitExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<MemberInitExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MemberInitExpression}#GetHashCode(System.Linq.Expressions.MemberInitExpression)
   name: IEqualityComparer<MemberInitExpression>.GetHashCode(MemberInitExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MemberInitExpression__GetHashCode_System_Linq_Expressions_MemberInitExpression_
@@ -1583,23 +1318,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<MemberInitExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MemberInitExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MethodCallExpression}#Equals(System.Linq.Expressions.MethodCallExpression,System.Linq.Expressions.MethodCallExpression)
-  name: IEqualityComparer<MethodCallExpression>.Equals(MethodCallExpression, MethodCallExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MethodCallExpression__Equals_System_Linq_Expressions_MethodCallExpression_System_Linq_Expressions_MethodCallExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MethodCallExpression}#Equals(System.Linq.Expressions.MethodCallExpression,System.Linq.Expressions.MethodCallExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.Equals(MethodCallExpression, MethodCallExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.Equals(System.Linq.Expressions.MethodCallExpression, System.Linq.Expressions.MethodCallExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<MethodCallExpression>.Equals(MethodCallExpression, MethodCallExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.Equals(MethodCallExpression, MethodCallExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MethodCallExpression}#Equals*
-  name: IEqualityComparer<MethodCallExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MethodCallExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MethodCallExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<MethodCallExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#MethodCallExpression}#GetHashCode(System.Linq.Expressions.MethodCallExpression)
   name: IEqualityComparer<MethodCallExpression>.GetHashCode(MethodCallExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_MethodCallExpression__GetHashCode_System_Linq_Expressions_MethodCallExpression_
@@ -1617,23 +1335,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<MethodCallExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.MethodCallExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewArrayExpression}#Equals(System.Linq.Expressions.NewArrayExpression,System.Linq.Expressions.NewArrayExpression)
-  name: IEqualityComparer<NewArrayExpression>.Equals(NewArrayExpression, NewArrayExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_NewArrayExpression__Equals_System_Linq_Expressions_NewArrayExpression_System_Linq_Expressions_NewArrayExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewArrayExpression}#Equals(System.Linq.Expressions.NewArrayExpression,System.Linq.Expressions.NewArrayExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.Equals(NewArrayExpression, NewArrayExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.Equals(System.Linq.Expressions.NewArrayExpression, System.Linq.Expressions.NewArrayExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<NewArrayExpression>.Equals(NewArrayExpression, NewArrayExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.Equals(NewArrayExpression, NewArrayExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewArrayExpression}#Equals*
-  name: IEqualityComparer<NewArrayExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_NewArrayExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewArrayExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<NewArrayExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewArrayExpression}#GetHashCode(System.Linq.Expressions.NewArrayExpression)
   name: IEqualityComparer<NewArrayExpression>.GetHashCode(NewArrayExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_NewArrayExpression__GetHashCode_System_Linq_Expressions_NewArrayExpression_
@@ -1651,23 +1352,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<NewArrayExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewArrayExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewExpression}#Equals(System.Linq.Expressions.NewExpression,System.Linq.Expressions.NewExpression)
-  name: IEqualityComparer<NewExpression>.Equals(NewExpression, NewExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_NewExpression__Equals_System_Linq_Expressions_NewExpression_System_Linq_Expressions_NewExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewExpression}#Equals(System.Linq.Expressions.NewExpression,System.Linq.Expressions.NewExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.Equals(NewExpression, NewExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.Equals(System.Linq.Expressions.NewExpression, System.Linq.Expressions.NewExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<NewExpression>.Equals(NewExpression, NewExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.Equals(NewExpression, NewExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewExpression}#Equals*
-  name: IEqualityComparer<NewExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_NewExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<NewExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#NewExpression}#GetHashCode(System.Linq.Expressions.NewExpression)
   name: IEqualityComparer<NewExpression>.GetHashCode(NewExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_NewExpression__GetHashCode_System_Linq_Expressions_NewExpression_
@@ -1685,23 +1369,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<NewExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.NewExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ParameterExpression}#Equals(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression)
-  name: IEqualityComparer<ParameterExpression>.Equals(ParameterExpression, ParameterExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ParameterExpression__Equals_System_Linq_Expressions_ParameterExpression_System_Linq_Expressions_ParameterExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ParameterExpression}#Equals(System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.Equals(ParameterExpression, ParameterExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.Equals(System.Linq.Expressions.ParameterExpression, System.Linq.Expressions.ParameterExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ParameterExpression>.Equals(ParameterExpression, ParameterExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.Equals(ParameterExpression, ParameterExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ParameterExpression}#Equals*
-  name: IEqualityComparer<ParameterExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ParameterExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ParameterExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<ParameterExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#ParameterExpression}#GetHashCode(System.Linq.Expressions.ParameterExpression)
   name: IEqualityComparer<ParameterExpression>.GetHashCode(ParameterExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_ParameterExpression__GetHashCode_System_Linq_Expressions_ParameterExpression_
@@ -1719,23 +1386,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<ParameterExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.ParameterExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#RuntimeVariablesExpression}#Equals(System.Linq.Expressions.RuntimeVariablesExpression,System.Linq.Expressions.RuntimeVariablesExpression)
-  name: IEqualityComparer<RuntimeVariablesExpression>.Equals(RuntimeVariablesExpression, RuntimeVariablesExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_RuntimeVariablesExpression__Equals_System_Linq_Expressions_RuntimeVariablesExpression_System_Linq_Expressions_RuntimeVariablesExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#RuntimeVariablesExpression}#Equals(System.Linq.Expressions.RuntimeVariablesExpression,System.Linq.Expressions.RuntimeVariablesExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.Equals(RuntimeVariablesExpression, RuntimeVariablesExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.Equals(System.Linq.Expressions.RuntimeVariablesExpression, System.Linq.Expressions.RuntimeVariablesExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<RuntimeVariablesExpression>.Equals(RuntimeVariablesExpression, RuntimeVariablesExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.Equals(RuntimeVariablesExpression, RuntimeVariablesExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#RuntimeVariablesExpression}#Equals*
-  name: IEqualityComparer<RuntimeVariablesExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_RuntimeVariablesExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#RuntimeVariablesExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<RuntimeVariablesExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#RuntimeVariablesExpression}#GetHashCode(System.Linq.Expressions.RuntimeVariablesExpression)
   name: IEqualityComparer<RuntimeVariablesExpression>.GetHashCode(RuntimeVariablesExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_RuntimeVariablesExpression__GetHashCode_System_Linq_Expressions_RuntimeVariablesExpression_
@@ -1753,23 +1403,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<RuntimeVariablesExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.RuntimeVariablesExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#SwitchExpression}#Equals(System.Linq.Expressions.SwitchExpression,System.Linq.Expressions.SwitchExpression)
-  name: IEqualityComparer<SwitchExpression>.Equals(SwitchExpression, SwitchExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_SwitchExpression__Equals_System_Linq_Expressions_SwitchExpression_System_Linq_Expressions_SwitchExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#SwitchExpression}#Equals(System.Linq.Expressions.SwitchExpression,System.Linq.Expressions.SwitchExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.Equals(SwitchExpression, SwitchExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.Equals(System.Linq.Expressions.SwitchExpression, System.Linq.Expressions.SwitchExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<SwitchExpression>.Equals(SwitchExpression, SwitchExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.Equals(SwitchExpression, SwitchExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#SwitchExpression}#Equals*
-  name: IEqualityComparer<SwitchExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_SwitchExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#SwitchExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<SwitchExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#SwitchExpression}#GetHashCode(System.Linq.Expressions.SwitchExpression)
   name: IEqualityComparer<SwitchExpression>.GetHashCode(SwitchExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_SwitchExpression__GetHashCode_System_Linq_Expressions_SwitchExpression_
@@ -1787,23 +1420,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<SwitchExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.SwitchExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TryExpression}#Equals(System.Linq.Expressions.TryExpression,System.Linq.Expressions.TryExpression)
-  name: IEqualityComparer<TryExpression>.Equals(TryExpression, TryExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_TryExpression__Equals_System_Linq_Expressions_TryExpression_System_Linq_Expressions_TryExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TryExpression}#Equals(System.Linq.Expressions.TryExpression,System.Linq.Expressions.TryExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.Equals(TryExpression, TryExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.Equals(System.Linq.Expressions.TryExpression, System.Linq.Expressions.TryExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<TryExpression>.Equals(TryExpression, TryExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.Equals(TryExpression, TryExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TryExpression}#Equals*
-  name: IEqualityComparer<TryExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_TryExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TryExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<TryExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TryExpression}#GetHashCode(System.Linq.Expressions.TryExpression)
   name: IEqualityComparer<TryExpression>.GetHashCode(TryExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_TryExpression__GetHashCode_System_Linq_Expressions_TryExpression_
@@ -1821,23 +1437,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<TryExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TryExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TypeBinaryExpression}#Equals(System.Linq.Expressions.TypeBinaryExpression,System.Linq.Expressions.TypeBinaryExpression)
-  name: IEqualityComparer<TypeBinaryExpression>.Equals(TypeBinaryExpression, TypeBinaryExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_TypeBinaryExpression__Equals_System_Linq_Expressions_TypeBinaryExpression_System_Linq_Expressions_TypeBinaryExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TypeBinaryExpression}#Equals(System.Linq.Expressions.TypeBinaryExpression,System.Linq.Expressions.TypeBinaryExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.Equals(TypeBinaryExpression, TypeBinaryExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.Equals(System.Linq.Expressions.TypeBinaryExpression, System.Linq.Expressions.TypeBinaryExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<TypeBinaryExpression>.Equals(TypeBinaryExpression, TypeBinaryExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.Equals(TypeBinaryExpression, TypeBinaryExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TypeBinaryExpression}#Equals*
-  name: IEqualityComparer<TypeBinaryExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_TypeBinaryExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TypeBinaryExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<TypeBinaryExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#TypeBinaryExpression}#GetHashCode(System.Linq.Expressions.TypeBinaryExpression)
   name: IEqualityComparer<TypeBinaryExpression>.GetHashCode(TypeBinaryExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_TypeBinaryExpression__GetHashCode_System_Linq_Expressions_TypeBinaryExpression_
@@ -1855,23 +1454,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<TypeBinaryExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.TypeBinaryExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#UnaryExpression}#Equals(System.Linq.Expressions.UnaryExpression,System.Linq.Expressions.UnaryExpression)
-  name: IEqualityComparer<UnaryExpression>.Equals(UnaryExpression, UnaryExpression)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_UnaryExpression__Equals_System_Linq_Expressions_UnaryExpression_System_Linq_Expressions_UnaryExpression_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#UnaryExpression}#Equals(System.Linq.Expressions.UnaryExpression,System.Linq.Expressions.UnaryExpression)
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.Equals(UnaryExpression, UnaryExpression)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.Equals(System.Linq.Expressions.UnaryExpression, System.Linq.Expressions.UnaryExpression)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<UnaryExpression>.Equals(UnaryExpression, UnaryExpression)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.Equals(UnaryExpression, UnaryExpression)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#UnaryExpression}#Equals*
-  name: IEqualityComparer<UnaryExpression>.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_UnaryExpression__Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#UnaryExpression}#Equals
-  isSpec: "True"
-  name.vb: System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer<UnaryExpression>.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#Generic#IEqualityComparer{System#Linq#Expressions#UnaryExpression}#GetHashCode(System.Linq.Expressions.UnaryExpression)
   name: IEqualityComparer<UnaryExpression>.GetHashCode(UnaryExpression)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_Generic_IEqualityComparer_System_Linq_Expressions_UnaryExpression__GetHashCode_System_Linq_Expressions_UnaryExpression_
@@ -1889,23 +1471,6 @@ references:
   fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.GetHashCode
   nameWithType: ExpressionEqualityComparer.IEqualityComparer<UnaryExpression>.GetHashCode
   nameWithType.vb: ExpressionEqualityComparer.System.Collections.Generic.IEqualityComparer<System.Linq.Expressions.UnaryExpression>.GetHashCode
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)
-  name: IEqualityComparer.Equals(Object, Object)
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_
-  commentId: M:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)
-  name.vb: System.Collections.IEqualityComparer.Equals(Object, Object)
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.IEqualityComparer.Equals(System.Object, System.Object)
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer.Equals(Object, Object)
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.IEqualityComparer.Equals(Object, Object)
-- uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#IEqualityComparer#Equals*
-  name: IEqualityComparer.Equals
-  href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_IEqualityComparer_Equals_
-  commentId: Overload:ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#IEqualityComparer#Equals
-  isSpec: "True"
-  name.vb: System.Collections.IEqualityComparer.Equals
-  fullName: ExpressionTreeToolkit.ExpressionEqualityComparer.System.Collections.IEqualityComparer.Equals
-  nameWithType: ExpressionEqualityComparer.IEqualityComparer.Equals
-  nameWithType.vb: ExpressionEqualityComparer.System.Collections.IEqualityComparer.Equals
 - uid: ExpressionTreeToolkit.ExpressionEqualityComparer.System#Collections#IEqualityComparer#GetHashCode(System.Object)
   name: IEqualityComparer.GetHashCode(Object)
   href: api/ExpressionTreeToolkit.ExpressionEqualityComparer.html#ExpressionTreeToolkit_ExpressionEqualityComparer_System_Collections_IEqualityComparer_GetHashCode_System_Object_
