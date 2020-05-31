@@ -33,5 +33,15 @@ namespace ExpressionTreeToolkit.UnitTests
 
             AssertAreEqual(x, y);
         }
+
+        [Fact]
+        public void Issue_12()
+        {
+            // Expressions similar to this code `new List<int> { 0|1 }`
+            var x = Expression.ListInit(Expression.New(typeof(List<int>)), Expression.Constant(0));
+            var y = Expression.ListInit(Expression.New(typeof(List<int>)), Expression.Constant(1));
+
+            AssertAreNotEqual(x, y);
+        }
     }
 }
