@@ -4,14 +4,14 @@ pool:
   vmImage: vs2017-win2016
 variables:
   BuildConfiguration: 'Release'
+  GitVersion.SemVer: ''
 
 steps:
-- task: gittools.gitversion.gitversion-task.GitVersion@5
+- task: UseGitVersion@5
   displayName: GitVersion
   inputs:
-    runtime: full
+    versionSpec: '5.x'
     updateAssemblyInfo: true
-    gitVersionPath: 'C:\ProgramData\chocolatey\bin\GitVersion.exe'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
@@ -25,14 +25,18 @@ steps:
   displayName: 'dotnet build'
   inputs:
     projects: '**/*.sln'
-    arguments: '--configuration $(BuildConfiguration) --no-restore'
+    configuration: '$(BuildConfiguration)'
+    arguments: '--no-restore'
+    versioningScheme: byEnvVar
+    versionEnvVar: 'GitVersion.SemVer'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
     command: test
     projects: 'test/**/*.UnitTests/*.csproj'
-    arguments: '--configuration $(BuildConfiguration) --no-build'
+    configuration: '$(BuildConfiguration)'
+    nobuild: true
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet pack release'
