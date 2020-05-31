@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ListInitExpression to compare.</param>
         /// <param name="y">The second ListInitExpression to compare.</param>
         /// <returns>true if the specified ListInitExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsListInit([NotNull] ListInitExpression x, [NotNull] ListInitExpression y)
+        protected virtual bool EqualsListInit([DisallowNull] ListInitExpression x, [DisallowNull] ListInitExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.NewExpression, y.NewExpression)
                    && Equals(x.Initializers, y.Initializers, EqualsElementInit);
@@ -24,8 +32,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified ListInitExpression.</summary>
         /// <param name="node">The ListInitExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified ListInitExpression.</returns>
-        protected virtual int GetHashCodeListInit([NotNull] ListInitExpression node)
+        protected virtual int GetHashCodeListInit([DisallowNull] ListInitExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetHashCode(node.NewExpression),
@@ -36,7 +45,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first ListInitExpression to compare.</param>
         /// <param name="y">The second ListInitExpression to compare.</param>
         /// <returns>true if the specified ListInitExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<ListInitExpression>.Equals(ListInitExpression x, ListInitExpression y)
+        bool IEqualityComparer<ListInitExpression>.Equals([AllowNull] ListInitExpression? x, [AllowNull] ListInitExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -51,7 +60,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="ListInitExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified ListInitExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<ListInitExpression>.GetHashCode(ListInitExpression obj)
+        int IEqualityComparer<ListInitExpression>.GetHashCode([DisallowNull] ListInitExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

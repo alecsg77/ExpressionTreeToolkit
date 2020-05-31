@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first TryExpression to compare.</param>
         /// <param name="y">The second TryExpression to compare.</param>
         /// <returns>true if the specified TryExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsTry([NotNull] TryExpression x, [NotNull] TryExpression y)
+        protected virtual bool EqualsTry([DisallowNull] TryExpression x, [DisallowNull] TryExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Body, y.Body)
                    && Equals(x.Fault, y.Fault)
@@ -27,8 +35,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first CatchBlock to compare.</param>
         /// <param name="y">The second CatchBlock to compare.</param>
         /// <returns>true if the specified CatchBlock are equal; otherwise, false.</returns>
-        protected virtual bool EqualsCatchBlock([NotNull] CatchBlock x, [NotNull] CatchBlock y)
+        protected virtual bool EqualsCatchBlock([DisallowNull] CatchBlock x, [DisallowNull] CatchBlock y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Test == y.Test
                    && Equals(x.Body, y.Body)
                    && Equals(x.Filter, y.Filter)
@@ -38,8 +48,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified TryExpression.</summary>
         /// <param name="node">The TryExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified TryExpression.</returns>
-        protected virtual int GetHashCodeTry([NotNull] TryExpression node)
+        protected virtual int GetHashCodeTry([DisallowNull] TryExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetHashCode(node.Body),
@@ -51,8 +62,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified CatchBlock.</summary>
         /// <param name="catchBlock">The CatchBlock for which to get a hash code.</param>
         /// <returns>A hash code for the specified CatchBlock.</returns>
-        protected virtual int GetHashCodeCatchBlock([NotNull] CatchBlock catchBlock)
+        protected virtual int GetHashCodeCatchBlock([DisallowNull] CatchBlock catchBlock)
         {
+            if (catchBlock == null) throw new ArgumentNullException(nameof(catchBlock));
             return GetHashCode(
                 GetDefaultHashCode(catchBlock.Test),
                 GetHashCode(catchBlock.Body),
@@ -64,7 +76,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first TryExpression to compare.</param>
         /// <param name="y">The second TryExpression to compare.</param>
         /// <returns>true if the specified TryExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<TryExpression>.Equals(TryExpression x, TryExpression y)
+        bool IEqualityComparer<TryExpression>.Equals([AllowNull] TryExpression? x, [AllowNull] TryExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -79,7 +91,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="TryExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified TryExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<TryExpression>.GetHashCode(TryExpression obj)
+        int IEqualityComparer<TryExpression>.GetHashCode([DisallowNull] TryExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

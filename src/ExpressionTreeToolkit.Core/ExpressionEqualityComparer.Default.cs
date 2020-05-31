@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -11,16 +17,19 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first DefaultExpression to compare.</param>
         /// <param name="y">The second DefaultExpression to compare.</param>
         /// <returns>true if the specified DefaultExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsDefault([NotNull] DefaultExpression x, [NotNull] DefaultExpression y)
+        protected virtual bool EqualsDefault([DisallowNull] DefaultExpression x, [DisallowNull] DefaultExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type;
         }
 
         /// <summary>Gets the hash code for the specified DefaultExpression.</summary>
         /// <param name="node">The DefaultExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified DefaultExpression.</returns>
-        protected virtual int GetHashCodeDefault([NotNull] DefaultExpression node)
+        protected virtual int GetHashCodeDefault([DisallowNull] DefaultExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetDefaultHashCode(node.Type);
         }
 
@@ -28,7 +37,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first DefaultExpression to compare.</param>
         /// <param name="y">The second DefaultExpression to compare.</param>
         /// <returns>true if the specified DefaultExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<DefaultExpression>.Equals(DefaultExpression x, DefaultExpression y)
+        bool IEqualityComparer<DefaultExpression>.Equals([AllowNull] DefaultExpression? x, [AllowNull] DefaultExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -43,7 +52,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="DefaultExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified DefaultExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<DefaultExpression>.GetHashCode(DefaultExpression obj)
+        int IEqualityComparer<DefaultExpression>.GetHashCode([DisallowNull] DefaultExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

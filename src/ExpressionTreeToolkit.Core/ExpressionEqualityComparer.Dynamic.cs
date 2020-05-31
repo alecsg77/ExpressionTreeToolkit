@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first DynamicExpression to compare.</param>
         /// <param name="y">The second DynamicExpression to compare.</param>
         /// <returns>true if the specified DynamicExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsDynamic([NotNull] DynamicExpression x, [NotNull] DynamicExpression y)
+        protected virtual bool EqualsDynamic([DisallowNull] DynamicExpression x, [DisallowNull] DynamicExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && x.DelegateType == y.DelegateType
                    && Equals(x.Arguments, y.Arguments)
@@ -25,8 +33,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified DynamicExpression.</summary>
         /// <param name="node">The DynamicExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified DynamicExpression.</returns>
-        protected virtual int GetHashCodeDynamic([NotNull] DynamicExpression node)
+        protected virtual int GetHashCodeDynamic([DisallowNull] DynamicExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetDefaultHashCode(node.DelegateType),
@@ -38,7 +47,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first DynamicExpression to compare.</param>
         /// <param name="y">The second DynamicExpression to compare.</param>
         /// <returns>true if the specified DynamicExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<DynamicExpression>.Equals(DynamicExpression x, DynamicExpression y)
+        bool IEqualityComparer<DynamicExpression>.Equals([AllowNull] DynamicExpression? x, [AllowNull] DynamicExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -53,7 +62,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="DynamicExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified DynamicExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<DynamicExpression>.GetHashCode(DynamicExpression obj)
+        int IEqualityComparer<DynamicExpression>.GetHashCode([DisallowNull] DynamicExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

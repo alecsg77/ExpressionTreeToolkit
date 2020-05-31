@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first NewExpression to compare.</param>
         /// <param name="y">The second NewExpression to compare.</param>
         /// <returns>true if the specified NewExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsNew([NotNull] NewExpression x, [NotNull] NewExpression y)
+        protected virtual bool EqualsNew([DisallowNull] NewExpression x, [DisallowNull] NewExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Constructor, y.Constructor)
                    && Equals(x.Members, y.Members)
@@ -25,8 +33,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified NewExpression.</summary>
         /// <param name="node">The NewExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified NewExpression.</returns>
-        protected virtual int GetHashCodeNew([NotNull] NewExpression node)
+        protected virtual int GetHashCodeNew([DisallowNull] NewExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetDefaultHashCode(node.Constructor),
@@ -38,7 +47,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first NewExpression to compare.</param>
         /// <param name="y">The second NewExpression to compare.</param>
         /// <returns>true if the specified NewExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<NewExpression>.Equals(NewExpression x, NewExpression y)
+        bool IEqualityComparer<NewExpression>.Equals([AllowNull] NewExpression? x, [AllowNull] NewExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -53,7 +62,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="NewExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified NewExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<NewExpression>.GetHashCode(NewExpression obj)
+        int IEqualityComparer<NewExpression>.GetHashCode([DisallowNull] NewExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

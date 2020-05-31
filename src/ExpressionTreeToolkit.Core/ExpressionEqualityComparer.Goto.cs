@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first GotoExpression to compare.</param>
         /// <param name="y">The second GotoExpression to compare.</param>
         /// <returns>true if the specified GotoExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsGoto([NotNull] GotoExpression x, [NotNull] GotoExpression y)
+        protected virtual bool EqualsGoto([DisallowNull] GotoExpression x, [DisallowNull] GotoExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && x.Kind == y.Kind
                    && EqualsLabelTarget(x.Target, y.Target)
@@ -25,8 +33,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified GotoExpression.</summary>
         /// <param name="node">The GotoExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified GotoExpression.</returns>
-        protected virtual int GetHashCodeGoto([NotNull] GotoExpression node)
+        protected virtual int GetHashCodeGoto([DisallowNull] GotoExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 node.Kind.GetHashCode(),
@@ -38,7 +47,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first GotoExpression to compare.</param>
         /// <param name="y">The second GotoExpression to compare.</param>
         /// <returns>true if the specified GotoExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<GotoExpression>.Equals(GotoExpression x, GotoExpression y)
+        bool IEqualityComparer<GotoExpression>.Equals([AllowNull] GotoExpression? x, [AllowNull] GotoExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -53,7 +62,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="GotoExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified GotoExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<GotoExpression>.GetHashCode(GotoExpression obj)
+        int IEqualityComparer<GotoExpression>.GetHashCode([DisallowNull] GotoExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 

@@ -12,7 +12,6 @@
     <PackageReference Include="GitVersionTask" Version="5.3.4" Condition="'$(MSBuildRuntimeType)' != 'Core'">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
+
+#if JETBRAINS_ANNOTATIONS
+using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
+using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
+#endif
 
 namespace ExpressionTreeToolkit
 {
@@ -14,8 +20,10 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first UnaryExpression to compare.</param>
         /// <param name="y">The second UnaryExpression to compare.</param>
         /// <returns>true if the specified UnaryExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsUnary([NotNull] UnaryExpression x, [NotNull] UnaryExpression y)
+        protected virtual bool EqualsUnary([DisallowNull] UnaryExpression x, [DisallowNull] UnaryExpression y)
         {
+            if (x == null) throw new ArgumentNullException(nameof(x));
+            if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Method, y.Method)
                    && Equals(x.Operand, y.Operand);
@@ -24,8 +32,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Gets the hash code for the specified UnaryExpression.</summary>
         /// <param name="node">The UnaryExpression for which to get a hash code.</param>
         /// <returns>A hash code for the specified UnaryExpression.</returns>
-        protected virtual int GetHashCodeUnary([NotNull] UnaryExpression node)
+        protected virtual int GetHashCodeUnary([DisallowNull] UnaryExpression node)
         {
+            if (node == null) throw new ArgumentNullException(nameof(node));
             return GetHashCode(
                 GetDefaultHashCode(node.Type),
                 GetDefaultHashCode(node.Method),
@@ -36,7 +45,7 @@ namespace ExpressionTreeToolkit
         /// <param name="x">The first UnaryExpression to compare.</param>
         /// <param name="y">The second UnaryExpression to compare.</param>
         /// <returns>true if the specified UnaryExpressions are equal; otherwise, false.</returns>
-        bool IEqualityComparer<UnaryExpression>.Equals(UnaryExpression x, UnaryExpression y)
+        bool IEqualityComparer<UnaryExpression>.Equals([AllowNull] UnaryExpression? x, [AllowNull] UnaryExpression? y)
         {
             if (ReferenceEquals(x, y))
                 return true;
@@ -51,7 +60,7 @@ namespace ExpressionTreeToolkit
         /// <param name="obj">The <see cref="UnaryExpression"></see> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified UnaryExpression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
-        int IEqualityComparer<UnaryExpression>.GetHashCode(UnaryExpression obj)
+        int IEqualityComparer<UnaryExpression>.GetHashCode([DisallowNull] UnaryExpression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
