@@ -24,9 +24,9 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
+    command: build
     projects: '**/*.sln'
-    configuration: '$(BuildConfiguration)'
-    arguments: '--no-restore'
+    arguments: '--configuration $(BuildConfiguration) --no-restore'
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.SemVer'
 
@@ -35,7 +35,7 @@ steps:
   inputs:
     command: test
     projects: 'test/**/*.UnitTests/*.csproj'
-    configuration: '$(BuildConfiguration)'
+    arguments: '--configuration $(BuildConfiguration)'
     nobuild: true
 
 - task: DotNetCoreCLI@2
@@ -43,6 +43,7 @@ steps:
   inputs:
     command: pack
     packagesToPack: 'src/**/*.csproj'
+    configurationToPack: '$(BuildConfiguration)'
     nobuild: true
     versioningScheme: byEnvVar
     versionEnvVar: GitVersion.NuGetVersion
