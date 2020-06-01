@@ -1,0 +1,109 @@
+name: $(GITVERSION_FullSemVer)
+
+trigger:
+  - "master"
+  - "develop"
+  - "feature/*"
+  - "release/*"
+  - "hotfix/*"
+
+pr:
+  - "master"
+  - "develop"
+
+pool:
+  vmImage: windows-latest
+variables:
+  BuildConfiguration: "Release"
+  GitVersion.SemVer: ""
+
+stages:
+  - stage: build
+    displayName: Build
+    jobs:
+      - job: build
+        steps:
+          - task: GitVersion@5
+            displayName: GitVersion
+            inputs:
+              runtime: full
+              updateAssemblyInfo: true
+
+          - task: UseDotNet@2
+            displayName: "Install .Net SDK"
+            inputs:
+              useGlobalJson: true
+              performMultiLevelLookup: true
+
+          - task: UseDotNet@2
+            displayName: "Install .Net Core 2.1.x Runtime"
+            inputs:
+              version: 2.1.x
+              packageType: runtime
+              performMultiLevelLookup: true
+
+          - task: UseDotNet@2
+            displayName: "Install .Net Core 3.1.x Runtime"
+            inputs:
+              version: 3.1.x
+              packageType: runtime
+              performMultiLevelLookup: true
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet restore"
+            inputs:
+              command: restore
+              projects: |
+                src/**/*.csproj 
+                test/**/*.csproj
+                docfx/**/*.proj
+              feedsToUse: config
+              nugetConfigPath: nuget.config
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet build"
+            inputs:
+              command: build
+              projects: "src/**/*.csproj"
+              arguments: "--configuration $(BuildConfiguration) --no-restore"
+              versioningScheme: byEnvVar
+              versionEnvVar: "GitVersion.SemVer"
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet test"
+            inputs:
+              command: test
+              projects: "test/**/*.UnitTests/*.csproj"
+              arguments: "--configuration $(BuildConfiguration) --no-restore"
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet pack release"
+            inputs:
+              command: pack
+              packagesToPack: "src/**/*.csproj"
+              configurationToPack: "$(BuildConfiguration)"
+              packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
+              nobuild: true
+              versioningScheme: byEnvVar
+              versionEnvVar: GitVersion.NuGetVersion
+
+          - publish: "$(Build.ArtifactStagingDirectory)/packages"
+            displayName: "Publish Artifact: packages"
+            artifact: packages
+
+          - task: DotNetCoreCLI@2
+            displayName: "docfx build"
+            env:
+              DOCFX_SOURCE_BRANCH_NAME: "$(Build.SourceBranchName)"
+            inputs:
+              command: build
+              projects: "docfx/**/*.proj"
+              arguments: "--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/pages --no-restore"
+              versioningScheme: byEnvVar
+              versionEnvVar: "GitVersion.SemVer"
+
+          - publish: "$(Build.ArtifactStagingDirectory)/pages"
+            displayName: "Publish Artifact: pages"
+            artifact: pages
+  
+
