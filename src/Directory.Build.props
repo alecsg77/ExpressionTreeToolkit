@@ -24,10 +24,20 @@
     <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+  </ItemGroup>
 
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>

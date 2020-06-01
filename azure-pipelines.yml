@@ -1,22 +1,22 @@
 name: $(GITVERSION_FullSemVer)
 
 trigger:
-  - "master"
-  - "develop"
   - "feature/*"
+  - "develop"
+  - "master"
   - "release/*"
   - "hotfix/*"
 
 pr:
-  - "master"
   - "develop"
+  - "master"
 
 pool:
   vmImage: windows-latest
 variables:
   BuildConfiguration: "Release"
-  GitVersion.SemVer: ""
-  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+  GitVersion.FullSemVer: ''
+  NuGet.Packages: $(Pipeline.Workspace)/.nuget/packages
 
 stages:
   - stage: build
@@ -24,6 +24,9 @@ stages:
     jobs:
       - job: build
         steps:
+          - checkout: self
+            displayName: "Checkout $(Build.SourceBranch)"
+            submodules: true
           - task: GitVersion@5
             displayName: GitVersion
             inputs:
@@ -56,7 +59,7 @@ stages:
               key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**'
               restoreKeys: |
                 nuget | "$(Agent.OS)"
-              path: $(NUGET_PACKAGES)
+              path: $(NuGet.Packages)
 
           - task: DotNetCoreCLI@2
             displayName: "dotnet restore"
@@ -76,7 +79,7 @@ stages:
               projects: "src/**/*.csproj"
               arguments: "--configuration $(BuildConfiguration) --no-restore"
               versioningScheme: byEnvVar
-              versionEnvVar: "GitVersion.SemVer"
+              versionEnvVar: "GitVersion.FullSemVer"
 
           - task: DotNetCoreCLI@2
             displayName: "dotnet test"
@@ -109,10 +112,80 @@ stages:
               projects: "docfx/**/*.proj"
               arguments: "--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/pages --no-restore"
               versioningScheme: byEnvVar
-              versionEnvVar: "GitVersion.SemVer"
+              versionEnvVar: "GitVersion.FullSemVer"
 
           - publish: "$(Build.ArtifactStagingDirectory)/pages"
             displayName: "Publish Artifact: pages"
             artifact: pages
   
+  - stage: release
+    displayName: Release
+    condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop', 'refs/heads/master', 'refs/heads/release', 'refs/heads/hotfix'))
+    jobs:
+      - job: myget
+        displayName: MyGet
+        steps:
+          - checkout: none
+          - download: current
+            artifact: packages
+          - task: NuGetCommand@2
+            displayName: 'MyGet push'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg;$(Pipeline.Workspace)/packages/**/*.snupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: 'MyGet - ExpressionTreeToolkit'
 
+      - job: nuget
+        displayName: NuGet
+        dependsOn: myget
+        condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/release', 'refs/heads/hotfix'))
+        steps:
+          - checkout: none
+          - download: current
+            artifact: packages
+          - task: NuGetCommand@2
+            displayName: 'NuGet push'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg;$(Pipeline.Workspace)/packages/**/*.snupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: 'NuGet - ExpressionTreeToolkit'
+          - task: GitHubRelease@1
+            displayName: Create GitHub Release
+            inputs:
+              gitHubConnection: 'GitHub connection'
+              isPreRelease: ${{ in(variables['Build.SourceBranch'], 'refs/heads/release', 'refs/heads/hotfix') }}
+              assets: |
+                $(Pipeline.Workspace)/packages/**/*.nupkg;
+
+      - job: githubpages
+        displayName: GitHub Pages
+        dependsOn: nuget
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        variables:
+          GitHub.UserName: "Alessio Gogna"
+          GitHub.UserEmail: "alecsg77@users.noreply.github.com"
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+            path: gh-pages
+          - download: current
+            artifact: pages
+          - script: |
+              git checkout --progress --no-recurse-submodules -f gh-pages
+              git rm -rf .
+            displayName: 'Git Checkout & Clean'
+            workingDirectory: $(Pipeline.Workspace)/gh-pages 
+          - task: CopyFiles@2
+            displayName: 'Copy Files to gh-pages'
+            inputs:
+              SourceFolder: '$(Pipeline.Workspace)/pages/_site'
+              TargetFolder: '$(Pipeline.Workspace)/gh-pages'
+          - script: |
+              git add -v .
+              git -c user.name="$(GitHub.UserName)" -c user.email="$(GitHub.UserEmail)" commit -a -v -m "v$(Build.BuildNumber)"
+              git push -v --tags origin gh-pages
+            displayName: 'Git Add & Commit & Push'
+            workingDirectory: $(Pipeline.Workspace)/gh-pages
