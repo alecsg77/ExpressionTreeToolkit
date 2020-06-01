@@ -1,5 +1,5 @@
 - name: Articles
   href: articles/
-- name: Api Documentation
-  href: obj/api/
-  homepage: api/index.md
+- name: Documentation
+  href: obj/docfx/lib/
+  topicHref: lib/index.md

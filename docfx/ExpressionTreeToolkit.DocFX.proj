@@ -5,16 +5,14 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="docfx.json" />
-    <None Include="api/**/*.yml" />
-    <None Include="api/index.md" />
+    <None Include="lib/**/*.yml" />
+    <None Include="lib/index.md" />
     <None Include="articles/**/*.md" />
     <None Include="articles/**/toc.yml" />
     <None Include="toc.yml" />
     <None Include="*.md" />
     <None Include="images/**" />
-    <None Include="apidoc/**/*.md" />
-    <None Remove="obj/**" />
-    <None Remove="_site" />
+    <None Include="libdoc/**/*.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,8 +23,6 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <PreviewOutputFolder>$(MSBuildProjectDirectory)/../docs</PreviewOutputFolder>
-    <LogFile>$(BaseIntermediateOutputPath)docfx.log.txt</LogFile>
-    <LogLevel>Info</LogLevel>
+    <OutputFolder Condition=" '$(OutputFolder)' == '' ">$(OutputPath)</OutputFolder>
   </PropertyGroup>
 </Project>
