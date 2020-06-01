@@ -16,6 +16,7 @@ pool:
 variables:
   BuildConfiguration: "Release"
   GitVersion.SemVer: ""
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 
 stages:
   - stage: build
@@ -48,6 +49,14 @@ stages:
               version: 3.1.x
               packageType: runtime
               performMultiLevelLookup: true
+
+          - task: Cache@2
+            displayName: Cache NuGet packages
+            inputs:
+              key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**'
+              restoreKeys: |
+                nuget | "$(Agent.OS)"
+              path: $(NUGET_PACKAGES)
 
           - task: DotNetCoreCLI@2
             displayName: "dotnet restore"

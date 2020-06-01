@@ -24,6 +24,10 @@
     <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
 
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
