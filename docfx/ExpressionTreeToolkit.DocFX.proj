@@ -1,15 +1,32 @@
-<Project Sdk="Microsoft.Build.NoTargets/1.0.39">
- <PropertyGroup>
+﻿<Project Sdk="Microsoft.Build.NoTargets">
+
+  <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="docfx.json" />
+    <None Include="api/**/*.yml" />
+    <None Include="api/index.md" />
+    <None Include="articles/**/*.md" />
+    <None Include="articles/**/toc.yml" />
+    <None Include="toc.yml" />
+    <None Include="*.md" />
+    <None Include="images/**" />
+    <None Include="apidoc/**/*.md" />
+    <None Remove="obj/**" />
+    <None Remove="_site" />
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.36.2" />
+    <PackageReference Include="docfx.console" Version="2.54.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <PropertyGroup>
     <PreviewOutputFolder>$(MSBuildProjectDirectory)/../docs</PreviewOutputFolder>
-    <LogFile>$(BaseIntermediateOutputPath)/docfx.log.txt</LogFile>
+    <LogFile>$(BaseIntermediateOutputPath)docfx.log.txt</LogFile>
     <LogLevel>Info</LogLevel>
   </PropertyGroup>
 </Project>
