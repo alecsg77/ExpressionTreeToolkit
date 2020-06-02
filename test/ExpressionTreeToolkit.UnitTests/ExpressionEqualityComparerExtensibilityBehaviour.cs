@@ -8,7 +8,7 @@ using Xunit;
 
 namespace ExpressionTreeToolkit.UnitTests
 {
-    public class ExpressionEqualityComparerExtensibilityBehavours
+    public class ExpressionEqualityComparerExtensibilityBehaviour
     {
         private void AssertAreEqual(Expression x, Expression y)
         {

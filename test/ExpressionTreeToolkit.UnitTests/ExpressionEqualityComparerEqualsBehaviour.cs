@@ -8,7 +8,7 @@ using Xunit;
 
 namespace ExpressionTreeToolkit.UnitTests
 {
-    public class ExpressionEqualityComparerEqualsBehavours
+    public class ExpressionEqualityComparerEqualsBehaviour
     {
         private readonly IEqualityComparer<Expression> _target = ExpressionEqualityComparer.Default;
 
