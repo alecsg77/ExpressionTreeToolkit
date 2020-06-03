@@ -1,0 +1,195 @@
+name: $(GITVERSION_FullSemVer)
+
+trigger:
+  - "feature/*"
+  - "develop"
+  - "master"
+  - "release/*"
+  - "hotfix/*"
+
+pr:
+  - "develop"
+  - "master"
+
+pool:
+  vmImage: windows-latest
+variables:
+  BuildConfiguration: "Release"
+  GitVersion.FullSemVer: ''
+  NuGet.Packages: $(Pipeline.Workspace)/.nuget/packages
+
+stages:
+  - stage: build
+    displayName: Build
+    jobs:
+      - job: build
+        steps:
+          - checkout: self
+            displayName: "Checkout $(Build.SourceBranch)"
+            submodules: true
+          - task: GitVersion@5
+            displayName: GitVersion
+            inputs:
+              runtime: full
+              updateAssemblyInfo: true
+
+          - task: UseDotNet@2
+            displayName: "Install .Net SDK"
+            inputs:
+              useGlobalJson: true
+              performMultiLevelLookup: true
+
+          - task: UseDotNet@2
+            displayName: "Install .Net Core 2.1.x Runtime"
+            inputs:
+              version: 2.1.x
+              packageType: runtime
+              performMultiLevelLookup: true
+
+          - task: UseDotNet@2
+            displayName: "Install .Net Core 3.1.x Runtime"
+            inputs:
+              version: 3.1.x
+              packageType: runtime
+              performMultiLevelLookup: true
+
+          - task: Cache@2
+            displayName: Cache NuGet packages
+            inputs:
+              key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**'
+              restoreKeys: |
+                nuget | "$(Agent.OS)"
+              path: $(NuGet.Packages)
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet restore"
+            inputs:
+              command: restore
+              projects: |
+                src/**/*.csproj 
+                test/**/*.csproj
+                docfx/**/*.proj
+              feedsToUse: config
+              nugetConfigPath: nuget.config
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet build"
+            inputs:
+              command: build
+              projects: "src/**/*.csproj"
+              arguments: "--configuration $(BuildConfiguration) --no-restore"
+              versioningScheme: byEnvVar
+              versionEnvVar: "GitVersion.FullSemVer"
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet test"
+            inputs:
+              command: test
+              projects: "test/**/*.UnitTests/*.csproj"
+              arguments: "--configuration $(BuildConfiguration) --no-restore"
+
+          - task: DotNetCoreCLI@2
+            displayName: "dotnet pack release"
+            inputs:
+              command: pack
+              packagesToPack: "src/**/*.csproj"
+              configurationToPack: "$(BuildConfiguration)"
+              packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
+              nobuild: true
+              versioningScheme: byEnvVar
+              versionEnvVar: GitVersion.NuGetVersion
+
+          - publish: "$(Build.ArtifactStagingDirectory)/packages"
+            displayName: "Publish Artifact: packages"
+            artifact: packages
+
+          - task: DotNetCoreCLI@2
+            displayName: "docfx build"
+            env:
+              DOCFX_SOURCE_BRANCH_NAME: "$(Build.SourceBranchName)"
+            inputs:
+              command: build
+              projects: "docfx/**/*.proj"
+              arguments: "--configuration $(BuildConfiguration)"
+          
+          - task: CopyFiles@2
+            displayName: "Copy To Artifact: docfx"
+            inputs:
+              SourceFolder: $(Build.SourcesDirectory)/docfx/_site
+              TargetFolder: $(Build.ArtifactStagingDirectory)/docfx
+              CleanTargetFolder: true
+
+          - publish: "$(Build.ArtifactStagingDirectory)/docfx"
+            displayName: "Publish Artifact: docfx"
+            artifact: docfx
+  
+  - stage: release
+    displayName: Release
+    condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop', 'refs/heads/master', 'refs/heads/release', 'refs/heads/hotfix'))
+    jobs:
+      - job: myget
+        displayName: MyGet
+        steps:
+          - checkout: none
+          - download: current
+            artifact: packages
+          - task: NuGetCommand@2
+            displayName: 'MyGet push'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg;$(Pipeline.Workspace)/packages/**/*.snupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: 'MyGet - ExpressionTreeToolkit'
+
+      - job: nuget
+        displayName: NuGet
+        dependsOn: myget
+        condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/release', 'refs/heads/hotfix'))
+        steps:
+          - checkout: none
+          - download: current
+          - task: NuGetCommand@2
+            displayName: 'NuGet push'
+            inputs:
+              command: push
+              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg;$(Pipeline.Workspace)/packages/**/*.snupkg'
+              nuGetFeedType: external
+              publishFeedCredentials: 'NuGet - ExpressionTreeToolkit'
+          - task: GitHubRelease@1
+            displayName: Create GitHub Release
+            inputs:
+              gitHubConnection: 'GitHub connection'
+              isPreRelease: ${{ in(variables['Build.SourceBranch'], 'refs/heads/release', 'refs/heads/hotfix') }}
+              assets: |
+                $(Pipeline.Workspace)/packages/**/*.nupkg;
+
+      - job: githubpages
+        displayName: GitHub Pages
+        dependsOn: nuget
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        variables:
+          GitHub.UserName: "Alessio Gogna"
+          GitHub.UserEmail: "alecsg77@users.noreply.github.com"
+        steps:
+          - checkout: self
+            clean: true
+            persistCredentials: true
+            path: gh-pages
+          - download: current
+            artifact: docfx
+          - script: |
+              git checkout --progress --no-recurse-submodules -f gh-pages
+              git rm -rf .
+            displayName: 'Git Checkout & Clean'
+            workingDirectory: $(Pipeline.Workspace)/gh-pages 
+          - task: CopyFiles@2
+            displayName: 'Copy Files to gh-pages'
+            inputs:
+              SourceFolder: '$(Pipeline.Workspace)/docfx'
+              TargetFolder: '$(Pipeline.Workspace)/gh-pages'
+          - script: |
+              git add -v .
+              git -c user.name="$(GitHub.UserName)" -c user.email="$(GitHub.UserEmail)" commit -a -v -m "v$(Build.BuildNumber)"
+              git push -v --tags origin gh-pages
+            displayName: 'Git Add & Commit & Push'
+            workingDirectory: $(Pipeline.Workspace)/gh-pages
