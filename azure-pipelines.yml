@@ -110,13 +110,18 @@ stages:
             inputs:
               command: build
               projects: "docfx/**/*.proj"
-              arguments: "--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/pages --no-restore"
-              versioningScheme: byEnvVar
-              versionEnvVar: "GitVersion.FullSemVer"
+              arguments: "--configuration $(BuildConfiguration)"
+          
+          - task: CopyFiles@2
+            displayName: "Copy To Artifact: docfx"
+            inputs:
+              SourceFolder: $(Build.SourcesDirectory)/docfx/_site
+              TargetFolder: $(Build.ArtifactStagingDirectory)/docfx
+              CleanTargetFolder: true
 
-          - publish: "$(Build.ArtifactStagingDirectory)/pages"
-            displayName: "Publish Artifact: pages"
-            artifact: pages
+          - publish: "$(Build.ArtifactStagingDirectory)/docfx"
+            displayName: "Publish Artifact: docfx"
+            artifact: docfx
   
   - stage: release
     displayName: Release
@@ -143,7 +148,6 @@ stages:
         steps:
           - checkout: none
           - download: current
-            artifact: packages
           - task: NuGetCommand@2
             displayName: 'NuGet push'
             inputs:
@@ -172,7 +176,7 @@ stages:
             persistCredentials: true
             path: gh-pages
           - download: current
-            artifact: pages
+            artifact: docfx
           - script: |
               git checkout --progress --no-recurse-submodules -f gh-pages
               git rm -rf .
@@ -181,7 +185,7 @@ stages:
           - task: CopyFiles@2
             displayName: 'Copy Files to gh-pages'
             inputs:
-              SourceFolder: '$(Pipeline.Workspace)/pages/_site'
+              SourceFolder: '$(Pipeline.Workspace)/docfx'
               TargetFolder: '$(Pipeline.Workspace)/gh-pages'
           - script: |
               git add -v .
