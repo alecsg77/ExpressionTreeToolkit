@@ -19,4 +19,9 @@
       <DependentUpon>ExpressionEqualityComparer.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ExpressionEqualityComparerExtensions.*.cs">
+      <DependentUpon>ExpressionEqualityComparerExtensions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
