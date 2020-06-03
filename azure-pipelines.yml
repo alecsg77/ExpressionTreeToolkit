@@ -15,8 +15,13 @@ pool:
   vmImage: windows-latest
 variables:
   BuildConfiguration: "Release"
-  GitVersion.FullSemVer: ''
+  GitVersion.SemVer: ''
   NuGet.Packages: $(Pipeline.Workspace)/.nuget/packages
+  IsPreRelease: ${{ or(
+                  eq(variables['Build.SourceBranch'], 'refs/heads/develop'),
+                  startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
+                  startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix')
+                ) }}
 
 stages:
   - stage: build
@@ -122,10 +127,21 @@ stages:
           - publish: "$(Build.ArtifactStagingDirectory)/docfx"
             displayName: "Publish Artifact: docfx"
             artifact: docfx
+
+          - script: echo ##vso[task.setvariable variable=Tag;isOutput=true]v$(GitVersion.SemVer)
+            name: Version
+            displayName: Set Version Output variables
   
   - stage: release
     displayName: Release
-    condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/develop', 'refs/heads/master', 'refs/heads/release', 'refs/heads/hotfix'))
+    dependsOn: build
+    condition: and(succeeded(), 
+                   or(
+                       in(variables['Build.SourceBranch'], 'refs/heads/develop', 'refs/heads/master'),
+                       startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
+                       startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix')
+                      )
+                  )
     jobs:
       - job: myget
         displayName: MyGet
@@ -137,14 +153,23 @@ stages:
             displayName: 'MyGet push'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg;$(Pipeline.Workspace)/packages/**/*.snupkg'
+              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'MyGet - ExpressionTreeToolkit'
 
       - job: nuget
         displayName: NuGet
         dependsOn: myget
-        condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/release', 'refs/heads/hotfix'))
+        condition: and(succeeded(),
+                       or(
+                          eq(variables['Build.SourceBranch'], 'refs/heads/master'),
+                          startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
+                          startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix')
+                        )
+                      )
+        variables:
+          Version.Tag: $[ stageDependencies.build.build.outputs['Version.Tag'] ]
+
         steps:
           - checkout: none
           - download: current
@@ -152,17 +177,21 @@ stages:
             displayName: 'NuGet push'
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg;$(Pipeline.Workspace)/packages/**/*.snupkg'
+              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg'
               nuGetFeedType: external
               publishFeedCredentials: 'NuGet - ExpressionTreeToolkit'
+
           - task: GitHubRelease@1
             displayName: Create GitHub Release
             inputs:
               gitHubConnection: 'GitHub connection'
-              isPreRelease: ${{ in(variables['Build.SourceBranch'], 'refs/heads/release', 'refs/heads/hotfix') }}
+              tagSource: userSpecifiedTag
+              tag: $(Version.Tag)
+              isPreRelease: $(IsPreRelease)
               assets: |
-                $(Pipeline.Workspace)/packages/**/*.nupkg;
-
+                $(Pipeline.Workspace)/packages/**/*.nupkg
+                $(Pipeline.Workspace)/packages/**/*.snupkg
+  
       - job: githubpages
         displayName: GitHub Pages
         dependsOn: nuget
@@ -170,6 +199,7 @@ stages:
         variables:
           GitHub.UserName: "Alessio Gogna"
           GitHub.UserEmail: "alecsg77@users.noreply.github.com"
+          Version.Tag: $[ stageDependencies.build.build.outputs['Version.Tag'] ]
         steps:
           - checkout: self
             clean: true
@@ -190,6 +220,7 @@ stages:
           - script: |
               git add -v .
               git -c user.name="$(GitHub.UserName)" -c user.email="$(GitHub.UserEmail)" commit -a -v -m "v$(Build.BuildNumber)"
+              git tag $(Version.Tag)
               git push -v --tags origin gh-pages
             displayName: 'Git Add & Commit & Push'
             workingDirectory: $(Pipeline.Workspace)/gh-pages
