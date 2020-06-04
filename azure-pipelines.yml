@@ -15,13 +15,20 @@ pool:
   vmImage: windows-latest
 variables:
   BuildConfiguration: "Release"
-  GitVersion.SemVer: ''
+  GitVersion.SemVer: ""
   NuGet.Packages: $(Pipeline.Workspace)/.nuget/packages
-  IsPreRelease: ${{ or(
-                  eq(variables['Build.SourceBranch'], 'refs/heads/develop'),
-                  startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
-                  startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix')
-                ) }}
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+    branch: master
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+    branch: develop
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/') }}:
+    branch: feature
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/release/') }}:
+    branch: release
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix/') }}:
+    branch: hotfix
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
+    branch: pull-request
 
 stages:
   - stage: build
@@ -116,7 +123,7 @@ stages:
               command: build
               projects: "docfx/**/*.proj"
               arguments: "--configuration $(BuildConfiguration)"
-          
+
           - task: CopyFiles@2
             displayName: "Copy To Artifact: docfx"
             inputs:
@@ -131,17 +138,11 @@ stages:
           - script: echo ##vso[task.setvariable variable=Tag;isOutput=true]v$(GitVersion.SemVer)
             name: Version
             displayName: Set Version Output variables
-  
+
   - stage: release
     displayName: Release
     dependsOn: build
-    condition: and(succeeded(), 
-                   or(
-                       in(variables['Build.SourceBranch'], 'refs/heads/develop', 'refs/heads/master'),
-                       startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
-                       startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix')
-                      )
-                  )
+    condition: and(succeeded(), in(variables.branch, 'develop', 'release', 'hotfix', 'master'))
     jobs:
       - job: myget
         displayName: MyGet
@@ -150,23 +151,17 @@ stages:
           - download: current
             artifact: packages
           - task: NuGetCommand@2
-            displayName: 'MyGet push'
+            displayName: "MyGet push"
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg'
+              packagesToPush: "$(Pipeline.Workspace)/packages/**/*.nupkg"
               nuGetFeedType: external
-              publishFeedCredentials: 'MyGet - ExpressionTreeToolkit'
+              publishFeedCredentials: "MyGet - ExpressionTreeToolkit"
 
       - job: nuget
         displayName: NuGet
         dependsOn: myget
-        condition: and(succeeded(),
-                       or(
-                          eq(variables['Build.SourceBranch'], 'refs/heads/master'),
-                          startsWith(variables['Build.SourceBranch'], 'refs/heads/release'),
-                          startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix')
-                        )
-                      )
+        condition: and(succeeded(), in(variables.branch, 'release', 'hotfix', 'master'))
         variables:
           Version.Tag: $[ stageDependencies.build.build.outputs['Version.Tag'] ]
 
@@ -174,28 +169,29 @@ stages:
           - checkout: none
           - download: current
           - task: NuGetCommand@2
-            displayName: 'NuGet push'
+            displayName: "NuGet push"
             inputs:
               command: push
-              packagesToPush: '$(Pipeline.Workspace)/packages/**/*.nupkg'
+              packagesToPush: "$(Pipeline.Workspace)/packages/**/*.nupkg"
               nuGetFeedType: external
-              publishFeedCredentials: 'NuGet - ExpressionTreeToolkit'
+              publishFeedCredentials: "NuGet - ExpressionTreeToolkit"
 
           - task: GitHubRelease@1
             displayName: Create GitHub Release
             inputs:
-              gitHubConnection: 'GitHub connection'
+              gitHubConnection: "GitHub connection"
               tagSource: userSpecifiedTag
               tag: $(Version.Tag)
-              isPreRelease: $(IsPreRelease)
+              isPreRelease: ${{ ne(variables.branch, 'master') }}
+              isDraft: ${{ notIn(variables.branch, 'master','release','hotfix') }}
               assets: |
                 $(Pipeline.Workspace)/packages/**/*.nupkg
                 $(Pipeline.Workspace)/packages/**/*.snupkg
-  
+
       - job: githubpages
         displayName: GitHub Pages
         dependsOn: nuget
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        condition: and(succeeded(), eq(variables.branch, 'master'))
         variables:
           GitHub.UserName: "Alessio Gogna"
           GitHub.UserEmail: "alecsg77@users.noreply.github.com"
@@ -210,17 +206,17 @@ stages:
           - script: |
               git checkout --progress --no-recurse-submodules -f gh-pages
               git rm -rf .
-            displayName: 'Git Checkout & Clean'
-            workingDirectory: $(Pipeline.Workspace)/gh-pages 
+            displayName: "Git Checkout & Clean"
+            workingDirectory: $(Pipeline.Workspace)/gh-pages
           - task: CopyFiles@2
-            displayName: 'Copy Files to gh-pages'
+            displayName: "Copy Files to gh-pages"
             inputs:
-              SourceFolder: '$(Pipeline.Workspace)/docfx'
-              TargetFolder: '$(Pipeline.Workspace)/gh-pages'
+              SourceFolder: "$(Pipeline.Workspace)/docfx"
+              TargetFolder: "$(Pipeline.Workspace)/gh-pages"
           - script: |
               git add -v .
               git -c user.name="$(GitHub.UserName)" -c user.email="$(GitHub.UserEmail)" commit -a -v -m "v$(Build.BuildNumber)"
               git tag $(Version.Tag)
               git push -v --tags origin gh-pages
-            displayName: 'Git Add & Commit & Push'
+            displayName: "Git Add & Commit & Push"
             workingDirectory: $(Pipeline.Workspace)/gh-pages
