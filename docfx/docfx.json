@@ -8,7 +8,7 @@
           "src": "../src/"
         }
       ],
-      "dest": "obj/api",
+      "dest": "obj/docfx/lib",
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
       "properties": {
@@ -20,14 +20,14 @@
     "content": [
       {
         "files": [
-          "api/**.yml"
+          "**/*.yml"
         ],
-        "src": "obj"
+        "src": "obj/docfx"
       },
       {
         "files": [
-          "api/**.yml",
-          "api/index.md"
+          "lib/**.yml",
+          "lib/index.md"
         ]
       },
       {
@@ -49,14 +49,15 @@
     "overwrite": [
       {
         "files": [
-          "apidoc/**.md"
+          "libdoc/**.md"
         ],
         "exclude": [
-          "obj/**"
+          "obj/**",
+          "_site/**"
         ]
       }
     ],
-    "dest": "../docs",
+    "dest": "_site",
     "globalMetadata": {
       "_appTitle": "Expression Tree Toolkit Documentation",
       "_enableSearch": true
@@ -77,7 +78,6 @@
         }
       }
     },
-    "intermediateFolder": "obj",
     "postProcessors": [],
     "markdownEngineName": "markdig",
     "noLangKeyword": false,

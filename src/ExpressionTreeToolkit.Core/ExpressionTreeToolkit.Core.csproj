@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="5.3.4" Condition="'$(MSBuildRuntimeType)' != 'Core'">
+    <PackageReference Include="GitVersionTask" Version="5.3.4">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
@@ -17,6 +17,11 @@
   <ItemGroup>
     <Compile Update="ExpressionEqualityComparer.*.cs">
       <DependentUpon>ExpressionEqualityComparer.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ExpressionEqualityComparerExtensions.*.cs">
+      <DependentUpon>ExpressionEqualityComparerExtensions.cs</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

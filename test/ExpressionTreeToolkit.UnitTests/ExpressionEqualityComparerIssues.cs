@@ -8,7 +8,8 @@ using Xunit;
 
 namespace ExpressionTreeToolkit.UnitTests
 {
-    public class Bugs
+    [Collection("Issue")]
+    public class ExpressionEqualityComparerIssues
     {
         private readonly IEqualityComparer<Expression> _target = ExpressionEqualityComparer.Default;
 
@@ -24,7 +25,7 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void Issue_4()
+        public void Issue_4_Catch_Without_Variable()
         {
             // Expression similar to this code `try { } catch (Exception) { }`
             // Same expression twice to evade reference equality check
@@ -35,7 +36,7 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void Issue_12()
+        public void Issue_12_Equals_ListInit()
         {
             // Expressions similar to this code `new List<int> { 0|1 }`
             var x = Expression.ListInit(Expression.New(typeof(List<int>)), Expression.Constant(0));

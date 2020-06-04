@@ -6,4 +6,5 @@
 /**/packages/
 /**/bin/
 /**/obj/
-wwwroot
+_site
+log.txt
