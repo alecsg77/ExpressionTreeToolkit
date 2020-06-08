@@ -224,11 +224,9 @@ stages:
     dependsOn:
       - ci
       - publish
-    condition: and(succeeded(), in(variables.branch, 'release', 'hotfix', 'master'))
     jobs:
       - job: github
         displayName: GitHub
-        condition: and(succeeded(), in(variables.branch, 'release', 'hotfix', 'master'))
         variables:
           Version.Tag: $[ format('v{0}', stageDependencies.ci.build.outputs['source.GitVersion.SemVer']) ]
         steps:
@@ -244,7 +242,7 @@ stages:
               tag: $(Version.Tag)
               isPreRelease: ${{ ne(variables.branch, 'master') }}
               isDraft: ${{ notIn(variables.branch, 'release', 'hotfix', 'master') }}
+              assetUploadMode: delete
               assets: |
                 $(Pipeline.Workspace)/packages/**/*.nupkg
-                $(Pipeline.Workspace)/packages/**/*.snupkg
                 $(Pipeline.Workspace)/packages/**/*.snupkg
