@@ -20,10 +20,11 @@
     <Product>ExpressionTreeToolkit</Product>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
-    <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
-  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="GitVersionTask" Version="5.3.4">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
