@@ -2,12 +2,6 @@
   "version": 1,
   "dependencies": {
     ".NETFramework,Version=v4.5": {
-      "GitVersionTask": {
-        "type": "Direct",
-        "requested": "[5.3.4, )",
-        "resolved": "5.3.4",
-        "contentHash": "/vnugR/H90r4bo3ikF+W6zwpHXXGM6bXeYMZLm6kXCMpFYIviIU7rVz1s18zJRxvru/vvXkUnY5uSE/ATxFadA=="
-      },
       "JetBrains.Annotations": {
         "type": "Direct",
         "requested": "[11.1.0, )",
@@ -36,12 +30,6 @@
       }
     },
     ".NETStandard,Version=v2.0": {
-      "GitVersionTask": {
-        "type": "Direct",
-        "requested": "[5.3.4, )",
-        "resolved": "5.3.4",
-        "contentHash": "/vnugR/H90r4bo3ikF+W6zwpHXXGM6bXeYMZLm6kXCMpFYIviIU7rVz1s18zJRxvru/vvXkUnY5uSE/ATxFadA=="
-      },
       "JetBrains.Annotations": {
         "type": "Direct",
         "requested": "[11.1.0, )",
@@ -101,12 +89,6 @@
       }
     },
     ".NETStandard,Version=v2.1": {
-      "GitVersionTask": {
-        "type": "Direct",
-        "requested": "[5.3.4, )",
-        "resolved": "5.3.4",
-        "contentHash": "/vnugR/H90r4bo3ikF+W6zwpHXXGM6bXeYMZLm6kXCMpFYIviIU7rVz1s18zJRxvru/vvXkUnY5uSE/ATxFadA=="
-      },
       "Microsoft.SourceLink.GitHub": {
         "type": "Direct",
         "requested": "[1.0.0, )",

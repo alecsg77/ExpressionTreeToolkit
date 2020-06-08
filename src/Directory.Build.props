@@ -20,12 +20,6 @@
     <Product>ExpressionTreeToolkit</Product>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="5.3.4">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
