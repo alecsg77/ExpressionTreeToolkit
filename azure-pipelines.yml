@@ -39,6 +39,7 @@ stages:
 
     jobs:
       - job: build
+        displayName: Build
         steps:
           - checkout: self
             displayName: "Checkout $(Build.SourceBranch)"
@@ -137,7 +138,7 @@ stages:
     condition: and(succeeded(), in(variables.branch, 'develop', 'release', 'hotfix', 'master'))
     jobs:
       - deployment: ci
-        displayName: Publish CI
+        displayName: CI
         environment: myget
         strategy:
           runOnce:
@@ -158,7 +159,7 @@ stages:
                     publishFeedCredentials: "MyGet - ExpressionTreeToolkit"
 
       - deployment: nuget
-        displayName: Publish NuGet
+        displayName: NuGet
         environment: nuget
         condition: and(succeeded(), in(variables.branch, 'release', 'hotfix', 'master'))
         strategy:
@@ -180,8 +181,8 @@ stages:
                     nuGetFeedType: external
                     publishFeedCredentials: "NuGet - ExpressionTreeToolkit"
 
-      - deployment: documentation
-        displayName: Publish Git Pages
+      - deployment: gh-pages
+        displayName: GitHub Pages
         environment: gh-pages
         condition: and(succeeded(), in(variables.branch, 'master'))
         variables:
@@ -226,7 +227,7 @@ stages:
     condition: and(succeeded(), in(variables.branch, 'release', 'hotfix', 'master'))
     jobs:
       - job: github
-        displayName: GitHub Release
+        displayName: GitHub
         condition: and(succeeded(), in(variables.branch, 'release', 'hotfix', 'master'))
         variables:
           Version.Tag: $[ format('v{0}', stageDependencies.ci.build.outputs['source.GitVersion.SemVer']) ]
