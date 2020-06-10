@@ -20,6 +20,8 @@ variables:
   System.Debug: ${{ eq(variables['Build.SourceBranchName'], 'azure-pipelines') }}
   ${{ if eq(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
     verbosity: -v:diag
+  ${{ if ne(variables['Build.SourceBranchName'], 'azure-pipelines') }}:
+    verbosity: ""
   ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
     branch: master
   ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix/') }}:
