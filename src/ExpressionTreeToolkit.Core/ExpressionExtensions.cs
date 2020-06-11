@@ -148,28 +148,50 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> UnaryIterator(UnaryExpression expression)
         {
-            yield return expression.Operand;
+            foreach (var operand in ExpressionIterator(expression.Operand))
+            {
+                yield return operand;
+            }
+
             yield return expression;
         }
 
         private static IEnumerable<Expression> BinaryIterator(BinaryExpression expression)
         {
-            yield return expression.Left;
-            yield return expression.Right;
+            foreach (var left in ExpressionIterator(expression.Left))
+            {
+                yield return left;
+            }
+            foreach (var right in ExpressionIterator(expression.Right))
+            {
+                yield return right;
+            }
             yield return expression;
         }
 
         private static IEnumerable<Expression> TypeBinaryIterator(TypeBinaryExpression expression)
         {
-            yield return expression.Expression;
+            foreach (var subExpression in ExpressionIterator(expression.Expression))
+            {
+                yield return subExpression;
+            }
             yield return expression;
         }
 
         private static IEnumerable<Expression> ConditionalIterator(ConditionalExpression expression)
         {
-            yield return expression.Test;
-            yield return expression.IfTrue;
-            yield return expression.IfFalse;
+            foreach (var test in ExpressionIterator(expression.Test))
+            {
+                yield return test;
+            }
+            foreach (var ifTrue in ExpressionIterator(expression.IfTrue))
+            {
+                yield return ifTrue;
+            }
+            foreach (var ifFalse in ExpressionIterator(expression.IfFalse))
+            {
+                yield return ifFalse;
+            }
             yield return expression;
         }
 
@@ -185,16 +207,31 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> MemberIterator(MemberExpression expression)
         {
-            if (expression.Expression != null) yield return expression.Expression;
+            if (expression.Expression != null)
+            {
+                foreach (var subExpression in ExpressionIterator(expression.Expression))
+                {
+                    yield return subExpression;
+                }
+            }
             yield return expression;
         }
 
         private static IEnumerable<Expression> MethodCallIterator(MethodCallExpression expression)
         {
-            if (expression.Object != null) yield return expression.Object;
+            if (expression.Object != null)
+            {
+                foreach (var obj in ExpressionIterator(expression.Object))
+                {
+                    yield return obj;
+                }
+            }
             foreach (var argument in expression.Arguments)
             {
-                yield return argument;
+                foreach (var arg in ExpressionIterator(argument))
+                {
+                    yield return arg;
+                }
             }
             yield return expression;
         }

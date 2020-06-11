@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+
 using Xunit;
 
 namespace ExpressionTreeToolkit.UnitTests
@@ -190,6 +191,47 @@ namespace ExpressionTreeToolkit.UnitTests
             var expected = new Expression[] { @object, arg0, node };
 
             var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        // TODO Complete the single node test cases
+
+        [Fact]
+        public void ShouldEnumerateIfNotAEqualBThenOneElseTwoAs_A_B_Equal_Not_1_2_IfThenElse()
+        {
+            var a = Expression.Variable(typeof(int), "a");
+            var b = Expression.Variable(typeof(int), "b");
+            var equal = Expression.Equal(a, b);
+            var not = Expression.Not(equal);
+            var one = Expression.Constant(1);
+            var two = Expression.Constant(2);
+            var ifThenElse = Expression.IfThenElse(not, one, two);
+            var expected = new Expression[] { a, b, equal, not, one, two, ifThenElse };
+
+            var actual = ExpressionExtensions.AsEnumerable(ifThenElse);
+
+            Assert.Equal(expected, actual);
+        }
+
+
+        [Fact]
+        public void ShouldEnumerateStringPadLeftDateTimeDateDayIsIntAs_String_DateTime_Date_Day_PadLeft_TypeEqual()
+        {
+            var dateProperty = typeof(DateTime).GetProperty(nameof(DateTime.Date));
+            var dayProperty = typeof(DateTime).GetProperty(nameof(DateTime.Day));
+            var padLeftMethod = typeof(String).GetMethod(nameof(String.PadLeft), new[] { typeof(int) });
+
+            var dateTime = Expression.Default(typeof(DateTime));
+            var date = Expression.MakeMemberAccess(dateTime, dateProperty);
+            var day = Expression.MakeMemberAccess(date, dayProperty);
+
+            var @string = Expression.Default(typeof(String));
+            var padLeft = Expression.Call(@string, padLeftMethod, day);
+            var typeEqual = Expression.TypeEqual(padLeft, typeof(int));
+            var expected = new Expression[] { @string, dateTime, date, day, padLeft, typeEqual };
+
+            var actual = ExpressionExtensions.AsEnumerable(typeEqual);
 
             Assert.Equal(expected, actual);
         }
