@@ -339,6 +339,28 @@ namespace ExpressionTreeToolkit.UnitTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void ShouldEnumerateInvokeLambdaAs_Initializers_NewArray_Parameter_Lambda_Arguments_New_Invoke()
+        {
+            var constructor = typeof(Exception).GetConstructor(new[] { typeof(string), typeof(Exception) });
+
+            var initializer = Expression.Default(typeof(int));
+            var newArray = Expression.NewArrayInit(typeof(int), initializer);
+            var parameter = Expression.Parameter(typeof(Exception));
+            var lambda = Expression.Lambda(newArray, parameter);
+
+            var argument1 = Expression.Default(typeof(string));
+            var argument2 = Expression.Default(typeof(Exception));
+            var @new = Expression.New(constructor, argument1, argument2);
+            var invoke = Expression.Invoke(lambda, @new);
+
+            var expected = new Expression[] { initializer, newArray, parameter, lambda, argument1, argument2, @new, invoke };
+
+            var actual = ExpressionExtensions.AsEnumerable(invoke);
+
+            Assert.Equal(expected, actual);
+        }
     }
 
 }
