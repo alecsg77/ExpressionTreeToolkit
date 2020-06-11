@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
 
 using Xunit;
 
@@ -195,7 +196,110 @@ namespace ExpressionTreeToolkit.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        // TODO Complete the single node test cases
+        [Fact]
+        public void ShouldEnumerateLambdaExpressionAs_Body_Node()
+        {
+            var body = Expression.Default(typeof(int));
+            var node = Expression.Lambda(body);
+            var expected = new Expression[] { body, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateLambdaExpressionAs_Body_Params_Node()
+        {
+            var body = Expression.Default(typeof(int));
+            var parameter = Expression.Parameter(typeof(string));
+            var node = Expression.Lambda(body, parameter);
+            var expected = new Expression[] { body, parameter, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateNewExpressionAs_Node()
+        {
+            var constructor = typeof(Exception).GetConstructor(new Type[0]);
+            var node = Expression.New(constructor);
+            var expected = new Expression[] { node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateNewExpressionAs_Arguments_Node()
+        {
+            var constructor = typeof(Exception).GetConstructor(new[] { typeof(string), typeof(Exception) });
+            var argument1 = Expression.Default(typeof(string));
+            var argument2 = Expression.Default(typeof(Exception));
+            var node = Expression.New(constructor, argument1, argument2);
+            var expected = new Expression[] { argument1, argument2, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateNewArrayExpressionAs_Node()
+        {
+            var node = Expression.NewArrayInit(typeof(int));
+            var expected = new Expression[] { node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateNewArrayExpressionAs_Initializers_Node()
+        {
+            var initializer = Expression.Default(typeof(int));
+            var node = Expression.NewArrayInit(typeof(int), initializer);
+            var expected = new Expression[] { initializer, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateInvocationExpressionAs_Body_Lambda_Node()
+        {
+            var body = Expression.Empty();
+            var lambda = Expression.Lambda(body);
+
+            var node = Expression.Invoke(lambda);
+            var expected = new Expression[] { body, lambda, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateInvocationExpressionAs_Body_Params_Lambda_Args_Node()
+        {
+            var body = Expression.Empty();
+            var parameter = Expression.Parameter(typeof(int));
+            var lambda = Expression.Lambda(body, parameter);
+
+            var argument = Expression.Default(typeof(int));
+            var node = Expression.Invoke(lambda, argument);
+
+            var expected = new Expression[] { body, parameter, lambda, argument, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
 
         [Fact]
         public void ShouldEnumerateIfNotAEqualBThenOneElseTwoAs_A_B_Equal_Not_1_2_IfThenElse()

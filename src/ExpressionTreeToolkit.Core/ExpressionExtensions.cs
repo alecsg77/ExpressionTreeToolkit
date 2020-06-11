@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
 
 #if JETBRAINS_ANNOTATIONS
-using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using AllowNullAttribute = JetBrains.Annotations.CanBeNullAttribute;
 using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
 using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 #endif
@@ -96,10 +96,6 @@ namespace ExpressionTreeToolkit
                     return TypeBinaryIterator((TypeBinaryExpression)expression);
                 case ExpressionType.Conditional:
                     return ConditionalIterator((ConditionalExpression)expression);
-                case ExpressionType.Constant:
-                    return ConstantIterator((ConstantExpression)expression);
-                case ExpressionType.Parameter:
-                    return ParameterIterator((ParameterExpression)expression);
                 case ExpressionType.MemberAccess:
                     return MemberIterator((MemberExpression)expression);
                 case ExpressionType.Call:
@@ -141,8 +137,10 @@ namespace ExpressionTreeToolkit
                     return DefaultIterator((DefaultExpression)expression);
                 case ExpressionType.Extension:
                     return ExtensionIterator(expression);
+                case ExpressionType.Constant:
+                case ExpressionType.Parameter:
                 default:
-                    return null;
+                    return new []{expression};
             }
         }
 
@@ -195,16 +193,6 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
-        private static IEnumerable<Expression> ConstantIterator(ConstantExpression expression)
-        {
-            yield return expression;
-        }
-
-        private static IEnumerable<Expression> ParameterIterator(ParameterExpression expression)
-        {
-            yield return expression;
-        }
-
         private static IEnumerable<Expression> MemberIterator(MemberExpression expression)
         {
             if (expression.Expression != null)
@@ -238,22 +226,43 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> LambdaIterator(LambdaExpression expression)
         {
-            throw new NotImplementedException();
+            yield return expression.Body;
+            foreach (var parameter in expression.Parameters)
+            {
+                yield return parameter;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> NewIterator(NewExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var parameter in expression.Arguments)
+            {
+                yield return parameter;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> NewArrayIterator(NewArrayExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var expr in expression.Expressions)
+            {
+                yield return expr;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> InvocationIterator(InvocationExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var subExpression in ExpressionIterator(expression.Expression))
+            {
+                yield return subExpression;
+            }
+            foreach (var parameter in expression.Arguments)
+            {
+                yield return parameter;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> MemberInitIterator(MemberInitExpression expression)
