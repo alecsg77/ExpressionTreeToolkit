@@ -282,7 +282,46 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> MemberInitIterator(MemberInitExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var newExpression in ExpressionIterator(expression.NewExpression))
+            {
+                yield return newExpression;
+            }
+
+            foreach (var memberBinding in expression.Bindings.SelectMany(MemberBindingIterator))
+            {
+                yield return memberBinding;
+            }
+            yield return expression;
+        }
+
+        private static IEnumerable<Expression> MemberBindingIterator(MemberBinding memberBinding)
+        {
+            switch (memberBinding.BindingType)
+            {
+                case MemberBindingType.Assignment:
+                    return MemberAssignmentIterator((MemberAssignment)memberBinding);
+                case MemberBindingType.MemberBinding:
+                    return MemberMemberBindingIterator((MemberMemberBinding)memberBinding);
+                case MemberBindingType.ListBinding:
+                    return MemberListBindingIterator((MemberListBinding)memberBinding);
+                default:
+                    throw new Exception($"Unhandled binding type '{memberBinding.BindingType}'");
+            }
+        }
+
+        private static IEnumerable<Expression> MemberAssignmentIterator(MemberAssignment memberAssignment)
+        {
+            return ExpressionIterator(memberAssignment.Expression);
+        }
+
+        private static IEnumerable<Expression> MemberMemberBindingIterator(MemberMemberBinding memberMemberBinding)
+        {
+            return memberMemberBinding.Bindings.SelectMany(MemberBindingIterator);
+        }
+
+        private static IEnumerable<Expression> MemberListBindingIterator(MemberListBinding memberListBinding)
+        {
+            return memberListBinding.Initializers.SelectMany(x => x.Arguments.SelectMany(ExpressionIterator));
         }
 
         private static IEnumerable<Expression> ListInitIterator(ListInitExpression expression)

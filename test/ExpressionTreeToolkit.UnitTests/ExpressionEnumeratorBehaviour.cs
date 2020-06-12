@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -308,6 +308,89 @@ namespace ExpressionTreeToolkit.UnitTests
             Assert.Equal(expected, actual);
         }
 
+
+        class Node
+        {
+            public Node()
+            {
+            }
+
+            public Node(string name)
+            {
+            }
+            public string Name { get; set; }
+            public Node Parent { get; set; }
+            public ICollection<Node> Children { get; set; }
+        }
+
+
+        [Fact]
+        public void ShouldEnumerateMemberInitExpression_Arguments_New_Node()
+        {
+            var constructor = typeof(Node).GetConstructor(new[] { typeof(string) });
+            var argument1 = Expression.Default(typeof(string));
+            var newExpression = Expression.New(constructor, argument1);
+            var node = Expression.MemberInit(newExpression);
+
+            var expected = new Expression[] { argument1, newExpression, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateMemberInitExpression_New_MemberAssignments_Node()
+        {
+            var constructor = typeof(Node).GetConstructor(new Type[0]);
+            var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
+            var newExpression = Expression.New(constructor);
+            var assignment = Expression.Default(typeof(string));
+            var node = Expression.MemberInit(newExpression, Expression.Bind(nameProperty, assignment));
+
+            var expected = new Expression[] { newExpression, assignment, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateMemberInitExpression_Arguments_New_MemberMemberBindings_Node()
+        {
+            var constructor = typeof(Node).GetConstructor(new Type[0]);
+            var parentProperty = typeof(Node).GetProperty(nameof(Node.Parent));
+            var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
+
+            var newExpression = Expression.New(constructor);
+            var assignment = Expression.Default(typeof(string));
+            var node = Expression.MemberInit(newExpression, Expression.MemberBind(parentProperty, Expression.Bind(nameProperty, assignment)));
+
+            var expected = new Expression[] { newExpression, assignment, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateMemberInitExpression_Arguments_New_MemberListBindings_Node()
+        {
+            var constructor = typeof(Node).GetConstructor(new Type[0]);
+            var childrenProperty = typeof(Node).GetProperty(nameof(Node.Children));
+            var addMethod = typeof(ICollection<Node>).GetMethod(nameof(ICollection<Node>.Add), new []{typeof(Node)});
+
+            var newExpression = Expression.New(constructor);
+            var assignment = Expression.Default(typeof(Node));
+            var node = Expression.MemberInit(newExpression, Expression.ListBind(childrenProperty, Expression.ElementInit(addMethod, assignment)));
+
+            var expected = new Expression[] { newExpression, assignment, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+        
         [Fact]
         public void ShouldEnumerateIfNotAEqualBThenOneElseTwoAs_A_B_Equal_Not_1_2_IfThenElse()
         {
