@@ -326,7 +326,17 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> ListInitIterator(ListInitExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var newExpression in ExpressionIterator(expression.NewExpression))
+            {
+                yield return newExpression;
+            }
+
+            foreach (var initializer in expression.Initializers.SelectMany(x => x.Arguments.SelectMany(ExpressionIterator)))
+            {
+                yield return initializer;
+            }
+
+            yield return expression;
         }
 
         private static IEnumerable<Expression> BlockIterator(BlockExpression expression)

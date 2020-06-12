@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -385,6 +386,21 @@ namespace ExpressionTreeToolkit.UnitTests
             var node = Expression.MemberInit(newExpression, Expression.ListBind(childrenProperty, Expression.ElementInit(addMethod, assignment)));
 
             var expected = new Expression[] { newExpression, assignment, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateListInitExpression_New_Initializers_Node()
+        {
+            var constructor = typeof(List<int>).GetConstructor(new Type[0]);
+            var newExpression = Expression.New(constructor);
+            var initializer = Expression.Default(typeof(int));
+            var node = Expression.ListInit(newExpression, initializer);
+ 
+            var expected = new Expression[] { newExpression, initializer, node };
 
             var actual = ExpressionExtensions.AsEnumerable(node);
 
