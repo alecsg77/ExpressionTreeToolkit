@@ -346,7 +346,7 @@ namespace ExpressionTreeToolkit
                 yield return variable;
             }
 
-            foreach (var subExpression in expression.Expressions)
+            foreach (var subExpression in expression.Expressions.SelectMany(ExpressionIterator))
             {
                 yield return subExpression;
             }

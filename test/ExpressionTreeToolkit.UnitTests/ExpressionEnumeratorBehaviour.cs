@@ -232,7 +232,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void ShouldEnumerateNewExpressionAs_Node()
         {
-            var constructor = typeof(Exception).GetConstructor(new Type[0]);
+            var constructor = typeof(Exception).GetConstructor(Array.Empty<Type>());
             var node = Expression.New(constructor);
             var expected = new Expression[] { node };
 
@@ -343,7 +343,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void ShouldEnumerateMemberInitExpression_New_MemberAssignments_Node()
         {
-            var constructor = typeof(Node).GetConstructor(new Type[0]);
+            var constructor = typeof(Node).GetConstructor(Array.Empty<Type>());
             var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
             var newExpression = Expression.New(constructor);
             var assignment = Expression.Default(typeof(string));
@@ -359,7 +359,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void ShouldEnumerateMemberInitExpression_Arguments_New_MemberMemberBindings_Node()
         {
-            var constructor = typeof(Node).GetConstructor(new Type[0]);
+            var constructor = typeof(Node).GetConstructor(Array.Empty<Type>());
             var parentProperty = typeof(Node).GetProperty(nameof(Node.Parent));
             var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
 
@@ -377,7 +377,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void ShouldEnumerateMemberInitExpression_Arguments_New_MemberListBindings_Node()
         {
-            var constructor = typeof(Node).GetConstructor(new Type[0]);
+            var constructor = typeof(Node).GetConstructor(Array.Empty<Type>());
             var childrenProperty = typeof(Node).GetProperty(nameof(Node.Children));
             var addMethod = typeof(ICollection<Node>).GetMethod(nameof(ICollection<Node>.Add), new[] { typeof(Node) });
 
@@ -395,7 +395,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void ShouldEnumerateListInitExpression_New_Initializers_Node()
         {
-            var constructor = typeof(List<int>).GetConstructor(new Type[0]);
+            var constructor = typeof(List<int>).GetConstructor(Array.Empty<Type>());
             var newExpression = Expression.New(constructor);
             var initializer = Expression.Default(typeof(int));
             var node = Expression.ListInit(newExpression, initializer);
@@ -491,6 +491,58 @@ namespace ExpressionTreeToolkit.UnitTests
             var expected = new Expression[] { initializer, newArray, parameter, lambda, argument1, argument2, @new, invoke };
 
             var actual = ExpressionExtensions.AsEnumerable(invoke);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateBlockListInitAs_Variables_NewList_NewNode_NodeInit_ListInit_Block()
+        {
+            var nodeConstructor = typeof(Node).GetConstructor(Array.Empty<Type>());
+            var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
+            var parentProperty = typeof(Node).GetProperty(nameof(Node.Parent));
+            var childrenProperty = typeof(Node).GetProperty(nameof(Node.Children));
+            var addMethod = typeof(ICollection<Node>).GetMethod(nameof(ICollection<Node>.Add), new[] { typeof(Node) });
+            var listConstructor = typeof(List<Node>).GetConstructor(Array.Empty<Type>());
+
+            var variable1 = Expression.Parameter(typeof(string));
+            var variable2 = Expression.Parameter(typeof(string));
+
+                var newList = Expression.New(listConstructor);
+
+                    var newNode1 = Expression.New(nodeConstructor);
+                    var node1Init = Expression.MemberInit(newNode1, Expression.Bind(nameProperty, variable1));
+
+                    var newNode3 = Expression.New(nodeConstructor);
+                        var newNode2 = Expression.New(nodeConstructor);
+                        var node2Init = Expression.MemberInit(newNode2, Expression.MemberBind(parentProperty, Expression.Bind(nameProperty, variable2)));
+                    var node3Init = Expression.MemberInit(newNode3, Expression.ListBind(childrenProperty, Expression.ElementInit(addMethod, node2Init)));
+
+                var listInit = Expression.ListInit(newList, node1Init, node3Init);
+
+            var block = Expression.Block(new[] { variable1, variable2 }, listInit);
+
+            var expected = new Expression[]
+            {
+                variable1,
+                variable2,
+                    newList,
+
+                        newNode1,
+                        variable1,
+                        node1Init,
+
+                        newNode3,
+                            newNode2,
+                            variable2,
+                            node2Init,
+                        node3Init,
+
+                    listInit,
+                block
+            };
+
+            var actual = ExpressionExtensions.AsEnumerable(block);
 
             Assert.Equal(expected, actual);
         }
