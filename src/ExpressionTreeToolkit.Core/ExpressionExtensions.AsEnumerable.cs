@@ -118,8 +118,6 @@ namespace ExpressionTreeToolkit
                     return ListInitIterator((ListInitExpression) expression);
                 case ExpressionType.Block:
                     return BlockIterator((BlockExpression) expression);
-                case ExpressionType.DebugInfo:
-                    return DebugInfoIterator((DebugInfoExpression) expression);
                 case ExpressionType.Dynamic:
                     return DynamicIterator((DynamicExpression) expression);
                 case ExpressionType.Goto:
@@ -136,12 +134,11 @@ namespace ExpressionTreeToolkit
                     return SwitchIterator((SwitchExpression) expression);
                 case ExpressionType.Try:
                     return TryIterator((TryExpression) expression);
-                case ExpressionType.Default:
-                    return DefaultIterator((DefaultExpression) expression);
-                case ExpressionType.Extension:
-                    return ExtensionIterator(expression);
                 case ExpressionType.Constant:
                 case ExpressionType.Parameter:
+                case ExpressionType.DebugInfo:
+                case ExpressionType.Extension:
+                case ExpressionType.Default:
                 default:
                     return new[] {expression};
             }
@@ -298,11 +295,6 @@ namespace ExpressionTreeToolkit
             throw new NotImplementedException();
         }
 
-        private static IEnumerable<Expression> DebugInfoIterator(DebugInfoExpression expression)
-        {
-            throw new NotImplementedException();
-        }
-
         private static IEnumerable<Expression> DynamicIterator(DynamicExpression expression)
         {
             throw new NotImplementedException();
@@ -339,16 +331,6 @@ namespace ExpressionTreeToolkit
         }
 
         private static IEnumerable<Expression> TryIterator(TryExpression expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static IEnumerable<Expression> DefaultIterator(DefaultExpression expression)
-        {
-            yield return expression;
-        }
-
-        private static IEnumerable<Expression> ExtensionIterator(Expression expression)
         {
             throw new NotImplementedException();
         }

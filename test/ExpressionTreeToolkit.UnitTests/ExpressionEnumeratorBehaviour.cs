@@ -44,6 +44,34 @@ namespace ExpressionTreeToolkit.UnitTests
             }
         }
 
+        private sealed class ExtensionExpression : Expression
+        {
+            public override ExpressionType NodeType => ExpressionType.Extension;
+            public override Type Type => typeof(void);
+
+            public static readonly ExtensionExpression Void = new ExtensionExpression();
+        }
+
+        public static IEnumerable<object[]> ExpressionAsNodeData => new[]
+        {
+            new object[] {Expression.Constant(0)},
+            new object[] {Expression.Parameter(typeof(int))},
+            new object[] {Expression.DebugInfo(Expression.SymbolDocument(string.Empty),1,1,1,1)},
+            new object[] {ExtensionExpression.Void},
+            new object[] {Expression.Default(typeof(double))},
+        };
+
+        [Theory]
+        [MemberData(nameof(ExpressionAsNodeData))]
+        public void ShouldEnumerateExpressionAs_Node(Expression node)
+        {
+            var expected = new[] { node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
         [Fact]
         public void ShouldEnumerateUnaryExpressionAs_Operand_Node()
         {
@@ -96,27 +124,6 @@ namespace ExpressionTreeToolkit.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void ShouldEnumerateConstantExpressionAs_TNode()
-        {
-            var node = Expression.Constant(0);
-            var expected = new Expression[] { node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void ShouldEnumerateParameterExpressionAs_TNode()
-        {
-            var node = Expression.Parameter(typeof(int));
-            var expected = new Expression[] { node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
-        }
 
         [Fact]
         public void ShouldEnumerateMemberExpressionAs_Node()
