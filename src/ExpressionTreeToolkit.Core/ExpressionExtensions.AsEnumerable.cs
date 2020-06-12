@@ -341,7 +341,16 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> BlockIterator(BlockExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var variable in expression.Variables)
+            {
+                yield return variable;
+            }
+
+            foreach (var subExpression in expression.Expressions)
+            {
+                yield return subExpression;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> DynamicIterator(DynamicExpression expression)

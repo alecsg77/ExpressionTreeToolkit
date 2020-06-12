@@ -379,7 +379,7 @@ namespace ExpressionTreeToolkit.UnitTests
         {
             var constructor = typeof(Node).GetConstructor(new Type[0]);
             var childrenProperty = typeof(Node).GetProperty(nameof(Node.Children));
-            var addMethod = typeof(ICollection<Node>).GetMethod(nameof(ICollection<Node>.Add), new []{typeof(Node)});
+            var addMethod = typeof(ICollection<Node>).GetMethod(nameof(ICollection<Node>.Add), new[] { typeof(Node) });
 
             var newExpression = Expression.New(constructor);
             var assignment = Expression.Default(typeof(Node));
@@ -399,14 +399,41 @@ namespace ExpressionTreeToolkit.UnitTests
             var newExpression = Expression.New(constructor);
             var initializer = Expression.Default(typeof(int));
             var node = Expression.ListInit(newExpression, initializer);
- 
+
             var expected = new Expression[] { newExpression, initializer, node };
 
             var actual = ExpressionExtensions.AsEnumerable(node);
 
             Assert.Equal(expected, actual);
         }
-        
+
+        [Fact]
+        public void ShouldEnumerateBlockExpression_Expressions_Node()
+        {
+            var expression = Expression.Empty();
+            var node = Expression.Block(expression);
+
+            var expected = new Expression[] { expression, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateBlockExpression_Variables_Expressions_Node()
+        {
+            var variable = Expression.Parameter(typeof(bool));
+            var expression = Expression.Empty();
+            var node = Expression.Block(new[] { variable }, expression);
+
+            var expected = new Expression[] { variable, expression, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
         [Fact]
         public void ShouldEnumerateIfNotAEqualBThenOneElseTwoAs_A_B_Equal_Not_1_2_IfThenElse()
         {
