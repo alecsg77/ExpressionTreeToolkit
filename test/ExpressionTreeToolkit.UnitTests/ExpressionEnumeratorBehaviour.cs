@@ -1,8 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+
+using Moq;
 
 using Xunit;
 
@@ -428,6 +431,20 @@ namespace ExpressionTreeToolkit.UnitTests
             var node = Expression.Block(new[] { variable }, expression);
 
             var expected = new Expression[] { variable, expression, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateDynamicExpressionAs_Arguments_Node()
+        {
+            var callSiteBinder = Mock.Of<CallSiteBinder>();
+            var argument = Expression.Default(typeof(int));
+            var node = Expression.Dynamic(callSiteBinder, typeof(object), argument);
+
+            var expected = new Expression[] { argument, node };
 
             var actual = ExpressionExtensions.AsEnumerable(node);
 

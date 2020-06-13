@@ -355,7 +355,12 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> DynamicIterator(DynamicExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var argument in expression.Arguments)
+            {
+                yield return argument;
+            }
+            yield return expression;
+
         }
 
         private static IEnumerable<Expression> GotoIterator(GotoExpression expression)
