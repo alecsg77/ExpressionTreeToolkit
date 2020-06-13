@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
@@ -53,7 +53,7 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.Increment:
                 case ExpressionType.Throw:
                 case ExpressionType.Unbox:
-                    return UnaryIterator((UnaryExpression) expression);
+                    return UnaryIterator((UnaryExpression)expression);
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
                 case ExpressionType.Subtract:
@@ -93,54 +93,54 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.AddAssignChecked:
                 case ExpressionType.MultiplyAssignChecked:
                 case ExpressionType.SubtractAssignChecked:
-                    return BinaryIterator((BinaryExpression) expression);
+                    return BinaryIterator((BinaryExpression)expression);
                 case ExpressionType.TypeIs:
                 case ExpressionType.TypeEqual:
-                    return TypeBinaryIterator((TypeBinaryExpression) expression);
+                    return TypeBinaryIterator((TypeBinaryExpression)expression);
                 case ExpressionType.Conditional:
-                    return ConditionalIterator((ConditionalExpression) expression);
+                    return ConditionalIterator((ConditionalExpression)expression);
                 case ExpressionType.MemberAccess:
-                    return MemberIterator((MemberExpression) expression);
+                    return MemberIterator((MemberExpression)expression);
                 case ExpressionType.Call:
-                    return MethodCallIterator((MethodCallExpression) expression);
+                    return MethodCallIterator((MethodCallExpression)expression);
                 case ExpressionType.Lambda:
-                    return LambdaIterator((LambdaExpression) expression);
+                    return LambdaIterator((LambdaExpression)expression);
                 case ExpressionType.New:
-                    return NewIterator((NewExpression) expression);
+                    return NewIterator((NewExpression)expression);
                 case ExpressionType.NewArrayInit:
                 case ExpressionType.NewArrayBounds:
-                    return NewArrayIterator((NewArrayExpression) expression);
+                    return NewArrayIterator((NewArrayExpression)expression);
                 case ExpressionType.Invoke:
-                    return InvocationIterator((InvocationExpression) expression);
+                    return InvocationIterator((InvocationExpression)expression);
                 case ExpressionType.MemberInit:
-                    return MemberInitIterator((MemberInitExpression) expression);
+                    return MemberInitIterator((MemberInitExpression)expression);
                 case ExpressionType.ListInit:
-                    return ListInitIterator((ListInitExpression) expression);
+                    return ListInitIterator((ListInitExpression)expression);
                 case ExpressionType.Block:
-                    return BlockIterator((BlockExpression) expression);
+                    return BlockIterator((BlockExpression)expression);
                 case ExpressionType.Dynamic:
-                    return DynamicIterator((DynamicExpression) expression);
+                    return DynamicIterator((DynamicExpression)expression);
                 case ExpressionType.Goto:
-                    return GotoIterator((GotoExpression) expression);
+                    return GotoIterator((GotoExpression)expression);
                 case ExpressionType.Index:
-                    return IndexIterator((IndexExpression) expression);
+                    return IndexIterator((IndexExpression)expression);
                 case ExpressionType.Label:
-                    return LabelIterator((LabelExpression) expression);
+                    return LabelIterator((LabelExpression)expression);
                 case ExpressionType.RuntimeVariables:
-                    return RuntimeVariablesIterator((RuntimeVariablesExpression) expression);
+                    return RuntimeVariablesIterator((RuntimeVariablesExpression)expression);
                 case ExpressionType.Loop:
-                    return LoopIterator((LoopExpression) expression);
+                    return LoopIterator((LoopExpression)expression);
                 case ExpressionType.Switch:
-                    return SwitchIterator((SwitchExpression) expression);
+                    return SwitchIterator((SwitchExpression)expression);
                 case ExpressionType.Try:
-                    return TryIterator((TryExpression) expression);
+                    return TryIterator((TryExpression)expression);
                 case ExpressionType.Constant:
                 case ExpressionType.Parameter:
                 case ExpressionType.DebugInfo:
                 case ExpressionType.Extension:
                 case ExpressionType.Default:
                 default:
-                    return new[] {expression};
+                    return new[] { expression };
             }
         }
 
@@ -355,7 +355,7 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> DynamicIterator(DynamicExpression expression)
         {
-            foreach (var argument in expression.Arguments)
+            foreach (var argument in expression.Arguments.SelectMany(ExpressionIterator))
             {
                 yield return argument;
             }
@@ -367,15 +367,21 @@ namespace ExpressionTreeToolkit
         {
             if (expression.Value != null)
             {
-                yield return expression.Value;
+                foreach (var value in ExpressionIterator(expression.Value))
+                {
+                    yield return value;
+                }
             }
             yield return expression;
         }
 
         private static IEnumerable<Expression> IndexIterator(IndexExpression expression)
         {
-            yield return expression.Object;
-            foreach (var argument in expression.Arguments)
+            foreach (var @object in ExpressionIterator(expression.Object))
+            {
+                yield return @object;
+            }
+            foreach (var argument in expression.Arguments.SelectMany(ExpressionIterator))
             {
                 yield return argument;
             }
@@ -384,7 +390,13 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> LabelIterator(LabelExpression expression)
         {
-            yield return expression.DefaultValue;
+            if (expression.DefaultValue != null)
+            {
+            foreach (var defaultValue in ExpressionIterator(expression.DefaultValue))
+            {
+                yield return defaultValue;
+            }
+            }
             yield return expression;
         }
 

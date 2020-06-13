@@ -12,6 +12,8 @@ namespace ExpressionTreeToolkit.UnitTests
 {
     public class ExpressionEnumeratorBehaviour
     {
+        private static readonly CallSiteBinder CallSiteBinder = Mock.Of<CallSiteBinder>();
+
         private sealed class Stub : Expression
         {
             public static readonly Stub Extension = new Stub(ExpressionType.Extension);
@@ -383,9 +385,8 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void DynamicExpressionShouldEnumerateAs_Arguments_Dynamic()
         {
-            var callSiteBinder = Mock.Of<CallSiteBinder>();
             var argument = Expression.Default(typeof(int));
-            var dynamic = Expression.Dynamic(callSiteBinder, typeof(object), argument);
+            var dynamic = Expression.Dynamic(CallSiteBinder, typeof(object), argument);
 
             Expression target = dynamic;
 
@@ -419,7 +420,7 @@ namespace ExpressionTreeToolkit.UnitTests
         public void LabelLabelExpressionShouldEnumerateAs_DefaultValue_Label()
         {
             var defaultValue = Expression.Default(typeof(int));
-            var label = Expression.Label(Expression.Label(),defaultValue);
+            var label = Expression.Label(Expression.Label(), defaultValue);
 
             Expression target = label;
 
@@ -526,6 +527,37 @@ namespace ExpressionTreeToolkit.UnitTests
 
                     listInit,
                 block
+            };
+
+            AssertEnumerateAs(target, expected);
+        }
+
+        [Fact]
+        public void ShouldEnumerateGotoDynamicLabelIndexAs_Instance_Arguments_Index_Label_Dynamic_Goto()
+        {
+            var labelTarget = Expression.Label(typeof(Stub));
+
+            var instance = Expression.Default(typeof(Stub[]));
+            var expression = Expression.Constant(0);
+            var argument = Expression.Negate(expression);
+            var index = Expression.MakeIndex(instance, null, new[] { argument });
+            var label = Expression.Label(labelTarget, index);
+
+            var dynamic = Expression.Dynamic(CallSiteBinder, typeof(Stub), label);
+
+            var @goto = Expression.Goto(labelTarget, dynamic);
+
+            Expression target = @goto;
+
+            var expected = new Expression[]
+            {
+                instance,
+                expression,
+                argument,
+                index,
+                label,
+                dynamic,
+                @goto
             };
 
             AssertEnumerateAs(target, expected);
