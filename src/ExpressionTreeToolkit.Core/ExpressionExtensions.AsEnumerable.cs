@@ -365,7 +365,11 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> GotoIterator(GotoExpression expression)
         {
-            throw new NotImplementedException();
+            if (expression.Value != null)
+            {
+                yield return expression.Value;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> IndexIterator(IndexExpression expression)

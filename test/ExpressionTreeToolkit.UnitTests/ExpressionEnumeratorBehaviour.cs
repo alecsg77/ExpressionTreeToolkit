@@ -63,6 +63,7 @@ namespace ExpressionTreeToolkit.UnitTests
             new object[] {Expression.DebugInfo(Expression.SymbolDocument(string.Empty),1,1,1,1)},
             new object[] {ExtensionExpression.Void},
             new object[] {Expression.Default(typeof(double))},
+            new object[] {Expression.Goto(Expression.Label())},
         };
 
         [Theory]
@@ -445,6 +446,19 @@ namespace ExpressionTreeToolkit.UnitTests
             var node = Expression.Dynamic(callSiteBinder, typeof(object), argument);
 
             var expected = new Expression[] { argument, node };
+
+            var actual = ExpressionExtensions.AsEnumerable(node);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ShouldEnumerateGotoExpression_Value_Node()
+        {
+            var value = Expression.Empty();
+            var node = Expression.Goto(Expression.Label(), value);
+
+            var expected = new Expression[] { value, node };
 
             var actual = ExpressionExtensions.AsEnumerable(node);
 
