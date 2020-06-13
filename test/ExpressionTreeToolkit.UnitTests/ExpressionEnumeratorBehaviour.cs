@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -13,6 +12,54 @@ namespace ExpressionTreeToolkit.UnitTests
 {
     public class ExpressionEnumeratorBehaviour
     {
+        private sealed class Stub : Expression
+        {
+            public static readonly Stub Extension = new Stub(ExpressionType.Extension);
+
+            public static Stub StaticMethod() => Extension;
+
+            public Stub()
+                : this(ExpressionType.Extension)
+            {
+            }
+
+            public Stub(ExpressionType nodeType)
+            {
+                this.NodeType = nodeType;
+                Type = typeof(void);
+            }
+
+            public Stub(ExpressionType nodeType, Type type)
+            {
+                this.NodeType = nodeType;
+                Type = type;
+            }
+
+            public override ExpressionType NodeType { get; }
+
+            public override Type Type { get; }
+
+            public Stub Parent { get; set; }
+            public ICollection<Stub> Children { get; set; }
+
+            public static readonly FieldInfo StaticFieldInfo = typeof(Stub).GetField(nameof(Extension));
+            public static readonly MethodInfo StaticMethodInfo = typeof(Stub).GetMethod(nameof(StaticMethod));
+            public static readonly ConstructorInfo CtorInfo = typeof(Stub).GetConstructor(Array.Empty<Type>());
+            public static readonly ConstructorInfo CtorExpressionTypeInfo = typeof(Stub).GetConstructor(new[] { typeof(ExpressionType) });
+            public static readonly ConstructorInfo CtorExpressionTypeTypeInfo = typeof(Stub).GetConstructor(new[] { typeof(ExpressionType), typeof(Type) });
+
+            public static readonly PropertyInfo TypePropertyInfo = typeof(Stub).GetProperty(nameof(Type));
+            public static readonly PropertyInfo ParentPropertyInfo = typeof(Stub).GetProperty(nameof(Parent));
+            public static readonly PropertyInfo ChildrenPropertyInfo = typeof(Stub).GetProperty(nameof(Children));
+            public static readonly MethodInfo ChildrenAddMethodInfo = typeof(ICollection<Stub>).GetMethod(nameof(ICollection<Stub>.Add), new[] { typeof(Stub) });
+
+            public static readonly MethodInfo ReduceMethodInfo = typeof(Stub).GetMethod(nameof(Reduce));
+            public static readonly MethodInfo DefaultMethodInfo = typeof(Expression).GetMethod(nameof(Default));
+            public static readonly MethodInfo EqualsMethodInfo = typeof(Expression).GetMethod(nameof(Equals));
+
+            public static readonly ConstructorInfo ListCtorInfo = typeof(List<Stub>).GetConstructor(Array.Empty<Type>());
+        }
+
         [Fact]
         public void ShouldThrowArgumentNullExceptionOnNull()
         {
@@ -48,510 +95,394 @@ namespace ExpressionTreeToolkit.UnitTests
             }
         }
 
-        private sealed class ExtensionExpression : Expression
+        private static void AssertEnumerateAs(Expression target, params Expression[] expected)
         {
-            public override ExpressionType NodeType => ExpressionType.Extension;
-            public override Type Type => typeof(void);
+            var actual = ExpressionExtensions.AsEnumerable(target);
 
-            public static readonly ExtensionExpression Void = new ExtensionExpression();
+            Assert.Equal(expected, actual);
         }
 
-        public static IEnumerable<object[]> ExpressionAsNodeData => new[]
+        public static IEnumerable<object[]> InvariantExpressionNodes => new[]
         {
             new object[] {Expression.Constant(0)},
             new object[] {Expression.Parameter(typeof(int))},
             new object[] {Expression.DebugInfo(Expression.SymbolDocument(string.Empty),1,1,1,1)},
-            new object[] {ExtensionExpression.Void},
+            new object[] {Stub.Extension},
             new object[] {Expression.Default(typeof(double))},
+            new object[] {Expression.MakeMemberAccess(null, Stub.StaticFieldInfo)},
+            new object[] {Expression.Call(null, Stub.StaticMethodInfo)},
+            new object[] {Expression.New(Stub.CtorInfo)},
+            new object[] {Expression.NewArrayInit(typeof(int))},
             new object[] {Expression.Goto(Expression.Label())},
         };
 
         [Theory]
-        [MemberData(nameof(ExpressionAsNodeData))]
-        public void ShouldEnumerateExpressionAs_Node(Expression node)
+        [MemberData(nameof(InvariantExpressionNodes))]
+        public void ExpressionShouldEnumerateAs_Expression(Expression expression)
         {
-            var expected = new[] { node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            Expression target = expression;
+            AssertEnumerateAs(target, expression);
         }
 
         [Fact]
-        public void ShouldEnumerateUnaryExpressionAs_Operand_Node()
+        public void UnaryExpressionShouldEnumerateAs_Operand_Unary()
         {
             var operand = Expression.Default(typeof(bool));
-            var node = Expression.Not(operand);
-            var expected = new Expression[] { operand, node };
+            var unary = Expression.Not(operand);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = unary;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, operand, unary);
         }
 
         [Fact]
-        public void ShouldEnumerateBinaryExpressionAs_Left_Right_Node()
+        public void BinaryExpressionShouldEnumerateAs_Left_Right_Binary()
         {
             var left = Expression.Default(typeof(bool));
             var right = Expression.Default(typeof(bool));
-            var node = Expression.And(left, right);
-            var expected = new Expression[] { left, right, node };
+            var and = Expression.And(left, right);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = and;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, left, right, and);
         }
 
-
         [Fact]
-        public void ShouldEnumerateTypeBinaryExpressionAs_Expression_Node()
+        public void TypeBinaryExpressionShouldEnumerateAs_Expression_TypeBinary()
         {
             var expression = Expression.Default(typeof(bool));
-            var node = Expression.TypeEqual(expression, typeof(int));
-            var expected = new Expression[] { expression, node };
+            var typeEqual = Expression.TypeEqual(expression, typeof(int));
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = typeEqual;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, expression, typeEqual);
         }
 
         [Fact]
-        public void ShouldEnumerateConditionalExpressionAs_Test_IfTrue_IfFalse_Node()
+        public void ConditionalExpressionShouldEnumerateAs_Test_IfTrue_IfFalse_Conditional()
         {
             var test = Expression.Default(typeof(bool));
             var ifTrue = Expression.Default(typeof(int));
             var ifFalse = Expression.Default(typeof(int));
-            var node = Expression.Condition(test, ifTrue, ifFalse);
-            var expected = new Expression[] { test, ifTrue, ifFalse, node };
+            var condition = Expression.Condition(test, ifTrue, ifFalse);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = condition;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, test, ifTrue, ifFalse, condition);
         }
 
-
         [Fact]
-        public void ShouldEnumerateMemberExpressionAs_Node()
+        public void MemberExpressionShouldEnumerateAs_Expression_Member()
         {
-            var memberInfo = typeof(int).GetField(nameof(int.MinValue));
-            var node = Expression.MakeMemberAccess(null, memberInfo);
-            var expected = new Expression[] { node };
+            var expression = Expression.Default(typeof(Stub));
+            var member = Expression.MakeMemberAccess(expression, Stub.TypePropertyInfo);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = member;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, expression, member);
         }
 
         [Fact]
-        public void ShouldEnumerateMemberExpressionAs_Expression_Node()
+        public void MethodCallExpressionShouldEnumerateAs_Instance_MethodCall()
         {
-            var expression = Expression.Default(typeof(Expression));
-            var propertyInfo = typeof(Expression).GetProperty(nameof(Expression.NodeType));
-            var node = Expression.MakeMemberAccess(expression, propertyInfo);
-            var expected = new Expression[] { expression, node };
+            var instance = Expression.Default(typeof(Stub));
+            var call = Expression.Call(instance, Stub.ReduceMethodInfo);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = call;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, instance, call);
         }
 
         [Fact]
-        public void ShouldEnumerateMethodCallExpressionAs_Node()
+        public void MethodCallExpressionShouldEnumerateAs_Args_MethodCall()
         {
-            var methodInfo = typeof(Expression).GetMethod(nameof(Expression.Empty));
-            var node = Expression.Call(null, methodInfo);
-            var expected = new Expression[] { node };
+            var argument = Expression.Default(typeof(Type));
+            var call = Expression.Call(null, Stub.DefaultMethodInfo, argument);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = call;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, argument, call);
         }
 
         [Fact]
-        public void ShouldEnumerateMethodCallExpressionAs_Object_Node()
+        public void MethodCallExpressionShouldEnumerateAs_Instance_Arguments_MethodCall()
         {
-            var @object = Expression.Default(typeof(Expression));
-            var methodInfo = typeof(Expression).GetMethod(nameof(Expression.Reduce));
-            var node = Expression.Call(@object, methodInfo);
-            var expected = new Expression[] { @object, node };
+            var instance = Expression.Default(typeof(Stub));
+            var argument = Expression.Default(typeof(Stub));
+            var call = Expression.Call(instance, Stub.EqualsMethodInfo, argument);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = call;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, instance, argument, call);
         }
 
         [Fact]
-        public void ShouldEnumerateMethodCallExpressionAs_Args_Node()
-        {
-            var methodInfo = typeof(Expression).GetMethod(nameof(Expression.ReferenceEqual));
-            var arg0 = Expression.Default(typeof(Expression));
-            var arg1 = Expression.Default(typeof(Expression));
-            var node = Expression.Call(null, methodInfo, arg0, arg1);
-            var expected = new Expression[] { arg0, arg1, node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void ShouldEnumerateMethodCallExpressionAs_Object_Args_Node()
-        {
-            var @object = Expression.Default(typeof(Expression));
-            var methodInfo = typeof(Expression).GetMethod(nameof(Expression.Equals));
-            var arg0 = Expression.Default(typeof(Expression));
-            var node = Expression.Call(@object, methodInfo, arg0);
-            var expected = new Expression[] { @object, arg0, node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void ShouldEnumerateLambdaExpressionAs_Body_Node()
+        public void LambdaExpressionShouldEnumerateAs_Body_Lambda()
         {
             var body = Expression.Default(typeof(int));
-            var node = Expression.Lambda(body);
-            var expected = new Expression[] { body, node };
+            var lambda = Expression.Lambda(body);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = lambda;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, body, lambda);
         }
 
         [Fact]
-        public void ShouldEnumerateLambdaExpressionAs_Body_Params_Node()
+        public void LambdaExpressionShouldEnumerateAs_Body_Params_Lambda()
         {
             var body = Expression.Default(typeof(int));
             var parameter = Expression.Parameter(typeof(string));
-            var node = Expression.Lambda(body, parameter);
-            var expected = new Expression[] { body, parameter, node };
+            var lambda = Expression.Lambda(body, parameter);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = lambda;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, body, parameter, lambda);
         }
 
         [Fact]
-        public void ShouldEnumerateNewExpressionAs_Node()
+        public void NewExpressionShouldEnumerateAs_Arguments_New()
         {
-            var constructor = typeof(Exception).GetConstructor(Array.Empty<Type>());
-            var node = Expression.New(constructor);
-            var expected = new Expression[] { node };
+            var argument = Expression.Default(typeof(ExpressionType));
+            var @new = Expression.New(Stub.CtorExpressionTypeInfo, argument);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = @new;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, argument, @new);
         }
 
         [Fact]
-        public void ShouldEnumerateNewExpressionAs_Arguments_Node()
-        {
-            var constructor = typeof(Exception).GetConstructor(new[] { typeof(string), typeof(Exception) });
-            var argument1 = Expression.Default(typeof(string));
-            var argument2 = Expression.Default(typeof(Exception));
-            var node = Expression.New(constructor, argument1, argument2);
-            var expected = new Expression[] { argument1, argument2, node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void ShouldEnumerateNewArrayExpressionAs_Node()
-        {
-            var node = Expression.NewArrayInit(typeof(int));
-            var expected = new Expression[] { node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void ShouldEnumerateNewArrayExpressionAs_Initializers_Node()
+        public void NewArrayExpressionShouldEnumerateAs_Initializers_NewArray()
         {
             var initializer = Expression.Default(typeof(int));
-            var node = Expression.NewArrayInit(typeof(int), initializer);
-            var expected = new Expression[] { initializer, node };
+            var newArray = Expression.NewArrayInit(typeof(int), initializer);
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
+            Expression target = newArray;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, initializer, newArray);
         }
 
         [Fact]
-        public void ShouldEnumerateInvocationExpressionAs_Body_Lambda_Node()
+        public void InvocationExpressionShouldEnumerateAs_Body_Lambda_Invocation()
         {
             var body = Expression.Empty();
             var lambda = Expression.Lambda(body);
+            var invoke = Expression.Invoke(lambda);
 
-            var node = Expression.Invoke(lambda);
-            var expected = new Expression[] { body, lambda, node };
+            Expression target = invoke;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, body, lambda, invoke);
         }
 
         [Fact]
-        public void ShouldEnumerateInvocationExpressionAs_Body_Params_Lambda_Args_Node()
+        public void InvocationExpressionShouldEnumerateAs_Body_Params_Lambda_Args_Invocation()
         {
             var body = Expression.Empty();
             var parameter = Expression.Parameter(typeof(int));
             var lambda = Expression.Lambda(body, parameter);
-
             var argument = Expression.Default(typeof(int));
-            var node = Expression.Invoke(lambda, argument);
+            var invoke = Expression.Invoke(lambda, argument);
 
-            var expected = new Expression[] { body, parameter, lambda, argument, node };
+            Expression target = invoke;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
-        }
-
-
-        class Node
-        {
-            public Node()
-            {
-            }
-
-            public Node(string name)
-            {
-            }
-            public string Name { get; set; }
-            public Node Parent { get; set; }
-            public ICollection<Node> Children { get; set; }
-        }
-
-
-        [Fact]
-        public void ShouldEnumerateMemberInitExpression_Arguments_New_Node()
-        {
-            var constructor = typeof(Node).GetConstructor(new[] { typeof(string) });
-            var argument1 = Expression.Default(typeof(string));
-            var newExpression = Expression.New(constructor, argument1);
-            var node = Expression.MemberInit(newExpression);
-
-            var expected = new Expression[] { argument1, newExpression, node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, body, parameter, lambda, argument, invoke);
         }
 
         [Fact]
-        public void ShouldEnumerateMemberInitExpression_New_MemberAssignments_Node()
+        public void MemberInitExpressionShouldEnumerateAs_New_MemberInit()
         {
-            var constructor = typeof(Node).GetConstructor(Array.Empty<Type>());
-            var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
-            var newExpression = Expression.New(constructor);
-            var assignment = Expression.Default(typeof(string));
-            var node = Expression.MemberInit(newExpression, Expression.Bind(nameProperty, assignment));
+            var newExpression = Expression.New(Stub.CtorInfo);
+            var memberInit = Expression.MemberInit(newExpression);
 
-            var expected = new Expression[] { newExpression, assignment, node };
+            Expression target = memberInit;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, newExpression, memberInit);
         }
 
         [Fact]
-        public void ShouldEnumerateMemberInitExpression_Arguments_New_MemberMemberBindings_Node()
+        public void MemberInitExpressionShouldEnumerateAs_New_MemberAssignments_MemberInit()
         {
-            var constructor = typeof(Node).GetConstructor(Array.Empty<Type>());
-            var parentProperty = typeof(Node).GetProperty(nameof(Node.Parent));
-            var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
+            var newExpression = Expression.New(Stub.CtorInfo);
+            var assignment = Expression.Default(typeof(Stub));
+            var memberInit = Expression.MemberInit(newExpression,
+                Expression.Bind(Stub.ParentPropertyInfo, assignment)
+                );
 
-            var newExpression = Expression.New(constructor);
-            var assignment = Expression.Default(typeof(string));
-            var node = Expression.MemberInit(newExpression, Expression.MemberBind(parentProperty, Expression.Bind(nameProperty, assignment)));
+            Expression target = memberInit;
 
-            var expected = new Expression[] { newExpression, assignment, node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, newExpression, assignment, memberInit);
         }
 
         [Fact]
-        public void ShouldEnumerateMemberInitExpression_Arguments_New_MemberListBindings_Node()
+        public void MemberInitExpressionShouldEnumerateAs_New_MemberMemberBindings_MemberInit()
         {
-            var constructor = typeof(Node).GetConstructor(Array.Empty<Type>());
-            var childrenProperty = typeof(Node).GetProperty(nameof(Node.Children));
-            var addMethod = typeof(ICollection<Node>).GetMethod(nameof(ICollection<Node>.Add), new[] { typeof(Node) });
+            var newExpression = Expression.New(Stub.CtorInfo);
+            var assignment = Expression.Default(typeof(Stub));
+            var memberInit = Expression.MemberInit(newExpression,
+                Expression.MemberBind(Stub.ParentPropertyInfo,
+                    Expression.Bind(Stub.ParentPropertyInfo, assignment)
+                    )
+                );
 
-            var newExpression = Expression.New(constructor);
-            var assignment = Expression.Default(typeof(Node));
-            var node = Expression.MemberInit(newExpression, Expression.ListBind(childrenProperty, Expression.ElementInit(addMethod, assignment)));
+            Expression target = memberInit;
 
-            var expected = new Expression[] { newExpression, assignment, node };
-
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, newExpression, assignment, memberInit);
         }
 
         [Fact]
-        public void ShouldEnumerateListInitExpression_New_Initializers_Node()
+        public void MemberInitExpressionShouldEnumerateAs_New_MemberListBindings_MemberInit()
         {
-            var constructor = typeof(List<int>).GetConstructor(Array.Empty<Type>());
-            var newExpression = Expression.New(constructor);
-            var initializer = Expression.Default(typeof(int));
-            var node = Expression.ListInit(newExpression, initializer);
+            var newExpression = Expression.New(Stub.CtorInfo);
+            var assignment = Expression.Default(typeof(Stub));
+            var memberInit = Expression.MemberInit(newExpression,
+                Expression.ListBind(Stub.ChildrenPropertyInfo,
+                    Expression.ElementInit(Stub.ChildrenAddMethodInfo, assignment)
+                    )
+                );
 
-            var expected = new Expression[] { newExpression, initializer, node };
+            Expression target = memberInit;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, newExpression, assignment, memberInit);
         }
 
         [Fact]
-        public void ShouldEnumerateBlockExpression_Expressions_Node()
+        public void ListInitExpressionShouldEnumerateAs_New_Initializers_ListInit()
+        {
+            var newExpression = Expression.New(Stub.ListCtorInfo);
+            var initializer = Expression.Default(typeof(Stub));
+            var listInit = Expression.ListInit(newExpression, initializer);
+
+            Expression target = listInit;
+
+            AssertEnumerateAs(target, newExpression, initializer, listInit);
+        }
+
+        [Fact]
+        public void BlockExpressionShouldEnumerateAs_Expressions_Block()
         {
             var expression = Expression.Empty();
-            var node = Expression.Block(expression);
+            var block = Expression.Block(expression);
 
-            var expected = new Expression[] { expression, node };
+            Expression target = block;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, expression, block);
         }
 
         [Fact]
-        public void ShouldEnumerateBlockExpression_Variables_Expressions_Node()
+        public void BlockExpressionShouldEnumerateAs_Variables_Expressions_Block()
         {
             var variable = Expression.Parameter(typeof(bool));
             var expression = Expression.Empty();
-            var node = Expression.Block(new[] { variable }, expression);
+            var block = Expression.Block(new[] { variable }, expression);
 
-            var expected = new Expression[] { variable, expression, node };
+            Expression target = block;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, variable, expression, block);
         }
 
         [Fact]
-        public void ShouldEnumerateDynamicExpressionAs_Arguments_Node()
+        public void DynamicExpressionShouldEnumerateAs_Arguments_Dynamic()
         {
             var callSiteBinder = Mock.Of<CallSiteBinder>();
             var argument = Expression.Default(typeof(int));
-            var node = Expression.Dynamic(callSiteBinder, typeof(object), argument);
+            var dynamic = Expression.Dynamic(callSiteBinder, typeof(object), argument);
 
-            var expected = new Expression[] { argument, node };
+            Expression target = dynamic;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, argument, dynamic);
         }
 
         [Fact]
-        public void ShouldEnumerateGotoExpression_Value_Node()
+        public void GotoExpressionShouldEnumerateAs_Value_Goto()
         {
             var value = Expression.Empty();
-            var node = Expression.Goto(Expression.Label(), value);
+            var @goto = Expression.Goto(Expression.Label(), value);
 
-            var expected = new Expression[] { value, node };
+            Expression target = @goto;
 
-            var actual = ExpressionExtensions.AsEnumerable(node);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, value, @goto);
         }
 
         [Fact]
-        public void ShouldEnumerateIfNotAEqualBThenOneElseTwoAs_A_B_Equal_Not_1_2_IfThenElse()
+        public void ShouldEnumerateIfNotLeftEqualRightThenOneElseTwoAs_Left_Right_Equal_Not_One_Two_IfThenElse()
         {
-            var a = Expression.Variable(typeof(int), "a");
-            var b = Expression.Variable(typeof(int), "b");
-            var equal = Expression.Equal(a, b);
+            var left = Expression.Variable(typeof(int));
+            var right = Expression.Variable(typeof(int));
+            var equal = Expression.Equal(left, right);
             var not = Expression.Not(equal);
             var one = Expression.Constant(1);
             var two = Expression.Constant(2);
             var ifThenElse = Expression.IfThenElse(not, one, two);
-            var expected = new Expression[] { a, b, equal, not, one, two, ifThenElse };
 
-            var actual = ExpressionExtensions.AsEnumerable(ifThenElse);
+            Expression target = ifThenElse;
 
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, left, right, equal, not, one, two, ifThenElse);
         }
 
-
         [Fact]
-        public void ShouldEnumerateStringPadLeftDateTimeDateDayIsIntAs_String_DateTime_Date_Day_PadLeft_TypeEqual()
+        public void ShouldEnumerateTypeEqualCallInstanceMethodTypeOfParentOfStub_Instance_Stub_Parent_Type_Call_TypeEqual()
         {
-            var dateProperty = typeof(DateTime).GetProperty(nameof(DateTime.Date));
-            var dayProperty = typeof(DateTime).GetProperty(nameof(DateTime.Day));
-            var padLeftMethod = typeof(String).GetMethod(nameof(String.PadLeft), new[] { typeof(int) });
+            var stub = Expression.Default(typeof(Stub));
+            var parent = Expression.MakeMemberAccess(stub, Stub.ParentPropertyInfo);
+            var type = Expression.MakeMemberAccess(parent, Stub.TypePropertyInfo);
 
-            var dateTime = Expression.Default(typeof(DateTime));
-            var date = Expression.MakeMemberAccess(dateTime, dateProperty);
-            var day = Expression.MakeMemberAccess(date, dayProperty);
+            var instance = Expression.Default(typeof(object));
+            var call = Expression.Call(instance, Stub.EqualsMethodInfo, type);
+            var typeEqual = Expression.TypeEqual(call, typeof(int));
 
-            var @string = Expression.Default(typeof(String));
-            var padLeft = Expression.Call(@string, padLeftMethod, day);
-            var typeEqual = Expression.TypeEqual(padLeft, typeof(int));
-            var expected = new Expression[] { @string, dateTime, date, day, padLeft, typeEqual };
+            Expression target = typeEqual;
 
-            var actual = ExpressionExtensions.AsEnumerable(typeEqual);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, instance, stub, parent, type, call, typeEqual);
         }
 
         [Fact]
         public void ShouldEnumerateInvokeLambdaAs_Initializers_NewArray_Parameter_Lambda_Arguments_New_Invoke()
         {
-            var constructor = typeof(Exception).GetConstructor(new[] { typeof(string), typeof(Exception) });
-
             var initializer = Expression.Default(typeof(int));
             var newArray = Expression.NewArrayInit(typeof(int), initializer);
-            var parameter = Expression.Parameter(typeof(Exception));
+            var parameter = Expression.Parameter(typeof(Stub));
             var lambda = Expression.Lambda(newArray, parameter);
 
-            var argument1 = Expression.Default(typeof(string));
-            var argument2 = Expression.Default(typeof(Exception));
-            var @new = Expression.New(constructor, argument1, argument2);
+            var argument1 = Expression.Default(typeof(ExpressionType));
+            var argument2 = Expression.Default(typeof(Type));
+            var @new = Expression.New(Stub.CtorExpressionTypeTypeInfo, argument1, argument2);
             var invoke = Expression.Invoke(lambda, @new);
 
-            var expected = new Expression[] { initializer, newArray, parameter, lambda, argument1, argument2, @new, invoke };
+            Expression target = invoke;
 
-            var actual = ExpressionExtensions.AsEnumerable(invoke);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, initializer, newArray, parameter, lambda, argument1, argument2, @new, invoke);
         }
 
         [Fact]
-        public void ShouldEnumerateBlockListInitAs_Variables_NewList_NewNode_NodeInit_ListInit_Block()
+        public void ShouldEnumerateBlockListInitAs_Variables_NewList_NewStubs_StubInits_ListInit_Block()
         {
-            var nodeConstructor = typeof(Node).GetConstructor(Array.Empty<Type>());
-            var nameProperty = typeof(Node).GetProperty(nameof(Node.Name));
-            var parentProperty = typeof(Node).GetProperty(nameof(Node.Parent));
-            var childrenProperty = typeof(Node).GetProperty(nameof(Node.Children));
-            var addMethod = typeof(ICollection<Node>).GetMethod(nameof(ICollection<Node>.Add), new[] { typeof(Node) });
-            var listConstructor = typeof(List<Node>).GetConstructor(Array.Empty<Type>());
+            var variable1 = Expression.Parameter(typeof(Stub));
+            var variable2 = Expression.Parameter(typeof(Stub));
 
-            var variable1 = Expression.Parameter(typeof(string));
-            var variable2 = Expression.Parameter(typeof(string));
+            var newList = Expression.New(Stub.ListCtorInfo);
 
-                var newList = Expression.New(listConstructor);
+            var newStub1 = Expression.New(Stub.CtorInfo);
+            var stub1Init = Expression.MemberInit(newStub1, Expression.Bind(Stub.ParentPropertyInfo, variable1));
 
-                    var newNode1 = Expression.New(nodeConstructor);
-                    var node1Init = Expression.MemberInit(newNode1, Expression.Bind(nameProperty, variable1));
+            var newStub2 = Expression.New(Stub.CtorInfo);
+            var stub2Init = Expression.MemberInit(newStub2,
+                Expression.MemberBind(Stub.ParentPropertyInfo,
+                    Expression.Bind(
+                        Stub.ParentPropertyInfo, variable2
+                        )
+                    )
+                );
+            var newStub3 = Expression.New(Stub.CtorInfo);
+            var stub3Init = Expression.MemberInit(newStub3,
+                Expression.ListBind(Stub.ChildrenPropertyInfo,
+                    Expression.ElementInit(Stub.ChildrenAddMethodInfo, stub2Init)
+                    )
+                );
 
-                    var newNode3 = Expression.New(nodeConstructor);
-                        var newNode2 = Expression.New(nodeConstructor);
-                        var node2Init = Expression.MemberInit(newNode2, Expression.MemberBind(parentProperty, Expression.Bind(nameProperty, variable2)));
-                    var node3Init = Expression.MemberInit(newNode3, Expression.ListBind(childrenProperty, Expression.ElementInit(addMethod, node2Init)));
-
-                var listInit = Expression.ListInit(newList, node1Init, node3Init);
+            var listInit = Expression.ListInit(newList, stub1Init, stub3Init);
 
             var block = Expression.Block(new[] { variable1, variable2 }, listInit);
+
+            Expression target = block;
 
             var expected = new Expression[]
             {
@@ -559,24 +490,21 @@ namespace ExpressionTreeToolkit.UnitTests
                 variable2,
                     newList,
 
-                        newNode1,
+                        newStub1,
                         variable1,
-                        node1Init,
+                        stub1Init,
 
-                        newNode3,
-                            newNode2,
+                        newStub3,
+                            newStub2,
                             variable2,
-                            node2Init,
-                        node3Init,
+                            stub2Init,
+                        stub3Init,
 
                     listInit,
                 block
             };
 
-            var actual = ExpressionExtensions.AsEnumerable(block);
-
-            Assert.Equal(expected, actual);
+            AssertEnumerateAs(target, expected);
         }
     }
-
 }
