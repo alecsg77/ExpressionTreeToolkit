@@ -32,6 +32,11 @@ namespace ExpressionTreeToolkit
                 throw new ArgumentNullException(nameof(expression));
             }
 
+            if (expression is IEnumerable<Expression> enumerable)
+            {
+                return enumerable;
+            }
+
             switch (expression.NodeType)
             {
                 case ExpressionType.Negate:

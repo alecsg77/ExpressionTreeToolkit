@@ -19,6 +19,16 @@ namespace ExpressionTreeToolkit
     {
         public static IEnumerable<Expression> AsEnumerable([DisallowNull] this Expression source)
         {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source is IEnumerable<Expression> enumerable)
+            {
+                return enumerable;
+            }
+
             return ExpressionIterator.Default.Iterator(source);
         }
     }

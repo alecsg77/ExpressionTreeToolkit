@@ -740,7 +740,8 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void ShouldEnumerateLoopSwitchCasesTryCatchesFinallyTryFault_Try_Catches_Finally_Try_Fault_Cases_Switch_Loop()
+        public void
+            ShouldEnumerateLoopSwitchCasesTryCatchesFinallyTryFault_Try_Catches_Finally_Try_Fault_Cases_Switch_Loop()
         {
             /*
             loop () {
@@ -811,27 +812,64 @@ namespace ExpressionTreeToolkit.UnitTests
 
             Expression target = loop;
 
-            var expected = new Expression[]{
-                    switchValue,
-                        caseValue1, caseTestValue1,
-                            tryCatchFinallyBody,
-                            catchParameter1, catchBody1, catchBodyBlock1,
-                            catchParameter2, catchFilterValue2, catchFilter2, catchBody2,
-                            finallyBody, finallyBlock,
-                        caseBody1,
+            var expected = new Expression[]
+            {
+                switchValue,
+                caseValue1, caseTestValue1,
+                tryCatchFinallyBody,
+                catchParameter1, catchBody1, catchBodyBlock1,
+                catchParameter2, catchFilterValue2, catchFilter2, catchBody2,
+                finallyBody, finallyBlock,
+                caseBody1,
 
-                        caseTestValue2,
-                        caseTestValue3,
-                            tryFaultBody, tryFaultBodyBlock,
-                            faultBody, faultBlock,
-                        caseBody2,
+                caseTestValue2,
+                caseTestValue3,
+                tryFaultBody, tryFaultBodyBlock,
+                faultBody, faultBlock,
+                caseBody2,
 
-                        defaultBody, defaultBodyBlock,
-                    @switch,
+                defaultBody, defaultBodyBlock,
+                @switch,
                 loop
             };
 
             AssertEnumerateAs(target, expected);
+        }
+
+        private static IEnumerator<Expression> Iterator(Expression expression)
+        {
+            yield return expression;
+        }
+
+        [Fact]
+        public void EnumerableExpressionShouldEnumerateAs_GetEnumerator()
+        {
+            var empty = Expression.Empty();
+
+            var mock = new Mock<Expression>(MockBehavior.Strict);
+            mock.As<IEnumerable<Expression>>()
+                .Setup(enumerableExpression => enumerableExpression.GetEnumerator()).Returns(Iterator(empty));
+
+            var target = mock.Object;
+
+            AssertEnumerateAs(target, empty);
+        }
+
+        [Fact]
+        public void ShouldEnumerateBlockEnumerableExpressionAs_GetEnumerator_Block()
+        {
+            var empty = Expression.Empty();
+
+            var mock = new Mock<Expression>(MockBehavior.Strict);
+            mock.SetupGet(x => x.NodeType).Returns(ExpressionType.Extension);
+            mock.As<IEnumerable<Expression>>()
+                .Setup(enumerableExpression => enumerableExpression.GetEnumerator()).Returns(Iterator(empty));
+
+            var block = Expression.Block(mock.Object);
+
+            var target = block;
+
+            AssertEnumerateAs(target, empty, block);
         }
     }
 }
