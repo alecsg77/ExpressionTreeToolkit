@@ -117,6 +117,7 @@ namespace ExpressionTreeToolkit.UnitTests
             new object[] {Expression.NewArrayInit(typeof(int))},
             new object[] {Expression.Goto(Expression.Label())},
             new object[] {Expression.Label(Expression.Label())},
+            new object[] {Expression.RuntimeVariables()},
         };
 
         [Theory]
@@ -425,6 +426,17 @@ namespace ExpressionTreeToolkit.UnitTests
             Expression target = label;
 
             AssertEnumerateAs(target, defaultValue, label);
+        }
+
+        [Fact]
+        public void RuntimeVariablesExpressionShouldEnumerateAs_Variables_RuntimeVariables()
+        {
+            var variable = Expression.Parameter(typeof(int));
+            var runtimeVariables = Expression.RuntimeVariables(variable);
+
+            Expression target = runtimeVariables;
+
+            AssertEnumerateAs(target, variable, runtimeVariables);
         }
 
         [Fact]

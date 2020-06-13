@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
@@ -237,7 +237,7 @@ namespace ExpressionTreeToolkit
                 yield return body;
             }
 
-            foreach (var parameter in expression.Parameters.SelectMany(ExpressionIterator))
+            foreach (var parameter in expression.Parameters)
             {
                 yield return parameter;
             }
@@ -392,17 +392,21 @@ namespace ExpressionTreeToolkit
         {
             if (expression.DefaultValue != null)
             {
-            foreach (var defaultValue in ExpressionIterator(expression.DefaultValue))
-            {
-                yield return defaultValue;
-            }
+                foreach (var defaultValue in ExpressionIterator(expression.DefaultValue))
+                {
+                    yield return defaultValue;
+                }
             }
             yield return expression;
         }
 
         private static IEnumerable<Expression> RuntimeVariablesIterator(RuntimeVariablesExpression expression)
         {
-            throw new NotImplementedException();
+            foreach (var variable in expression.Variables)
+            {
+                yield return variable;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> LoopIterator(LoopExpression expression)
