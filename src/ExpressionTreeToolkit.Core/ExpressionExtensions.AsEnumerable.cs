@@ -374,7 +374,12 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> IndexIterator(IndexExpression expression)
         {
-            throw new NotImplementedException();
+            yield return expression.Object;
+            foreach (var argument in expression.Arguments)
+            {
+                yield return argument;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> LabelIterator(LabelExpression expression)

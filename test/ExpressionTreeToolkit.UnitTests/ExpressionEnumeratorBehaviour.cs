@@ -403,6 +403,18 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
+        public void IndexExpressionShouldEnumerateAs_Instance_Arguments_Index()
+        {
+            var instance = Expression.Default(typeof(Stub[]));
+            var argument = Expression.Default(typeof(int));
+            var index = Expression.MakeIndex(instance, null, new[] { argument });
+
+            Expression target = index;
+
+            AssertEnumerateAs(target, instance, argument, index);
+        }
+
+        [Fact]
         public void ShouldEnumerateIfNotLeftEqualRightThenOneElseTwoAs_Left_Right_Equal_Not_One_Two_IfThenElse()
         {
             var left = Expression.Variable(typeof(int));
