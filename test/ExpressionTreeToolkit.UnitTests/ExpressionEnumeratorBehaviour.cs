@@ -450,6 +450,61 @@ namespace ExpressionTreeToolkit.UnitTests
             AssertEnumerateAs(target, body, loop);
         }
 
+#if NETFRAMEWORK != true
+        [Fact]
+        public void SwitchExpressionShouldEnumerateAs_SwitchValue_Switch()
+        {
+            var switchValue = Expression.Default(typeof(int));
+            var @switch = Expression.Switch(switchValue);
+
+            Expression target = @switch;
+
+            AssertEnumerateAs(target, switchValue, @switch);
+        }
+
+        [Fact]
+        public void SwitchExpressionShouldEnumerateAs_SwitchValue_Default_Switch()
+        {
+            var switchValue = Expression.Default(typeof(int));
+            var defaultBody = Expression.Empty();
+            var @switch = Expression.Switch(switchValue, defaultBody);
+
+            Expression target = @switch;
+
+            AssertEnumerateAs(target, switchValue, defaultBody, @switch);
+        }
+
+#endif
+
+        [Fact]
+        public void SwitchExpressionShouldEnumerateAs_SwitchValue_Bodies_TestValues_Switch()
+        {
+            var switchValue = Expression.Default(typeof(int));
+            var body = Expression.Empty();
+            var testValue = Expression.Default(typeof(int));
+            var @case = Expression.SwitchCase(body, testValue);
+            var @switch = Expression.Switch(switchValue, @case);
+
+            Expression target = @switch;
+
+            AssertEnumerateAs(target, switchValue, testValue, body, @switch);
+        }
+
+        [Fact]
+        public void SwitchExpressionShouldEnumerateAs_SwitchValue_Bodies_TestValues_Default_Switch()
+        {
+            var switchValue = Expression.Default(typeof(int));
+            var body = Expression.Empty();
+            var testValue = Expression.Default(typeof(int));
+            var @case = Expression.SwitchCase(body, testValue);
+            var defaultBody = Expression.Empty();
+            var @switch = Expression.Switch(switchValue, defaultBody, @case);
+
+            Expression target = @switch;
+
+            AssertEnumerateAs(target, switchValue, testValue, body, defaultBody, @switch);
+        }
+
         [Fact]
         public void ShouldEnumerateIfNotLeftEqualRightThenOneElseTwoAs_Left_Right_Equal_Not_One_Two_IfThenElse()
         {

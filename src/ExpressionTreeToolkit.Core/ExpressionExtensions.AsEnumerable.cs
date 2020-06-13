@@ -417,7 +417,20 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> SwitchIterator(SwitchExpression expression)
         {
-            throw new NotImplementedException();
+            yield return expression.SwitchValue;
+            foreach (var switchCase in expression.Cases)
+            {
+                foreach (var testValue in switchCase.TestValues)
+                {
+                    yield return testValue;
+                }
+                yield return switchCase.Body;
+            }
+            if (expression.DefaultBody != null)
+            {
+                yield return expression.DefaultBody;
+            }
+            yield return expression;
         }
 
         private static IEnumerable<Expression> TryIterator(TryExpression expression)
