@@ -384,7 +384,8 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> LabelIterator(LabelExpression expression)
         {
-            throw new NotImplementedException();
+            yield return expression.DefaultValue;
+            yield return expression;
         }
 
         private static IEnumerable<Expression> RuntimeVariablesIterator(RuntimeVariablesExpression expression)

@@ -114,6 +114,7 @@ namespace ExpressionTreeToolkit.UnitTests
             new object[] {Expression.New(Stub.CtorInfo)},
             new object[] {Expression.NewArrayInit(typeof(int))},
             new object[] {Expression.Goto(Expression.Label())},
+            new object[] {Expression.Label(Expression.Label())},
         };
 
         [Theory]
@@ -412,6 +413,17 @@ namespace ExpressionTreeToolkit.UnitTests
             Expression target = index;
 
             AssertEnumerateAs(target, instance, argument, index);
+        }
+
+        [Fact]
+        public void LabelLabelExpressionShouldEnumerateAs_DefaultValue_Label()
+        {
+            var defaultValue = Expression.Default(typeof(int));
+            var label = Expression.Label(Expression.Label(),defaultValue);
+
+            Expression target = label;
+
+            AssertEnumerateAs(target, defaultValue, label);
         }
 
         [Fact]
