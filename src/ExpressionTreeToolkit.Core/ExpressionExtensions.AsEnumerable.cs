@@ -435,7 +435,34 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> TryIterator(TryExpression expression)
         {
-            throw new NotImplementedException();
+            yield return expression.Body;
+
+            foreach (var catchBlock in expression.Handlers)
+            {
+                if (catchBlock.Variable != null)
+                {
+                    yield return catchBlock.Variable;
+                }
+
+                if (catchBlock.Filter != null)
+                {
+                    yield return catchBlock.Filter;
+                }
+
+                yield return catchBlock.Body;
+            }
+
+            if (expression.Fault != null)
+            {
+                yield return expression.Fault;
+            }
+
+            if (expression.Finally != null)
+            {
+                yield return expression.Finally;
+            }
+
+            yield return expression;
         }
     }
 }

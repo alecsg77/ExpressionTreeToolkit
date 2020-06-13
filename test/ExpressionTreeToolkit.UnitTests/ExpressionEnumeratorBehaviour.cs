@@ -473,7 +473,6 @@ namespace ExpressionTreeToolkit.UnitTests
 
             AssertEnumerateAs(target, switchValue, defaultBody, @switch);
         }
-
 #endif
 
         [Fact]
@@ -503,6 +502,101 @@ namespace ExpressionTreeToolkit.UnitTests
             Expression target = @switch;
 
             AssertEnumerateAs(target, switchValue, testValue, body, defaultBody, @switch);
+        }
+
+        [Fact]
+        public void TryExpressionShouldEnumerateAs_Body_Finally_Try()
+        {
+            var body = Expression.Empty();
+            var @finally = Expression.Empty();
+            var @try = Expression.TryFinally(body, @finally);
+
+            Expression target = @try;
+
+            AssertEnumerateAs(target, body, @finally, @try);
+        }
+
+        [Fact]
+        public void TryExpressionShouldEnumerateAs_Body_Fault_Try()
+        {
+            var body = Expression.Empty();
+            var fault = Expression.Empty();
+            var @try = Expression.TryFault(body, fault);
+
+            Expression target = @try;
+
+            AssertEnumerateAs(target, body, fault, @try);
+        }
+        [Fact]
+        public void TryExpressionShouldEnumerateAs_Body_Catches_Try()
+        {
+            var body = Expression.Empty();
+            var catchBody = Expression.Empty();
+            var @catch = Expression.Catch(typeof(Exception), catchBody);
+            var @try = Expression.TryCatch(body, @catch);
+
+            Expression target = @try;
+
+            AssertEnumerateAs(target, body, catchBody, @try);
+        }
+
+        [Fact]
+        public void TryExpressionShouldEnumerateAs_Body_CatchBodies_Final_Try()
+        {
+            var body = Expression.Empty();
+            var catchBody = Expression.Empty();
+            var @catch = Expression.Catch(typeof(Exception), catchBody);
+            var @finally = Expression.Empty();
+            var @try = Expression.TryCatchFinally(body, @finally, @catch);
+
+            Expression target = @try;
+
+            AssertEnumerateAs(target, body, catchBody, @finally, @try);
+        }
+
+        [Fact]
+        public void TryExpressionShouldEnumerateAs_Body_Parameters_CatchBodies_Final_Try()
+        {
+            var body = Expression.Empty();
+            var parameter = Expression.Parameter(typeof(Exception));
+            var catchBody = Expression.Empty();
+            var @catch = Expression.Catch(parameter, catchBody);
+            var @finally = Expression.Empty();
+            var @try = Expression.TryCatchFinally(body, @finally, @catch);
+
+            Expression target = @try;
+
+            AssertEnumerateAs(target, body, parameter, catchBody, @finally, @try);
+        }
+        [Fact]
+        public void TryExpressionShouldEnumerateAs_Body_Filters_CatchBodies_Final_Try()
+        {
+            var body = Expression.Empty();
+            var catchBody = Expression.Empty();
+            var filter = Expression.Default(typeof(bool));
+            var @catch = Expression.Catch(typeof(Exception), catchBody, filter);
+            var @finally = Expression.Empty();
+            var @try = Expression.TryCatchFinally(body, @finally, @catch);
+
+            Expression target = @try;
+
+            AssertEnumerateAs(target, body, filter, catchBody, @finally, @try);
+        }
+
+        [Fact]
+        public void TryExpressionShouldEnumerateAs_Body_Filters_Parameters_CatchBodies_Final_Try()
+        {
+            var body = Expression.Empty();
+            var parameter = Expression.Parameter(typeof(Exception));
+            var filter = Expression.Default(typeof(bool));
+            var catchBody = Expression.Empty();
+            var @catch = Expression.Catch(parameter, catchBody, filter);
+            var @finally = Expression.Empty();
+            var @try = Expression.TryCatchFinally(body, @finally, @catch);
+
+            Expression target = @try;
+
+            AssertEnumerateAs(target, body, parameter, filter, catchBody, @finally, @try);
         }
 
         [Fact]
