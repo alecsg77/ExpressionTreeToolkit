@@ -360,7 +360,6 @@ namespace ExpressionTreeToolkit
                 yield return argument;
             }
             yield return expression;
-
         }
 
         private static IEnumerable<Expression> GotoIterator(GotoExpression expression)
@@ -411,7 +410,10 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> LoopIterator(LoopExpression expression)
         {
-            yield return expression.Body;
+            foreach (var body in ExpressionIterator(expression.Body))
+            {
+                yield return body;
+            }
             yield return expression;
         }
 
@@ -420,22 +422,31 @@ namespace ExpressionTreeToolkit
             yield return expression.SwitchValue;
             foreach (var switchCase in expression.Cases)
             {
-                foreach (var testValue in switchCase.TestValues)
+                foreach (var testValue in switchCase.TestValues.SelectMany(ExpressionIterator))
                 {
                     yield return testValue;
                 }
-                yield return switchCase.Body;
+                foreach (var body in ExpressionIterator(switchCase.Body))
+                {
+                    yield return body;
+                }
             }
             if (expression.DefaultBody != null)
             {
-                yield return expression.DefaultBody;
+                foreach (var defaultBody in ExpressionIterator(expression.DefaultBody))
+                {
+                    yield return defaultBody;
+                }
             }
             yield return expression;
         }
 
         private static IEnumerable<Expression> TryIterator(TryExpression expression)
         {
-            yield return expression.Body;
+            foreach (var body in ExpressionIterator(expression.Body))
+            {
+                yield return body;
+            }
 
             foreach (var catchBlock in expression.Handlers)
             {
@@ -446,20 +457,32 @@ namespace ExpressionTreeToolkit
 
                 if (catchBlock.Filter != null)
                 {
-                    yield return catchBlock.Filter;
+                    foreach (var filter in ExpressionIterator(catchBlock.Filter))
+                    {
+                        yield return filter;
+                    }
                 }
 
-                yield return catchBlock.Body;
+                foreach (var body in ExpressionIterator(catchBlock.Body))
+                {
+                    yield return body;
+                }
             }
 
             if (expression.Fault != null)
             {
-                yield return expression.Fault;
+                foreach (var fault in ExpressionIterator(expression.Fault))
+                {
+                    yield return fault;
+                }
             }
 
             if (expression.Finally != null)
             {
-                yield return expression.Finally;
+                foreach (var @finally in ExpressionIterator(expression.Finally))
+                {
+                    yield return @finally;
+                }
             }
 
             yield return expression;

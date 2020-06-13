@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -99,7 +100,7 @@ namespace ExpressionTreeToolkit.UnitTests
 
         private static void AssertEnumerateAs(Expression target, params Expression[] expected)
         {
-            var actual = ExpressionExtensions.AsEnumerable(target);
+            var actual = ExpressionExtensions.AsEnumerable(target).ToArray();
 
             Assert.Equal(expected, actual);
         }
@@ -730,6 +731,101 @@ namespace ExpressionTreeToolkit.UnitTests
                 label,
                 dynamic,
                 @goto
+            };
+
+            AssertEnumerateAs(target, expected);
+        }
+
+        [Fact]
+        public void ShouldEnumerateLoopSwitchCasesTryCatchesFinallyTryFault_Try_Catches_Finally_Try_Fault_Cases_Switch_Loop()
+        {
+            /*
+            loop () {
+                switch (switchValue) {
+                    case testValue1:
+                        try {
+                        }
+                        catch (Exception e) {
+                        }
+                        catch (Exception) when (catchFilterValue2) {
+                        }
+                        finally {
+                        }
+                        break;
+                    case testValue2:
+                        try {
+                        }
+                        fault {
+                        }
+                        break;
+                    default:
+                        {
+                        }
+                }
+            }
+            */
+
+            var switchValue = Expression.Default(typeof(bool));
+
+            var tryCatchFinallyBody = Expression.Empty();
+
+            var catchParameter1 = Expression.Parameter(typeof(Exception));
+            var catchBody1 = Expression.Empty();
+            var catchBodyBlock1 = Expression.Block(catchBody1);
+            var catch1 = Expression.Catch(catchParameter1, catchBodyBlock1);
+
+            var catchParameter2 = Expression.Parameter(typeof(Exception));
+            var catchBody2 = Expression.Empty();
+            var catchFilterValue2 = Expression.Default(typeof(bool));
+            var catchFilter2 = Expression.Not(catchFilterValue2);
+            var catch2 = Expression.Catch(catchParameter2, catchBody2, catchFilter2);
+
+            var finallyBody = Expression.Empty();
+            var finallyBlock = Expression.Block(finallyBody);
+
+            var caseBody1 = Expression.TryCatchFinally(tryCatchFinallyBody, finallyBlock, catch1, catch2);
+            var caseValue1 = Expression.Default(typeof(bool));
+            var caseTestValue1 = Expression.Not(caseValue1);
+            var case1 = Expression.SwitchCase(caseBody1, caseTestValue1);
+
+            var tryFaultBody = Expression.Empty();
+            var tryFaultBodyBlock = Expression.Block(tryFaultBody);
+            var faultBody = Expression.Empty();
+            var faultBlock = Expression.Block(faultBody);
+
+            var caseBody2 = Expression.TryFault(tryFaultBodyBlock, faultBlock);
+            var caseTestValue2 = Expression.Default(typeof(bool));
+            var caseTestValue3 = Expression.Default(typeof(bool));
+            var case2 = Expression.SwitchCase(caseBody2, caseTestValue2, caseTestValue3);
+
+            var defaultBody = Expression.Empty();
+            var defaultBodyBlock = Expression.Block(defaultBody);
+
+            var @switch = Expression.Switch(switchValue, defaultBodyBlock, case1, case2);
+
+            var loop = Expression.Loop(@switch);
+
+
+            Expression target = loop;
+
+            var expected = new Expression[]{
+                    switchValue,
+                        caseValue1, caseTestValue1,
+                            tryCatchFinallyBody,
+                            catchParameter1, catchBody1, catchBodyBlock1,
+                            catchParameter2, catchFilterValue2, catchFilter2, catchBody2,
+                            finallyBody, finallyBlock,
+                        caseBody1,
+
+                        caseTestValue2,
+                        caseTestValue3,
+                            tryFaultBody, tryFaultBodyBlock,
+                            faultBody, faultBlock,
+                        caseBody2,
+
+                        defaultBody, defaultBodyBlock,
+                    @switch,
+                loop
             };
 
             AssertEnumerateAs(target, expected);
