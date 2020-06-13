@@ -411,7 +411,8 @@ namespace ExpressionTreeToolkit
 
         private static IEnumerable<Expression> LoopIterator(LoopExpression expression)
         {
-            throw new NotImplementedException();
+            yield return expression.Body;
+            yield return expression;
         }
 
         private static IEnumerable<Expression> SwitchIterator(SwitchExpression expression)

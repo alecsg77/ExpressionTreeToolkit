@@ -440,6 +440,17 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
+        public void LoopExpressionShouldEnumerateAs_Body_Loop()
+        {
+            var body = Expression.Empty();
+            var loop = Expression.Loop(body);
+
+            Expression target = loop;
+
+            AssertEnumerateAs(target, body, loop);
+        }
+
+        [Fact]
         public void ShouldEnumerateIfNotLeftEqualRightThenOneElseTwoAs_Left_Right_Equal_Not_One_Two_IfThenElse()
         {
             var left = Expression.Variable(typeof(int));
