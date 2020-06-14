@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Xunit;
 
@@ -22,7 +23,6 @@ namespace ExpressionTreeToolkit.UnitTests
 
         private static void AssertAreEqual(Expression x, Expression y, IEqualityComparer<Expression> equalityComparer)
         {
-            if (equalityComparer == null) throw new ArgumentNullException(nameof(equalityComparer));
             Assert.True(equalityComparer.Equals(x, y));
             Assert.Equal(equalityComparer.GetHashCode(x), equalityComparer.GetHashCode(y));
         }
@@ -30,7 +30,6 @@ namespace ExpressionTreeToolkit.UnitTests
         private static void AssertAreNotEqual(Expression x, Expression y,
             IEqualityComparer<Expression> equalityComparer)
         {
-            if (equalityComparer == null) throw new ArgumentNullException(nameof(equalityComparer));
             Assert.False(equalityComparer.Equals(x, y));
         }
 
@@ -55,6 +54,7 @@ namespace ExpressionTreeToolkit.UnitTests
             AssertAreNotEqual(new SimpleExpression(3), new SimpleExpression(3));
         }
 
+        [ExcludeFromCodeCoverage]
         class EqualityComparableExpression : SimpleExpression, IEquatable<EqualityComparableExpression>
         {
             public EqualityComparableExpression(int id) : base(id)
@@ -107,6 +107,7 @@ namespace ExpressionTreeToolkit.UnitTests
             AssertAreNotEqual(expressionX, expressionY, target);
         }
 
+        [ExcludeFromCodeCoverage]
         private sealed class SimpleExpressionEqualityComparer : EqualityComparer<Expression>
         {
             public override bool Equals(Expression x, Expression y)
@@ -153,6 +154,7 @@ namespace ExpressionTreeToolkit.UnitTests
             AssertAreEqual(expressionX, expressionY, target);
         }
 
+        [ExcludeFromCodeCoverage]
         private sealed class ExtendedExpressionEqualityComparer : ExpressionEqualityComparer
         {
             public override bool Equals(Expression x, Expression y)

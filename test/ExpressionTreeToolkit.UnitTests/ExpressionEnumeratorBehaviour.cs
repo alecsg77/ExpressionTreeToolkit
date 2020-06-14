@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -18,6 +19,7 @@ namespace ExpressionTreeToolkit.UnitTests
     {
         private static readonly CallSiteBinder CallSiteBinder = Mock.Of<CallSiteBinder>();
 
+        [ExcludeFromCodeCoverage]
         private sealed class Stub : Expression
         {
             public static readonly Stub Extension = new Stub(ExpressionType.Extension);
@@ -67,6 +69,7 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
+        [ExcludeFromCodeCoverage]
         public void ShouldThrowArgumentNullExceptionOnNull()
         {
             Assert.Throws<ArgumentNullException>(() => ExpressionExtensions.AsEnumerable(null));
