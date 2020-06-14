@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Alessio Gogna
+﻿// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
 using System;
@@ -11,24 +11,36 @@ using Xunit.Sdk;
 
 namespace ExpressionTreeToolkit.UnitTests
 {
-    public class ExpressionEqualityComparerEqualsBehaviour
+    public partial class ExpressionEqualityComparerBehaviour
     {
         private readonly IEqualityComparer<Expression> _target = ExpressionEqualityComparer.Default;
 
         [ExcludeFromCodeCoverage]
         private void AssertAreEqual(Expression x, Expression y)
         {
-            if (!_target.Equals(x, y))
-            {
-                throw new EqualException(x, y);
-            }
-            Assert.Equal(_target.GetHashCode(x), _target.GetHashCode(y));
+            AssertAreEqual(x, y, _target);
         }
 
         [ExcludeFromCodeCoverage]
         private void AssertAreNotEqual(Expression x, Expression y)
         {
-            Assert.NotEqual(x, y, _target);
+            AssertAreNotEqual(x, y, _target);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static void AssertAreEqual(Expression x, Expression y, IEqualityComparer<Expression> equalityComparer)
+        {
+            if (!equalityComparer.Equals(x, y))
+            {
+                throw new EqualException(x, y);
+            }
+            Assert.Equal(equalityComparer.GetHashCode(x), equalityComparer.GetHashCode(y));
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static void AssertAreNotEqual(Expression x, Expression y, IEqualityComparer<Expression> equalityComparer)
+        {
+            Assert.NotEqual(x, y, equalityComparer);
         }
 
         [Fact]
