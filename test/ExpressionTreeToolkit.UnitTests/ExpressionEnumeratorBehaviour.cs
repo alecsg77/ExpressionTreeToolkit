@@ -52,7 +52,7 @@ namespace ExpressionTreeToolkit.UnitTests
 
             public static readonly FieldInfo StaticFieldInfo = typeof(Stub).GetField(nameof(Extension));
             public static readonly MethodInfo StaticMethodInfo = typeof(Stub).GetMethod(nameof(StaticMethod));
-            public static readonly ConstructorInfo CtorInfo = typeof(Stub).GetConstructor(Array.Empty<Type>());
+            public static readonly ConstructorInfo CtorInfo = typeof(Stub).GetConstructor(Type.EmptyTypes);
             public static readonly ConstructorInfo CtorExpressionTypeInfo = typeof(Stub).GetConstructor(new[] { typeof(ExpressionType) });
             public static readonly ConstructorInfo CtorExpressionTypeTypeInfo = typeof(Stub).GetConstructor(new[] { typeof(ExpressionType), typeof(Type) });
 
@@ -65,7 +65,7 @@ namespace ExpressionTreeToolkit.UnitTests
             public static readonly MethodInfo DefaultMethodInfo = typeof(Expression).GetMethod(nameof(Default));
             public static readonly MethodInfo EqualsMethodInfo = typeof(Expression).GetMethod(nameof(Equals));
 
-            public static readonly ConstructorInfo ListCtorInfo = typeof(List<Stub>).GetConstructor(Array.Empty<Type>());
+            public static readonly ConstructorInfo ListCtorInfo = typeof(List<Stub>).GetConstructor(Type.EmptyTypes);
         }
 
         [Fact]

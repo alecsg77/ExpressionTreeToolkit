@@ -1,10 +1,13 @@
-﻿// Copyright (c) 2018 Alessio Gogna
+// Copyright (c) 2018 Alessio Gogna
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+
 using Xunit;
+using Xunit.Sdk;
 
 namespace ExpressionTreeToolkit.UnitTests
 {
@@ -12,15 +15,20 @@ namespace ExpressionTreeToolkit.UnitTests
     {
         private readonly IEqualityComparer<Expression> _target = ExpressionEqualityComparer.Default;
 
+        [ExcludeFromCodeCoverage]
         private void AssertAreEqual(Expression x, Expression y)
         {
-            Assert.True(_target.Equals(x, y));
+            if (!_target.Equals(x, y))
+            {
+                throw new EqualException(x, y);
+            }
             Assert.Equal(_target.GetHashCode(x), _target.GetHashCode(y));
         }
 
+        [ExcludeFromCodeCoverage]
         private void AssertAreNotEqual(Expression x, Expression y)
         {
-            Assert.False(_target.Equals(x, y));
+            Assert.NotEqual(x, y, _target);
         }
 
         [Fact]
