@@ -3,7 +3,8 @@
 
 namespace ExpressionTreeToolkit
 {
-    public static partial class ExpressionEqualityComparerExtensions
+    public static partial class ExpressionExtensions
     {
     }
+
 }
