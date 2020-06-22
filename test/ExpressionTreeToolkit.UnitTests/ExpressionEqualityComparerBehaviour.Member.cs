@@ -72,21 +72,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MemberExpressionShouldBeNotEqual_SameExpression_DifferentMember()
-        {
-            var x = Expression.MakeMemberAccess(
-                StubObject.Expressions.Default,
-                StubObject.Members.Single
-            );
-            var y = Expression.MakeMemberAccess(
-                StubObject.Expressions.Default,
-                StubObject.Members.Field
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void MemberExpressionShouldBeNotEqual_DifferentExpression_DifferentMember()
         {
             var x = Expression.MakeMemberAccess(

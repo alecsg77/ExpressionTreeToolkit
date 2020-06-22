@@ -72,23 +72,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void NewArrayExpressionShouldBeEqual_DifferentType_SameInitializers()
-        {
-            var x = Expression.NewArrayInit(
-                typeof(StubObject),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.NewArrayInit(
-                typeof(object),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void NewArrayExpressionShouldBeEqual_DifferentType_DifferentInitializers()
         {
             var x = Expression.NewArrayInit(
@@ -139,22 +122,6 @@ namespace ExpressionTreeToolkit.UnitTests
             AssertAreNotEqual(x, y);
         }
 
-        [Fact]
-        public void NewArrayExpressionShouldBeNotEqual_DifferentType_SameBounds()
-        {
-            var x = Expression.NewArrayBounds(
-                typeof(StubObject),
-                Expression.Default(typeof(int)),
-                Expression.Parameter(typeof(int))
-            );
-            var y = Expression.NewArrayBounds(
-                typeof(object),
-                Expression.Default(typeof(int)),
-                Expression.Parameter(typeof(int))
-            );
-
-            AssertAreNotEqual(x, y);
-        }
         [Fact]
         public void NewArrayExpressionShouldBeNotEqual_DifferentType_DifferentBounds()
         {

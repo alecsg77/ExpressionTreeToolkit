@@ -63,23 +63,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void ListInitExpressionShouldBeNotEqual_DifferentNewExpression_SameInitializers()
-        {
-            var x = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.ListInit(
-                Expression.New(typeof(List<StubObject>)),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void ListInitExpressionShouldBeNotEqual_SameNewExpression_DifferentInitializers()
         {
             var x = Expression.ListInit(
@@ -89,23 +72,6 @@ namespace ExpressionTreeToolkit.UnitTests
             );
             var y = Expression.ListInit(
                 Expression.New(typeof(StubCollection)),
-                StubObject.Expressions.Constant,
-                StubObject.Expressions.Default
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void ListInitExpressionShouldBeNotEqual_DifferentNewExpression_DifferentInitializers()
-        {
-            var x = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.ListInit(
-                Expression.New(typeof(List<StubObject>)),
                 StubObject.Expressions.Constant,
                 StubObject.Expressions.Default
             );
@@ -133,63 +99,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void ListInitExpressionShouldBeNotEqual_DifferentNewExpression_SameMethod_SameInitializers()
-        {
-            var x = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                Methods.CollectionAdd<StubObject>(),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.ListInit(
-                Expression.New(typeof(List<StubObject>)),
-                Methods.CollectionAdd<StubObject>(),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void ListInitExpressionShouldBeNotEqual_SameNewExpression_SameMethod_DifferentInitializers()
-        {
-            var x = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                StubCollection.Methods.Add,
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                StubCollection.Methods.Add,
-                StubObject.Expressions.Constant,
-                StubObject.Expressions.Default
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void ListInitExpressionShouldBeNotEqual_DifferentNewExpression_SameMethod_DifferentInitializers()
-        {
-            var x = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                Methods.CollectionAdd<StubObject>(),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.ListInit(
-                Expression.New(typeof(List<StubObject>)),
-                Methods.CollectionAdd<StubObject>(),
-                StubObject.Expressions.Constant,
-                StubObject.Expressions.Default
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void ListInitExpressionShouldBeNotEqual_SameNewExpression_DifferentMethod_SameInitializers()
         {
             var x = Expression.ListInit(
@@ -203,44 +112,6 @@ namespace ExpressionTreeToolkit.UnitTests
                 Methods.CollectionAdd<StubObject>(),
                 StubObject.Expressions.Default,
                 StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void ListInitExpressionShouldBeNotEqual_DifferentNewExpression_DifferentMethod_SameInitializers()
-        {
-            var x = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                StubCollection.Methods.Add,
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.ListInit(
-                Expression.New(typeof(List<StubObject>)),
-                Methods.CollectionAdd<StubObject>(),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void ListInitExpressionShouldBeNotEqual_SameNewExpression_DifferentMethod_DifferentInitializers()
-        {
-            var x = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                StubCollection.Methods.Add,
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.ListInit(
-                Expression.New(typeof(StubCollection)),
-                Methods.CollectionAdd<StubObject>(),
-                StubObject.Expressions.Constant,
-                StubObject.Expressions.Default
             );
 
             AssertAreNotEqual(x, y);

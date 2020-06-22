@@ -55,21 +55,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void UnaryExpressionShouldBeNotEqual_DifferentOperand_DifferentType()
-        {
-            var x = Expression.TypeAs(
-                    StubObject.Expressions.Default,
-                    typeof(StubObject)
-                );
-            var y = Expression.TypeAs(
-                    StubObject.Expressions.Constant,
-                    typeof(object)
-                );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void UnaryExpressionShouldBeEqual_SameOperand_SameType_SameMethod()
         {
             var x = Expression.Convert(
@@ -100,23 +85,6 @@ namespace ExpressionTreeToolkit.UnitTests
                     Methods.Convert<StubObject,StubObject>()
                 );
 
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void UnaryExpressionShouldBeNotEqual_DifferentOperand_SameType_SameMethod()
-        {
-            var x = Expression.Convert(
-                    StubObject.Expressions.Default,
-                    typeof(StubObject),
-                    Methods.Func<StubObject,StubObject>()
-                );
-            var y = Expression.Convert(
-                    StubObject.Expressions.Constant,
-                    typeof(StubObject),
-                    Methods.Func<StubObject,StubObject>()
-                );
-            
             AssertAreNotEqual(x, y);
         }
 

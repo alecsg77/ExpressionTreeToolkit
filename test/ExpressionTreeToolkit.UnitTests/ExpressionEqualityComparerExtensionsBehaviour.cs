@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Moq;
 
@@ -17,6 +18,7 @@ namespace ExpressionTreeToolkit.UnitTests
         private readonly Mock<IEqualityComparer<Expression>> _mock;
         private readonly IEqualityComparer<Expression> _target;
 
+        [ExcludeFromCodeCoverage]
         private static void Action() => throw new NotImplementedException();
 
         public ExpressionEqualityComparerExtensionsBehaviour()

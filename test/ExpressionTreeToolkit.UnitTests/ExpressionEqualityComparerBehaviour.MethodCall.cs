@@ -72,40 +72,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MethodCallExpressionShouldBeNotEqual_DifferentMethod_SameArguments()
-        {
-            var x = Expression.Call(
-                Methods.Add<StubObject>(),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.Call(
-                Methods.Func<StubObject, StubObject, StubObject>(),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void MethodCallExpressionShouldBeNotEqual_DifferentMethod_DifferentArguments()
-        {
-            var x = Expression.Call(
-                Methods.Func<StubObject, StubObject, StubObject>(),
-                StubObject.Expressions.Default,
-                StubObject.Expressions.Constant
-            );
-            var y = Expression.Call(
-                Methods.Add<StubObject>(),
-                StubObject.Expressions.Constant,
-                StubObject.Expressions.Default
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void MethodCallExpressionShouldBeEqual_SameInstance_SameMethod_SameArguments()
         {
             var x = Expression.Call(
@@ -123,57 +89,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MethodCallExpressionShouldBeNotEqual_SameInstance_SameMethod_DifferentArguments()
-        {
-            var x = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Action<StubObject>(),
-                StubObject.Expressions.Default
-            );
-            var y = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Action<StubObject>(),
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void MethodCallExpressionShouldBeNotEqual_SameInstance_DifferentMethod_SameArguments()
-        {
-            var x = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Insert,
-                StubObject.Expressions.Default
-            );
-            var y = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Action<StubObject>(),
-                StubObject.Expressions.Default
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void MethodCallExpressionShouldBeNotEqual_SameInstance_DifferentMethod_DifferentArguments()
-        {
-            var x = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Insert,
-                StubObject.Expressions.Default
-            );
-            var y = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Action<StubObject>(),
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void MethodCallExpressionShouldBeNotEqual_DifferentInstance_SameMethod_SameArguments()
         {
             var x = Expression.Call(
@@ -184,40 +99,6 @@ namespace ExpressionTreeToolkit.UnitTests
             var y = Expression.Call(
                 StubObject.Expressions.Constant,
                 StubObject.Methods.Insert,
-                StubObject.Expressions.Default
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void MethodCallExpressionShouldBeNotEqual_DifferentInstance_SameMethod_DifferentArguments()
-        {
-            var x = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Action<StubObject>(),
-                StubObject.Expressions.Default
-            );
-            var y = Expression.Call(
-                StubObject.Expressions.Constant,
-                StubObject.Methods.Action<StubObject>(),
-                StubObject.Expressions.Constant
-            );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
-        public void MethodCallExpressionShouldBeNotEqual_DifferentInstance_DifferentMethod_SameArguments()
-        {
-            var x = Expression.Call(
-                StubObject.Expressions.Default,
-                StubObject.Methods.Insert,
-                StubObject.Expressions.Default
-            );
-            var y = Expression.Call(
-                StubObject.Expressions.Constant,
-                StubObject.Methods.Action<StubObject>(),
                 StubObject.Expressions.Default
             );
 

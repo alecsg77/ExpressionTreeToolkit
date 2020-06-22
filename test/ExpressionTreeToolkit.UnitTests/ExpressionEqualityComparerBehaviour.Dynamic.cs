@@ -84,5 +84,22 @@ namespace ExpressionTreeToolkit.UnitTests
 
             AssertAreNotEqual(x, y);
         }
+
+        [Fact]
+        public void DynamicExpressionShouldBeNotEqual_DifferentCallSiteBinder_DifferentReturnType_DifferentArguments()
+        {
+            var x = Expression.Dynamic(
+                CallSiteBinder,
+                typeof(StubObject),
+                StubObject.Expressions.Default
+            );
+            var y = Expression.Dynamic(
+                AnotherCallSiteBinder,
+                typeof(StubCollection),
+                StubObject.Expressions.Constant
+            );
+
+            AssertAreNotEqual(x, y);
+        }
     }
 }

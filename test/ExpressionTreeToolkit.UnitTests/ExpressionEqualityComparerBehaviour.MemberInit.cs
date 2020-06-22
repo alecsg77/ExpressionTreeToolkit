@@ -71,21 +71,6 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MemberInitExpressionShouldBeNotEqual_DifferentNewExpression_SameBindings()
-        {
-            var x = Expression.MemberInit(
-                New,
-                Expression.MemberBind(StubObject.Members.Single)
-            );
-            var y = Expression.MemberInit(
-                NewCopy,
-                Expression.MemberBind(StubObject.Members.Single)
-                );
-
-            AssertAreNotEqual(x, y);
-        }
-
-        [Fact]
         public void MemberInitExpressionShouldBeNotEqual_DifferentNewExpression_DifferentBindings()
         {
             var x = Expression.MemberInit(
