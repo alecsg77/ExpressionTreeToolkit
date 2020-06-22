@@ -21,10 +21,15 @@ namespace ExpressionTreeToolkit.UnitTests
         private static readonly CallSiteBinder CallSiteBinder = Mock.Of<CallSiteBinder>();
 
         [Fact]
-        [ExcludeFromCodeCoverage]
         public void ShouldThrowArgumentNullExceptionOnNull()
         {
-            Assert.Throws<ArgumentNullException>(() => ExpressionExtensions.AsEnumerable(null));
+            Assert.Throws<ArgumentNullException>(EnumerableNull);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void EnumerableNull()
+        {
+            ExpressionExtensions.AsEnumerable(null);
         }
 
         [Fact]

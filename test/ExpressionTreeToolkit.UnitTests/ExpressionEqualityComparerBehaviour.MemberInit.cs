@@ -11,8 +11,8 @@ namespace ExpressionTreeToolkit.UnitTests
 {
     partial class ExpressionEqualityComparerBehaviour
     {
-        private static readonly NewExpression New = Expression.New(StubObject.Constructors.Default);
-        private static readonly NewExpression NewCopy = Expression.New(StubObject.Constructors.Copy, StubObject.Expressions.Default);
+        private static NewExpression New => Expression.New(StubObject.Constructors.Default);
+        private static NewExpression NewCopy => Expression.New(StubObject.Constructors.Copy, StubObject.Expressions.Default);
 
         [Fact]
         public void MemberInitExpressionShouldBeEqual_SameNewExpression()
@@ -41,7 +41,7 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MemberInitExpressionShouldBeEqual_SameNewExpression_SameBindings()
+        public void MemberInitExpressionShouldBeEqual_SameNewExpression_SameMemberBindBindings()
         {
             var x = Expression.MemberInit(
                 New,
@@ -56,7 +56,7 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MemberInitExpressionShouldBeNotEqual_SameNewExpression_DifferentBindings()
+        public void MemberInitExpressionShouldBeNotEqual_SameNewExpression_DifferentMemberBindBindings()
         {
             var x = Expression.MemberInit(
                 New,
@@ -64,7 +64,103 @@ namespace ExpressionTreeToolkit.UnitTests
             );
             var y = Expression.MemberInit(
                 New,
-                Expression.Bind(StubObject.Members.Single, StubObject.Expressions.Default)
+                Expression.MemberBind(StubObject.Members.Field)
+            );
+
+            AssertAreNotEqual(x, y);
+        }
+
+        [Fact]
+        public void MemberInitExpressionShouldBeEqual_SameNewExpression_SameBindBindings()
+        {
+            var x = Expression.MemberInit(
+                New,
+                Expression.Bind(
+                    StubObject.Members.Single,
+                    StubObject.Expressions.Default
+                )
+            );
+            var y = Expression.MemberInit(
+                New,
+                Expression.Bind(
+                    StubObject.Members.Single,
+                    StubObject.Expressions.Default
+                )
+            );
+
+            AssertAreEqual(x, y);
+        }
+
+        [Fact]
+        public void MemberInitExpressionShouldBeNotEqual_SameNewExpression_DifferentBindBindings()
+        {
+            var x = Expression.MemberInit(
+                New,
+                Expression.Bind(
+                    StubObject.Members.Single,
+                    StubObject.Expressions.Default
+                )
+            );
+            var y = Expression.MemberInit(
+                New,
+                Expression.Bind(
+                    StubObject.Members.Single,
+                    StubObject.Expressions.Constant
+                )
+            );
+
+            AssertAreNotEqual(x, y);
+        }
+
+        [Fact]
+        public void MemberInitExpressionShouldBeEqual_SameNewExpression_SameListBindBindings()
+        {
+            var x = Expression.MemberInit(
+                New,
+                Expression.ListBind(
+                    StubObject.Members.Collection,
+                    Expression.ElementInit(
+                        Methods.CollectionAdd<StubObject>(),
+                        StubObject.Expressions.Default
+                    )
+                )
+            );
+            var y = Expression.MemberInit(
+                New,
+                Expression.ListBind(
+                    StubObject.Members.Collection,
+                    Expression.ElementInit(
+                        Methods.CollectionAdd<StubObject>(),
+                        StubObject.Expressions.Default
+                    )
+                )
+            );
+
+            AssertAreEqual(x, y);
+        }
+
+        [Fact]
+        public void MemberInitExpressionShouldBeNotEqual_SameNewExpression_DifferentListBindBindings()
+        {
+            var x = Expression.MemberInit(
+                New,
+                Expression.ListBind(
+                    StubObject.Members.Collection,
+                    Expression.ElementInit(
+                        Methods.CollectionAdd<StubObject>(),
+                        StubObject.Expressions.Default
+                    )
+                )
+            );
+            var y = Expression.MemberInit(
+                New,
+                Expression.ListBind(
+                    StubObject.Members.Collection,
+                    Expression.ElementInit(
+                        Methods.CollectionAdd<StubObject>(),
+                        StubObject.Expressions.Constant
+                    )
+                )
             );
 
             AssertAreNotEqual(x, y);
@@ -75,11 +171,33 @@ namespace ExpressionTreeToolkit.UnitTests
         {
             var x = Expression.MemberInit(
                 New,
-                Expression.MemberBind(StubObject.Members.Single)
+                Expression.MemberBind(StubObject.Members.Single),
+                Expression.Bind(
+                    StubObject.Members.Single,
+                    StubObject.Expressions.Default
+                ),
+                Expression.ListBind(
+                    StubObject.Members.Collection,
+                    Expression.ElementInit(
+                        Methods.CollectionAdd<StubObject>(),
+                        StubObject.Expressions.Default
+                    )
+                )
             );
             var y = Expression.MemberInit(
                 NewCopy,
-                Expression.Bind(StubObject.Members.Single, StubObject.Expressions.Default)
+                Expression.MemberBind(StubObject.Members.Field),
+                Expression.Bind(
+                    StubObject.Members.Single,
+                    StubObject.Expressions.Constant
+                ),
+                Expression.ListBind(
+                    StubObject.Members.Collection,
+                    Expression.ElementInit(
+                        Methods.CollectionAdd<StubObject>(),
+                        StubObject.Expressions.Constant
+                    )
+                )
             );
 
             AssertAreNotEqual(x, y);
