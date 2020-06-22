@@ -17,5 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\ExpressionTreeToolkit.Core\ExpressionTreeToolkit.Core.csproj" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <Compile Update="ExpressionEqualityComparerBehaviour.*.cs">
+      <DependentUpon>ExpressionEqualityComparerBehaviour.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

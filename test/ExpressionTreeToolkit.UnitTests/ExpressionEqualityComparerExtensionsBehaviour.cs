@@ -3,9 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Text;
-
 using Moq;
 
 using Xunit;
@@ -18,6 +17,9 @@ namespace ExpressionTreeToolkit.UnitTests
     {
         private readonly Mock<IEqualityComparer<Expression>> _mock;
         private readonly IEqualityComparer<Expression> _target;
+
+        [ExcludeFromCodeCoverage]
+        private static void Action() => throw new NotImplementedException();
 
         public ExpressionEqualityComparerExtensionsBehaviour()
         {
@@ -35,7 +37,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void Equals1_Action()
         {
-            var _ = Target.Equals(_target, () => Equals1_Action(), () => Equals1_Action());
+            var _ = Target.Equals(_target, () => Action(), () => Action());
             VerifyEquals<Expression<Action>, Expression<Action>>();
         }
 
@@ -49,7 +51,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void Equals2_Action()
         {
-            var _ = Target.Equals(_target, () => Equals2_Action(), Expression.Empty());
+            var _ = Target.Equals(_target, () => Action(), Expression.Empty());
             VerifyEquals<Expression<Action>, DefaultExpression>();
         }
 
@@ -63,7 +65,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void Equals3_Action()
         {
-            var _ = Target.Equals(_target, Expression.Empty(), () => Equals3_Action());
+            var _ = Target.Equals(_target, Expression.Empty(), () => Action());
             VerifyEquals<DefaultExpression, Expression<Action>>();
         }
 
@@ -83,7 +85,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void GetHashCode_Action()
         {
-            var _ = Target.GetHashCode(_target, () => GetHashCode_Action());
+            var _ = Target.GetHashCode(_target, () => Action());
             VerifyGetHashCode<Expression<Action>>();
         }
 

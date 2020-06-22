@@ -3,10 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Runtime.CompilerServices;
+
+using ExpressionTreeToolkit.UnitTests.Stubs;
 
 using Moq;
 
@@ -18,58 +20,16 @@ namespace ExpressionTreeToolkit.UnitTests
     {
         private static readonly CallSiteBinder CallSiteBinder = Mock.Of<CallSiteBinder>();
 
-        private sealed class Stub : Expression
-        {
-            public static readonly Stub Extension = new Stub(ExpressionType.Extension);
-
-            public static Stub StaticMethod() => Extension;
-
-            public Stub()
-                : this(ExpressionType.Extension)
-            {
-            }
-
-            public Stub(ExpressionType nodeType)
-            {
-                this.NodeType = nodeType;
-                Type = typeof(void);
-            }
-
-            public Stub(ExpressionType nodeType, Type type)
-            {
-                this.NodeType = nodeType;
-                Type = type;
-            }
-
-            public override ExpressionType NodeType { get; }
-
-            public override Type Type { get; }
-
-            public Stub Parent { get; set; }
-            public ICollection<Stub> Children { get; set; }
-
-            public static readonly FieldInfo StaticFieldInfo = typeof(Stub).GetField(nameof(Extension));
-            public static readonly MethodInfo StaticMethodInfo = typeof(Stub).GetMethod(nameof(StaticMethod));
-            public static readonly ConstructorInfo CtorInfo = typeof(Stub).GetConstructor(Array.Empty<Type>());
-            public static readonly ConstructorInfo CtorExpressionTypeInfo = typeof(Stub).GetConstructor(new[] { typeof(ExpressionType) });
-            public static readonly ConstructorInfo CtorExpressionTypeTypeInfo = typeof(Stub).GetConstructor(new[] { typeof(ExpressionType), typeof(Type) });
-
-            public static readonly PropertyInfo TypePropertyInfo = typeof(Stub).GetProperty(nameof(Type));
-            public static readonly PropertyInfo ParentPropertyInfo = typeof(Stub).GetProperty(nameof(Parent));
-            public static readonly PropertyInfo ChildrenPropertyInfo = typeof(Stub).GetProperty(nameof(Children));
-            public static readonly MethodInfo ChildrenAddMethodInfo = typeof(ICollection<Stub>).GetMethod(nameof(ICollection<Stub>.Add), new[] { typeof(Stub) });
-
-            public static readonly MethodInfo ReduceMethodInfo = typeof(Stub).GetMethod(nameof(Reduce));
-            public static readonly MethodInfo DefaultMethodInfo = typeof(Expression).GetMethod(nameof(Default));
-            public static readonly MethodInfo EqualsMethodInfo = typeof(Expression).GetMethod(nameof(Equals));
-
-            public static readonly ConstructorInfo ListCtorInfo = typeof(List<Stub>).GetConstructor(Array.Empty<Type>());
-        }
-
         [Fact]
         public void ShouldThrowArgumentNullExceptionOnNull()
         {
-            Assert.Throws<ArgumentNullException>(() => ExpressionExtensions.AsEnumerable(null));
+            Assert.Throws<ArgumentNullException>(EnumerableNull);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void EnumerableNull()
+        {
+            ExpressionExtensions.AsEnumerable(null);
         }
 
         [Fact]
@@ -113,11 +73,11 @@ namespace ExpressionTreeToolkit.UnitTests
             new object[] {Expression.Constant(0)},
             new object[] {Expression.Parameter(typeof(int))},
             new object[] {Expression.DebugInfo(Expression.SymbolDocument(string.Empty),1,1,1,1)},
-            new object[] {Stub.Extension},
+            new object[] {StubExpression.Extension()},
             new object[] {Expression.Default(typeof(double))},
-            new object[] {Expression.MakeMemberAccess(null, Stub.StaticFieldInfo)},
-            new object[] {Expression.Call(null, Stub.StaticMethodInfo)},
-            new object[] {Expression.New(Stub.CtorInfo)},
+            new object[] {Expression.MakeMemberAccess(null, Members.Field<StubObject>())},
+            new object[] {Expression.Call(null, Methods.Func<StubObject>())},
+            new object[] {Expression.New(typeof(StubObject))},
             new object[] {Expression.NewArrayInit(typeof(int))},
             new object[] {Expression.Goto(Expression.Label())},
             new object[] {Expression.Label(Expression.Label())},
@@ -182,8 +142,8 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void MemberExpressionShouldEnumerateAs_Expression_Member()
         {
-            var expression = Expression.Default(typeof(Stub));
-            var member = Expression.MakeMemberAccess(expression, Stub.TypePropertyInfo);
+            var expression = StubObject.Expressions.Default;
+            var member = Expression.MakeMemberAccess(expression, StubObject.Members.Single);
 
             Expression target = member;
 
@@ -191,10 +151,10 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MethodCallExpressionShouldEnumerateAs_Instance_MethodCall()
+        public void MethodCallExpressionShouldEnumerateAs_Default_MethodCall()
         {
-            var instance = Expression.Default(typeof(Stub));
-            var call = Expression.Call(instance, Stub.ReduceMethodInfo);
+            var instance = StubObject.Expressions.Default;
+            var call = Expression.Call(instance, StubObject.Methods.Action());
 
             Expression target = call;
 
@@ -204,8 +164,8 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void MethodCallExpressionShouldEnumerateAs_Args_MethodCall()
         {
-            var argument = Expression.Default(typeof(Type));
-            var call = Expression.Call(null, Stub.DefaultMethodInfo, argument);
+            var argument = StubObject.Expressions.Default;
+            var call = Expression.Call(null, Methods.Func<StubObject,StubObject>(), argument);
 
             Expression target = call;
 
@@ -213,11 +173,11 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void MethodCallExpressionShouldEnumerateAs_Instance_Arguments_MethodCall()
+        public void MethodCallExpressionShouldEnumerateAs_Default_Arguments_MethodCall()
         {
-            var instance = Expression.Default(typeof(Stub));
-            var argument = Expression.Default(typeof(Stub));
-            var call = Expression.Call(instance, Stub.EqualsMethodInfo, argument);
+            var instance = StubObject.Expressions.Default;
+            var argument = StubObject.Expressions.Default;
+            var call = Expression.Call(instance, StubObject.Methods.Action<StubObject>(), argument);
 
             Expression target = call;
 
@@ -250,8 +210,8 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void NewExpressionShouldEnumerateAs_Arguments_New()
         {
-            var argument = Expression.Default(typeof(ExpressionType));
-            var @new = Expression.New(Stub.CtorExpressionTypeInfo, argument);
+            var argument = StubObject.Expressions.Default;
+            var @new = Expression.New(StubObject.Constructors.Copy, argument);
 
             Expression target = @new;
 
@@ -298,7 +258,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void MemberInitExpressionShouldEnumerateAs_New_MemberInit()
         {
-            var newExpression = Expression.New(Stub.CtorInfo);
+            var newExpression = Expression.New(typeof(StubObject));
             var memberInit = Expression.MemberInit(newExpression);
 
             Expression target = memberInit;
@@ -309,10 +269,10 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void MemberInitExpressionShouldEnumerateAs_New_MemberAssignments_MemberInit()
         {
-            var newExpression = Expression.New(Stub.CtorInfo);
-            var assignment = Expression.Default(typeof(Stub));
+            var newExpression = Expression.New(typeof(StubObject));
+            var assignment = StubObject.Expressions.Default;
             var memberInit = Expression.MemberInit(newExpression,
-                Expression.Bind(Stub.ParentPropertyInfo, assignment)
+                Expression.Bind(StubObject.Members.Single, assignment)
                 );
 
             Expression target = memberInit;
@@ -323,11 +283,11 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void MemberInitExpressionShouldEnumerateAs_New_MemberMemberBindings_MemberInit()
         {
-            var newExpression = Expression.New(Stub.CtorInfo);
-            var assignment = Expression.Default(typeof(Stub));
+            var newExpression = Expression.New(typeof(StubObject));
+            var assignment = StubObject.Expressions.Default;
             var memberInit = Expression.MemberInit(newExpression,
-                Expression.MemberBind(Stub.ParentPropertyInfo,
-                    Expression.Bind(Stub.ParentPropertyInfo, assignment)
+                Expression.MemberBind(StubObject.Members.Single,
+                    Expression.Bind(StubObject.Members.Single, assignment)
                     )
                 );
 
@@ -339,11 +299,11 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void MemberInitExpressionShouldEnumerateAs_New_MemberListBindings_MemberInit()
         {
-            var newExpression = Expression.New(Stub.CtorInfo);
-            var assignment = Expression.Default(typeof(Stub));
+            var newExpression = Expression.New(typeof(StubObject));
+            var assignment = StubObject.Expressions.Default;
             var memberInit = Expression.MemberInit(newExpression,
-                Expression.ListBind(Stub.ChildrenPropertyInfo,
-                    Expression.ElementInit(Stub.ChildrenAddMethodInfo, assignment)
+                Expression.ListBind(StubObject.Members.Collection,
+                    Expression.ElementInit(Methods.CollectionAdd<StubObject>(), assignment)
                     )
                 );
 
@@ -355,8 +315,8 @@ namespace ExpressionTreeToolkit.UnitTests
         [Fact]
         public void ListInitExpressionShouldEnumerateAs_New_Initializers_ListInit()
         {
-            var newExpression = Expression.New(Stub.ListCtorInfo);
-            var initializer = Expression.Default(typeof(Stub));
+            var newExpression = Expression.New(typeof(List<StubObject>));
+            var initializer = StubObject.Expressions.Default;
             var listInit = Expression.ListInit(newExpression, initializer);
 
             Expression target = listInit;
@@ -410,9 +370,9 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void IndexExpressionShouldEnumerateAs_Instance_Arguments_Index()
+        public void IndexExpressionShouldEnumerateAs_Default_Arguments_Index()
         {
-            var instance = Expression.Default(typeof(Stub[]));
+            var instance = Expression.Default(typeof(StubObject[]));
             var argument = Expression.Default(typeof(int));
             var index = Expression.MakeIndex(instance, null, new[] { argument });
 
@@ -620,66 +580,67 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void ShouldEnumerateTypeEqualCallInstanceMethodTypeOfParentOfStub_Instance_Stub_Parent_Type_Call_TypeEqual()
+        public void ShouldEnumerateTypeEqualCallDefaultMethodTypeOfParentOfStub_Default_Stub_Parent_Type_Call_TypeEqual()
         {
-            var stub = Expression.Default(typeof(Stub));
-            var parent = Expression.MakeMemberAccess(stub, Stub.ParentPropertyInfo);
-            var type = Expression.MakeMemberAccess(parent, Stub.TypePropertyInfo);
+            var stub = StubObject.Expressions.Default;
+            var parent = Expression.MakeMemberAccess(stub, StubObject.Members.Single);
+            var parentParent = Expression.MakeMemberAccess(parent, StubObject.Members.Single);
 
-            var instance = Expression.Default(typeof(object));
-            var call = Expression.Call(instance, Stub.EqualsMethodInfo, type);
+            var instance = StubObject.Expressions.Default;
+            var call = Expression.Call(instance, StubObject.Methods.Action<StubObject>(), parentParent);
             var typeEqual = Expression.TypeEqual(call, typeof(int));
 
             Expression target = typeEqual;
 
-            AssertEnumerateAs(target, instance, stub, parent, type, call, typeEqual);
+            AssertEnumerateAs(target, instance, stub, parent, parentParent, call, typeEqual);
         }
 
         [Fact]
         public void ShouldEnumerateInvokeLambdaAs_Initializers_NewArray_Parameter_Lambda_Arguments_New_Invoke()
         {
-            var initializer = Expression.Default(typeof(int));
-            var newArray = Expression.NewArrayInit(typeof(int), initializer);
-            var parameter = Expression.Parameter(typeof(Stub));
+            var integer = Expression.Default(typeof(int));
+            var increment = Expression.Increment(integer);
+            var newArray = Expression.NewArrayInit(typeof(int), increment);
+            var parameter = Expression.Parameter(typeof(StubObject));
             var lambda = Expression.Lambda(newArray, parameter);
 
-            var argument1 = Expression.Default(typeof(ExpressionType));
-            var argument2 = Expression.Default(typeof(Type));
-            var @new = Expression.New(Stub.CtorExpressionTypeTypeInfo, argument1, argument2);
+            var @object = Expression.Default(typeof(object));
+            var asDummy = Expression.TypeAs(@object,typeof(StubObject));
+            var @new = Expression.New(StubObject.Constructors.Copy, asDummy);
             var invoke = Expression.Invoke(lambda, @new);
 
             Expression target = invoke;
 
-            AssertEnumerateAs(target, initializer, newArray, parameter, lambda, argument1, argument2, @new, invoke);
+            AssertEnumerateAs(target, integer, increment, newArray, parameter, lambda, @object, asDummy, @new, invoke);
         }
 
         [Fact]
-        public void ShouldEnumerateBlockListInitAs_Variables_NewList_NewStubs_StubInits_ListInit_Block()
+        public void ShouldEnumerateBlockListInitAs_Variables_NewList_NewDummies_InitDummies_ListInit_Block()
         {
-            var variable1 = Expression.Parameter(typeof(Stub));
-            var variable2 = Expression.Parameter(typeof(Stub));
+            var variable1 = Expression.Variable(typeof(StubObject));
+            var variable2 = Expression.Variable(typeof(StubObject));
 
-            var newList = Expression.New(Stub.ListCtorInfo);
+            var newList = Expression.New(typeof(List<StubObject>));
 
-            var newStub1 = Expression.New(Stub.CtorInfo);
-            var stub1Init = Expression.MemberInit(newStub1, Expression.Bind(Stub.ParentPropertyInfo, variable1));
+            var newDummy1 = Expression.New(typeof(StubObject));
+            var initDummy1 = Expression.MemberInit(newDummy1, Expression.Bind(StubObject.Members.Single, variable1));
 
-            var newStub2 = Expression.New(Stub.CtorInfo);
-            var stub2Init = Expression.MemberInit(newStub2,
-                Expression.MemberBind(Stub.ParentPropertyInfo,
+            var newDummy2 = Expression.New(typeof(StubObject));
+            var initDummy2 = Expression.MemberInit(newDummy2,
+                Expression.MemberBind(StubObject.Members.Single,
                     Expression.Bind(
-                        Stub.ParentPropertyInfo, variable2
+                        StubObject.Members.Single, variable2
                         )
                     )
                 );
-            var newStub3 = Expression.New(Stub.CtorInfo);
-            var stub3Init = Expression.MemberInit(newStub3,
-                Expression.ListBind(Stub.ChildrenPropertyInfo,
-                    Expression.ElementInit(Stub.ChildrenAddMethodInfo, stub2Init)
+            var newDummy3 = Expression.New(typeof(StubObject));
+            var initDummy3 = Expression.MemberInit(newDummy3,
+                Expression.ListBind(StubObject.Members.Collection,
+                    Expression.ElementInit(Methods.CollectionAdd<StubObject>(), initDummy2)
                     )
                 );
 
-            var listInit = Expression.ListInit(newList, stub1Init, stub3Init);
+            var listInit = Expression.ListInit(newList, initDummy1, initDummy3);
 
             var block = Expression.Block(new[] { variable1, variable2 }, listInit);
 
@@ -691,15 +652,15 @@ namespace ExpressionTreeToolkit.UnitTests
                 variable2,
                     newList,
 
-                        newStub1,
+                        newDummy1,
                         variable1,
-                        stub1Init,
+                        initDummy1,
 
-                        newStub3,
-                            newStub2,
+                        newDummy3,
+                            newDummy2,
                             variable2,
-                            stub2Init,
-                        stub3Init,
+                            initDummy2,
+                        initDummy3,
 
                     listInit,
                 block
@@ -709,17 +670,17 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void ShouldEnumerateGotoDynamicLabelIndexAs_Instance_Arguments_Index_Label_Dynamic_Goto()
+        public void ShouldEnumerateGotoDynamicLabelIndexAs_Array_Arguments_Index_Label_Dynamic_Goto()
         {
-            var labelTarget = Expression.Label(typeof(Stub));
+            var labelTarget = Expression.Label(typeof(StubObject));
 
-            var instance = Expression.Default(typeof(Stub[]));
+            var array = Expression.Default(typeof(StubObject[]));
             var expression = Expression.Constant(0);
             var argument = Expression.Negate(expression);
-            var index = Expression.MakeIndex(instance, null, new[] { argument });
+            var index = Expression.MakeIndex(array, null, new[] { argument });
             var label = Expression.Label(labelTarget, index);
 
-            var dynamic = Expression.Dynamic(CallSiteBinder, typeof(Stub), label);
+            var dynamic = Expression.Dynamic(CallSiteBinder, typeof(StubObject), label);
 
             var @goto = Expression.Goto(labelTarget, dynamic);
 
@@ -727,7 +688,7 @@ namespace ExpressionTreeToolkit.UnitTests
 
             var expected = new Expression[]
             {
-                instance,
+                array,
                 expression,
                 argument,
                 index,

@@ -3,24 +3,91 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+
 using Xunit;
+using Xunit.Sdk;
 
 namespace ExpressionTreeToolkit.UnitTests
 {
-    public class ExpressionEqualityComparerEqualsBehaviour
+    public partial class ExpressionEqualityComparerBehaviour
     {
-        private readonly IEqualityComparer<Expression> _target = ExpressionEqualityComparer.Default;
+        private readonly ExpressionEqualityComparer _target = ExpressionEqualityComparer.Default;
 
-        private void AssertAreEqual(Expression x, Expression y)
+        [ExcludeFromCodeCoverage]
+        private void AssertAreEqual<T>(T x, T y) where T : Expression
         {
-            Assert.True(_target.Equals(x, y));
-            Assert.Equal(_target.GetHashCode(x), _target.GetHashCode(y));
+            AssertAreEqual<T>(x, y, _target);
+            AssertAreEqual((Expression)x, (Expression)y);
         }
 
+        [ExcludeFromCodeCoverage]
+        private void AssertAreEqual(Expression x, Expression y)
+        {
+            AssertAreEqual(x, y, _target);
+            AssertAreEqual((object)x, (object)y);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void AssertAreEqual(object x, object y)
+        {
+            AssertAreEqual(x, y, _target);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void AssertAreNotEqual<T>(T x, T y) where T : Expression
+        {
+            AssertAreNotEqual<T>(x, y, _target);
+            AssertAreNotEqual((Expression)x, (Expression)y);
+        }
+
+        [ExcludeFromCodeCoverage]
         private void AssertAreNotEqual(Expression x, Expression y)
         {
-            Assert.False(_target.Equals(x, y));
+            AssertAreNotEqual(x, y, _target);
+            AssertAreNotEqual((object)x, (object)y);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private void AssertAreNotEqual(object x, object y)
+        {
+            AssertAreNotEqual(x, y, _target);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static void AssertAreEqual<T>(T x, T y, IEqualityComparer<T> equalityComparer) where T : Expression
+        {
+            if (!equalityComparer.Equals(x, y))
+            {
+                throw new EqualException(x, y);
+            }
+            Assert.Equal(equalityComparer.GetHashCode(x), equalityComparer.GetHashCode(y));
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static void AssertAreNotEqual<T>(T x, T y, IEqualityComparer<T> equalityComparer) where T : Expression
+        {
+            Assert.NotEqual(x, y, equalityComparer);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static void AssertAreEqual(object x, object y, System.Collections.IEqualityComparer equalityComparer)
+        {
+            if (!equalityComparer.Equals(x, y))
+            {
+                throw new EqualException(x, y);
+            }
+            Assert.Equal(equalityComparer.GetHashCode(x), equalityComparer.GetHashCode(y));
+        }
+
+        [ExcludeFromCodeCoverage]
+        private static void AssertAreNotEqual(object x, object y, System.Collections.IEqualityComparer equalityComparer)
+        {
+            if (equalityComparer.Equals(x, y))
+            {
+                throw new NotEqualException(x.ToString(), y.ToString());
+            }
         }
 
         [Fact]
