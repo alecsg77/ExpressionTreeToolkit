@@ -34,5 +34,28 @@ namespace ExpressionTreeToolkit.UnitTests
 
             AssertExpressions.NotEqual(x, y);
         }
+
+
+        [Fact]
+        public void Issue_21_Equals_Block_Swapped_Variables()
+        {
+            var var1X = Expression.Variable(typeof(int));
+            var var2X = Expression.Variable(typeof(int));
+            var x = Expression.Block(
+                new[] { var1X, var2X },
+                var1X,
+                var2X
+            );
+
+            var var1Y = Expression.Variable(typeof(int));
+            var var2Y = Expression.Variable(typeof(int));
+            var y = Expression.Block(
+                new[] { var1Y, var2Y },
+                var2Y,
+                var1Y
+            );
+
+            AssertExpressions.NotEqual(x, y);
+        }
     }
 }
