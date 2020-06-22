@@ -34,5 +34,14 @@ namespace ExpressionTreeToolkit.UnitTests
 
             AssertExpressions.NotEqual(x, y);
         }
+
+        [Fact]
+        public void Issue_25_Nested_Lambda_Swapped_Parameters()
+        {
+            Expression<Func<int, int, Func<int>>> x = (a1, a2) => () => a1;
+            Expression<Func<int, int, Func<int>>> y = (a1, a2) => () => a2;
+
+            AssertAreNotEqual(x,y);
+        }
     }
 }
