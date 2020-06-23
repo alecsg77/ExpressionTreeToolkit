@@ -4,6 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+
+using ExpressionTreeToolkit.UnitTests.Stubs;
+
 using Xunit;
 
 namespace ExpressionTreeToolkit.UnitTests
@@ -11,19 +14,6 @@ namespace ExpressionTreeToolkit.UnitTests
     [Collection("Issue")]
     public class ExpressionEqualityComparerIssues
     {
-        private readonly IEqualityComparer<Expression> _target = ExpressionEqualityComparer.Default;
-
-        private void AssertAreEqual(Expression x, Expression y)
-        {
-            Assert.True(_target.Equals(x, y));
-            Assert.Equal(_target.GetHashCode(x), _target.GetHashCode(y));
-        }
-
-        private void AssertAreNotEqual(Expression x, Expression y)
-        {
-            Assert.False(_target.Equals(x, y));
-        }
-
         [Fact]
         public void Issue_4_Catch_Without_Variable()
         {
@@ -32,7 +22,7 @@ namespace ExpressionTreeToolkit.UnitTests
             var x = Expression.TryCatch(Expression.Empty(), Expression.Catch(typeof(Exception), Expression.Empty()));
             var y = Expression.TryCatch(Expression.Empty(), Expression.Catch(typeof(Exception), Expression.Empty()));
 
-            AssertAreEqual(x, y);
+            AssertExpressions.Equal(x, y);
         }
 
         [Fact]
@@ -42,7 +32,7 @@ namespace ExpressionTreeToolkit.UnitTests
             var x = Expression.ListInit(Expression.New(typeof(List<int>)), Expression.Constant(0));
             var y = Expression.ListInit(Expression.New(typeof(List<int>)), Expression.Constant(1));
 
-            AssertAreNotEqual(x, y);
+            AssertExpressions.NotEqual(x, y);
         }
     }
 }

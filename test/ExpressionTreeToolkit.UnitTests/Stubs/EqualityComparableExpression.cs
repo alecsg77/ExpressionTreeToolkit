@@ -7,17 +7,20 @@ using System.Diagnostics.CodeAnalysis;
 namespace ExpressionTreeToolkit.UnitTests.Stubs
 {
     [ExcludeFromCodeCoverage]
-    internal class EqualityComparableExpression : SimpleExpression, IEquatable<EqualityComparableExpression>
+    internal class EqualityComparableExpression : ExtensionExpression, IEquatable<EqualityComparableExpression>
     {
-        public EqualityComparableExpression(int id) : base(id)
+        public int Value { get; }
+
+        public EqualityComparableExpression(int value) : base(typeof(int), () => Constant(value))
         {
+            Value = value;
         }
 
         public bool Equals(EqualityComparableExpression other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id;
+            return Value == other.Value;
         }
 
         public override bool Equals(object obj)
@@ -30,7 +33,7 @@ namespace ExpressionTreeToolkit.UnitTests.Stubs
 
         public override int GetHashCode()
         {
-            return Id;
+            return Value;
         }
 
         public static bool operator ==(EqualityComparableExpression left, EqualityComparableExpression right)

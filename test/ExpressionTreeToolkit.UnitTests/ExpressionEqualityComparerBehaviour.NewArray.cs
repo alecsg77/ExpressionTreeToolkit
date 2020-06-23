@@ -72,7 +72,7 @@ namespace ExpressionTreeToolkit.UnitTests
         }
 
         [Fact]
-        public void NewArrayExpressionShouldBeEqual_DifferentType_DifferentInitializers()
+        public void NewArrayExpressionShouldBeNotEqual_DifferentType_DifferentInitializers()
         {
             var x = Expression.NewArrayInit(
                 typeof(StubObject),

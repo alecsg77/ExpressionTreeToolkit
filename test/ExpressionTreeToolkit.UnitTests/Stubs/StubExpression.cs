@@ -1,32 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 namespace ExpressionTreeToolkit.UnitTests.Stubs
 {
+    [ExcludeFromCodeCoverage]
     internal static class StubExpression
     {
-        private class ExtensionExpression : Expression
-        {
-            private readonly Func<Expression> _reducer;
-
-            public ExtensionExpression(Type type, Func<Expression> reducer)
-            {
-                Type = type;
-                _reducer = reducer;
-            }
-
-            public override ExpressionType NodeType => ExpressionType.Extension;
-
-            public override Type Type { get; }
-
-            public override bool CanReduce => true;
-
-            public override Expression Reduce()
-            {
-                return _reducer();
-            }
-        }
-
         public static Expression Extension()
         {
             return Extension(Expression.Empty());
@@ -39,12 +19,12 @@ namespace ExpressionTreeToolkit.UnitTests.Stubs
 
         public static Expression Extension(Type type, Func<Expression> reducer)
         {
-            return new ExtensionExpression(type,reducer);
+            return new ExtensionExpression(type, reducer);
         }
 
-        public static Expression Simple(int id)
+        public static Expression Unknown(int id)
         {
-            return new SimpleExpression(id);
+            return new UnknownExpression(id);
         }
 
         public static EqualityComparableExpression Comparable(int id)
