@@ -35,6 +35,14 @@ namespace ExpressionTreeToolkit.UnitTests
             AssertExpressions.NotEqual(x, y);
         }
 
+        [Fact]
+        public void Issue_27_EqualityComparer_Ignored_Lambda_Body_Evaluation()
+        {
+            var target = new ExpressionEqualityComparer(UnknownExpression.EqualityComparer);
+            var x = Expression.Lambda(StubExpression.Unknown(3));
+            var y = Expression.Lambda(StubExpression.Unknown(3));
+            AssertExpressions.Equal(x, y, target);
+        }
 
         [Fact]
         public void Issue_21_Equals_Block_Swapped_Variables()
@@ -42,7 +50,7 @@ namespace ExpressionTreeToolkit.UnitTests
             var var1X = Expression.Variable(typeof(int));
             var var2X = Expression.Variable(typeof(int));
             var x = Expression.Block(
-                new[] { var1X, var2X },
+                new[] {var1X, var2X},
                 var1X,
                 var2X
             );
@@ -50,7 +58,7 @@ namespace ExpressionTreeToolkit.UnitTests
             var var1Y = Expression.Variable(typeof(int));
             var var2Y = Expression.Variable(typeof(int));
             var y = Expression.Block(
-                new[] { var1Y, var2Y },
+                new[] {var1Y, var2Y},
                 var2Y,
                 var1Y
             );

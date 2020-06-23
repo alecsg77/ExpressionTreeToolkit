@@ -21,9 +21,11 @@ namespace ExpressionTreeToolkit
         private readonly ReadOnlyCollection<ParameterExpression>? _yParameters;
 
         private ExpressionEqualityComparer(
-            ReadOnlyCollection<ParameterExpression> xParameters,
-            ReadOnlyCollection<ParameterExpression> yParameters)
-            : this()
+                ReadOnlyCollection<ParameterExpression> xParameters,
+                ReadOnlyCollection<ParameterExpression> yParameters,
+                IEqualityComparer<Expression>? equalityComparer
+            )
+            : this(equalityComparer)
         {
             _xParameters = xParameters;
             _yParameters = yParameters;

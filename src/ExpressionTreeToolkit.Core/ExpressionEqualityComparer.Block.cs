@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
 
 #if JETBRAINS_ANNOTATIONS
-using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using AllowNullAttribute = JetBrains.Annotations.CanBeNullAttribute;
 using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
 using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 #endif
@@ -26,7 +26,7 @@ namespace ExpressionTreeToolkit
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Variables, y.Variables, EqualsParameter)
-                   && new ExpressionEqualityComparer(x.Variables, y.Variables).Equals(x.Expressions, y.Expressions)
+                   && new ExpressionEqualityComparer(x.Variables, y.Variables, _equalityComparer).Equals(x.Expressions, y.Expressions)
                 ;
         }
 
