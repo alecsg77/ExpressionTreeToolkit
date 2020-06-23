@@ -34,5 +34,14 @@ namespace ExpressionTreeToolkit.UnitTests
 
             AssertExpressions.NotEqual(x, y);
         }
+
+        [Fact]
+        public void Issue_27_EqualityComparer_Ignored_Lambda_Body_Evaluation()
+        {
+            var target = new ExpressionEqualityComparer(UnknownExpression.EqualityComparer);
+            var x = Expression.Lambda(StubExpression.Unknown(3));
+            var y = Expression.Lambda(StubExpression.Unknown(3));
+            AssertExpressions.Equal(x, y, target);
+        }
     }
 }
