@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Linq;
 #if JETBRAINS_ANNOTATIONS
 using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
 using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
@@ -29,6 +29,15 @@ namespace ExpressionTreeToolkit
         {
             _xParameters = xParameters;
             _yParameters = yParameters;
+        }
+
+        /// <summary>Merge two ParameterExpression collections.</summary>
+        /// <param name="left">The first ParameterExpression collection to merge.</param>
+        /// <param name="right">The second ParameterExpression collection to merge.</param>
+        /// <returns>A merged ParameterExpression collection.</returns>
+        protected virtual ReadOnlyCollection<ParameterExpression> MergeParameters(ReadOnlyCollection<ParameterExpression>? left, ReadOnlyCollection<ParameterExpression> right)
+        {
+            return left != null ? right != null ? right.Concat(left).ToList().AsReadOnly() : left : right;
         }
 
         /// <summary>Determines whether the children of the two ParameterExpression are equal.</summary>
