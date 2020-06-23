@@ -19,13 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two RuntimeVariablesExpression are equal.</summary>
         /// <param name="x">The first RuntimeVariablesExpression to compare.</param>
         /// <param name="y">The second RuntimeVariablesExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified RuntimeVariablesExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsRuntimeVariables([DisallowNull] RuntimeVariablesExpression x, [DisallowNull] RuntimeVariablesExpression y)
+        protected virtual bool EqualsRuntimeVariables([DisallowNull] RuntimeVariablesExpression x,
+            [DisallowNull] RuntimeVariablesExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Variables, y.Variables, EqualsParameter);
+                   && Equals(x.Variables, y.Variables, EqualsParameter, context);
         }
 
         /// <summary>Gets the hash code for the specified RuntimeVariablesExpression.</summary>
@@ -51,7 +53,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsRuntimeVariables(x, y);
+            return EqualsRuntimeVariables(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified RuntimeVariablesExpression.</summary>

@@ -19,14 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two UnaryExpression are equal.</summary>
         /// <param name="x">The first UnaryExpression to compare.</param>
         /// <param name="y">The second UnaryExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified UnaryExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsUnary([DisallowNull] UnaryExpression x, [DisallowNull] UnaryExpression y)
+        protected virtual bool EqualsUnary([DisallowNull] UnaryExpression x, [DisallowNull] UnaryExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Method, y.Method)
-                   && Equals(x.Operand, y.Operand);
+                   && Equals(x.Operand, y.Operand, context);
         }
 
         /// <summary>Gets the hash code for the specified UnaryExpression.</summary>
@@ -53,7 +54,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsUnary(x, y);
+            return EqualsUnary(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified UnaryExpression.</summary>

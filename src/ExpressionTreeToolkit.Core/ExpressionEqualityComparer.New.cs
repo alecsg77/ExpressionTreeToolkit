@@ -19,15 +19,16 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two NewExpression are equal.</summary>
         /// <param name="x">The first NewExpression to compare.</param>
         /// <param name="y">The second NewExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified NewExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsNew([DisallowNull] NewExpression x, [DisallowNull] NewExpression y)
+        protected virtual bool EqualsNew([DisallowNull] NewExpression x, [DisallowNull] NewExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Constructor, y.Constructor)
-                   && Equals(x.Members, y.Members)
-                   && Equals(x.Arguments, y.Arguments);
+                   && Equals(x.Members, y.Members, context)
+                   && Equals(x.Arguments, y.Arguments, context);
         }
 
         /// <summary>Gets the hash code for the specified NewExpression.</summary>
@@ -55,7 +56,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsNew(x, y);
+            return EqualsNew(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified NewExpression.</summary>

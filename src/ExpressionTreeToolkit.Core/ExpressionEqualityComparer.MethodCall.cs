@@ -19,15 +19,17 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two MethodCallExpression are equal.</summary>
         /// <param name="x">The first MethodCallExpression to compare.</param>
         /// <param name="y">The second MethodCallExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified MethodCallExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMethodCall([DisallowNull] MethodCallExpression x, [DisallowNull] MethodCallExpression y)
+        protected virtual bool EqualsMethodCall([DisallowNull] MethodCallExpression x,
+            [DisallowNull] MethodCallExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Method, y.Method)
-                   && Equals(x.Object, y.Object)
-                   && Equals(x.Arguments, y.Arguments);
+                   && Equals(x.Object, y.Object, context)
+                   && Equals(x.Arguments, y.Arguments, context);
         }
 
         /// <summary>Gets the hash code for the specified MethodCallExpression.</summary>
@@ -55,7 +57,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsMethodCall(x, y);
+            return EqualsMethodCall(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified MethodCallExpression.</summary>

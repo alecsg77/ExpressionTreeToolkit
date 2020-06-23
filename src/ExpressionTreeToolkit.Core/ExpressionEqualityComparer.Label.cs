@@ -19,14 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two LabelExpression are equal.</summary>
         /// <param name="x">The first LabelExpression to compare.</param>
         /// <param name="y">The second LabelExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified LabelExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLabel([DisallowNull] LabelExpression x, [DisallowNull] LabelExpression y)
+        protected virtual bool EqualsLabel([DisallowNull] LabelExpression x, [DisallowNull] LabelExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && EqualsLabelTarget(x.Target, y.Target)
-                   && Equals(x.DefaultValue, y.DefaultValue);
+                   && EqualsLabelTarget(x.Target, y.Target, context)
+                   && Equals(x.DefaultValue, y.DefaultValue, context);
         }
 
         /// <summary>Gets the hash code for the specified LabelExpression.</summary>
@@ -53,7 +54,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsLabel(x, y);
+            return EqualsLabel(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified LabelExpression.</summary>

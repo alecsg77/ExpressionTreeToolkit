@@ -19,14 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two InvocationExpression are equal.</summary>
         /// <param name="x">The first InvocationExpression to compare.</param>
         /// <param name="y">The second InvocationExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified InvocationExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsInvocation([DisallowNull] InvocationExpression x, [DisallowNull] InvocationExpression y)
+        protected virtual bool EqualsInvocation([DisallowNull] InvocationExpression x, [DisallowNull] InvocationExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Expression, y.Expression)
-                   && Equals(x.Arguments, y.Arguments);
+                   && Equals(x.Expression, y.Expression, context)
+                   && Equals(x.Arguments, y.Arguments, context);
         }
 
         /// <summary>Gets the hash code for the specified InvocationExpression.</summary>
@@ -53,7 +54,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsInvocation(x, y);
+            return EqualsInvocation(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified InvocationExpression.</summary>

@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
 
 #if JETBRAINS_ANNOTATIONS
-using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using AllowNullAttribute = JetBrains.Annotations.CanBeNullAttribute;
 using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
 using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 #endif
@@ -19,15 +19,16 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two IndexExpression are equal.</summary>
         /// <param name="x">The first IndexExpression to compare.</param>
         /// <param name="y">The second IndexExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified IndexExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsIndex([DisallowNull] IndexExpression x, [DisallowNull] IndexExpression y)
+        protected virtual bool EqualsIndex([DisallowNull] IndexExpression x, [DisallowNull] IndexExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Object, y.Object)
+                   && Equals(x.Object, y.Object, context)
                    && Equals(x.Indexer, y.Indexer)
-                   && Equals(x.Arguments, y.Arguments);
+                   && Equals(x.Arguments, y.Arguments, context);
         }
 
         /// <summary>Gets the hash code for the specified IndexExpression.</summary>
@@ -55,7 +56,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsIndex(x, y);
+            return EqualsIndex(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified IndexExpression.</summary>

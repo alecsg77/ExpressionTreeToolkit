@@ -19,14 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two BlockExpression are equal.</summary>
         /// <param name="x">The first BlockExpression to compare.</param>
         /// <param name="y">The second BlockExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified BlockExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsBlock([DisallowNull] BlockExpression x, [DisallowNull] BlockExpression y)
+        protected virtual bool EqualsBlock([DisallowNull] BlockExpression x, [DisallowNull] BlockExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Variables, y.Variables, EqualsParameter)
-                   && new ExpressionEqualityComparer(x.Variables, y.Variables, _equalityComparer).Equals(x.Expressions, y.Expressions)
+                   && Equals(x.Variables, y.Variables, EqualsParameter, context)
+                   && Equals(x.Expressions, y.Expressions, context.NestedScope(x.Variables, y.Variables))
                 ;
         }
 
@@ -55,7 +56,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsBlock(x, y);
+            return EqualsBlock(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified BlockExpression.</summary>

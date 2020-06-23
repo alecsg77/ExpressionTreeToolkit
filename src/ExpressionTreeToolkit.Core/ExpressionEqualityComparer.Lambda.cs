@@ -19,14 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two LambdaExpression are equal.</summary>
         /// <param name="x">The first LambdaExpression to compare.</param>
         /// <param name="y">The second LambdaExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified LambdaExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLambda([DisallowNull] LambdaExpression x, [DisallowNull] LambdaExpression y)
+        protected virtual bool EqualsLambda([DisallowNull] LambdaExpression x, [DisallowNull] LambdaExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Parameters, y.Parameters, EqualsParameter)
-                   && new ExpressionEqualityComparer(MergeParameters(_xParameters, x.Parameters), MergeParameters(_yParameters, y.Parameters), _equalityComparer).Equals(x.Body, y.Body);
+                   && Equals(x.Parameters, y.Parameters, EqualsParameter, context)
+                   && Equals(x.Body, y.Body, context.NestedScope(x.Parameters,y.Parameters));
         }
 
         /// <summary>Gets the hash code for the specified LambdaExpression.</summary>
@@ -53,7 +54,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsLambda(x, y);
+            return EqualsLambda(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified LambdaExpression.</summary>
