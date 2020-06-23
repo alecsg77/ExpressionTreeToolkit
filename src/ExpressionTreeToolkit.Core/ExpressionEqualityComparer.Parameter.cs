@@ -17,40 +17,20 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ParameterExpression>
     {
-        private readonly ReadOnlyCollection<ParameterExpression>? _xParameters;
-        private readonly ReadOnlyCollection<ParameterExpression>? _yParameters;
 
-        private ExpressionEqualityComparer(
-                ReadOnlyCollection<ParameterExpression> xParameters,
-                ReadOnlyCollection<ParameterExpression> yParameters,
-                IEqualityComparer<Expression>? equalityComparer
-            )
-            : this(equalityComparer)
-        {
-            _xParameters = xParameters;
-            _yParameters = yParameters;
-        }
-
-        /// <summary>Merge two ParameterExpression collections.</summary>
-        /// <param name="left">The first ParameterExpression collection to merge.</param>
-        /// <param name="right">The second ParameterExpression collection to merge.</param>
-        /// <returns>A merged ParameterExpression collection.</returns>
-        protected virtual ReadOnlyCollection<ParameterExpression> MergeParameters(ReadOnlyCollection<ParameterExpression>? left, ReadOnlyCollection<ParameterExpression> right)
-        {
-            return left != null ? right != null ? right.Concat(left).ToList().AsReadOnly() : left : right;
-        }
 
         /// <summary>Determines whether the children of the two ParameterExpression are equal.</summary>
         /// <param name="x">The first ParameterExpression to compare.</param>
         /// <param name="y">The second ParameterExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified ParameterExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsParameter([DisallowNull] ParameterExpression x, [DisallowNull] ParameterExpression y)
+        protected virtual bool EqualsParameter([DisallowNull] ParameterExpression x, [DisallowNull] ParameterExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && (_xParameters?.IndexOf(x) ?? 0) == (_yParameters?.IndexOf(y) ?? 0)
-                   && x.IsByRef == y.IsByRef;
+                   && x.IsByRef == y.IsByRef
+                   && context.VerifyParameter(x,y);
         }
 
         /// <summary>Gets the hash code for the specified ParameterExpression.</summary>
@@ -76,7 +56,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsParameter(x, y);
+            return EqualsParameter(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified ParameterExpression.</summary>

@@ -36,7 +36,7 @@ namespace ExpressionTreeToolkit.UnitTests
         [ExcludeFromCodeCoverage]
         private sealed class ExtendedExpressionEqualityComparer : ExpressionEqualityComparer
         {
-            public override bool Equals(Expression x, Expression y)
+            protected override bool Equals(Expression x, Expression y, ComparisonContext context)
             {
                 if (ReferenceEquals(x, y)) return true;
 
@@ -45,7 +45,7 @@ namespace ExpressionTreeToolkit.UnitTests
                 if (x is UnknownExpression myExpressionX && y is UnknownExpression myExpressionY)
                     return myExpressionX.Id == myExpressionY.Id;
 
-                return base.Equals(x, y);
+                return base.Equals(x, y, context);
             }
 
             public override int GetHashCode(Expression expression)

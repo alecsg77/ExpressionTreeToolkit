@@ -19,14 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two ListInitExpression are equal.</summary>
         /// <param name="x">The first ListInitExpression to compare.</param>
         /// <param name="y">The second ListInitExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified ListInitExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsListInit([DisallowNull] ListInitExpression x, [DisallowNull] ListInitExpression y)
+        protected virtual bool EqualsListInit([DisallowNull] ListInitExpression x, [DisallowNull] ListInitExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.NewExpression, y.NewExpression)
-                   && Equals(x.Initializers, y.Initializers, EqualsElementInit);
+                   && Equals(x.NewExpression, y.NewExpression, context)
+                   && Equals(x.Initializers, y.Initializers, EqualsElementInit, context);
         }
 
         /// <summary>Gets the hash code for the specified ListInitExpression.</summary>
@@ -53,7 +54,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsListInit(x, y);
+            return EqualsListInit(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified ListInitExpression.</summary>

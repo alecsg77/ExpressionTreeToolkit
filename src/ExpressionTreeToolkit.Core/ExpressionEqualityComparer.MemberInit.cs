@@ -19,14 +19,16 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two MemberInitExpression are equal.</summary>
         /// <param name="x">The first MemberInitExpression to compare.</param>
         /// <param name="y">The second MemberInitExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified MemberInitExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberInit([DisallowNull] MemberInitExpression x, [DisallowNull] MemberInitExpression y)
+        protected virtual bool EqualsMemberInit([DisallowNull] MemberInitExpression x,
+            [DisallowNull] MemberInitExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.NewExpression, y.NewExpression)
-                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding);
+                   && Equals(x.NewExpression, y.NewExpression, context)
+                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding, context);
         }
 
         /// <summary>Gets the hash code for the specified MemberInitExpression.</summary>
@@ -53,7 +55,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsMemberInit(x, y);
+            return EqualsMemberInit(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified MemberInitExpression.</summary>

@@ -19,28 +19,30 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two SwitchExpression are equal.</summary>
         /// <param name="x">The first SwitchExpression to compare.</param>
         /// <param name="y">The second SwitchExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified SwitchExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsSwitch([DisallowNull] SwitchExpression x, [DisallowNull] SwitchExpression y)
+        protected virtual bool EqualsSwitch([DisallowNull] SwitchExpression x, [DisallowNull] SwitchExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.SwitchValue, y.SwitchValue)
+                   && Equals(x.SwitchValue, y.SwitchValue, context)
                    && Equals(x.Comparison, y.Comparison)
-                   && Equals(x.Cases, y.Cases, EqualsSwitchCase)
-                   && Equals(x.DefaultBody, y.DefaultBody);
+                   && Equals(x.Cases, y.Cases, EqualsSwitchCase, context)
+                   && Equals(x.DefaultBody, y.DefaultBody, context);
         }
 
         /// <summary>Determines whether the children of the two SwitchCase are equal.</summary>
         /// <param name="x">The first SwitchCase to compare.</param>
         /// <param name="y">The second SwitchCase to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified SwitchCase are equal; otherwise, false.</returns>
-        protected virtual bool EqualsSwitchCase([DisallowNull] SwitchCase x, [DisallowNull] SwitchCase y)
+        protected virtual bool EqualsSwitchCase([DisallowNull] SwitchCase x, [DisallowNull] SwitchCase y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
-            return Equals(x.Body, y.Body)
-                   && Equals(x.TestValues, y.TestValues);
+            return Equals(x.Body, y.Body, context)
+                   && Equals(x.TestValues, y.TestValues, context);
         }
 
         /// <summary>Gets the hash code for the specified SwitchExpression.</summary>
@@ -79,7 +81,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsSwitch(x, y);
+            return EqualsSwitch(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified SwitchExpression.</summary>

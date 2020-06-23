@@ -19,15 +19,16 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two GotoExpression are equal.</summary>
         /// <param name="x">The first GotoExpression to compare.</param>
         /// <param name="y">The second GotoExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified GotoExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsGoto([DisallowNull] GotoExpression x, [DisallowNull] GotoExpression y)
+        protected virtual bool EqualsGoto([DisallowNull] GotoExpression x, [DisallowNull] GotoExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && x.Kind == y.Kind
-                   && EqualsLabelTarget(x.Target, y.Target)
-                   && Equals(x.Value, y.Value);
+                   && EqualsLabelTarget(x.Target, y.Target, context)
+                   && Equals(x.Value, y.Value, context);
         }
 
         /// <summary>Gets the hash code for the specified GotoExpression.</summary>
@@ -55,7 +56,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsGoto(x, y);
+            return EqualsGoto(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified GotoExpression.</summary>

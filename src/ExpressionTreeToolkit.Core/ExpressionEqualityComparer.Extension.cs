@@ -18,12 +18,13 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two extension Expression are equal.</summary>
         /// <param name="x">The first extension Expression to compare.</param>
         /// <param name="y">The second extension Expression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified extension Expression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsExtension([DisallowNull] Expression x, [DisallowNull] Expression y)
+        protected virtual bool EqualsExtension([DisallowNull] Expression x, [DisallowNull] Expression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
-            return Equals(x.ReduceExtensions(), y.ReduceExtensions());
+            return Equals(x.ReduceExtensions(), y.ReduceExtensions(), context);
         }
 
         /// <summary>Gets the hash code for the specified extension Expression.</summary>

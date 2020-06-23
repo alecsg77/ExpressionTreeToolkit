@@ -19,14 +19,16 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two TypeBinaryExpression are equal.</summary>
         /// <param name="x">The first TypeBinaryExpression to compare.</param>
         /// <param name="y">The second TypeBinaryExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified TypeBinaryExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsTypeBinary([DisallowNull] TypeBinaryExpression x, [DisallowNull] TypeBinaryExpression y)
+        protected virtual bool EqualsTypeBinary([DisallowNull] TypeBinaryExpression x,
+            [DisallowNull] TypeBinaryExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && x.TypeOperand == y.TypeOperand
-                   && Equals(x.Expression, y.Expression);
+                   && Equals(x.Expression, y.Expression, context);
         }
 
         /// <summary>Gets the hash code for the specified TypeBinaryExpression.</summary>
@@ -53,7 +55,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsTypeBinary(x, y);
+            return EqualsTypeBinary(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified TypeBinaryExpression.</summary>

@@ -19,8 +19,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two DebugInfoExpression are equal.</summary>
         /// <param name="x">The first DebugInfoExpression to compare.</param>
         /// <param name="y">The second DebugInfoExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified DebugInfoExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsDebugInfo([DisallowNull] DebugInfoExpression x, [DisallowNull] DebugInfoExpression y)
+        protected virtual bool EqualsDebugInfo([DisallowNull] DebugInfoExpression x, [DisallowNull] DebugInfoExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
@@ -93,7 +94,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsDebugInfo(x, y);
+            return EqualsDebugInfo(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified DebugInfoExpression.</summary>

@@ -19,8 +19,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two ConstantExpression are equal.</summary>
         /// <param name="x">The first ConstantExpression to compare.</param>
         /// <param name="y">The second ConstantExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified ConstantExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsConstant([DisallowNull] ConstantExpression x, [DisallowNull] ConstantExpression y)
+        protected virtual bool EqualsConstant([DisallowNull] ConstantExpression x, [DisallowNull] ConstantExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
@@ -51,7 +52,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsConstant(x, y);
+            return EqualsConstant(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified ConstantExpression.</summary>

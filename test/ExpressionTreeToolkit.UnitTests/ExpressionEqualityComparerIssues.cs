@@ -74,5 +74,27 @@ namespace ExpressionTreeToolkit.UnitTests
 
             AssertExpressions.NotEqual(x,y);
         }
+
+        [Fact]
+        public void Issue_20_Equals_Block_Swapped_Labels()
+        {
+            var returnX = Expression.Label();
+            var labelX = Expression.Label();
+            var x = Expression.Block(
+                Expression.Label(labelX),
+                Expression.Goto(returnX),
+                Expression.Label(returnX)
+            );
+
+            var returnY = Expression.Label();
+            var labelY = Expression.Label();
+            var y = Expression.Block(
+                Expression.Label(labelY),
+                Expression.Goto(labelY),
+                Expression.Label(returnY)
+            );
+
+            AssertExpressions.NotEqual(x, y);
+        }
     }
 }

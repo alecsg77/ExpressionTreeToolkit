@@ -19,15 +19,16 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two LoopExpression are equal.</summary>
         /// <param name="x">The first LoopExpression to compare.</param>
         /// <param name="y">The second LoopExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified LoopExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLoop([DisallowNull] LoopExpression x, [DisallowNull] LoopExpression y)
+        protected virtual bool EqualsLoop([DisallowNull] LoopExpression x, [DisallowNull] LoopExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Body, y.Body)
-                   && EqualsLabelTarget(x.ContinueLabel, y.ContinueLabel)
-                   && EqualsLabelTarget(x.BreakLabel, y.BreakLabel);
+                   && Equals(x.Body, y.Body, context)
+                   && EqualsLabelTarget(x.ContinueLabel, y.ContinueLabel, context)
+                   && EqualsLabelTarget(x.BreakLabel, y.BreakLabel, context);
         }
 
         /// <summary>Gets the hash code for the specified LoopExpression.</summary>
@@ -55,7 +56,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsLoop(x, y);
+            return EqualsLoop(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified LoopExpression.</summary>

@@ -19,14 +19,15 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two DynamicExpression are equal.</summary>
         /// <param name="x">The first DynamicExpression to compare.</param>
         /// <param name="y">The second DynamicExpression to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified DynamicExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsDynamic([DisallowNull] DynamicExpression x, [DisallowNull] DynamicExpression y)
+        protected virtual bool EqualsDynamic([DisallowNull] DynamicExpression x, [DisallowNull] DynamicExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && x.DelegateType == y.DelegateType
-                   && Equals(x.Arguments, y.Arguments)
+                   && Equals(x.Arguments, y.Arguments, context)
                    && Equals(x.Binder, y.Binder);
         }
 
@@ -55,7 +56,7 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsDynamic(x, y);
+            return EqualsDynamic(x, y, BeginScope());
         }
 
         /// <summary>Returns a hash code for the specified DynamicExpression.</summary>

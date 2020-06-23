@@ -2,12 +2,14 @@
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Linq;
 #if JETBRAINS_ANNOTATIONS
-using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using AllowNullAttribute = JetBrains.Annotations.CanBeNullAttribute;
 using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
 using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 #endif
@@ -17,7 +19,7 @@ namespace ExpressionTreeToolkit
     /// <summary>
     /// Expression Equality Comparer
     /// </summary>
-    public partial class ExpressionEqualityComparer : IEqualityComparer<Expression>, System.Collections.IEqualityComparer
+    public partial class ExpressionEqualityComparer : IEqualityComparer<Expression>, IEqualityComparer
     {
         private readonly IEqualityComparer<Expression> _equalityComparer;
 
@@ -55,6 +57,22 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
+            return Equals(x, y, BeginScope());
+        }
+
+        /// <summary>Determines whether two Expressions are equal.</summary>
+        /// <param name="x">The first Expression to compare.</param>
+        /// <param name="y">The second Expression to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
+        protected virtual bool Equals([AllowNull] Expression? x, [AllowNull] Expression? y, [DisallowNull] ComparisonContext context)
+        {
+            if (ReferenceEquals(x, y))
+                return true;
+
+            if (x == null || y == null)
+                return false;
+
             if (!Equals(x.NodeType, y.NodeType))
                 return false;
 
@@ -80,7 +98,7 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.Increment:
                 case ExpressionType.Throw:
                 case ExpressionType.Unbox:
-                    return EqualsUnary((UnaryExpression)x, (UnaryExpression)y);
+                    return EqualsUnary((UnaryExpression)x, (UnaryExpression)y, context);
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
                 case ExpressionType.Subtract:
@@ -120,57 +138,57 @@ namespace ExpressionTreeToolkit
                 case ExpressionType.AddAssignChecked:
                 case ExpressionType.MultiplyAssignChecked:
                 case ExpressionType.SubtractAssignChecked:
-                    return EqualsBinary((BinaryExpression)x, (BinaryExpression)y);
+                    return EqualsBinary((BinaryExpression)x, (BinaryExpression)y, context);
                 case ExpressionType.TypeIs:
                 case ExpressionType.TypeEqual:
-                    return EqualsTypeBinary((TypeBinaryExpression)x, (TypeBinaryExpression)y);
+                    return EqualsTypeBinary((TypeBinaryExpression)x, (TypeBinaryExpression)y, context);
                 case ExpressionType.Conditional:
-                    return EqualsConditional((ConditionalExpression)x, (ConditionalExpression)y);
+                    return EqualsConditional((ConditionalExpression)x, (ConditionalExpression)y, context);
                 case ExpressionType.Constant:
-                    return EqualsConstant((ConstantExpression)x, (ConstantExpression)y);
+                    return EqualsConstant((ConstantExpression)x, (ConstantExpression)y, context);
                 case ExpressionType.Parameter:
-                    return EqualsParameter((ParameterExpression)x, (ParameterExpression)y);
+                    return EqualsParameter((ParameterExpression)x, (ParameterExpression)y, context);
                 case ExpressionType.MemberAccess:
-                    return EqualsMember((MemberExpression)x, (MemberExpression)y);
+                    return EqualsMember((MemberExpression)x, (MemberExpression)y, context);
                 case ExpressionType.Call:
-                    return EqualsMethodCall((MethodCallExpression)x, (MethodCallExpression)y);
+                    return EqualsMethodCall((MethodCallExpression)x, (MethodCallExpression)y, context);
                 case ExpressionType.Lambda:
-                    return EqualsLambda((LambdaExpression)x, (LambdaExpression)y);
+                    return EqualsLambda((LambdaExpression)x, (LambdaExpression)y, context);
                 case ExpressionType.New:
-                    return EqualsNew((NewExpression)x, (NewExpression)y);
+                    return EqualsNew((NewExpression)x, (NewExpression)y, context);
                 case ExpressionType.NewArrayInit:
                 case ExpressionType.NewArrayBounds:
-                    return EqualsNewArray((NewArrayExpression)x, (NewArrayExpression)y);
+                    return EqualsNewArray((NewArrayExpression)x, (NewArrayExpression)y, context);
                 case ExpressionType.Invoke:
-                    return EqualsInvocation((InvocationExpression)x, (InvocationExpression)y);
+                    return EqualsInvocation((InvocationExpression)x, (InvocationExpression)y, context);
                 case ExpressionType.MemberInit:
-                    return EqualsMemberInit((MemberInitExpression)x, (MemberInitExpression)y);
+                    return EqualsMemberInit((MemberInitExpression)x, (MemberInitExpression)y, context);
                 case ExpressionType.ListInit:
-                    return EqualsListInit((ListInitExpression)x, (ListInitExpression)y);
+                    return EqualsListInit((ListInitExpression)x, (ListInitExpression)y, context);
                 case ExpressionType.Block:
-                    return EqualsBlock((BlockExpression)x, (BlockExpression)y);
+                    return EqualsBlock((BlockExpression)x, (BlockExpression)y, context);
                 case ExpressionType.DebugInfo:
-                    return EqualsDebugInfo((DebugInfoExpression)x, (DebugInfoExpression)y);
+                    return EqualsDebugInfo((DebugInfoExpression)x, (DebugInfoExpression)y, context);
                 case ExpressionType.Dynamic:
-                    return EqualsDynamic((DynamicExpression)x, (DynamicExpression)y);
+                    return EqualsDynamic((DynamicExpression)x, (DynamicExpression)y, context);
                 case ExpressionType.Goto:
-                    return EqualsGoto((GotoExpression)x, (GotoExpression)y);
+                    return EqualsGoto((GotoExpression)x, (GotoExpression)y, context);
                 case ExpressionType.Index:
-                    return EqualsIndex((IndexExpression)x, (IndexExpression)y);
+                    return EqualsIndex((IndexExpression)x, (IndexExpression)y, context);
                 case ExpressionType.Label:
-                    return EqualsLabel((LabelExpression)x, (LabelExpression)y);
+                    return EqualsLabel((LabelExpression)x, (LabelExpression)y, context);
                 case ExpressionType.RuntimeVariables:
-                    return EqualsRuntimeVariables((RuntimeVariablesExpression)x, (RuntimeVariablesExpression)y);
+                    return EqualsRuntimeVariables((RuntimeVariablesExpression)x, (RuntimeVariablesExpression)y, context);
                 case ExpressionType.Loop:
-                    return EqualsLoop((LoopExpression)x, (LoopExpression)y);
+                    return EqualsLoop((LoopExpression)x, (LoopExpression)y, context);
                 case ExpressionType.Switch:
-                    return EqualsSwitch((SwitchExpression)x, (SwitchExpression)y);
+                    return EqualsSwitch((SwitchExpression)x, (SwitchExpression)y, context);
                 case ExpressionType.Try:
-                    return EqualsTry((TryExpression)x, (TryExpression)y);
+                    return EqualsTry((TryExpression)x, (TryExpression)y, context);
                 case ExpressionType.Default:
-                    return EqualsDefault((DefaultExpression)x, (DefaultExpression)y);
+                    return EqualsDefault((DefaultExpression)x, (DefaultExpression)y, context);
                 case ExpressionType.Extension:
-                    return EqualsExtension(x, y);
+                    return EqualsExtension(x, y, context);
                 default:
                     return _equalityComparer.Equals(x, y);
             }
@@ -322,7 +340,7 @@ namespace ExpressionTreeToolkit
         /// <param name="y">The second Expression to compare.</param>
         /// <returns>true if the specified Expressions are equal; otherwise, false.</returns>
         /// <exception cref="ArgumentException"><paramref name="x">x</paramref> or <paramref name="y">y</paramref> is of a type that cannot be cast to Expression.</exception>
-        bool System.Collections.IEqualityComparer.Equals([AllowNull] object? x, [AllowNull] object? y)
+        bool IEqualityComparer.Equals([AllowNull] object? x, [AllowNull] object? y)
         {
             if (x == y)
                 return true;
@@ -352,7 +370,7 @@ namespace ExpressionTreeToolkit
         /// <returns>A hash code for the specified Expression.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         /// <exception cref="System.ArgumentException"><paramref name="obj">obj</paramref> is of a type that cannot be cast to Expression</exception>
-        int System.Collections.IEqualityComparer.GetHashCode([DisallowNull] object obj)
+        int IEqualityComparer.GetHashCode([DisallowNull] object obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
