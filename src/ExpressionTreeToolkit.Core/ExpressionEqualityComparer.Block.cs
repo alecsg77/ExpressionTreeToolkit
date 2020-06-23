@@ -25,9 +25,9 @@ namespace ExpressionTreeToolkit
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Expressions, y.Expressions)
                    && Equals(x.Variables, y.Variables, EqualsParameter)
-                   && Equals(x.Result, y.Result);
+                   && new ExpressionEqualityComparer(x.Variables, y.Variables).Equals(x.Expressions, y.Expressions)
+                ;
         }
 
         /// <summary>Gets the hash code for the specified BlockExpression.</summary>
