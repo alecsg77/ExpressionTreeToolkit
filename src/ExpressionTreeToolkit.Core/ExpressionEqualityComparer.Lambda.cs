@@ -26,7 +26,7 @@ namespace ExpressionTreeToolkit
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Parameters, y.Parameters, EqualsParameter)
-                   && new ExpressionEqualityComparer(x.Parameters, y.Parameters).Equals(x.Body, y.Body);
+                   && new ExpressionEqualityComparer(x.Parameters, y.Parameters, _equalityComparer).Equals(x.Body, y.Body);
         }
 
         /// <summary>Gets the hash code for the specified LambdaExpression.</summary>
