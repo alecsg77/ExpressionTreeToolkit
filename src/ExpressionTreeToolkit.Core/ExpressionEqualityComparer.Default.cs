@@ -14,7 +14,7 @@ using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 
 namespace ExpressionTreeToolkit
 {
-    public partial class ExpressionEqualityComparer : IEqualityComparer<DefaultExpression>
+    partial class ExpressionEqualityComparer : IEqualityComparer<DefaultExpression>
     {
         /// <summary>Determines whether the children of the two DefaultExpression are equal.</summary>
         /// <param name="x">The first DefaultExpression to compare.</param>

@@ -14,17 +14,28 @@ using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
 using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 #endif
 
-
 namespace ExpressionTreeToolkit
 {
+    /// <summary>
+    /// Generate enumerators for Expression tree.
+    /// </summary>
     public class ExpressionIterator
     {
         internal static readonly ExpressionIterator Default = new ExpressionIterator();
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         protected ExpressionIterator()
         {
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the Expression.
+        /// </summary>
+        /// <param name="expression">The Expression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the Expression.</returns>
+        /// <exception cref="ArgumentNullException">The Expression is null.</exception>
         public virtual IEnumerable<Expression> Iterator([DisallowNull] Expression expression)
         {
             if (expression == null)
@@ -155,6 +166,12 @@ namespace ExpressionTreeToolkit
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the ReadOnlyCollection&lt;Expression&gt; elements.
+        /// </summary>
+        /// <param name="expressions">The ReadOnlyCollection&lt;Expression&gt; to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the ReadOnlyCollection&lt;Expression&gt;</returns>
+        /// <exception cref="ArgumentNullException">The ReadOnlyCollection&lt;Expression&gt; is null.</exception>
         protected IEnumerable<Expression> Iterator([DisallowNull] ReadOnlyCollection<Expression> expressions)
         {
             if (expressions == null)
@@ -164,6 +181,14 @@ namespace ExpressionTreeToolkit
             return expressions.SelectMany(Iterator);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the ReadOnlyCollection&lt;t&gt; elements using an iterator.
+        /// </summary>
+        /// <param name="values">The ReadOnlyCollection&lt;Expression&gt; to iterate.</param>
+        /// <param name="iterator">The iterator to apply to each element.</param>
+        /// <typeparam name="T">The type of the elements of values</typeparam>
+        /// <returns>An enumerator that can be used to iterate through the ReadOnlyCollection&lt;Expression&gt; elements using the iterator.</returns>
+        /// <exception cref="ArgumentNullException">The ReadOnlyCollection&lt;Expression&gt; is null</exception>
         protected IEnumerable<Expression> Iterator<T>([DisallowNull] ReadOnlyCollection<T> values, Func<T, IEnumerable<Expression>> iterator)
             where T : class
         {
@@ -174,6 +199,12 @@ namespace ExpressionTreeToolkit
             return values.SelectMany(iterator);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the UnaryExpression.
+        /// </summary>
+        /// <param name="expression">The UnaryExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the UnaryExpression.</returns>
+        /// <exception cref="ArgumentNullException">The UnaryExpression is null.</exception>
         protected virtual IEnumerable<Expression> UnaryIterator([DisallowNull] UnaryExpression expression)
         {
             foreach (var operand in Iterator(expression.Operand))
@@ -184,6 +215,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the BinaryExpression.
+        /// </summary>
+        /// <param name="expression">The BinaryExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the BinaryExpression.</returns>
+        /// <exception cref="ArgumentNullException">The BinaryExpression is null.</exception>
         protected virtual IEnumerable<Expression> BinaryIterator([DisallowNull] BinaryExpression expression)
         {
             foreach (var left in Iterator(expression.Left))
@@ -199,6 +236,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the TypeBinaryExpression.
+        /// </summary>
+        /// <param name="expression">The TypeBinaryExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the TypeBinaryExpression.</returns>
+        /// <exception cref="ArgumentNullException">The TypeBinaryExpression is null.</exception>
         protected virtual IEnumerable<Expression> TypeBinaryIterator([DisallowNull] TypeBinaryExpression expression)
         {
             foreach (var subExpression in Iterator(expression.Expression))
@@ -209,6 +252,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the ConditionalExpression.
+        /// </summary>
+        /// <param name="expression">The ConditionalExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the ConditionalExpression.</returns>
+        /// <exception cref="ArgumentNullException">The ConditionalExpression is null.</exception>
         protected virtual IEnumerable<Expression> ConditionalIterator([DisallowNull] ConditionalExpression expression)
         {
             foreach (var test in Iterator(expression.Test))
@@ -229,16 +278,34 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the ConstantExpression.
+        /// </summary>
+        /// <param name="expression">The ConstantExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the ConstantExpression.</returns>
+        /// <exception cref="ArgumentNullException">The ConstantExpression is null.</exception>
         protected virtual IEnumerable<Expression> ConstantIterator([DisallowNull] ConstantExpression expression)
         {
             return new[] { expression };
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the ParameterExpression.
+        /// </summary>
+        /// <param name="expression">The ParameterExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the ParameterExpression.</returns>
+        /// <exception cref="ArgumentNullException">The ParameterExpression is null.</exception>
         protected virtual IEnumerable<Expression> ParameterIterator([DisallowNull] ParameterExpression expression)
         {
             return new[] { expression };
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the MemberExpression.
+        /// </summary>
+        /// <param name="expression">The MemberExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the MemberExpression.</returns>
+        /// <exception cref="ArgumentNullException">The MemberExpression is null.</exception>
         protected virtual IEnumerable<Expression> MemberIterator([DisallowNull] MemberExpression expression)
         {
             if (expression.Expression != null)
@@ -252,6 +319,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the MethodCallExpression.
+        /// </summary>
+        /// <param name="expression">The MethodCallExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the MethodCallExpression.</returns>
+        /// <exception cref="ArgumentNullException">The MethodCallExpression is null.</exception>
         protected virtual IEnumerable<Expression> MethodCallIterator([DisallowNull] MethodCallExpression expression)
         {
             if (expression.Object != null)
@@ -270,6 +343,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the LambdaExpression.
+        /// </summary>
+        /// <param name="expression">The LambdaExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the LambdaExpression.</returns>
+        /// <exception cref="ArgumentNullException">The LambdaExpression is null.</exception>
         protected virtual IEnumerable<Expression> LambdaIterator([DisallowNull] LambdaExpression expression)
         {
             foreach (var body in Iterator(expression.Body))
@@ -285,6 +364,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the NewExpression.
+        /// </summary>
+        /// <param name="expression">The NewExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the NewExpression.</returns>
+        /// <exception cref="ArgumentNullException">The NewExpression is null.</exception>
         protected virtual IEnumerable<Expression> NewIterator([DisallowNull] NewExpression expression)
         {
             foreach (var parameter in Iterator(expression.Arguments))
@@ -295,6 +380,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the NewArrayExpression.
+        /// </summary>
+        /// <param name="expression">The NewArrayExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the NewArrayExpression.</returns>
+        /// <exception cref="ArgumentNullException">The NewArrayExpression is null.</exception>
         protected virtual IEnumerable<Expression> NewArrayIterator([DisallowNull] NewArrayExpression expression)
         {
             foreach (var expr in Iterator(expression.Expressions))
@@ -305,6 +396,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the InvocationExpression.
+        /// </summary>
+        /// <param name="expression">The InvocationExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the InvocationExpression.</returns>
+        /// <exception cref="ArgumentNullException">The InvocationExpression is null.</exception>
         protected virtual IEnumerable<Expression> InvocationIterator([DisallowNull] InvocationExpression expression)
         {
             foreach (var subExpression in Iterator(expression.Expression))
@@ -320,6 +417,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the MemberInitExpression.
+        /// </summary>
+        /// <param name="expression">The MemberInitExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the MemberInitExpression.</returns>
+        /// <exception cref="ArgumentNullException">The MemberInitExpression is null.</exception>
         protected virtual IEnumerable<Expression> MemberInitIterator([DisallowNull] MemberInitExpression expression)
         {
             foreach (var newExpression in Iterator(expression.NewExpression))
@@ -334,6 +437,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the MemberBinding.
+        /// </summary>
+        /// <param name="memberBinding">The MemberBinding to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the MemberBinding.</returns>
+        /// <exception cref="ArgumentNullException">The MemberBinding is null.</exception>
         protected virtual IEnumerable<Expression> MemberBindingIterator([DisallowNull] MemberBinding memberBinding)
         {
             if (memberBinding == null)
@@ -353,6 +462,12 @@ namespace ExpressionTreeToolkit
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the MemberAssignment.
+        /// </summary>
+        /// <param name="memberAssignment">The MemberAssignment to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the MemberAssignment.</returns>
+        /// <exception cref="ArgumentNullException">The MemberAssignment is null.</exception>
         protected virtual IEnumerable<Expression> MemberAssignmentIterator([DisallowNull] MemberAssignment memberAssignment)
         {
             if (memberAssignment == null)
@@ -362,6 +477,12 @@ namespace ExpressionTreeToolkit
             return Iterator(memberAssignment.Expression);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the MemberMemberBinding.
+        /// </summary>
+        /// <param name="memberMemberBinding">The MemberMemberBinding to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the MemberMemberBinding.</returns>
+        /// <exception cref="ArgumentNullException">The MemberMemberBinding is null.</exception>
         protected virtual IEnumerable<Expression> MemberMemberBindingIterator([DisallowNull] MemberMemberBinding memberMemberBinding)
         {
             if (memberMemberBinding == null)
@@ -371,6 +492,12 @@ namespace ExpressionTreeToolkit
             return Iterator(memberMemberBinding.Bindings, MemberBindingIterator);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the MemberListBinding.
+        /// </summary>
+        /// <param name="memberListBinding">The MemberListBinding to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the MemberListBinding.</returns>
+        /// <exception cref="ArgumentNullException">The MemberListBinding is null.</exception>
         protected virtual IEnumerable<Expression> MemberListBindingIterator([DisallowNull] MemberListBinding memberListBinding)
         {
             if (memberListBinding == null)
@@ -380,6 +507,12 @@ namespace ExpressionTreeToolkit
             return Iterator(memberListBinding.Initializers, ElementInitIterator);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the ElementInit.
+        /// </summary>
+        /// <param name="elementInit">The ElementInit to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the ElementInit.</returns>
+        /// <exception cref="ArgumentNullException">The ElementInit is null.</exception>
         protected virtual IEnumerable<Expression> ElementInitIterator([DisallowNull] ElementInit elementInit)
         {
             if (elementInit == null)
@@ -389,6 +522,12 @@ namespace ExpressionTreeToolkit
             return Iterator(elementInit.Arguments);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the ListInitExpression.
+        /// </summary>
+        /// <param name="expression">The ListInitExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the ListInitExpression.</returns>
+        /// <exception cref="ArgumentNullException">The ListInitExpression is null.</exception>
         protected virtual IEnumerable<Expression> ListInitIterator([DisallowNull] ListInitExpression expression)
         {
             foreach (var newExpression in Iterator(expression.NewExpression))
@@ -404,6 +543,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the BlockExpression.
+        /// </summary>
+        /// <param name="expression">The BlockExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the BlockExpression.</returns>
+        /// <exception cref="ArgumentNullException">The BlockExpression is null.</exception>
         protected virtual IEnumerable<Expression> BlockIterator([DisallowNull] BlockExpression expression)
         {
             foreach (var variable in expression.Variables)
@@ -418,6 +563,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the DebugInfoExpression.
+        /// </summary>
+        /// <param name="expression">The DebugInfoExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the DebugInfoExpression.</returns>
+        /// <exception cref="ArgumentNullException">The DebugInfoExpression is null.</exception>
         protected virtual IEnumerable<Expression> DebugInfoIterator([DisallowNull] DebugInfoExpression expression)
         {
             if (expression == null)
@@ -427,6 +578,12 @@ namespace ExpressionTreeToolkit
             return new[] { expression };
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the DynamicExpression.
+        /// </summary>
+        /// <param name="expression">The DynamicExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the DynamicExpression.</returns>
+        /// <exception cref="ArgumentNullException">The DynamicExpression is null.</exception>
         protected virtual IEnumerable<Expression> DynamicIterator([DisallowNull] DynamicExpression expression)
         {
             foreach (var argument in Iterator(expression.Arguments))
@@ -436,6 +593,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the GotoExpression.
+        /// </summary>
+        /// <param name="expression">The GotoExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the GotoExpression.</returns>
+        /// <exception cref="ArgumentNullException">The GotoExpression is null.</exception>
         protected virtual IEnumerable<Expression> GotoIterator([DisallowNull] GotoExpression expression)
         {
             if (expression.Value != null)
@@ -448,6 +611,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the IndexExpression.
+        /// </summary>
+        /// <param name="expression">The IndexExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the IndexExpression.</returns>
+        /// <exception cref="ArgumentNullException">The IndexExpression is null.</exception>
         protected virtual IEnumerable<Expression> IndexIterator([DisallowNull] IndexExpression expression)
         {
             foreach (var @object in Iterator(expression.Object))
@@ -461,6 +630,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the LabelExpression.
+        /// </summary>
+        /// <param name="expression">The LabelExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the LabelExpression.</returns>
+        /// <exception cref="ArgumentNullException">The LabelExpression is null.</exception>
         protected virtual IEnumerable<Expression> LabelIterator([DisallowNull] LabelExpression expression)
         {
             if (expression.DefaultValue != null)
@@ -473,6 +648,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the RuntimeVariablesExpression.
+        /// </summary>
+        /// <param name="expression">The RuntimeVariablesExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the RuntimeVariablesExpression.</returns>
+        /// <exception cref="ArgumentNullException">The RuntimeVariablesExpression is null.</exception>
         protected virtual IEnumerable<Expression> RuntimeVariablesIterator([DisallowNull] RuntimeVariablesExpression expression)
         {
             foreach (var variable in expression.Variables)
@@ -482,6 +663,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the LoopExpression.
+        /// </summary>
+        /// <param name="expression">The LoopExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the LoopExpression.</returns>
+        /// <exception cref="ArgumentNullException">The LoopExpression is null.</exception>
         protected virtual IEnumerable<Expression> LoopIterator([DisallowNull] LoopExpression expression)
         {
             foreach (var body in Iterator(expression.Body))
@@ -491,6 +678,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the SwitchExpression.
+        /// </summary>
+        /// <param name="expression">The SwitchExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the SwitchExpression.</returns>
+        /// <exception cref="ArgumentNullException">The SwitchExpression is null.</exception>
         protected virtual IEnumerable<Expression> SwitchIterator([DisallowNull] SwitchExpression expression)
         {
             yield return expression.SwitchValue;
@@ -515,6 +708,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the TryExpression.
+        /// </summary>
+        /// <param name="expression">The TryExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the TryExpression.</returns>
+        /// <exception cref="ArgumentNullException">The TryExpression is null.</exception>
         protected virtual IEnumerable<Expression> TryIterator([DisallowNull] TryExpression expression)
         {
             foreach (var body in Iterator(expression.Body))
@@ -546,6 +745,12 @@ namespace ExpressionTreeToolkit
             yield return expression;
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the CatchBlock.
+        /// </summary>
+        /// <param name="catchBlock">The CatchBlock to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the CatchBlock.</returns>
+        /// <exception cref="ArgumentNullException">The CatchBlock is null.</exception>
         protected virtual IEnumerable<Expression> CatchBlockIterator([DisallowNull] CatchBlock catchBlock)
         {
             if (catchBlock.Variable != null)
@@ -567,6 +772,12 @@ namespace ExpressionTreeToolkit
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the DefaultExpression.
+        /// </summary>
+        /// <param name="expression">The DefaultExpression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the DefaultExpression.</returns>
+        /// <exception cref="ArgumentNullException">The DefaultExpression is null.</exception>
         protected virtual IEnumerable<Expression> DefaultIterator([DisallowNull] DefaultExpression expression)
         {
             if (expression == null)
@@ -576,6 +787,12 @@ namespace ExpressionTreeToolkit
             return new[] { expression };
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the Expression.
+        /// </summary>
+        /// <param name="expression">The Expression to iterate.</param>
+        /// <returns>An enumerator that can be used to iterate through the Expression.</returns>
+        /// <exception cref="ArgumentNullException">The Expression is null.</exception>
         protected virtual IEnumerable<Expression> ExtensionIterator([DisallowNull] Expression expression)
         {
             if (expression == null)

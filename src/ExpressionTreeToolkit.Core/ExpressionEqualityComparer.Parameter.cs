@@ -17,8 +17,6 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ParameterExpression>
     {
-
-
         /// <summary>Determines whether the children of the two ParameterExpression are equal.</summary>
         /// <param name="x">The first ParameterExpression to compare.</param>
         /// <param name="y">The second ParameterExpression to compare.</param>

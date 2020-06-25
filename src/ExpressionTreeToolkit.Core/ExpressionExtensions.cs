@@ -3,8 +3,10 @@
 
 namespace ExpressionTreeToolkit
 {
+    /// <summary>
+    /// Extension methods to make working with Expression easier.
+    /// </summary>
     public static partial class ExpressionExtensions
     {
     }
-
 }

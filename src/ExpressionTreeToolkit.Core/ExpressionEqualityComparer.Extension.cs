@@ -13,7 +13,7 @@ using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 
 namespace ExpressionTreeToolkit
 {
-    public partial class ExpressionEqualityComparer
+    partial class ExpressionEqualityComparer
     {
         /// <summary>Determines whether the children of the two extension Expression are equal.</summary>
         /// <param name="x">The first extension Expression to compare.</param>
