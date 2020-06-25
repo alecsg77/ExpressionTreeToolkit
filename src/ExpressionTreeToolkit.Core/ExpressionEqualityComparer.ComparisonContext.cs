@@ -36,8 +36,8 @@ namespace ExpressionTreeToolkit
             /// Initializes a new instance of the ComparisonContext class that represents a nested scope.
             /// </summary>
             /// <param name="parent">The parent ComparisonContext.</param>
-            /// <param name="xParameters">The ReadOnlyCollection&lt;ParameterExpression&gt; parameters of x</param>
-            /// <param name="yParameters">The ReadOnlyCollection&lt;ParameterExpression&gt; parameters of y</param>
+            /// <param name="xParameters">The [ReadOnlyCollection](xref:System.Collections.ObjectModel.ReadOnlyCollection`1)&lt;<see cref="ParameterExpression"/>&gt; parameters of x</param>
+            /// <param name="yParameters">The [ReadOnlyCollection](xref:System.Collections.ObjectModel.ReadOnlyCollection`1)&lt;<see cref="ParameterExpression"/>&gt; parameters of y</param>
             protected ComparisonContext(
                 ComparisonContext parent,
                 ReadOnlyCollection<ParameterExpression> xParameters,
@@ -52,10 +52,10 @@ namespace ExpressionTreeToolkit
             }
 
             /// <summary>
-            /// Returns a new nested ComparisonContext.
+            /// Returns a new nested <see cref="ComparisonContext"/>.
             /// </summary>
-            /// <param name="xVariables">The first ReadOnlyCollection&lt;ParameterExpression&gt;</param>
-            /// <param name="yVariables">The second ReadOnlyCollection&lt;ParameterExpression&gt;</param>
+            /// <param name="xVariables">The first [ReadOnlyCollection](xref:System.Collections.ObjectModel.ReadOnlyCollection`1)&lt;<see cref="ParameterExpression"/>&gt;</param>
+            /// <param name="yVariables">The second [ReadOnlyCollection](xref:System.Collections.ObjectModel.ReadOnlyCollection`1)&lt;<see cref="ParameterExpression"/>&gt;</param>
             /// <returns>The nested ComparisonContext.</returns>
             public ComparisonContext NestedScope(
                 ReadOnlyCollection<ParameterExpression> xVariables,
@@ -66,11 +66,11 @@ namespace ExpressionTreeToolkit
             }
 
             /// <summary>
-            /// Determines whether the two ParameterExpression are equal in the context.
+            /// Determines whether the two <see cref="ParameterExpression"/> are equal in the context.
             /// </summary>
-            /// <param name="x">The first ParameterExpression to compare.</param>
-            /// <param name="y">The second ParameterExpression to compare.</param>
-            /// <returns>true if the specified ParameterExpression are equal in the context; otherwise, false.</returns>
+            /// <param name="x">The first <see cref="ParameterExpression"/> to compare.</param>
+            /// <param name="y">The second <see cref="ParameterExpression"/> to compare.</param>
+            /// <returns>true if the specified <see cref="ParameterExpression"/> are equal in the context; otherwise, false.</returns>
             public bool VerifyParameter(ParameterExpression x, ParameterExpression y)
             {
                 var xIndex = _xParameters?.IndexOf(x) ?? -1;

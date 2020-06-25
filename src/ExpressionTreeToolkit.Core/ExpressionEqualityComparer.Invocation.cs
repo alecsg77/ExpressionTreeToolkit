@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<InvocationExpression>
     {
-        /// <summary>Determines whether the children of the two InvocationExpression are equal.</summary>
-        /// <param name="x">The first InvocationExpression to compare.</param>
-        /// <param name="y">The second InvocationExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="InvocationExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="InvocationExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="InvocationExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified InvocationExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="InvocationExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsInvocation([DisallowNull] InvocationExpression x, [DisallowNull] InvocationExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -30,9 +30,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Arguments, y.Arguments, context);
         }
 
-        /// <summary>Gets the hash code for the specified InvocationExpression.</summary>
-        /// <param name="node">The InvocationExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified InvocationExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="InvocationExpression"/>.</summary>
+        /// <param name="node">The <see cref="InvocationExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="InvocationExpression"/>.</returns>
         protected virtual int GetHashCodeInvocation([DisallowNull] InvocationExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -42,10 +42,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Arguments));
         }
 
-        /// <summary>Determines whether the specified InvocationExpressions are equal.</summary>
-        /// <param name="x">The first InvocationExpression to compare.</param>
-        /// <param name="y">The second InvocationExpression to compare.</param>
-        /// <returns>true if the specified InvocationExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="InvocationExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="InvocationExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="InvocationExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="InvocationExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<InvocationExpression>.Equals([AllowNull] InvocationExpression? x, [AllowNull] InvocationExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -57,9 +57,9 @@ namespace ExpressionTreeToolkit
             return EqualsInvocation(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified InvocationExpression.</summary>
-        /// <param name="obj">The <see cref="InvocationExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified InvocationExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="InvocationExpression"/>.</summary>
+        /// <param name="obj">The <see cref="InvocationExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="InvocationExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<InvocationExpression>.GetHashCode([DisallowNull] InvocationExpression obj)
         {

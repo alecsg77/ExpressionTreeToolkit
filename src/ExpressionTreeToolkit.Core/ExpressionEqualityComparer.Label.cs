@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<LabelExpression>
     {
-        /// <summary>Determines whether the children of the two LabelExpression are equal.</summary>
-        /// <param name="x">The first LabelExpression to compare.</param>
-        /// <param name="y">The second LabelExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="LabelExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="LabelExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="LabelExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified LabelExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="LabelExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsLabel([DisallowNull] LabelExpression x, [DisallowNull] LabelExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -30,9 +30,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.DefaultValue, y.DefaultValue, context);
         }
 
-        /// <summary>Gets the hash code for the specified LabelExpression.</summary>
-        /// <param name="node">The LabelExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified LabelExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="LabelExpression"/>.</summary>
+        /// <param name="node">The <see cref="LabelExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="LabelExpression"/>.</returns>
         protected virtual int GetHashCodeLabel([DisallowNull] LabelExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -42,10 +42,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.DefaultValue));
         }
 
-        /// <summary>Determines whether the specified LabelExpressions are equal.</summary>
-        /// <param name="x">The first LabelExpression to compare.</param>
-        /// <param name="y">The second LabelExpression to compare.</param>
-        /// <returns>true if the specified LabelExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="LabelExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="LabelExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="LabelExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="LabelExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<LabelExpression>.Equals([AllowNull] LabelExpression? x, [AllowNull] LabelExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -57,9 +57,9 @@ namespace ExpressionTreeToolkit
             return EqualsLabel(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified LabelExpression.</summary>
-        /// <param name="obj">The <see cref="LabelExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified LabelExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="LabelExpression"/>.</summary>
+        /// <param name="obj">The <see cref="LabelExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="LabelExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<LabelExpression>.GetHashCode([DisallowNull] LabelExpression obj)
         {

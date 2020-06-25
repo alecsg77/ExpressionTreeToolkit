@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<RuntimeVariablesExpression>
     {
-        /// <summary>Determines whether the children of the two RuntimeVariablesExpression are equal.</summary>
-        /// <param name="x">The first RuntimeVariablesExpression to compare.</param>
-        /// <param name="y">The second RuntimeVariablesExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="RuntimeVariablesExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="RuntimeVariablesExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="RuntimeVariablesExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified RuntimeVariablesExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="RuntimeVariablesExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsRuntimeVariables([DisallowNull] RuntimeVariablesExpression x,
             [DisallowNull] RuntimeVariablesExpression y, [DisallowNull] ComparisonContext context)
         {
@@ -30,9 +30,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Variables, y.Variables, EqualsParameter, context);
         }
 
-        /// <summary>Gets the hash code for the specified RuntimeVariablesExpression.</summary>
-        /// <param name="node">The RuntimeVariablesExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified RuntimeVariablesExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="RuntimeVariablesExpression"/>.</summary>
+        /// <param name="node">The <see cref="RuntimeVariablesExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="RuntimeVariablesExpression"/>.</returns>
         protected virtual int GetHashCodeRuntimeVariables([DisallowNull] RuntimeVariablesExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -41,10 +41,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Variables, GetHashCodeParameter));
         }
 
-        /// <summary>Determines whether the specified RuntimeVariablesExpressions are equal.</summary>
-        /// <param name="x">The first RuntimeVariablesExpression to compare.</param>
-        /// <param name="y">The second RuntimeVariablesExpression to compare.</param>
-        /// <returns>true if the specified RuntimeVariablesExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="RuntimeVariablesExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="RuntimeVariablesExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="RuntimeVariablesExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="RuntimeVariablesExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<RuntimeVariablesExpression>.Equals([AllowNull] RuntimeVariablesExpression? x, [AllowNull] RuntimeVariablesExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -56,9 +56,9 @@ namespace ExpressionTreeToolkit
             return EqualsRuntimeVariables(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified RuntimeVariablesExpression.</summary>
-        /// <param name="obj">The <see cref="RuntimeVariablesExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified RuntimeVariablesExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="RuntimeVariablesExpression"/>.</summary>
+        /// <param name="obj">The <see cref="RuntimeVariablesExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="RuntimeVariablesExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<RuntimeVariablesExpression>.GetHashCode([DisallowNull] RuntimeVariablesExpression obj)
         {

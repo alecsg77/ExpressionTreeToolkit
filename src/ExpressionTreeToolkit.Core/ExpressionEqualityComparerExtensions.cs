@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace ExpressionTreeToolkit
 {
     /// <summary>
-    /// Extension methods to make working with ExpressionEqualityComparer easier.
+    /// Extension methods to make working with <see cref="ExpressionEqualityComparer"/> easier.
     /// </summary>
     [ExcludeFromCodeCoverage]
     public static partial class ExpressionEqualityComparerExtensions

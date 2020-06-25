@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ListInitExpression>
     {
-        /// <summary>Determines whether the children of the two ListInitExpression are equal.</summary>
-        /// <param name="x">The first ListInitExpression to compare.</param>
-        /// <param name="y">The second ListInitExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="ListInitExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="ListInitExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ListInitExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified ListInitExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="ListInitExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsListInit([DisallowNull] ListInitExpression x, [DisallowNull] ListInitExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -30,9 +30,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Initializers, y.Initializers, EqualsElementInit, context);
         }
 
-        /// <summary>Gets the hash code for the specified ListInitExpression.</summary>
-        /// <param name="node">The ListInitExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified ListInitExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="ListInitExpression"/>.</summary>
+        /// <param name="node">The <see cref="ListInitExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="ListInitExpression"/>.</returns>
         protected virtual int GetHashCodeListInit([DisallowNull] ListInitExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -42,10 +42,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Initializers, GetHashCodeElementInit));
         }
 
-        /// <summary>Determines whether the specified ListInitExpressions are equal.</summary>
-        /// <param name="x">The first ListInitExpression to compare.</param>
-        /// <param name="y">The second ListInitExpression to compare.</param>
-        /// <returns>true if the specified ListInitExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="ListInitExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="ListInitExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ListInitExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="ListInitExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<ListInitExpression>.Equals([AllowNull] ListInitExpression? x, [AllowNull] ListInitExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -57,9 +57,9 @@ namespace ExpressionTreeToolkit
             return EqualsListInit(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified ListInitExpression.</summary>
-        /// <param name="obj">The <see cref="ListInitExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified ListInitExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="ListInitExpression"/>.</summary>
+        /// <param name="obj">The <see cref="ListInitExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="ListInitExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<ListInitExpression>.GetHashCode([DisallowNull] ListInitExpression obj)
         {

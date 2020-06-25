@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<LoopExpression>
     {
-        /// <summary>Determines whether the children of the two LoopExpression are equal.</summary>
-        /// <param name="x">The first LoopExpression to compare.</param>
-        /// <param name="y">The second LoopExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="LoopExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="LoopExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="LoopExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified LoopExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="LoopExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsLoop([DisallowNull] LoopExpression x, [DisallowNull] LoopExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -31,9 +31,9 @@ namespace ExpressionTreeToolkit
                    && EqualsLabelTarget(x.BreakLabel, y.BreakLabel, context);
         }
 
-        /// <summary>Gets the hash code for the specified LoopExpression.</summary>
-        /// <param name="node">The LoopExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified LoopExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="LoopExpression"/>.</summary>
+        /// <param name="node">The <see cref="LoopExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="LoopExpression"/>.</returns>
         protected virtual int GetHashCodeLoop([DisallowNull] LoopExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -44,10 +44,10 @@ namespace ExpressionTreeToolkit
                 GetHashCodeLabelTarget(node.BreakLabel));
         }
 
-        /// <summary>Determines whether the specified LoopExpressions are equal.</summary>
-        /// <param name="x">The first LoopExpression to compare.</param>
-        /// <param name="y">The second LoopExpression to compare.</param>
-        /// <returns>true if the specified LoopExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="LoopExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="LoopExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="LoopExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="LoopExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<LoopExpression>.Equals([AllowNull] LoopExpression? x, [AllowNull] LoopExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -59,9 +59,9 @@ namespace ExpressionTreeToolkit
             return EqualsLoop(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified LoopExpression.</summary>
-        /// <param name="obj">The <see cref="LoopExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified LoopExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="LoopExpression"/>.</summary>
+        /// <param name="obj">The <see cref="LoopExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="LoopExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<LoopExpression>.GetHashCode([DisallowNull] LoopExpression obj)
         {

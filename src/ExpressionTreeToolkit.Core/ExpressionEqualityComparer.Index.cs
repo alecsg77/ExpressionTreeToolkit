@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<IndexExpression>
     {
-        /// <summary>Determines whether the children of the two IndexExpression are equal.</summary>
-        /// <param name="x">The first IndexExpression to compare.</param>
-        /// <param name="y">The second IndexExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="IndexExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="IndexExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="IndexExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified IndexExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="IndexExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsIndex([DisallowNull] IndexExpression x, [DisallowNull] IndexExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -31,9 +31,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Arguments, y.Arguments, context);
         }
 
-        /// <summary>Gets the hash code for the specified IndexExpression.</summary>
-        /// <param name="node">The IndexExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified IndexExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="IndexExpression"/>.</summary>
+        /// <param name="node">The <see cref="IndexExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="IndexExpression"/>.</returns>
         protected virtual int GetHashCodeIndex([DisallowNull] IndexExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -44,10 +44,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Arguments));
         }
 
-        /// <summary>Determines whether the specified IndexExpressions are equal.</summary>
-        /// <param name="x">The first IndexExpression to compare.</param>
-        /// <param name="y">The second IndexExpression to compare.</param>
-        /// <returns>true if the specified IndexExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="IndexExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="IndexExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="IndexExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="IndexExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<IndexExpression>.Equals([AllowNull] IndexExpression? x, [AllowNull] IndexExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -59,9 +59,9 @@ namespace ExpressionTreeToolkit
             return EqualsIndex(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified IndexExpression.</summary>
-        /// <param name="obj">The <see cref="IndexExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified IndexExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="IndexExpression"/>.</summary>
+        /// <param name="obj">The <see cref="IndexExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="IndexExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<IndexExpression>.GetHashCode([DisallowNull] IndexExpression obj)
         {

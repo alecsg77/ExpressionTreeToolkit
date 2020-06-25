@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<NewExpression>
     {
-        /// <summary>Determines whether the children of the two NewExpression are equal.</summary>
-        /// <param name="x">The first NewExpression to compare.</param>
-        /// <param name="y">The second NewExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="NewExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="NewExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="NewExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified NewExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="NewExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsNew([DisallowNull] NewExpression x, [DisallowNull] NewExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -31,9 +31,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Arguments, y.Arguments, context);
         }
 
-        /// <summary>Gets the hash code for the specified NewExpression.</summary>
-        /// <param name="node">The NewExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified NewExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="NewExpression"/>.</summary>
+        /// <param name="node">The <see cref="NewExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="NewExpression"/>.</returns>
         protected virtual int GetHashCodeNew([DisallowNull] NewExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -44,10 +44,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Arguments));
         }
 
-        /// <summary>Determines whether the specified NewExpressions are equal.</summary>
-        /// <param name="x">The first NewExpression to compare.</param>
-        /// <param name="y">The second NewExpression to compare.</param>
-        /// <returns>true if the specified NewExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="NewExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="NewExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="NewExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="NewExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<NewExpression>.Equals([AllowNull] NewExpression? x, [AllowNull] NewExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -59,9 +59,9 @@ namespace ExpressionTreeToolkit
             return EqualsNew(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified NewExpression.</summary>
-        /// <param name="obj">The <see cref="NewExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified NewExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="NewExpression"/>.</summary>
+        /// <param name="obj">The <see cref="NewExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="NewExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<NewExpression>.GetHashCode([DisallowNull] NewExpression obj)
         {

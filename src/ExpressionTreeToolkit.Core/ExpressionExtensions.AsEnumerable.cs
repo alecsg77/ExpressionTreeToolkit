@@ -18,11 +18,11 @@ namespace ExpressionTreeToolkit
     partial class ExpressionExtensions
     {
         /// <summary>
-        /// Returns an IEnumerable<Expression>. This object can be used in a LINQ expression or method query.
+        /// Returns an [IEnumerable](xref:System.Collections.Generic.IEnumerable`1)&lt;<see cref="Expression"/>&gt;. This object can be used in a LINQ expression or method query.
         /// </summary>
-        /// <param name="source">The source Expression to make enumerable.</param>
-        /// <returns>An IEnumerable<Expression> object.</returns>
-        /// <exception cref="ArgumentNullException">The source Expression is null.</exception>
+        /// <param name="source">The source <see cref="Expression"/> to make enumerable.</param>
+        /// <returns>An [IEnumerable](xref:System.Collections.Generic.IEnumerable`1)&lt;<see cref="Expression"/>&gt; object.</returns>
+        /// <exception cref="ArgumentNullException">The source <see cref="Expression"/> is null.</exception>
         public static IEnumerable<Expression> AsEnumerable([DisallowNull] this Expression source)
         {
             if (source == null)

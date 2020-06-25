@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<SwitchExpression>
     {
-        /// <summary>Determines whether the children of the two SwitchExpression are equal.</summary>
-        /// <param name="x">The first SwitchExpression to compare.</param>
-        /// <param name="y">The second SwitchExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="SwitchExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="SwitchExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="SwitchExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified SwitchExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="SwitchExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsSwitch([DisallowNull] SwitchExpression x, [DisallowNull] SwitchExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -45,9 +45,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.TestValues, y.TestValues, context);
         }
 
-        /// <summary>Gets the hash code for the specified SwitchExpression.</summary>
-        /// <param name="node">The SwitchExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified SwitchExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="SwitchExpression"/>.</summary>
+        /// <param name="node">The <see cref="SwitchExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="SwitchExpression"/>.</returns>
         protected virtual int GetHashCodeSwitch([DisallowNull] SwitchExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -69,10 +69,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(switchCase.TestValues));
         }
 
-        /// <summary>Determines whether the specified SwitchExpressions are equal.</summary>
-        /// <param name="x">The first SwitchExpression to compare.</param>
-        /// <param name="y">The second SwitchExpression to compare.</param>
-        /// <returns>true if the specified SwitchExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="SwitchExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="SwitchExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="SwitchExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="SwitchExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<SwitchExpression>.Equals([AllowNull] SwitchExpression? x, [AllowNull] SwitchExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -84,9 +84,9 @@ namespace ExpressionTreeToolkit
             return EqualsSwitch(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified SwitchExpression.</summary>
-        /// <param name="obj">The <see cref="SwitchExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified SwitchExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="SwitchExpression"/>.</summary>
+        /// <param name="obj">The <see cref="SwitchExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="SwitchExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<SwitchExpression>.GetHashCode([DisallowNull] SwitchExpression obj)
         {

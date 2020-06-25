@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<GotoExpression>
     {
-        /// <summary>Determines whether the children of the two GotoExpression are equal.</summary>
-        /// <param name="x">The first GotoExpression to compare.</param>
-        /// <param name="y">The second GotoExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="GotoExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="GotoExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="GotoExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified GotoExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="GotoExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsGoto([DisallowNull] GotoExpression x, [DisallowNull] GotoExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -31,9 +31,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Value, y.Value, context);
         }
 
-        /// <summary>Gets the hash code for the specified GotoExpression.</summary>
-        /// <param name="node">The GotoExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified GotoExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="GotoExpression"/>.</summary>
+        /// <param name="node">The <see cref="GotoExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="GotoExpression"/>.</returns>
         protected virtual int GetHashCodeGoto([DisallowNull] GotoExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -44,10 +44,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Value));
         }
 
-        /// <summary>Determines whether the specified GotoExpressions are equal.</summary>
-        /// <param name="x">The first GotoExpression to compare.</param>
-        /// <param name="y">The second GotoExpression to compare.</param>
-        /// <returns>true if the specified GotoExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="GotoExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="GotoExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="GotoExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="GotoExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<GotoExpression>.Equals([AllowNull] GotoExpression? x, [AllowNull] GotoExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -59,9 +59,9 @@ namespace ExpressionTreeToolkit
             return EqualsGoto(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified GotoExpression.</summary>
-        /// <param name="obj">The <see cref="GotoExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified GotoExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="GotoExpression"/>.</summary>
+        /// <param name="obj">The <see cref="GotoExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="GotoExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<GotoExpression>.GetHashCode([DisallowNull] GotoExpression obj)
         {
