@@ -16,23 +16,25 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<MethodCallExpression>
     {
-        /// <summary>Determines whether the children of the two MethodCallExpression are equal.</summary>
-        /// <param name="x">The first MethodCallExpression to compare.</param>
-        /// <param name="y">The second MethodCallExpression to compare.</param>
-        /// <returns>true if the specified MethodCallExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMethodCall([DisallowNull] MethodCallExpression x, [DisallowNull] MethodCallExpression y)
+        /// <summary>Determines whether the children of the two <see cref="MethodCallExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="MethodCallExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="MethodCallExpression"/> to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified <see cref="MethodCallExpression"/> are equal; otherwise, false.</returns>
+        protected virtual bool EqualsMethodCall([DisallowNull] MethodCallExpression x,
+            [DisallowNull] MethodCallExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
                    && Equals(x.Method, y.Method)
-                   && Equals(x.Object, y.Object)
-                   && Equals(x.Arguments, y.Arguments);
+                   && Equals(x.Object, y.Object, context)
+                   && Equals(x.Arguments, y.Arguments, context);
         }
 
-        /// <summary>Gets the hash code for the specified MethodCallExpression.</summary>
-        /// <param name="node">The MethodCallExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified MethodCallExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="MethodCallExpression"/>.</summary>
+        /// <param name="node">The <see cref="MethodCallExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="MethodCallExpression"/>.</returns>
         protected virtual int GetHashCodeMethodCall([DisallowNull] MethodCallExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -43,10 +45,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Arguments));
         }
 
-        /// <summary>Determines whether the specified MethodCallExpressions are equal.</summary>
-        /// <param name="x">The first MethodCallExpression to compare.</param>
-        /// <param name="y">The second MethodCallExpression to compare.</param>
-        /// <returns>true if the specified MethodCallExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="MethodCallExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="MethodCallExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="MethodCallExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="MethodCallExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<MethodCallExpression>.Equals([AllowNull] MethodCallExpression? x, [AllowNull] MethodCallExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -55,12 +57,12 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsMethodCall(x, y);
+            return EqualsMethodCall(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified MethodCallExpression.</summary>
-        /// <param name="obj">The <see cref="MethodCallExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified MethodCallExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="MethodCallExpression"/>.</summary>
+        /// <param name="obj">The <see cref="MethodCallExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="MethodCallExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<MethodCallExpression>.GetHashCode([DisallowNull] MethodCallExpression obj)
         {

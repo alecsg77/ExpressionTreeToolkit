@@ -16,11 +16,12 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ConstantExpression>
     {
-        /// <summary>Determines whether the children of the two ConstantExpression are equal.</summary>
-        /// <param name="x">The first ConstantExpression to compare.</param>
-        /// <param name="y">The second ConstantExpression to compare.</param>
-        /// <returns>true if the specified ConstantExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsConstant([DisallowNull] ConstantExpression x, [DisallowNull] ConstantExpression y)
+        /// <summary>Determines whether the children of the two <see cref="ConstantExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="ConstantExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ConstantExpression"/> to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified <see cref="ConstantExpression"/> are equal; otherwise, false.</returns>
+        protected virtual bool EqualsConstant([DisallowNull] ConstantExpression x, [DisallowNull] ConstantExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
@@ -28,9 +29,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Value, y.Value);
         }
 
-        /// <summary>Gets the hash code for the specified ConstantExpression.</summary>
-        /// <param name="node">The ConstantExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified ConstantExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="ConstantExpression"/>.</summary>
+        /// <param name="node">The <see cref="ConstantExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="ConstantExpression"/>.</returns>
         protected virtual int GetHashCodeConstant([DisallowNull] ConstantExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -39,10 +40,10 @@ namespace ExpressionTreeToolkit
                 GetDefaultHashCode(node.Value));
         }
 
-        /// <summary>Determines whether the specified ConstantExpressions are equal.</summary>
-        /// <param name="x">The first ConstantExpression to compare.</param>
-        /// <param name="y">The second ConstantExpression to compare.</param>
-        /// <returns>true if the specified ConstantExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="ConstantExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="ConstantExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ConstantExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="ConstantExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<ConstantExpression>.Equals([AllowNull] ConstantExpression? x, [AllowNull] ConstantExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -51,12 +52,12 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsConstant(x, y);
+            return EqualsConstant(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified ConstantExpression.</summary>
-        /// <param name="obj">The <see cref="ConstantExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified ConstantExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="ConstantExpression"/>.</summary>
+        /// <param name="obj">The <see cref="ConstantExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="ConstantExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<ConstantExpression>.GetHashCode([DisallowNull] ConstantExpression obj)
         {

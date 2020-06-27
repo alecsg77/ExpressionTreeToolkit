@@ -16,22 +16,23 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<LambdaExpression>
     {
-        /// <summary>Determines whether the children of the two LambdaExpression are equal.</summary>
-        /// <param name="x">The first LambdaExpression to compare.</param>
-        /// <param name="y">The second LambdaExpression to compare.</param>
-        /// <returns>true if the specified LambdaExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLambda([DisallowNull] LambdaExpression x, [DisallowNull] LambdaExpression y)
+        /// <summary>Determines whether the children of the two <see cref="LambdaExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="LambdaExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="LambdaExpression"/> to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified <see cref="LambdaExpression"/> are equal; otherwise, false.</returns>
+        protected virtual bool EqualsLambda([DisallowNull] LambdaExpression x, [DisallowNull] LambdaExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Parameters, y.Parameters, EqualsParameter)
-                   && new ExpressionEqualityComparer(x.Parameters, y.Parameters).Equals(x.Body, y.Body);
+                   && Equals(x.Parameters, y.Parameters, EqualsParameter, context)
+                   && Equals(x.Body, y.Body, context.NestedScope(x.Parameters,y.Parameters));
         }
 
-        /// <summary>Gets the hash code for the specified LambdaExpression.</summary>
-        /// <param name="node">The LambdaExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified LambdaExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="LambdaExpression"/>.</summary>
+        /// <param name="node">The <see cref="LambdaExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="LambdaExpression"/>.</returns>
         protected virtual int GetHashCodeLambda([DisallowNull] LambdaExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -41,10 +42,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Body));
         }
 
-        /// <summary>Determines whether the specified LambdaExpressions are equal.</summary>
-        /// <param name="x">The first LambdaExpression to compare.</param>
-        /// <param name="y">The second LambdaExpression to compare.</param>
-        /// <returns>true if the specified LambdaExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="LambdaExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="LambdaExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="LambdaExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="LambdaExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<LambdaExpression>.Equals([AllowNull] LambdaExpression? x, [AllowNull] LambdaExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -53,12 +54,12 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsLambda(x, y);
+            return EqualsLambda(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified LambdaExpression.</summary>
-        /// <param name="obj">The <see cref="LambdaExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified LambdaExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="LambdaExpression"/>.</summary>
+        /// <param name="obj">The <see cref="LambdaExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="LambdaExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<LambdaExpression>.GetHashCode([DisallowNull] LambdaExpression obj)
         {

@@ -5,18 +5,18 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="docfx.json" />
-    <None Include="lib/**/*.yml" />
-    <None Include="lib/index.md" />
+    <None Include="docs/**/*.yml" />
+    <None Include="docs/**/*.md" />
     <None Include="articles/**/*.md" />
-    <None Include="articles/**/toc.yml" />
-    <None Include="toc.yml" />
+    <None Include="articles/**/*.yml" />
+    <None Include="*.yml" />
     <None Include="*.md" />
     <None Include="images/**" />
     <None Include="libdoc/**/*.md" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.54.0">
+    <PackageReference Include="docfx.console" Version="2.55.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -24,5 +24,6 @@
 
   <PropertyGroup>
     <OutputFolder Condition=" '$(OutputFolder)' == '' ">$(OutputPath)</OutputFolder>
+    <PreviewOutputFolder Condition=" '$(PreviewOutputFolder)' == '' ">$(MSBuildProjectDirectory)/_site</PreviewOutputFolder>
   </PropertyGroup>
 </Project>

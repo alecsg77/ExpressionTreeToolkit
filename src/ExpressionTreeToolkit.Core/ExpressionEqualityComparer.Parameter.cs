@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Linq;
 #if JETBRAINS_ANNOTATIONS
 using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
 using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
@@ -17,34 +17,23 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ParameterExpression>
     {
-        private readonly ReadOnlyCollection<ParameterExpression>? _xParameters;
-        private readonly ReadOnlyCollection<ParameterExpression>? _yParameters;
-
-        private ExpressionEqualityComparer(
-            ReadOnlyCollection<ParameterExpression> xParameters,
-            ReadOnlyCollection<ParameterExpression> yParameters)
-            : this()
-        {
-            _xParameters = xParameters;
-            _yParameters = yParameters;
-        }
-
-        /// <summary>Determines whether the children of the two ParameterExpression are equal.</summary>
-        /// <param name="x">The first ParameterExpression to compare.</param>
-        /// <param name="y">The second ParameterExpression to compare.</param>
-        /// <returns>true if the specified ParameterExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsParameter([DisallowNull] ParameterExpression x, [DisallowNull] ParameterExpression y)
+        /// <summary>Determines whether the children of the two <see cref="ParameterExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="ParameterExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ParameterExpression"/> to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified <see cref="ParameterExpression"/> are equal; otherwise, false.</returns>
+        protected virtual bool EqualsParameter([DisallowNull] ParameterExpression x, [DisallowNull] ParameterExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && (_xParameters?.IndexOf(x) ?? 0) == (_yParameters?.IndexOf(y) ?? 0)
-                   && x.IsByRef == y.IsByRef;
+                   && x.IsByRef == y.IsByRef
+                   && context.VerifyParameter(x,y);
         }
 
-        /// <summary>Gets the hash code for the specified ParameterExpression.</summary>
-        /// <param name="node">The ParameterExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified ParameterExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="ParameterExpression"/>.</summary>
+        /// <param name="node">The <see cref="ParameterExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="ParameterExpression"/>.</returns>
         protected virtual int GetHashCodeParameter([DisallowNull] ParameterExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -53,10 +42,10 @@ namespace ExpressionTreeToolkit
                 node.IsByRef.GetHashCode());
         }
 
-        /// <summary>Determines whether the specified ParameterExpressions are equal.</summary>
-        /// <param name="x">The first ParameterExpression to compare.</param>
-        /// <param name="y">The second ParameterExpression to compare.</param>
-        /// <returns>true if the specified ParameterExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="ParameterExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="ParameterExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ParameterExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="ParameterExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<ParameterExpression>.Equals([AllowNull] ParameterExpression? x, [AllowNull] ParameterExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -65,12 +54,12 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsParameter(x, y);
+            return EqualsParameter(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified ParameterExpression.</summary>
-        /// <param name="obj">The <see cref="ParameterExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified ParameterExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="ParameterExpression"/>.</summary>
+        /// <param name="obj">The <see cref="ParameterExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="ParameterExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<ParameterExpression>.GetHashCode([DisallowNull] ParameterExpression obj)
         {

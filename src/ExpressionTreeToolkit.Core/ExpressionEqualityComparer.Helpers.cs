@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Diagnostics.CodeAnalysis;
 
 #if JETBRAINS_ANNOTATIONS
-using AllowNullAttribute  = JetBrains.Annotations.CanBeNullAttribute;
+using AllowNullAttribute = JetBrains.Annotations.CanBeNullAttribute;
 using DisallowNullAttribute = JetBrains.Annotations.NotNullAttribute;
 using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 #endif
@@ -19,10 +19,15 @@ namespace ExpressionTreeToolkit
     partial class ExpressionEqualityComparer
     {
         /// <summary>Determines whether two collections are equal by comparing the nodes.</summary>
-        /// <param name="first">A collection of Expression to compare.</param>
-        /// <param name="second">A collection of Expression to compare to the first sequence.</param>
+        /// <param name="first">A collection of <see cref="Expression"/> to compare.</param>
+        /// <param name="second">A collection of <see cref="Expression"/> to compare to the first sequence.</param>
+        /// <param name="context"></param>
         /// <returns>true if the two nodes sequences are of equal length and their corresponding elements are equal; otherwise, false.</returns>
-        protected bool Equals([AllowNull, AllowItemNull] ReadOnlyCollection<Expression?>? first, [AllowNull, AllowItemNull] ReadOnlyCollection<Expression?>? second)
+        protected bool Equals(
+            [AllowNull][AllowItemNull] ReadOnlyCollection<Expression?>? first,
+            [AllowNull][AllowItemNull] ReadOnlyCollection<Expression?>? second,
+            [DisallowNull] ComparisonContext context
+        )
         {
             if (ReferenceEquals(first, second))
             {
@@ -44,7 +49,7 @@ namespace ExpressionTreeToolkit
                         return false;
                     }
 
-                    if (!Equals(e1.Current, e2.Current))
+                    if (!Equals(e1.Current, e2.Current, context))
                     {
                         return false;
                     }
@@ -60,11 +65,16 @@ namespace ExpressionTreeToolkit
         }
 
         /// <summary>Determines whether two sequences are equal by comparing the elements by using the default equality comparer for their type.</summary>
-        /// <param name="first">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to second.</param>
-        /// <param name="second">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to the first sequence.</param>
+        /// <param name="first">An <see cref="ReadOnlyCollection{T}"></see> to compare to second.</param>
+        /// <param name="second">An <see cref="ReadOnlyCollection{T}"></see> to compare to the first sequence.</param>
+        /// <param name="context"></param>
         /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
         /// <returns>true if the two source sequences are of equal length and their corresponding elements are equal according to the default equality comparer for their type; otherwise, false.</returns>
-        protected bool Equals<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? first, [AllowNull, AllowItemNull] ReadOnlyCollection<T?>? second)
+        protected bool Equals<T>(
+            [AllowNull, AllowItemNull] ReadOnlyCollection<T?>? first,
+            [AllowNull, AllowItemNull] ReadOnlyCollection<T?>? second,
+            [DisallowNull] ComparisonContext context
+        )
             where T : class
         {
             if (ReferenceEquals(first, second))
@@ -80,13 +90,19 @@ namespace ExpressionTreeToolkit
             return first.SequenceEqual(second);
         }
 
-        /// <summary>Determines whether two sequences are equal by comparing their elements by using a specified <see cref="T:System.Func{T,T,bool}"></see>.</summary>
-        /// <param name="first">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to second.</param>
-        /// <param name="second">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to the first sequence.</param>
-        /// <param name="equalityComparer">An <see cref="T:System.Func{T,T,bool}"></see> to use to compare elements.</param>
+        /// <summary>Determines whether two sequences are equal by comparing their elements by using a specified <see cref="System.Func{T,T,bool}"></see>.</summary>
+        /// <param name="first">An <see cref="ReadOnlyCollection{T}"></see> to compare to second.</param>
+        /// <param name="second">An <see cref="ReadOnlyCollection{T}"></see> to compare to the first sequence.</param>
+        /// <param name="equalityComparer">An <see cref="System.Func{T,T,bool}"></see> to use to compare elements.</param>
+        /// <param name="context"></param>
         /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
         /// <returns>true if the two source sequences are of equal length and their corresponding elements compare equal according to <paramref name="equalityComparer">equality comparer</paramref>; otherwise, false.</returns>
-        protected bool Equals<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? first, [AllowNull, AllowItemNull] ReadOnlyCollection<T?>? second, Func<T, T, bool>? equalityComparer)
+        protected bool Equals<T>(
+            [AllowNull][AllowItemNull] ReadOnlyCollection<T?>? first,
+            [AllowNull][AllowItemNull] ReadOnlyCollection<T?>? second,
+            Func<T, T, ComparisonContext, bool>? equalityComparer,
+            [DisallowNull] ComparisonContext context
+        )
             where T : class
         {
             if (equalityComparer == null) throw new ArgumentNullException(nameof(equalityComparer));
@@ -124,7 +140,7 @@ namespace ExpressionTreeToolkit
                         return false;
                     }
 
-                    if (!equalityComparer(x, y))
+                    if (!equalityComparer(x, y, context))
                     {
                         return false;
                     }
@@ -142,8 +158,9 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two ElementInit are equal.</summary>
         /// <param name="x">The first ElementInit to compare.</param>
         /// <param name="y">The second ElementInit to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified ElementInit are equal; otherwise, false.</returns>
-        protected virtual bool EqualsElementInit([AllowNull] ElementInit? x, [AllowNull] ElementInit? y)
+        protected virtual bool EqualsElementInit([AllowNull] ElementInit? x, [AllowNull] ElementInit? y, [DisallowNull] ComparisonContext context)
         {
             if (ReferenceEquals(x, y))
             {
@@ -156,14 +173,15 @@ namespace ExpressionTreeToolkit
             }
 
             return Equals(x.AddMethod, y.AddMethod)
-                && Equals(x.Arguments, y.Arguments);
+                && Equals(x.Arguments, y.Arguments, context);
         }
 
         /// <summary>Determines whether the children of the two MemberBinding are equal.</summary>
         /// <param name="x">The first MemberBinding to compare.</param>
         /// <param name="y">The second MemberBinding to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified MemberBinding are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberBinding([AllowNull] MemberBinding? x, [AllowNull] MemberBinding? y)
+        protected virtual bool EqualsMemberBinding([AllowNull] MemberBinding? x, [AllowNull] MemberBinding? y, [DisallowNull] ComparisonContext context)
         {
             if (ReferenceEquals(x, y))
             {
@@ -183,11 +201,11 @@ namespace ExpressionTreeToolkit
             switch (x.BindingType)
             {
                 case MemberBindingType.Assignment:
-                    return EqualsMemberAssignment((MemberAssignment)x, (MemberAssignment)y);
+                    return EqualsMemberAssignment((MemberAssignment)x, (MemberAssignment)y, context);
                 case MemberBindingType.MemberBinding:
-                    return EqualsMemberMemberBinding((MemberMemberBinding)x, (MemberMemberBinding)y);
+                    return EqualsMemberMemberBinding((MemberMemberBinding)x, (MemberMemberBinding)y, context);
                 case MemberBindingType.ListBinding:
-                    return EqualsMemberListBinding((MemberListBinding)x, (MemberListBinding)y);
+                    return EqualsMemberListBinding((MemberListBinding)x, (MemberListBinding)y, context);
                 default:
                     throw new Exception($"Unhandled binding type '{x.BindingType}'");
             }
@@ -196,44 +214,48 @@ namespace ExpressionTreeToolkit
         /// <summary>Determines whether the children of the two MemberAssignment are equal.</summary>
         /// <param name="x">The first MemberAssignment to compare.</param>
         /// <param name="y">The second MemberAssignment to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified MemberAssignment are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberAssignment([DisallowNull] MemberAssignment x, [DisallowNull] MemberAssignment y)
+        protected virtual bool EqualsMemberAssignment([DisallowNull] MemberAssignment x, [DisallowNull] MemberAssignment y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return Equals(x.Member, y.Member)
-                   && Equals(x.Expression, y.Expression);
+                   && Equals(x.Expression, y.Expression, context);
         }
 
         /// <summary>Determines whether the children of the two MemberMemberBinding are equal.</summary>
         /// <param name="x">The first MemberMemberBinding to compare.</param>
         /// <param name="y">The second MemberMemberBinding to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified MemberMemberBinding are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberMemberBinding([DisallowNull] MemberMemberBinding x, [DisallowNull] MemberMemberBinding y)
+        protected virtual bool EqualsMemberMemberBinding([DisallowNull] MemberMemberBinding x, [DisallowNull] MemberMemberBinding y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return Equals(x.Member, y.Member)
-                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding);
+                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding, context);
         }
 
         /// <summary>Determines whether the children of the two MemberListBinding are equal.</summary>
         /// <param name="x">The first MemberListBinding to compare.</param>
         /// <param name="y">The second MemberListBinding to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified MemberListBinding are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberListBinding([DisallowNull] MemberListBinding x, [DisallowNull] MemberListBinding y)
+        protected virtual bool EqualsMemberListBinding([DisallowNull] MemberListBinding x, [DisallowNull] MemberListBinding y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return Equals(x.Member, y.Member)
-                   && Equals(x.Initializers, y.Initializers, EqualsElementInit);
+                   && Equals(x.Initializers, y.Initializers, EqualsElementInit, context);
         }
 
         /// <summary>Determines whether the children of the two LabelTarget are equal.</summary>
         /// <param name="x">The first LabelTarget to compare.</param>
         /// <param name="y">The second LabelTarget to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified LabelTarget are equal; otherwise, false.</returns>
-        protected virtual bool EqualsLabelTarget([AllowNull] LabelTarget? x, [AllowNull] LabelTarget? y)
+        protected virtual bool EqualsLabelTarget([AllowNull] LabelTarget? x, [AllowNull] LabelTarget? y, [DisallowNull] ComparisonContext context)
         {
             if (ReferenceEquals(x, y))
             {
@@ -246,7 +268,9 @@ namespace ExpressionTreeToolkit
             }
 
             return x.Type == y.Type
-                   && Equals(x.Name, y.Name);
+                   && Equals(x.Name, y.Name)
+                   && context.VerifyLabelTarget(x, y);
+            ;
         }
 
         private static int GetDefaultHashCode<T>([AllowNull] T? obj)
@@ -278,8 +302,8 @@ namespace ExpressionTreeToolkit
             return args.Aggregate(h1, GetHashCode);
         }
 
-        /// <summary>Computes the hash of a sequence of <see cref="T:Expression"></see> nodes.</summary>
-        /// <param name="nodes">A sequence of <see cref="T:Expression"></see> nodes to calculate the hash of.</param>
+        /// <summary>Computes the hash of a sequence of <see cref="Expression"/> nodes.</summary>
+        /// <param name="nodes">A sequence of <see cref="Expression"/> nodes to calculate the hash of.</param>
         /// <returns>The hash of the sequence of nodes.</returns>
         protected int GetHashCode([AllowNull, AllowItemNull] ReadOnlyCollection<Expression?>? nodes)
         {
@@ -308,9 +332,9 @@ namespace ExpressionTreeToolkit
                 .Aggregate(GetHashCode);
         }
 
-        /// <summary>Computes the hash of a sequence of values by using a specified <see cref="T:System.Func{T,int}"></see>.</summary>
+        /// <summary>Computes the hash of a sequence of values by using a specified <see cref="System.Func{T,int}"></see>.</summary>
         /// <param name="values">A sequence of values to calculate the hash of.</param>
-        /// <param name="getHashCode">An <see cref="T:System.Func{T,int}"></see> to use to computes the hash of elements.</param>
+        /// <param name="getHashCode">An <see cref="System.Func{T,int}"></see> to use to computes the hash of elements.</param>
         /// <typeparam name="T">The type of the elements of values.</typeparam>
         /// <returns>The hash of the sequence of values.</returns>
         protected int GetHashCode<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? values, Func<T, int>? getHashCode)

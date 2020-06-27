@@ -21,11 +21,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
-    <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 

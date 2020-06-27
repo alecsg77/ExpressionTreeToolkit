@@ -16,38 +16,40 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<TryExpression>
     {
-        /// <summary>Determines whether the children of the two TryExpression are equal.</summary>
-        /// <param name="x">The first TryExpression to compare.</param>
-        /// <param name="y">The second TryExpression to compare.</param>
-        /// <returns>true if the specified TryExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsTry([DisallowNull] TryExpression x, [DisallowNull] TryExpression y)
+        /// <summary>Determines whether the children of the two <see cref="TryExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="TryExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="TryExpression"/> to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified <see cref="TryExpression"/> are equal; otherwise, false.</returns>
+        protected virtual bool EqualsTry([DisallowNull] TryExpression x, [DisallowNull] TryExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Body, y.Body)
-                   && Equals(x.Fault, y.Fault)
-                   && Equals(x.Finally, y.Finally)
-                   && Equals(x.Handlers, y.Handlers, EqualsCatchBlock);
+                   && Equals(x.Body, y.Body, context)
+                   && Equals(x.Fault, y.Fault, context)
+                   && Equals(x.Finally, y.Finally, context)
+                   && Equals(x.Handlers, y.Handlers, EqualsCatchBlock, context);
         }
 
         /// <summary>Determines whether the children of the two CatchBlock are equal.</summary>
         /// <param name="x">The first CatchBlock to compare.</param>
         /// <param name="y">The second CatchBlock to compare.</param>
+        /// <param name="context"></param>
         /// <returns>true if the specified CatchBlock are equal; otherwise, false.</returns>
-        protected virtual bool EqualsCatchBlock([DisallowNull] CatchBlock x, [DisallowNull] CatchBlock y)
+        protected virtual bool EqualsCatchBlock([DisallowNull] CatchBlock x, [DisallowNull] CatchBlock y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Test == y.Test
-                   && Equals(x.Body, y.Body)
-                   && Equals(x.Filter, y.Filter)
-                   && Equals(x.Variable, y.Variable);
+                   && Equals(x.Body, y.Body, context)
+                   && Equals(x.Filter, y.Filter, context)
+                   && Equals(x.Variable, y.Variable, context);
         }
 
-        /// <summary>Gets the hash code for the specified TryExpression.</summary>
-        /// <param name="node">The TryExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified TryExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="TryExpression"/>.</summary>
+        /// <param name="node">The <see cref="TryExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="TryExpression"/>.</returns>
         protected virtual int GetHashCodeTry([DisallowNull] TryExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -72,10 +74,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(catchBlock.Variable));
         }
 
-        /// <summary>Determines whether the specified TryExpressions are equal.</summary>
-        /// <param name="x">The first TryExpression to compare.</param>
-        /// <param name="y">The second TryExpression to compare.</param>
-        /// <returns>true if the specified TryExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="TryExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="TryExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="TryExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="TryExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<TryExpression>.Equals([AllowNull] TryExpression? x, [AllowNull] TryExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -84,12 +86,12 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsTry(x, y);
+            return EqualsTry(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified TryExpression.</summary>
-        /// <param name="obj">The <see cref="TryExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified TryExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="TryExpression"/>.</summary>
+        /// <param name="obj">The <see cref="TryExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="TryExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<TryExpression>.GetHashCode([DisallowNull] TryExpression obj)
         {

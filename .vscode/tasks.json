@@ -10,6 +10,31 @@
                 "${workspaceFolder}/ExpressionTreeToolkit.UnitTests/ExpressionTreeToolkit.UnitTests.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "DocBuild",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/docfx/ExpressionTreeToolkit.DocFX.proj",
+                "-t:DocBuild"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "DocServe",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/docfx/ExpressionTreeToolkit.DocFX.proj",
+                "-t:DocServe"
+            ],
+            "dependsOn": [
+                "DocBuild"
+            ],
+            "problemMatcher": []
         }
     ]
 }

@@ -16,23 +16,24 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<ConditionalExpression>
     {
-        /// <summary>Determines whether the children of the two ConditionalExpression are equal.</summary>
-        /// <param name="x">The first ConditionalExpression to compare.</param>
-        /// <param name="y">The second ConditionalExpression to compare.</param>
-        /// <returns>true if the specified ConditionalExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsConditional([DisallowNull] ConditionalExpression x, [DisallowNull] ConditionalExpression y)
+        /// <summary>Determines whether the children of the two <see cref="ConditionalExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="ConditionalExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ConditionalExpression"/> to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified <see cref="ConditionalExpression"/> are equal; otherwise, false.</returns>
+        protected virtual bool EqualsConditional([DisallowNull] ConditionalExpression x, [DisallowNull] ConditionalExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.Test, y.Test)
-                   && Equals(x.IfTrue, y.IfTrue)
-                   && Equals(x.IfFalse, y.IfFalse);
+                   && Equals(x.Test, y.Test, context)
+                   && Equals(x.IfTrue, y.IfTrue, context)
+                   && Equals(x.IfFalse, y.IfFalse, context);
         }
 
-        /// <summary>Gets the hash code for the specified ConditionalExpression.</summary>
-        /// <param name="node">The ConditionalExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified ConditionalExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="ConditionalExpression"/>.</summary>
+        /// <param name="node">The <see cref="ConditionalExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="ConditionalExpression"/>.</returns>
         protected virtual int GetHashCodeConditional([DisallowNull] ConditionalExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -43,10 +44,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.IfFalse));
         }
 
-        /// <summary>Determines whether the specified ConditionalExpressions are equal.</summary>
-        /// <param name="x">The first ConditionalExpression to compare.</param>
-        /// <param name="y">The second ConditionalExpression to compare.</param>
-        /// <returns>true if the specified ConditionalExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="ConditionalExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="ConditionalExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="ConditionalExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="ConditionalExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<ConditionalExpression>.Equals([AllowNull] ConditionalExpression? x, [AllowNull] ConditionalExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -55,12 +56,12 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsConditional(x, y);
+            return EqualsConditional(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified ConditionalExpression.</summary>
-        /// <param name="obj">The <see cref="ConditionalExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified ConditionalExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="ConditionalExpression"/>.</summary>
+        /// <param name="obj">The <see cref="ConditionalExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="ConditionalExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<ConditionalExpression>.GetHashCode([DisallowNull] ConditionalExpression obj)
         {

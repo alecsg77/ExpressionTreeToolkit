@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "DocFX": {
+      "commandName": "Executable",
+      "executablePath": "$(BuildDocToolPath)",
+      "commandLineArgs": "serve $(PreviewOutputFolder)"
+    }
+  }
+}

@@ -16,22 +16,24 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<MemberInitExpression>
     {
-        /// <summary>Determines whether the children of the two MemberInitExpression are equal.</summary>
-        /// <param name="x">The first MemberInitExpression to compare.</param>
-        /// <param name="y">The second MemberInitExpression to compare.</param>
-        /// <returns>true if the specified MemberInitExpression are equal; otherwise, false.</returns>
-        protected virtual bool EqualsMemberInit([DisallowNull] MemberInitExpression x, [DisallowNull] MemberInitExpression y)
+        /// <summary>Determines whether the children of the two <see cref="MemberInitExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="MemberInitExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="MemberInitExpression"/> to compare.</param>
+        /// <param name="context"></param>
+        /// <returns>true if the specified <see cref="MemberInitExpression"/> are equal; otherwise, false.</returns>
+        protected virtual bool EqualsMemberInit([DisallowNull] MemberInitExpression x,
+            [DisallowNull] MemberInitExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             return x.Type == y.Type
-                   && Equals(x.NewExpression, y.NewExpression)
-                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding);
+                   && Equals(x.NewExpression, y.NewExpression, context)
+                   && Equals(x.Bindings, y.Bindings, EqualsMemberBinding, context);
         }
 
-        /// <summary>Gets the hash code for the specified MemberInitExpression.</summary>
-        /// <param name="node">The MemberInitExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified MemberInitExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="MemberInitExpression"/>.</summary>
+        /// <param name="node">The <see cref="MemberInitExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="MemberInitExpression"/>.</returns>
         protected virtual int GetHashCodeMemberInit([DisallowNull] MemberInitExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -41,10 +43,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Bindings, GetHashCodeMemberBinding));
         }
 
-        /// <summary>Determines whether the specified MemberInitExpressions are equal.</summary>
-        /// <param name="x">The first MemberInitExpression to compare.</param>
-        /// <param name="y">The second MemberInitExpression to compare.</param>
-        /// <returns>true if the specified MemberInitExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="MemberInitExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="MemberInitExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="MemberInitExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="MemberInitExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<MemberInitExpression>.Equals([AllowNull] MemberInitExpression? x, [AllowNull] MemberInitExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -53,12 +55,12 @@ namespace ExpressionTreeToolkit
             if (x == null || y == null)
                 return false;
 
-            return EqualsMemberInit(x, y);
+            return EqualsMemberInit(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified MemberInitExpression.</summary>
-        /// <param name="obj">The <see cref="MemberInitExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified MemberInitExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="MemberInitExpression"/>.</summary>
+        /// <param name="obj">The <see cref="MemberInitExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="MemberInitExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<MemberInitExpression>.GetHashCode([DisallowNull] MemberInitExpression obj)
         {
