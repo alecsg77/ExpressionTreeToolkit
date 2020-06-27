@@ -21,7 +21,7 @@ The Expression Tree Toolkit is a collection of helper functions, extension metho
 
 # See It In Action
 
-ExpressionEqualityComparer example on [dotnetfiddle](https://dotnetfiddle.net/ijvLUm)
+ExpressionEqualityComparer example on [dotnetfiddle](https://dotnetfiddle.net/O2gVw7)
 
 # Contribution Guidelines
 Please use [GitHub Issues](https://github.com/alecsg77/ExpressionTreeToolkit/issues) for bug reports and feature requests.
