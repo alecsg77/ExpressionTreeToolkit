@@ -15,8 +15,14 @@ using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 
 namespace ExpressionTreeToolkit
 {
-    public static partial class ExpressionExtensions
+    partial class ExpressionExtensions
     {
+        /// <summary>
+        /// Returns an [IEnumerable](xref:System.Collections.Generic.IEnumerable`1)&lt;<see cref="Expression"/>&gt;. This object can be used in a LINQ expression or method query.
+        /// </summary>
+        /// <param name="source">The source <see cref="Expression"/> to make enumerable.</param>
+        /// <returns>An [IEnumerable](xref:System.Collections.Generic.IEnumerable`1)&lt;<see cref="Expression"/>&gt; object.</returns>
+        /// <exception cref="ArgumentNullException">The source <see cref="Expression"/> is null.</exception>
         public static IEnumerable<Expression> AsEnumerable([DisallowNull] this Expression source)
         {
             if (source == null)

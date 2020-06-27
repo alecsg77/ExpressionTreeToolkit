@@ -19,8 +19,8 @@ namespace ExpressionTreeToolkit
     partial class ExpressionEqualityComparer
     {
         /// <summary>Determines whether two collections are equal by comparing the nodes.</summary>
-        /// <param name="first">A collection of Expression to compare.</param>
-        /// <param name="second">A collection of Expression to compare to the first sequence.</param>
+        /// <param name="first">A collection of <see cref="Expression"/> to compare.</param>
+        /// <param name="second">A collection of <see cref="Expression"/> to compare to the first sequence.</param>
         /// <param name="context"></param>
         /// <returns>true if the two nodes sequences are of equal length and their corresponding elements are equal; otherwise, false.</returns>
         protected bool Equals(
@@ -65,8 +65,8 @@ namespace ExpressionTreeToolkit
         }
 
         /// <summary>Determines whether two sequences are equal by comparing the elements by using the default equality comparer for their type.</summary>
-        /// <param name="first">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to second.</param>
-        /// <param name="second">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to the first sequence.</param>
+        /// <param name="first">An <see cref="ReadOnlyCollection{T}"></see> to compare to second.</param>
+        /// <param name="second">An <see cref="ReadOnlyCollection{T}"></see> to compare to the first sequence.</param>
         /// <param name="context"></param>
         /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
         /// <returns>true if the two source sequences are of equal length and their corresponding elements are equal according to the default equality comparer for their type; otherwise, false.</returns>
@@ -90,10 +90,10 @@ namespace ExpressionTreeToolkit
             return first.SequenceEqual(second);
         }
 
-        /// <summary>Determines whether two sequences are equal by comparing their elements by using a specified <see cref="T:System.Func{T,T,bool}"></see>.</summary>
-        /// <param name="first">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to second.</param>
-        /// <param name="second">An <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"></see> to compare to the first sequence.</param>
-        /// <param name="equalityComparer">An <see cref="T:System.Func{T,T,bool}"></see> to use to compare elements.</param>
+        /// <summary>Determines whether two sequences are equal by comparing their elements by using a specified <see cref="System.Func{T,T,bool}"></see>.</summary>
+        /// <param name="first">An <see cref="ReadOnlyCollection{T}"></see> to compare to second.</param>
+        /// <param name="second">An <see cref="ReadOnlyCollection{T}"></see> to compare to the first sequence.</param>
+        /// <param name="equalityComparer">An <see cref="System.Func{T,T,bool}"></see> to use to compare elements.</param>
         /// <param name="context"></param>
         /// <typeparam name="T">The type of the elements of the input sequences.</typeparam>
         /// <returns>true if the two source sequences are of equal length and their corresponding elements compare equal according to <paramref name="equalityComparer">equality comparer</paramref>; otherwise, false.</returns>
@@ -302,8 +302,8 @@ namespace ExpressionTreeToolkit
             return args.Aggregate(h1, GetHashCode);
         }
 
-        /// <summary>Computes the hash of a sequence of <see cref="T:Expression"></see> nodes.</summary>
-        /// <param name="nodes">A sequence of <see cref="T:Expression"></see> nodes to calculate the hash of.</param>
+        /// <summary>Computes the hash of a sequence of <see cref="Expression"/> nodes.</summary>
+        /// <param name="nodes">A sequence of <see cref="Expression"/> nodes to calculate the hash of.</param>
         /// <returns>The hash of the sequence of nodes.</returns>
         protected int GetHashCode([AllowNull, AllowItemNull] ReadOnlyCollection<Expression?>? nodes)
         {
@@ -332,9 +332,9 @@ namespace ExpressionTreeToolkit
                 .Aggregate(GetHashCode);
         }
 
-        /// <summary>Computes the hash of a sequence of values by using a specified <see cref="T:System.Func{T,int}"></see>.</summary>
+        /// <summary>Computes the hash of a sequence of values by using a specified <see cref="System.Func{T,int}"></see>.</summary>
         /// <param name="values">A sequence of values to calculate the hash of.</param>
-        /// <param name="getHashCode">An <see cref="T:System.Func{T,int}"></see> to use to computes the hash of elements.</param>
+        /// <param name="getHashCode">An <see cref="System.Func{T,int}"></see> to use to computes the hash of elements.</param>
         /// <typeparam name="T">The type of the elements of values.</typeparam>
         /// <returns>The hash of the sequence of values.</returns>
         protected int GetHashCode<T>([AllowNull, AllowItemNull] ReadOnlyCollection<T?>? values, Func<T, int>? getHashCode)

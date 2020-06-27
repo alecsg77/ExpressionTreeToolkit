@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<DebugInfoExpression>
     {
-        /// <summary>Determines whether the children of the two DebugInfoExpression are equal.</summary>
-        /// <param name="x">The first DebugInfoExpression to compare.</param>
-        /// <param name="y">The second DebugInfoExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="DebugInfoExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="DebugInfoExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="DebugInfoExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified DebugInfoExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="DebugInfoExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsDebugInfo([DisallowNull] DebugInfoExpression x, [DisallowNull] DebugInfoExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -52,9 +52,9 @@ namespace ExpressionTreeToolkit
                    && x.FileName == y.FileName;
         }
 
-        /// <summary>Gets the hash code for the specified DebugInfoExpression.</summary>
-        /// <param name="node">The DebugInfoExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified DebugInfoExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="DebugInfoExpression"/>.</summary>
+        /// <param name="node">The <see cref="DebugInfoExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="DebugInfoExpression"/>.</returns>
         protected virtual int GetHashCodeDebugInfo([DisallowNull] DebugInfoExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -82,10 +82,10 @@ namespace ExpressionTreeToolkit
                 GetDefaultHashCode(symbolDocumentInfo.FileName));
         }
 
-        /// <summary>Determines whether the specified DebugInfoExpressions are equal.</summary>
-        /// <param name="x">The first DebugInfoExpression to compare.</param>
-        /// <param name="y">The second DebugInfoExpression to compare.</param>
-        /// <returns>true if the specified DebugInfoExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="DebugInfoExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="DebugInfoExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="DebugInfoExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="DebugInfoExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<DebugInfoExpression>.Equals([AllowNull] DebugInfoExpression? x, [AllowNull] DebugInfoExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -97,9 +97,9 @@ namespace ExpressionTreeToolkit
             return EqualsDebugInfo(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified DebugInfoExpression.</summary>
-        /// <param name="obj">The <see cref="DebugInfoExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified DebugInfoExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="DebugInfoExpression"/>.</summary>
+        /// <param name="obj">The <see cref="DebugInfoExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="DebugInfoExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<DebugInfoExpression>.GetHashCode([DisallowNull] DebugInfoExpression obj)
         {

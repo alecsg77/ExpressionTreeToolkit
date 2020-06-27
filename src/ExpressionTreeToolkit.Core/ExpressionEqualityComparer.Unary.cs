@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<UnaryExpression>
     {
-        /// <summary>Determines whether the children of the two UnaryExpression are equal.</summary>
-        /// <param name="x">The first UnaryExpression to compare.</param>
-        /// <param name="y">The second UnaryExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="UnaryExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="UnaryExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="UnaryExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified UnaryExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="UnaryExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsUnary([DisallowNull] UnaryExpression x, [DisallowNull] UnaryExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -30,9 +30,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Operand, y.Operand, context);
         }
 
-        /// <summary>Gets the hash code for the specified UnaryExpression.</summary>
-        /// <param name="node">The UnaryExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified UnaryExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="UnaryExpression"/>.</summary>
+        /// <param name="node">The <see cref="UnaryExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="UnaryExpression"/>.</returns>
         protected virtual int GetHashCodeUnary([DisallowNull] UnaryExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -42,10 +42,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Operand));
         }
 
-        /// <summary>Determines whether the specified UnaryExpressions are equal.</summary>
-        /// <param name="x">The first UnaryExpression to compare.</param>
-        /// <param name="y">The second UnaryExpression to compare.</param>
-        /// <returns>true if the specified UnaryExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="UnaryExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="UnaryExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="UnaryExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="UnaryExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<UnaryExpression>.Equals([AllowNull] UnaryExpression? x, [AllowNull] UnaryExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -57,9 +57,9 @@ namespace ExpressionTreeToolkit
             return EqualsUnary(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified UnaryExpression.</summary>
-        /// <param name="obj">The <see cref="UnaryExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified UnaryExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="UnaryExpression"/>.</summary>
+        /// <param name="obj">The <see cref="UnaryExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="UnaryExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<UnaryExpression>.GetHashCode([DisallowNull] UnaryExpression obj)
         {

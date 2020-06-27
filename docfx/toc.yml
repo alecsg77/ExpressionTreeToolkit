@@ -1,5 +1,4 @@
-- name: Articles
-  href: articles/
-- name: Documentation
-  href: obj/docfx/lib/
-  topicHref: lib/index.md
+- name: Documents
+  href: docs/
+- name: GitHub
+  href: https://github.com/alecsg77/ExpressionTreeToolkit

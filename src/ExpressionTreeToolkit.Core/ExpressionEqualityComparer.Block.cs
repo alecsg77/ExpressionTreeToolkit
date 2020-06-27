@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<BlockExpression>
     {
-        /// <summary>Determines whether the children of the two BlockExpression are equal.</summary>
-        /// <param name="x">The first BlockExpression to compare.</param>
-        /// <param name="y">The second BlockExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="BlockExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="BlockExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="BlockExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified BlockExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="BlockExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsBlock([DisallowNull] BlockExpression x, [DisallowNull] BlockExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -31,9 +31,9 @@ namespace ExpressionTreeToolkit
                 ;
         }
 
-        /// <summary>Gets the hash code for the specified BlockExpression.</summary>
-        /// <param name="node">The BlockExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified BlockExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="BlockExpression"/>.</summary>
+        /// <param name="node">The <see cref="BlockExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="BlockExpression"/>.</returns>
         protected virtual int GetHashCodeBlock([DisallowNull] BlockExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -44,10 +44,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Result));
         }
 
-        /// <summary>Determines whether the specified BlockExpression are equal.</summary>
-        /// <param name="x">The first BlockExpression to compare.</param>
-        /// <param name="y">The second BlockExpression to compare.</param>
-        /// <returns>true if the specified BlockExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="BlockExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="BlockExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="BlockExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="BlockExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<BlockExpression>.Equals([AllowNull] BlockExpression? x, [AllowNull] BlockExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -59,9 +59,9 @@ namespace ExpressionTreeToolkit
             return EqualsBlock(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified BlockExpression.</summary>
-        /// <param name="obj">The <see cref="BlockExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified BlockExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="BlockExpression"/>.</summary>
+        /// <param name="obj">The <see cref="BlockExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="BlockExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<BlockExpression>.GetHashCode([DisallowNull] BlockExpression obj)
         {

@@ -13,13 +13,13 @@ using AllowItemNullAttribute = JetBrains.Annotations.ItemCanBeNullAttribute;
 
 namespace ExpressionTreeToolkit
 {
-    public partial class ExpressionEqualityComparer
+    partial class ExpressionEqualityComparer
     {
-        /// <summary>Determines whether the children of the two extension Expression are equal.</summary>
-        /// <param name="x">The first extension Expression to compare.</param>
-        /// <param name="y">The second extension Expression to compare.</param>
+        /// <summary>Determines whether the children of the two extension <see cref="Expression"/> are equal.</summary>
+        /// <param name="x">The first extension <see cref="Expression"/> to compare.</param>
+        /// <param name="y">The second extension <see cref="Expression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified extension Expression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified extension <see cref="Expression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsExtension([DisallowNull] Expression x, [DisallowNull] Expression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -27,9 +27,9 @@ namespace ExpressionTreeToolkit
             return Equals(x.ReduceExtensions(), y.ReduceExtensions(), context);
         }
 
-        /// <summary>Gets the hash code for the specified extension Expression.</summary>
-        /// <param name="node">The extension Expression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified extension Expression.</returns>
+        /// <summary>Gets the hash code for the specified extension <see cref="Expression"/>.</summary>
+        /// <param name="node">The extension <see cref="Expression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified extension <see cref="Expression"/>.</returns>
         protected virtual int GetHashCodeExtension([DisallowNull] Expression obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));

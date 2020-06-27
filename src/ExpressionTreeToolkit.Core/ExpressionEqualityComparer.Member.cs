@@ -16,11 +16,11 @@ namespace ExpressionTreeToolkit
 {
     partial class ExpressionEqualityComparer : IEqualityComparer<MemberExpression>
     {
-        /// <summary>Determines whether the children of the two MemberExpression are equal.</summary>
-        /// <param name="x">The first MemberExpression to compare.</param>
-        /// <param name="y">The second MemberExpression to compare.</param>
+        /// <summary>Determines whether the children of the two <see cref="MemberExpression"/> are equal.</summary>
+        /// <param name="x">The first <see cref="MemberExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="MemberExpression"/> to compare.</param>
         /// <param name="context"></param>
-        /// <returns>true if the specified MemberExpression are equal; otherwise, false.</returns>
+        /// <returns>true if the specified <see cref="MemberExpression"/> are equal; otherwise, false.</returns>
         protected virtual bool EqualsMember([DisallowNull] MemberExpression x, [DisallowNull] MemberExpression y, [DisallowNull] ComparisonContext context)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));
@@ -30,9 +30,9 @@ namespace ExpressionTreeToolkit
                    && Equals(x.Expression, y.Expression, context);
         }
 
-        /// <summary>Gets the hash code for the specified MemberExpression.</summary>
-        /// <param name="node">The MemberExpression for which to get a hash code.</param>
-        /// <returns>A hash code for the specified MemberExpression.</returns>
+        /// <summary>Gets the hash code for the specified <see cref="MemberExpression"/>.</summary>
+        /// <param name="node">The <see cref="MemberExpression"/> for which to get a hash code.</param>
+        /// <returns>A hash code for the specified <see cref="MemberExpression"/>.</returns>
         protected virtual int GetHashCodeMember([DisallowNull] MemberExpression node)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
@@ -42,10 +42,10 @@ namespace ExpressionTreeToolkit
                 GetHashCode(node.Expression));
         }
 
-        /// <summary>Determines whether the specified MemberExpressions are equal.</summary>
-        /// <param name="x">The first MemberExpression to compare.</param>
-        /// <param name="y">The second MemberExpression to compare.</param>
-        /// <returns>true if the specified MemberExpressions are equal; otherwise, false.</returns>
+        /// <summary>Determines whether the specified <see cref="MemberExpression"/>s are equal.</summary>
+        /// <param name="x">The first <see cref="MemberExpression"/> to compare.</param>
+        /// <param name="y">The second <see cref="MemberExpression"/> to compare.</param>
+        /// <returns>true if the specified <see cref="MemberExpression"/>s are equal; otherwise, false.</returns>
         bool IEqualityComparer<MemberExpression>.Equals([AllowNull] MemberExpression? x, [AllowNull] MemberExpression? y)
         {
             if (ReferenceEquals(x, y))
@@ -57,9 +57,9 @@ namespace ExpressionTreeToolkit
             return EqualsMember(x, y, BeginScope());
         }
 
-        /// <summary>Returns a hash code for the specified MemberExpression.</summary>
-        /// <param name="obj">The <see cref="MemberExpression"></see> for which a hash code is to be returned.</param>
-        /// <returns>A hash code for the specified MemberExpression.</returns>
+        /// <summary>Returns a hash code for the specified <see cref="MemberExpression"/>.</summary>
+        /// <param name="obj">The <see cref="MemberExpression"/> for which a hash code is to be returned.</param>
+        /// <returns>A hash code for the specified <see cref="MemberExpression"/>.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="obj">obj</paramref> is null.</exception>
         int IEqualityComparer<MemberExpression>.GetHashCode([DisallowNull] MemberExpression obj)
         {
