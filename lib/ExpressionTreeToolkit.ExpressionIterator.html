@@ -1,0 +1,2518 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ExpressionIterator
+   | Expression Tree Toolkit Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ExpressionIterator
+   | Expression Tree Toolkit Documentation ">
+    <meta name="generator" content="docfx 2.55.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;515;600;700&display=swap" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ExpressionTreeToolkit.ExpressionIterator">
+  
+  
+  <h1 id="ExpressionTreeToolkit_ExpressionIterator" data-uid="ExpressionTreeToolkit.ExpressionIterator" class="text-break">Class ExpressionIterator
+  </h1>
+  <div class="markdown level0 summary"><p>Generate enumerators for <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a> tree.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">ExpressionIterator</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ExpressionTreeToolkit.html">ExpressionTreeToolkit</a></h6>
+  <h6><strong>Assembly</strong>: ExpressionTreeToolkit.Core.dll</h6>
+  <h5 id="ExpressionTreeToolkit_ExpressionIterator_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ExpressionIterator</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator__ctor.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L29">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator__ctor_" data-uid="ExpressionTreeToolkit.ExpressionIterator.#ctor*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator__ctor" data-uid="ExpressionTreeToolkit.ExpressionIterator.#ctor">ExpressionIterator()</h4>
+  <div class="markdown level1 summary"><p>Default constructor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ExpressionIterator()</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_BinaryIterator_System_Linq_Expressions_BinaryExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.BinaryIterator(System.Linq.Expressions.BinaryExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L224">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_BinaryIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.BinaryIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_BinaryIterator_System_Linq_Expressions_BinaryExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.BinaryIterator(System.Linq.Expressions.BinaryExpression)">BinaryIterator(BinaryExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.binaryexpression">BinaryExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; BinaryIterator([NotNull] BinaryExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.binaryexpression">BinaryExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.binaryexpression">BinaryExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.binaryexpression">BinaryExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.binaryexpression">BinaryExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_BlockIterator_System_Linq_Expressions_BlockExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.BlockIterator(System.Linq.Expressions.BlockExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L552">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_BlockIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.BlockIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_BlockIterator_System_Linq_Expressions_BlockExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.BlockIterator(System.Linq.Expressions.BlockExpression)">BlockIterator(BlockExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.blockexpression">BlockExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; BlockIterator([NotNull] BlockExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.blockexpression">BlockExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.blockexpression">BlockExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.blockexpression">BlockExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.blockexpression">BlockExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_CatchBlockIterator_System_Linq_Expressions_CatchBlock_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.CatchBlockIterator(System.Linq.Expressions.CatchBlock)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L754">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_CatchBlockIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.CatchBlockIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_CatchBlockIterator_System_Linq_Expressions_CatchBlock_" data-uid="ExpressionTreeToolkit.ExpressionIterator.CatchBlockIterator(System.Linq.Expressions.CatchBlock)">CatchBlockIterator(CatchBlock)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the CatchBlock.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; CatchBlockIterator([NotNull] CatchBlock catchBlock)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.catchblock">CatchBlock</a></td>
+        <td><span class="parametername">catchBlock</span></td>
+        <td><p>The CatchBlock to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the CatchBlock.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The CatchBlock is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_ConditionalIterator_System_Linq_Expressions_ConditionalExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.ConditionalIterator(System.Linq.Expressions.ConditionalExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L261">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_ConditionalIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ConditionalIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_ConditionalIterator_System_Linq_Expressions_ConditionalExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ConditionalIterator(System.Linq.Expressions.ConditionalExpression)">ConditionalIterator(ConditionalExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.conditionalexpression">ConditionalExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; ConditionalIterator([NotNull] ConditionalExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.conditionalexpression">ConditionalExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.conditionalexpression">ConditionalExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.conditionalexpression">ConditionalExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.conditionalexpression">ConditionalExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_ConstantIterator_System_Linq_Expressions_ConstantExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.ConstantIterator(System.Linq.Expressions.ConstantExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L287">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_ConstantIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ConstantIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_ConstantIterator_System_Linq_Expressions_ConstantExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ConstantIterator(System.Linq.Expressions.ConstantExpression)">ConstantIterator(ConstantExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.constantexpression">ConstantExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; ConstantIterator([NotNull] ConstantExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.constantexpression">ConstantExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.constantexpression">ConstantExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.constantexpression">ConstantExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.constantexpression">ConstantExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_DebugInfoIterator_System_Linq_Expressions_DebugInfoExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.DebugInfoIterator(System.Linq.Expressions.DebugInfoExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L572">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_DebugInfoIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.DebugInfoIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_DebugInfoIterator_System_Linq_Expressions_DebugInfoExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.DebugInfoIterator(System.Linq.Expressions.DebugInfoExpression)">DebugInfoIterator(DebugInfoExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.debuginfoexpression">DebugInfoExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; DebugInfoIterator([NotNull] DebugInfoExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.debuginfoexpression">DebugInfoExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.debuginfoexpression">DebugInfoExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.debuginfoexpression">DebugInfoExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.debuginfoexpression">DebugInfoExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_DefaultIterator_System_Linq_Expressions_DefaultExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.DefaultIterator(System.Linq.Expressions.DefaultExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L781">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_DefaultIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.DefaultIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_DefaultIterator_System_Linq_Expressions_DefaultExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.DefaultIterator(System.Linq.Expressions.DefaultExpression)">DefaultIterator(DefaultExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.defaultexpression">DefaultExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; DefaultIterator([NotNull] DefaultExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.defaultexpression">DefaultExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.defaultexpression">DefaultExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.defaultexpression">DefaultExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.defaultexpression">DefaultExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_DynamicIterator_System_Linq_Expressions_DynamicExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.DynamicIterator(System.Linq.Expressions.DynamicExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L587">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_DynamicIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.DynamicIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_DynamicIterator_System_Linq_Expressions_DynamicExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.DynamicIterator(System.Linq.Expressions.DynamicExpression)">DynamicIterator(DynamicExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.dynamicexpression">DynamicExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; DynamicIterator([NotNull] DynamicExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.dynamicexpression">DynamicExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.dynamicexpression">DynamicExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.dynamicexpression">DynamicExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.dynamicexpression">DynamicExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_ElementInitIterator_System_Linq_Expressions_ElementInit_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.ElementInitIterator(System.Linq.Expressions.ElementInit)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L516">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_ElementInitIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ElementInitIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_ElementInitIterator_System_Linq_Expressions_ElementInit_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ElementInitIterator(System.Linq.Expressions.ElementInit)">ElementInitIterator(ElementInit)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the ElementInit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; ElementInitIterator([NotNull] ElementInit elementInit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.elementinit">ElementInit</a></td>
+        <td><span class="parametername">elementInit</span></td>
+        <td><p>The ElementInit to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the ElementInit.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The ElementInit is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_ExtensionIterator_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.ExtensionIterator(System.Linq.Expressions.Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L796">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_ExtensionIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ExtensionIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_ExtensionIterator_System_Linq_Expressions_Expression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ExtensionIterator(System.Linq.Expressions.Expression)">ExtensionIterator(Expression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; ExtensionIterator([NotNull] Expression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_GotoIterator_System_Linq_Expressions_GotoExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.GotoIterator(System.Linq.Expressions.GotoExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L602">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_GotoIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.GotoIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_GotoIterator_System_Linq_Expressions_GotoExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.GotoIterator(System.Linq.Expressions.GotoExpression)">GotoIterator(GotoExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.gotoexpression">GotoExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; GotoIterator([NotNull] GotoExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.gotoexpression">GotoExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.gotoexpression">GotoExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.gotoexpression">GotoExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.gotoexpression">GotoExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_IndexIterator_System_Linq_Expressions_IndexExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.IndexIterator(System.Linq.Expressions.IndexExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L620">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_IndexIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.IndexIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_IndexIterator_System_Linq_Expressions_IndexExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.IndexIterator(System.Linq.Expressions.IndexExpression)">IndexIterator(IndexExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.indexexpression">IndexExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; IndexIterator([NotNull] IndexExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.indexexpression">IndexExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.indexexpression">IndexExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.indexexpression">IndexExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.indexexpression">IndexExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_InvocationIterator_System_Linq_Expressions_InvocationExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.InvocationIterator(System.Linq.Expressions.InvocationExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L405">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_InvocationIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.InvocationIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_InvocationIterator_System_Linq_Expressions_InvocationExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.InvocationIterator(System.Linq.Expressions.InvocationExpression)">InvocationIterator(InvocationExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.invocationexpression">InvocationExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; InvocationIterator([NotNull] InvocationExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.invocationexpression">InvocationExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.invocationexpression">InvocationExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.invocationexpression">InvocationExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.invocationexpression">InvocationExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_Iterator_System_Collections_ObjectModel_ReadOnlyCollection_System_Linq_Expressions_Expression__.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.Iterator(System.Collections.ObjectModel.ReadOnlyCollection%7BSystem.Linq.Expressions.Expression%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L175">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_Iterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.Iterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_Iterator_System_Collections_ObjectModel_ReadOnlyCollection_System_Linq_Expressions_Expression__" data-uid="ExpressionTreeToolkit.ExpressionIterator.Iterator(System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression})">Iterator(ReadOnlyCollection&lt;Expression&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt; elements.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IEnumerable&lt;Expression&gt; Iterator([NotNull] ReadOnlyCollection&lt;Expression&gt; expressions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><span class="parametername">expressions</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt; to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt; is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_Iterator_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.Iterator(System.Linq.Expressions.Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L39">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_Iterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.Iterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_Iterator_System_Linq_Expressions_Expression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.Iterator(System.Linq.Expressions.Expression)">Iterator(Expression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual IEnumerable&lt;Expression&gt; Iterator([NotNull] Expression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_Iterator__1_System_Collections_ObjectModel_ReadOnlyCollection___0__System_Func___0_System_Collections_Generic_IEnumerable_System_Linq_Expressions_Expression___.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.Iterator%60%601(System.Collections.ObjectModel.ReadOnlyCollection%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Collections.Generic.IEnumerable%7BSystem.Linq.Expressions.Expression%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L192">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_Iterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.Iterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_Iterator__1_System_Collections_ObjectModel_ReadOnlyCollection___0__System_Func___0_System_Collections_Generic_IEnumerable_System_Linq_Expressions_Expression___" data-uid="ExpressionTreeToolkit.ExpressionIterator.Iterator``1(System.Collections.ObjectModel.ReadOnlyCollection{``0},System.Func{``0,System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression}})">Iterator&lt;T&gt;(ReadOnlyCollection&lt;T&gt;, Func&lt;T, IEnumerable&lt;Expression&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the ReadOnlyCollection&lt;t&gt; elements using an iterator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IEnumerable&lt;Expression&gt; Iterator&lt;T&gt;([NotNull] ReadOnlyCollection&lt;T&gt; values, Func&lt;T, IEnumerable&lt;Expression&gt;&gt; iterator)
+    where T : class</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;T&gt;</td>
+        <td><span class="parametername">values</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt; to iterate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;&gt;</td>
+        <td><span class="parametername">iterator</span></td>
+        <td><p>The iterator to apply to each element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt; elements using the iterator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the elements of values</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt; is null</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_LabelIterator_System_Linq_Expressions_LabelExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.LabelIterator(System.Linq.Expressions.LabelExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L639">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_LabelIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.LabelIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_LabelIterator_System_Linq_Expressions_LabelExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.LabelIterator(System.Linq.Expressions.LabelExpression)">LabelIterator(LabelExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.labelexpression">LabelExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; LabelIterator([NotNull] LabelExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.labelexpression">LabelExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.labelexpression">LabelExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.labelexpression">LabelExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.labelexpression">LabelExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_LambdaIterator_System_Linq_Expressions_LambdaExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.LambdaIterator(System.Linq.Expressions.LambdaExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L352">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_LambdaIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.LambdaIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_LambdaIterator_System_Linq_Expressions_LambdaExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.LambdaIterator(System.Linq.Expressions.LambdaExpression)">LambdaIterator(LambdaExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; LambdaIterator([NotNull] LambdaExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_ListInitIterator_System_Linq_Expressions_ListInitExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.ListInitIterator(System.Linq.Expressions.ListInitExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L531">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_ListInitIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ListInitIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_ListInitIterator_System_Linq_Expressions_ListInitExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ListInitIterator(System.Linq.Expressions.ListInitExpression)">ListInitIterator(ListInitExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.listinitexpression">ListInitExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; ListInitIterator([NotNull] ListInitExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.listinitexpression">ListInitExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.listinitexpression">ListInitExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.listinitexpression">ListInitExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.listinitexpression">ListInitExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_LoopIterator_System_Linq_Expressions_LoopExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.LoopIterator(System.Linq.Expressions.LoopExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L672">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_LoopIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.LoopIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_LoopIterator_System_Linq_Expressions_LoopExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.LoopIterator(System.Linq.Expressions.LoopExpression)">LoopIterator(LoopExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.loopexpression">LoopExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; LoopIterator([NotNull] LoopExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.loopexpression">LoopExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.loopexpression">LoopExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.loopexpression">LoopExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.loopexpression">LoopExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_MemberAssignmentIterator_System_Linq_Expressions_MemberAssignment_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.MemberAssignmentIterator(System.Linq.Expressions.MemberAssignment)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L471">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_MemberAssignmentIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberAssignmentIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_MemberAssignmentIterator_System_Linq_Expressions_MemberAssignment_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberAssignmentIterator(System.Linq.Expressions.MemberAssignment)">MemberAssignmentIterator(MemberAssignment)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the MemberAssignment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; MemberAssignmentIterator([NotNull] MemberAssignment memberAssignment)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberassignment">MemberAssignment</a></td>
+        <td><span class="parametername">memberAssignment</span></td>
+        <td><p>The MemberAssignment to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the MemberAssignment.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The MemberAssignment is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_MemberBindingIterator_System_Linq_Expressions_MemberBinding_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.MemberBindingIterator(System.Linq.Expressions.MemberBinding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L446">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_MemberBindingIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberBindingIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_MemberBindingIterator_System_Linq_Expressions_MemberBinding_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberBindingIterator(System.Linq.Expressions.MemberBinding)">MemberBindingIterator(MemberBinding)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the MemberBinding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; MemberBindingIterator([NotNull] MemberBinding memberBinding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberbinding">MemberBinding</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>The MemberBinding to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the MemberBinding.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The MemberBinding is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_MemberInitIterator_System_Linq_Expressions_MemberInitExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.MemberInitIterator(System.Linq.Expressions.MemberInitExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L426">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_MemberInitIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberInitIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_MemberInitIterator_System_Linq_Expressions_MemberInitExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberInitIterator(System.Linq.Expressions.MemberInitExpression)">MemberInitIterator(MemberInitExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberinitexpression">MemberInitExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; MemberInitIterator([NotNull] MemberInitExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberinitexpression">MemberInitExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberinitexpression">MemberInitExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberinitexpression">MemberInitExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberinitexpression">MemberInitExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_MemberIterator_System_Linq_Expressions_MemberExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.MemberIterator(System.Linq.Expressions.MemberExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L309">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_MemberIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_MemberIterator_System_Linq_Expressions_MemberExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberIterator(System.Linq.Expressions.MemberExpression)">MemberIterator(MemberExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberexpression">MemberExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; MemberIterator([NotNull] MemberExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberexpression">MemberExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberexpression">MemberExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberexpression">MemberExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberexpression">MemberExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_MemberListBindingIterator_System_Linq_Expressions_MemberListBinding_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.MemberListBindingIterator(System.Linq.Expressions.MemberListBinding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L501">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_MemberListBindingIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberListBindingIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_MemberListBindingIterator_System_Linq_Expressions_MemberListBinding_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberListBindingIterator(System.Linq.Expressions.MemberListBinding)">MemberListBindingIterator(MemberListBinding)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the MemberListBinding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; MemberListBindingIterator([NotNull] MemberListBinding memberListBinding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.memberlistbinding">MemberListBinding</a></td>
+        <td><span class="parametername">memberListBinding</span></td>
+        <td><p>The MemberListBinding to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the MemberListBinding.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The MemberListBinding is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_MemberMemberBindingIterator_System_Linq_Expressions_MemberMemberBinding_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.MemberMemberBindingIterator(System.Linq.Expressions.MemberMemberBinding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L486">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_MemberMemberBindingIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberMemberBindingIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_MemberMemberBindingIterator_System_Linq_Expressions_MemberMemberBinding_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MemberMemberBindingIterator(System.Linq.Expressions.MemberMemberBinding)">MemberMemberBindingIterator(MemberMemberBinding)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the MemberMemberBinding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; MemberMemberBindingIterator([NotNull] MemberMemberBinding memberMemberBinding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.membermemberbinding">MemberMemberBinding</a></td>
+        <td><span class="parametername">memberMemberBinding</span></td>
+        <td><p>The MemberMemberBinding to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the MemberMemberBinding.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The MemberMemberBinding is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_MethodCallIterator_System_Linq_Expressions_MethodCallExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.MethodCallIterator(System.Linq.Expressions.MethodCallExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L328">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_MethodCallIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MethodCallIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_MethodCallIterator_System_Linq_Expressions_MethodCallExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.MethodCallIterator(System.Linq.Expressions.MethodCallExpression)">MethodCallIterator(MethodCallExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; MethodCallIterator([NotNull] MethodCallExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_NewArrayIterator_System_Linq_Expressions_NewArrayExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.NewArrayIterator(System.Linq.Expressions.NewArrayExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L389">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_NewArrayIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.NewArrayIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_NewArrayIterator_System_Linq_Expressions_NewArrayExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.NewArrayIterator(System.Linq.Expressions.NewArrayExpression)">NewArrayIterator(NewArrayExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newarrayexpression">NewArrayExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; NewArrayIterator([NotNull] NewArrayExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newarrayexpression">NewArrayExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newarrayexpression">NewArrayExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newarrayexpression">NewArrayExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newarrayexpression">NewArrayExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_NewIterator_System_Linq_Expressions_NewExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.NewIterator(System.Linq.Expressions.NewExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L373">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_NewIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.NewIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_NewIterator_System_Linq_Expressions_NewExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.NewIterator(System.Linq.Expressions.NewExpression)">NewIterator(NewExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newexpression">NewExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; NewIterator([NotNull] NewExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newexpression">NewExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newexpression">NewExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newexpression">NewExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newexpression">NewExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_ParameterIterator_System_Linq_Expressions_ParameterExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.ParameterIterator(System.Linq.Expressions.ParameterExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L298">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_ParameterIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ParameterIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_ParameterIterator_System_Linq_Expressions_ParameterExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.ParameterIterator(System.Linq.Expressions.ParameterExpression)">ParameterIterator(ParameterExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.parameterexpression">ParameterExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; ParameterIterator([NotNull] ParameterExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.parameterexpression">ParameterExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.parameterexpression">ParameterExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.parameterexpression">ParameterExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.parameterexpression">ParameterExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_RuntimeVariablesIterator_System_Linq_Expressions_RuntimeVariablesExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.RuntimeVariablesIterator(System.Linq.Expressions.RuntimeVariablesExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L657">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_RuntimeVariablesIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.RuntimeVariablesIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_RuntimeVariablesIterator_System_Linq_Expressions_RuntimeVariablesExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.RuntimeVariablesIterator(System.Linq.Expressions.RuntimeVariablesExpression)">RuntimeVariablesIterator(RuntimeVariablesExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.runtimevariablesexpression">RuntimeVariablesExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; RuntimeVariablesIterator([NotNull] RuntimeVariablesExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.runtimevariablesexpression">RuntimeVariablesExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.runtimevariablesexpression">RuntimeVariablesExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.runtimevariablesexpression">RuntimeVariablesExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.runtimevariablesexpression">RuntimeVariablesExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_SwitchIterator_System_Linq_Expressions_SwitchExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.SwitchIterator(System.Linq.Expressions.SwitchExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L687">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_SwitchIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.SwitchIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_SwitchIterator_System_Linq_Expressions_SwitchExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.SwitchIterator(System.Linq.Expressions.SwitchExpression)">SwitchIterator(SwitchExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.switchexpression">SwitchExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; SwitchIterator([NotNull] SwitchExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.switchexpression">SwitchExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.switchexpression">SwitchExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.switchexpression">SwitchExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.switchexpression">SwitchExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_TryIterator_System_Linq_Expressions_TryExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.TryIterator(System.Linq.Expressions.TryExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L717">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_TryIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.TryIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_TryIterator_System_Linq_Expressions_TryExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.TryIterator(System.Linq.Expressions.TryExpression)">TryIterator(TryExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.tryexpression">TryExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; TryIterator([NotNull] TryExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.tryexpression">TryExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.tryexpression">TryExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.tryexpression">TryExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.tryexpression">TryExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_TypeBinaryIterator_System_Linq_Expressions_TypeBinaryExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.TypeBinaryIterator(System.Linq.Expressions.TypeBinaryExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L245">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_TypeBinaryIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.TypeBinaryIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_TypeBinaryIterator_System_Linq_Expressions_TypeBinaryExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.TypeBinaryIterator(System.Linq.Expressions.TypeBinaryExpression)">TypeBinaryIterator(TypeBinaryExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.typebinaryexpression">TypeBinaryExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; TypeBinaryIterator([NotNull] TypeBinaryExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.typebinaryexpression">TypeBinaryExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.typebinaryexpression">TypeBinaryExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.typebinaryexpression">TypeBinaryExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.typebinaryexpression">TypeBinaryExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator_UnaryIterator_System_Linq_Expressions_UnaryExpression_.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator.UnaryIterator(System.Linq.Expressions.UnaryExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L208">View Source</a>
+  </span>
+  <a id="ExpressionTreeToolkit_ExpressionIterator_UnaryIterator_" data-uid="ExpressionTreeToolkit.ExpressionIterator.UnaryIterator*"></a>
+  <h4 id="ExpressionTreeToolkit_ExpressionIterator_UnaryIterator_System_Linq_Expressions_UnaryExpression_" data-uid="ExpressionTreeToolkit.ExpressionIterator.UnaryIterator(System.Linq.Expressions.UnaryExpression)">UnaryIterator(UnaryExpression)</h4>
+  <div class="markdown level1 summary"><p>Returns an enumerator that iterates through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.unaryexpression">UnaryExpression</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Expression&gt; UnaryIterator([NotNull] UnaryExpression expression)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.unaryexpression">UnaryExpression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.unaryexpression">UnaryExpression</a> to iterate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a>&gt;</td>
+        <td><p>An enumerator that can be used to iterate through the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.unaryexpression">UnaryExpression</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.unaryexpression">UnaryExpression</a> is null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/new/dev/apiSpec/new?filename=ExpressionTreeToolkit_ExpressionIterator.md&amp;value=---%0Auid%3A%20ExpressionTreeToolkit.ExpressionIterator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/alecsg77/ExpressionTreeToolkit/blob/master/src/ExpressionTreeToolkit.Core/ExpressionIterator.cs/#L22" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © alecsg77.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
