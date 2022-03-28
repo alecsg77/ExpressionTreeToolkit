@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ExpressionEqualityComparer
    | Expression Tree Toolkit Documentation ">
-    <meta name="generator" content="docfx 2.55.0.0">
+    <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;515;600;700&display=swap" rel="stylesheet"> 
     <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:tocrel" content="../docs/toc.html">
     
     <meta property="docfx:rel" content="../">
     <meta property="docfx:newtab" content="true">
@@ -61,11 +61,11 @@
       <div class="container body-content">
         
         <div id="search-results">
-          <div class="search-list"></div>
+          <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
             <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
           </div>
-          <ul id="pagination"></ul>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
@@ -124,25 +124,25 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
     </div>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="ExpressionTreeToolkit.html">ExpressionTreeToolkit</a></h6>
@@ -235,7 +235,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ExpressionEqualityComparer([CanBeNull] IEqualityComparer&lt;Expression&gt; equalityComparer)</code></pre>
+    <pre><code class="lang-csharp hljs">public ExpressionEqualityComparer(IEqualityComparer&lt;Expression&gt; equalityComparer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -335,7 +335,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected bool Equals([CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;Expression&gt; first, [CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;Expression&gt; second, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected bool Equals(ReadOnlyCollection&lt;Expression&gt; first, ReadOnlyCollection&lt;Expression&gt; second, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -396,7 +396,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual bool Equals([CanBeNull] Expression x, [CanBeNull] Expression y)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual bool Equals(Expression x, Expression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -452,7 +452,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool Equals([CanBeNull] Expression x, [CanBeNull] Expression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool Equals(Expression x, Expression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -513,7 +513,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected bool Equals&lt;T&gt;([CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;T&gt; first, [CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;T&gt; second, [NotNull] ExpressionEqualityComparer.ComparisonContext context)
+    <pre><code class="lang-csharp hljs">protected bool Equals&lt;T&gt;(ReadOnlyCollection&lt;T&gt; first, ReadOnlyCollection&lt;T&gt; second, ExpressionEqualityComparer.ComparisonContext context)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -591,7 +591,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected bool Equals&lt;T&gt;([CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;T&gt; first, [CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;T&gt; second, Func&lt;T, T, ExpressionEqualityComparer.ComparisonContext, bool&gt; equalityComparer, [NotNull] ExpressionEqualityComparer.ComparisonContext context)
+    <pre><code class="lang-csharp hljs">protected bool Equals&lt;T&gt;(ReadOnlyCollection&lt;T&gt; first, ReadOnlyCollection&lt;T&gt; second, Func&lt;T, T, ExpressionEqualityComparer.ComparisonContext, bool&gt; equalityComparer, ExpressionEqualityComparer.ComparisonContext context)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -675,7 +675,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsBinary([NotNull] BinaryExpression x, [NotNull] BinaryExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsBinary(BinaryExpression x, BinaryExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -736,7 +736,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsBlock([NotNull] BlockExpression x, [NotNull] BlockExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsBlock(BlockExpression x, BlockExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -797,7 +797,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsCatchBlock([NotNull] CatchBlock x, [NotNull] CatchBlock y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsCatchBlock(CatchBlock x, CatchBlock y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -858,7 +858,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsConditional([NotNull] ConditionalExpression x, [NotNull] ConditionalExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsConditional(ConditionalExpression x, ConditionalExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -919,7 +919,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsConstant([NotNull] ConstantExpression x, [NotNull] ConstantExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsConstant(ConstantExpression x, ConstantExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -980,7 +980,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsDebugInfo([NotNull] DebugInfoExpression x, [NotNull] DebugInfoExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsDebugInfo(DebugInfoExpression x, DebugInfoExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1041,7 +1041,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsDefault([NotNull] DefaultExpression x, [NotNull] DefaultExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsDefault(DefaultExpression x, DefaultExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1102,7 +1102,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsDynamic([NotNull] DynamicExpression x, [NotNull] DynamicExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsDynamic(DynamicExpression x, DynamicExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1163,7 +1163,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsElementInit([CanBeNull] ElementInit x, [CanBeNull] ElementInit y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsElementInit(ElementInit x, ElementInit y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1224,7 +1224,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsExtension([NotNull] Expression x, [NotNull] Expression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsExtension(Expression x, Expression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1285,7 +1285,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsGoto([NotNull] GotoExpression x, [NotNull] GotoExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsGoto(GotoExpression x, GotoExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1346,7 +1346,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsIndex([NotNull] IndexExpression x, [NotNull] IndexExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsIndex(IndexExpression x, IndexExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1407,7 +1407,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsInvocation([NotNull] InvocationExpression x, [NotNull] InvocationExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsInvocation(InvocationExpression x, InvocationExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1468,7 +1468,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLabel([NotNull] LabelExpression x, [NotNull] LabelExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLabel(LabelExpression x, LabelExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1529,7 +1529,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLabelTarget([CanBeNull] LabelTarget x, [CanBeNull] LabelTarget y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLabelTarget(LabelTarget x, LabelTarget y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1590,7 +1590,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLambda([NotNull] LambdaExpression x, [NotNull] LambdaExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLambda(LambdaExpression x, LambdaExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1651,7 +1651,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsListInit([NotNull] ListInitExpression x, [NotNull] ListInitExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsListInit(ListInitExpression x, ListInitExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1712,7 +1712,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLoop([NotNull] LoopExpression x, [NotNull] LoopExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsLoop(LoopExpression x, LoopExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1773,7 +1773,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMember([NotNull] MemberExpression x, [NotNull] MemberExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMember(MemberExpression x, MemberExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1834,7 +1834,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberAssignment([NotNull] MemberAssignment x, [NotNull] MemberAssignment y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberAssignment(MemberAssignment x, MemberAssignment y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1895,7 +1895,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberBinding([CanBeNull] MemberBinding x, [CanBeNull] MemberBinding y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberBinding(MemberBinding x, MemberBinding y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1956,7 +1956,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberInit([NotNull] MemberInitExpression x, [NotNull] MemberInitExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2017,7 +2017,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberListBinding([NotNull] MemberListBinding x, [NotNull] MemberListBinding y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberListBinding(MemberListBinding x, MemberListBinding y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2078,7 +2078,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberMemberBinding([NotNull] MemberMemberBinding x, [NotNull] MemberMemberBinding y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMemberMemberBinding(MemberMemberBinding x, MemberMemberBinding y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2139,7 +2139,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMethodCall([NotNull] MethodCallExpression x, [NotNull] MethodCallExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2200,7 +2200,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsNew([NotNull] NewExpression x, [NotNull] NewExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsNew(NewExpression x, NewExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2261,7 +2261,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsNewArray([NotNull] NewArrayExpression x, [NotNull] NewArrayExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsNewArray(NewArrayExpression x, NewArrayExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2322,7 +2322,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsParameter([NotNull] ParameterExpression x, [NotNull] ParameterExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsParameter(ParameterExpression x, ParameterExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2383,7 +2383,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsRuntimeVariables([NotNull] RuntimeVariablesExpression x, [NotNull] RuntimeVariablesExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsRuntimeVariables(RuntimeVariablesExpression x, RuntimeVariablesExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2444,7 +2444,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsSwitch([NotNull] SwitchExpression x, [NotNull] SwitchExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsSwitch(SwitchExpression x, SwitchExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2505,7 +2505,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsSwitchCase([NotNull] SwitchCase x, [NotNull] SwitchCase y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsSwitchCase(SwitchCase x, SwitchCase y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2566,7 +2566,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsTry([NotNull] TryExpression x, [NotNull] TryExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsTry(TryExpression x, TryExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2627,7 +2627,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsTypeBinary([NotNull] TypeBinaryExpression x, [NotNull] TypeBinaryExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsTypeBinary(TypeBinaryExpression x, TypeBinaryExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2688,7 +2688,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual bool EqualsUnary([NotNull] UnaryExpression x, [NotNull] UnaryExpression y, [NotNull] ExpressionEqualityComparer.ComparisonContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual bool EqualsUnary(UnaryExpression x, UnaryExpression y, ExpressionEqualityComparer.ComparisonContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2749,7 +2749,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected int GetHashCode([CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;Expression&gt; nodes)</code></pre>
+    <pre><code class="lang-csharp hljs">protected int GetHashCode(ReadOnlyCollection&lt;Expression&gt; nodes)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2799,7 +2799,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual int GetHashCode([CanBeNull] Expression expression)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual int GetHashCode(Expression expression)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2849,7 +2849,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected int GetHashCode&lt;T&gt;([CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;T&gt; values)
+    <pre><code class="lang-csharp hljs">protected int GetHashCode&lt;T&gt;(ReadOnlyCollection&lt;T&gt; values)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -2916,7 +2916,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected int GetHashCode&lt;T&gt;([CanBeNull, ItemCanBeNull] ReadOnlyCollection&lt;T&gt; values, Func&lt;T, int&gt; getHashCode)
+    <pre><code class="lang-csharp hljs">protected int GetHashCode&lt;T&gt;(ReadOnlyCollection&lt;T&gt; values, Func&lt;T, int&gt; getHashCode)
     where T : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -2989,7 +2989,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeBinary([NotNull] BinaryExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeBinary(BinaryExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3039,7 +3039,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeBlock([NotNull] BlockExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeBlock(BlockExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3089,7 +3089,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeCatchBlock([NotNull] CatchBlock catchBlock)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeCatchBlock(CatchBlock catchBlock)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3139,7 +3139,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeConditional([NotNull] ConditionalExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeConditional(ConditionalExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3189,7 +3189,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeConstant([NotNull] ConstantExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeConstant(ConstantExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3239,7 +3239,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeDebugInfo([NotNull] DebugInfoExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeDebugInfo(DebugInfoExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3289,7 +3289,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeDefault([NotNull] DefaultExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeDefault(DefaultExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3339,7 +3339,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeDynamic([NotNull] DynamicExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeDynamic(DynamicExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3389,7 +3389,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeElementInit([CanBeNull] ElementInit elementInit)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeElementInit(ElementInit elementInit)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3439,7 +3439,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeExtension([NotNull] Expression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeExtension(Expression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3488,7 +3488,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeGoto([NotNull] GotoExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeGoto(GotoExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3538,7 +3538,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeIndex([NotNull] IndexExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeIndex(IndexExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3588,7 +3588,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeInvocation([NotNull] InvocationExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeInvocation(InvocationExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3638,7 +3638,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLabel([NotNull] LabelExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLabel(LabelExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3688,7 +3688,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLabelTarget([CanBeNull] LabelTarget labelTarget)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLabelTarget(LabelTarget labelTarget)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3738,7 +3738,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLambda([NotNull] LambdaExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLambda(LambdaExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3788,7 +3788,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeListInit([NotNull] ListInitExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeListInit(ListInitExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3838,7 +3838,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLoop([NotNull] LoopExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeLoop(LoopExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3888,7 +3888,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMember([NotNull] MemberExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMember(MemberExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3938,7 +3938,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberAssignment([NotNull] MemberAssignment memberAssignment)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberAssignment(MemberAssignment memberAssignment)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3988,7 +3988,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberBinding([CanBeNull] MemberBinding memberBinding)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberBinding(MemberBinding memberBinding)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4038,7 +4038,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberInit([NotNull] MemberInitExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberInit(MemberInitExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4088,7 +4088,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberListBinding([NotNull] MemberListBinding memberListBinding)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberListBinding(MemberListBinding memberListBinding)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4138,7 +4138,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberMemberBinding([NotNull] MemberMemberBinding memberMemberBinding)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMemberMemberBinding(MemberMemberBinding memberMemberBinding)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4188,7 +4188,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMethodCall([NotNull] MethodCallExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeMethodCall(MethodCallExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4238,7 +4238,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeNew([NotNull] NewExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeNew(NewExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4288,7 +4288,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeNewArray([NotNull] NewArrayExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeNewArray(NewArrayExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4338,7 +4338,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeParameter([NotNull] ParameterExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeParameter(ParameterExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4388,7 +4388,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeRuntimeVariables([NotNull] RuntimeVariablesExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeRuntimeVariables(RuntimeVariablesExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4438,7 +4438,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeSwitch([NotNull] SwitchExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeSwitch(SwitchExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4488,7 +4488,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeSwitchCase([NotNull] SwitchCase switchCase)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeSwitchCase(SwitchCase switchCase)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4538,7 +4538,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeTry([NotNull] TryExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeTry(TryExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4588,7 +4588,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeTypeBinary([NotNull] TypeBinaryExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeTypeBinary(TypeBinaryExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4638,7 +4638,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeUnary([NotNull] UnaryExpression node)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual int GetHashCodeUnary(UnaryExpression node)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4690,7 +4690,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;BinaryExpression&gt;.Equals([CanBeNull] BinaryExpression x, [CanBeNull] BinaryExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;BinaryExpression&gt;.Equals(BinaryExpression x, BinaryExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4746,7 +4746,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;BinaryExpression&gt;.GetHashCode([NotNull] BinaryExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;BinaryExpression&gt;.GetHashCode(BinaryExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4812,7 +4812,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;BlockExpression&gt;.Equals([CanBeNull] BlockExpression x, [CanBeNull] BlockExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;BlockExpression&gt;.Equals(BlockExpression x, BlockExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4868,7 +4868,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;BlockExpression&gt;.GetHashCode([NotNull] BlockExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;BlockExpression&gt;.GetHashCode(BlockExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4934,7 +4934,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ConditionalExpression&gt;.Equals([CanBeNull] ConditionalExpression x, [CanBeNull] ConditionalExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ConditionalExpression&gt;.Equals(ConditionalExpression x, ConditionalExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4990,7 +4990,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ConditionalExpression&gt;.GetHashCode([NotNull] ConditionalExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ConditionalExpression&gt;.GetHashCode(ConditionalExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5056,7 +5056,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ConstantExpression&gt;.Equals([CanBeNull] ConstantExpression x, [CanBeNull] ConstantExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ConstantExpression&gt;.Equals(ConstantExpression x, ConstantExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5112,7 +5112,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ConstantExpression&gt;.GetHashCode([NotNull] ConstantExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ConstantExpression&gt;.GetHashCode(ConstantExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5178,7 +5178,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;DebugInfoExpression&gt;.Equals([CanBeNull] DebugInfoExpression x, [CanBeNull] DebugInfoExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;DebugInfoExpression&gt;.Equals(DebugInfoExpression x, DebugInfoExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5234,7 +5234,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;DebugInfoExpression&gt;.GetHashCode([NotNull] DebugInfoExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;DebugInfoExpression&gt;.GetHashCode(DebugInfoExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5300,7 +5300,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;DefaultExpression&gt;.Equals([CanBeNull] DefaultExpression x, [CanBeNull] DefaultExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;DefaultExpression&gt;.Equals(DefaultExpression x, DefaultExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5356,7 +5356,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;DefaultExpression&gt;.GetHashCode([NotNull] DefaultExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;DefaultExpression&gt;.GetHashCode(DefaultExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5422,7 +5422,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;DynamicExpression&gt;.Equals([CanBeNull] DynamicExpression x, [CanBeNull] DynamicExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;DynamicExpression&gt;.Equals(DynamicExpression x, DynamicExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5478,7 +5478,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;DynamicExpression&gt;.GetHashCode([NotNull] DynamicExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;DynamicExpression&gt;.GetHashCode(DynamicExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5544,7 +5544,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;Expression&gt;.Equals([CanBeNull] Expression x, [CanBeNull] Expression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;Expression&gt;.Equals(Expression x, Expression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5600,7 +5600,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;Expression&gt;.GetHashCode([NotNull] Expression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;Expression&gt;.GetHashCode(Expression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5666,7 +5666,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;GotoExpression&gt;.Equals([CanBeNull] GotoExpression x, [CanBeNull] GotoExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;GotoExpression&gt;.Equals(GotoExpression x, GotoExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5722,7 +5722,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;GotoExpression&gt;.GetHashCode([NotNull] GotoExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;GotoExpression&gt;.GetHashCode(GotoExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5788,7 +5788,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;IndexExpression&gt;.Equals([CanBeNull] IndexExpression x, [CanBeNull] IndexExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;IndexExpression&gt;.Equals(IndexExpression x, IndexExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5844,7 +5844,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;IndexExpression&gt;.GetHashCode([NotNull] IndexExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;IndexExpression&gt;.GetHashCode(IndexExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5910,7 +5910,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;InvocationExpression&gt;.Equals([CanBeNull] InvocationExpression x, [CanBeNull] InvocationExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;InvocationExpression&gt;.Equals(InvocationExpression x, InvocationExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5966,7 +5966,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;InvocationExpression&gt;.GetHashCode([NotNull] InvocationExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;InvocationExpression&gt;.GetHashCode(InvocationExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6032,7 +6032,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;LabelExpression&gt;.Equals([CanBeNull] LabelExpression x, [CanBeNull] LabelExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;LabelExpression&gt;.Equals(LabelExpression x, LabelExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6088,7 +6088,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;LabelExpression&gt;.GetHashCode([NotNull] LabelExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;LabelExpression&gt;.GetHashCode(LabelExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6154,7 +6154,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;LambdaExpression&gt;.Equals([CanBeNull] LambdaExpression x, [CanBeNull] LambdaExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;LambdaExpression&gt;.Equals(LambdaExpression x, LambdaExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6210,7 +6210,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;LambdaExpression&gt;.GetHashCode([NotNull] LambdaExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;LambdaExpression&gt;.GetHashCode(LambdaExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6276,7 +6276,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ListInitExpression&gt;.Equals([CanBeNull] ListInitExpression x, [CanBeNull] ListInitExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ListInitExpression&gt;.Equals(ListInitExpression x, ListInitExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6332,7 +6332,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ListInitExpression&gt;.GetHashCode([NotNull] ListInitExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ListInitExpression&gt;.GetHashCode(ListInitExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6398,7 +6398,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;LoopExpression&gt;.Equals([CanBeNull] LoopExpression x, [CanBeNull] LoopExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;LoopExpression&gt;.Equals(LoopExpression x, LoopExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6454,7 +6454,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;LoopExpression&gt;.GetHashCode([NotNull] LoopExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;LoopExpression&gt;.GetHashCode(LoopExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6520,7 +6520,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;MemberExpression&gt;.Equals([CanBeNull] MemberExpression x, [CanBeNull] MemberExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;MemberExpression&gt;.Equals(MemberExpression x, MemberExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6576,7 +6576,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;MemberExpression&gt;.GetHashCode([NotNull] MemberExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;MemberExpression&gt;.GetHashCode(MemberExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6642,7 +6642,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;MemberInitExpression&gt;.Equals([CanBeNull] MemberInitExpression x, [CanBeNull] MemberInitExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;MemberInitExpression&gt;.Equals(MemberInitExpression x, MemberInitExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6698,7 +6698,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;MemberInitExpression&gt;.GetHashCode([NotNull] MemberInitExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;MemberInitExpression&gt;.GetHashCode(MemberInitExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6764,7 +6764,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;MethodCallExpression&gt;.Equals([CanBeNull] MethodCallExpression x, [CanBeNull] MethodCallExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;MethodCallExpression&gt;.Equals(MethodCallExpression x, MethodCallExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6820,7 +6820,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;MethodCallExpression&gt;.GetHashCode([NotNull] MethodCallExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;MethodCallExpression&gt;.GetHashCode(MethodCallExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6886,7 +6886,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;NewArrayExpression&gt;.Equals([CanBeNull] NewArrayExpression x, [CanBeNull] NewArrayExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;NewArrayExpression&gt;.Equals(NewArrayExpression x, NewArrayExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -6942,7 +6942,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;NewArrayExpression&gt;.GetHashCode([NotNull] NewArrayExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;NewArrayExpression&gt;.GetHashCode(NewArrayExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7008,7 +7008,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;NewExpression&gt;.Equals([CanBeNull] NewExpression x, [CanBeNull] NewExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;NewExpression&gt;.Equals(NewExpression x, NewExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7064,7 +7064,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;NewExpression&gt;.GetHashCode([NotNull] NewExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;NewExpression&gt;.GetHashCode(NewExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7130,7 +7130,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ParameterExpression&gt;.Equals([CanBeNull] ParameterExpression x, [CanBeNull] ParameterExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;ParameterExpression&gt;.Equals(ParameterExpression x, ParameterExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7186,7 +7186,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ParameterExpression&gt;.GetHashCode([NotNull] ParameterExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;ParameterExpression&gt;.GetHashCode(ParameterExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7252,7 +7252,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;RuntimeVariablesExpression&gt;.Equals([CanBeNull] RuntimeVariablesExpression x, [CanBeNull] RuntimeVariablesExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;RuntimeVariablesExpression&gt;.Equals(RuntimeVariablesExpression x, RuntimeVariablesExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7308,7 +7308,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;RuntimeVariablesExpression&gt;.GetHashCode([NotNull] RuntimeVariablesExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;RuntimeVariablesExpression&gt;.GetHashCode(RuntimeVariablesExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7374,7 +7374,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;SwitchExpression&gt;.Equals([CanBeNull] SwitchExpression x, [CanBeNull] SwitchExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;SwitchExpression&gt;.Equals(SwitchExpression x, SwitchExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7430,7 +7430,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;SwitchExpression&gt;.GetHashCode([NotNull] SwitchExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;SwitchExpression&gt;.GetHashCode(SwitchExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7496,7 +7496,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;TryExpression&gt;.Equals([CanBeNull] TryExpression x, [CanBeNull] TryExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;TryExpression&gt;.Equals(TryExpression x, TryExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7552,7 +7552,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;TryExpression&gt;.GetHashCode([NotNull] TryExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;TryExpression&gt;.GetHashCode(TryExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7618,7 +7618,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;TypeBinaryExpression&gt;.Equals([CanBeNull] TypeBinaryExpression x, [CanBeNull] TypeBinaryExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;TypeBinaryExpression&gt;.Equals(TypeBinaryExpression x, TypeBinaryExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7674,7 +7674,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;TypeBinaryExpression&gt;.GetHashCode([NotNull] TypeBinaryExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;TypeBinaryExpression&gt;.GetHashCode(TypeBinaryExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7740,7 +7740,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;UnaryExpression&gt;.Equals([CanBeNull] UnaryExpression x, [CanBeNull] UnaryExpression y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer&lt;UnaryExpression&gt;.Equals(UnaryExpression x, UnaryExpression y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7796,7 +7796,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;UnaryExpression&gt;.GetHashCode([NotNull] UnaryExpression obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer&lt;UnaryExpression&gt;.GetHashCode(UnaryExpression obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7862,7 +7862,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IEqualityComparer.Equals([CanBeNull] object x, [CanBeNull] object y)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IEqualityComparer.Equals(object x, object y)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -7934,7 +7934,7 @@ public class Program
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int IEqualityComparer.GetHashCode([NotNull] object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">int IEqualityComparer.GetHashCode(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -8498,7 +8498,8 @@ public class Program
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>
