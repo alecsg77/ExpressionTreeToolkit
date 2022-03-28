@@ -4,9 +4,9 @@
     ".NETCoreApp,Version=v3.1": {
       "docfx.console": {
         "type": "Direct",
-        "requested": "[2.55.0, )",
-        "resolved": "2.55.0",
-        "contentHash": "DY5Fu+PxILSc0VnCI3sHHI7bhVwhm0a6HGqfhdKuAqdQQnH5Ip01JyaIVdiz8SrbgsWbf+aXr/+d/Ro218lq9w=="
+        "requested": "[2.59.0, )",
+        "resolved": "2.59.0",
+        "contentHash": "OmHpFa3TGrvWC5371OV5PJxhoOsJH6xSrTCb/rght10XMIdtNRR4VDuHVkBIS1YfpgDx/5gBYCtkmVDWjjj0ig=="
       }
     }
   }
