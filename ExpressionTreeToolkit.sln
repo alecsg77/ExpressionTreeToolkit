@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionTreeToolkit.Core", "src\ExpressionTreeToolkit.Core\ExpressionTreeToolkit.Core.csproj", "{425CF5CA-C402-4863-B808-BF6FC39F3260}"
 EndProject
@@ -17,7 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4DDB3794-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A6511EA6-2F0F-4D2A-9A41-C4D358BF8E0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionTreeToolkit.DocFX", "docfx\ExpressionTreeToolkit.DocFX.proj", "{19B2CB76-EB5E-4292-BCFB-C32E51B8528A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionTreeToolkit.DocFX", "docfx\ExpressionTreeToolkit.DocFX.proj", "{19B2CB76-EB5E-4292-BCFB-C32E51B8528A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF3B8F55-07B2-413A-8659-A52E7592C900}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

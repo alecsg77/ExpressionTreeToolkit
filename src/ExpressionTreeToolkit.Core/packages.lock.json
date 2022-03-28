@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETFramework,Version=v4.5": {
+    ".NETFramework,Version=v4.5.2": {
       "JetBrains.Annotations": {
         "type": "Direct",
         "requested": "[11.1.0, )",
